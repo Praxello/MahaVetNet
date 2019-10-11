@@ -5,7 +5,70 @@ $('#medicinename').select2({
   allowClear: true,
   placeholder: "Select Medicine Name"
 });
-getlistvaccineentry();
+$('#medicinetype').select2({
+  allowClear: true,
+  placeholder: "Select Type"
+});
+getlistdeworming();
+function settabledata(styleData){
+  console.log(styleData);
+  var html ='';
+  $('#styletbl').dataTable().fnDestroy();
+  $("#styletbldata").empty();
+  for(let k of styleData.keys())
+  {
+        var AllData= styleData.get(k);
+        html +='<tr>';
+        // let isConfirmed = confirmationStatus.get(AllData.isActive);
+        html +="<td>"+AllData.medicineIds+"</td>";
+        html +="<td>"+AllData.visitDate+"</td>";
+        // html +="<td>"+AllData.batch+"</td>";
+        // html +="<td>"+AllData.vaccineExpiryDate+"</td>";
+        html +="<td>"+AllData.totalanimals+"</td>";
+        html +="<td>"+AllData.fees+"</td>";
+        // html +="<td>"+isConfirmed+"</td>";
+        html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
+        html +="</tr>";
+  }
+  $("#styletbldata").html(html);
+  $('#styletbl').DataTable({
+  searching: true,
+  retrieve: true,
+  bPaginate: $('tbody tr').length>10,
+  order: [],
+  columnDefs: [ { orderable: false, targets: [0,1,2,3,4] } ],
+  dom: 'Bfrtip',
+  buttons: [],
+  destroy: true
+  });
+
+}
+
+function getlistdeworming(){
+  $('#styletbl').dataTable().fnDestroy();
+  $("#styletbldata").empty();
+     $.ajax({
+         type: "POST",
+         url: api_url+"listdewormingentry.php",
+         data :{
+           branchid:"2"
+         },
+         async : false,
+         dataType :'json',
+         success: function(response) {
+            console.log(response);
+           var count;
+            if(response['Data']!=null){
+               count= response['Data'].length;
+            }
+            for(var i=0;i<count;i++)
+            {
+            vaccinationList.set(response.Data[i].treatmentId,response.Data[i]);
+            }
+            settabledata(vaccinationList);
+         }
+     });
+}
 // function addtablemedicine(){
 //   var medicinename = $("#medicinename").val();
 //             $("#fileList tbody").empty();
@@ -26,66 +89,6 @@ getlistvaccineentry();
 //             document.getElementById("fileList").deleteRow(rowNumber);
 //   }
 
-function settabledata(styleData){
-  console.log(styleData);
-  var html ='';
-  $('#styletbl').dataTable().fnDestroy();
-  $("#styletbldata").empty();
-  for(let k of styleData.keys())
-  {
-        var AllData= styleData.get(k);
-        html +='<tr>';
-        // let isConfirmed = confirmationStatus.get(AllData.isActive);
-        html +="<td>"+AllData.medicineIds+"</td>";
-        html +="<td>"+AllData.visitDate+"</td>";
-        html +="<td>"+AllData.batch+"</td>";
-        html +="<td>"+AllData.vaccineExpiryDate+"</td>";
-        html +="<td>"+AllData.totalAnimals+"</td>";
-        html +="<td>"+AllData.fees+"</td>";
-        // html +="<td>"+isConfirmed+"</td>";
-        html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
-        html +="</tr>";
-  }
-  $("#styletbldata").html(html);
-  $('#styletbl').DataTable({
-  searching: true,
-  retrieve: true,
-  bPaginate: $('tbody tr').length>10,
-  order: [],
-  columnDefs: [ { orderable: false, targets: [0,1,2,3,4,5,6] } ],
-  dom: 'Bfrtip',
-  buttons: [],
-  destroy: true
-  });
-
-}
-
-function getlistvaccineentry(){
-  $('#styletbl').dataTable().fnDestroy();
-  $("#styletbldata").empty();
-     $.ajax({
-         type: "POST",
-         url: api_url+"listvaccineentry.php",
-         data :{
-           branchid:"2"
-         },
-         async : false,
-         dataType :'json',
-         success: function(response) {
-           // console.log(response);
-           var count;
-            if(response['Data']!=null){
-               count= response['Data'].length;
-            }
-            for(var i=0;i<count;i++)
-            {
-            vaccinationList.set(response.Data[i].treatmentId,response.Data[i]);
-            }
-            settabledata(vaccinationList);
-         }
-     });
-}
-
 // This function is created For Add Button New Style
 function addStyle(){
   $("#customerstyletable").hide();
@@ -94,9 +97,7 @@ function addStyle(){
   $("#updatebtncustomerstyle").hide();
   $("#medicinename").val('').trigger('change');
   $("#visitdate").val('');
-  $("#batchnumber").val('');
-  $("#expirydate").val('');
-  $("#wastageqty").val('');
+  $("#medicinetype").val('').trigger('change');
   $("#nogoat").val('');
   $("#nocow").val('');
   $("#nobull").val('');
@@ -106,10 +107,8 @@ function addStyle(){
   $("#nosheep").val('');
   $("#nopoultry").val('');
   $("#nofees").val('');
-  $("#totanimal").html(0);
 }
 
-// This function is created For Edit Button
 function editStyle(id){
    //console.log(vaccinationList.get(id.toString()));
 var AllData= vaccinationList.get(id.toString());
@@ -123,9 +122,7 @@ $("#savebtncustomerstyle").hide();
 $("#updatebtncustomerstyle").show();
 $("#medicinename").val(medicinearr).trigger('change');
 $("#visitdate").val(AllData.visitDate);
-$("#batchnumber").val(AllData.batch);
-$("#expirydate").val(AllData.vaccineExpiryDate);
-$("#wastageqty").val(AllData.wastageQuantity);
+$("#medicinetype").val(AllData.type).trigger('change');
 $("#nogoat").val(AllData.goat);
 $("#nocow").val(AllData.cow);
 $("#nobull").val(AllData.bull);
@@ -135,8 +132,9 @@ $("#noredka").val(AllData.redka);
 $("#nosheep").val(AllData.sheep);
 $("#nopoultry").val(AllData.poultry);
 $("#nofees").val(AllData.fees);
-$("#totanimal").html(AllData.totalAnimals);
+$("#totanimal").html(AllData.totalanimals);
 }
+
 
 
 
@@ -192,9 +190,7 @@ $('#savebtncustomerstyle').on('click',function(event){
    event.preventDefault();
   var medicinename = $("#medicinename").val();
   var visitdate = $("#visitdate").val();
-  var batchnumber =$("#batchnumber").val();
-  var expirydate =$("#expirydate").val();
-  var wastageqty =$("#wastageqty").val();
+  var medicinetype = $("#medicinetype").val();
   var nogoat =$("#nogoat").val();
   var nocow =$("#nocow").val();
   var nobull =$("#nobull").val();
@@ -205,32 +201,32 @@ $('#savebtncustomerstyle').on('click',function(event){
   var nopoultry =$("#nopoultry").val();
   var nofees =$("#nofees").val();
   if(nogoat==""){
-    nogoat="0";
+    nogoat=0;
   }
   if(nocow==""){
-    nocow="0";
+    nocow=0;
   }
   if(nobull==""){
-    nobull="0";
+    nobull=0;
   }
   if(nocalf==""){
-    nocalf="0";
+    nocalf=0;
   }
   if(nobuffalo==""){
-    nobuffalo="0";
+    nobuffalo=0;
   }
   if(noredka==""){
-    noredka="0";
+    noredka=0;
   }
   if(nosheep==""){
-    nosheep="0";
+    nosheep=0;
   }
   if(nopoultry==""){
-    nopoultry="0";
+    nopoultry=0;
   }
   var totanimal = $("#totanimal").html();
   console.log(totanimal);
-  console.log("medicinename"+medicinename);
+  // console.log("medicinename"+medicinename);
   // console.log("visitdate"+visitdate);
   // console.log("batchnumber"+batchnumber);
   // console.log("expirydate"+expirydate);
@@ -247,12 +243,10 @@ $('#savebtncustomerstyle').on('click',function(event){
   var obj={
               medicineids:medicinename,
               visitdate :visitdate,
-              batchnumber :batchnumber,
-              vaccineexpirydate:expirydate,
+              dewormingtype: medicinetype,
               ownerid :'2',
               animalid :'2',
               totalanimals :totanimal,
-              wastagequantity :wastageqty,
               fees :nofees,
               doctorid :'2',
               branchid :'2',
@@ -266,7 +260,6 @@ $('#savebtncustomerstyle').on('click',function(event){
               poultry :nopoultry
            };
            var obj1 ={
-             batch: batchnumber,
              branchId: "2",
              buffalo: nobuffalo,
              bull: nobull,
@@ -281,14 +274,12 @@ $('#savebtncustomerstyle').on('click',function(event){
              poultry:nopoultry,
              redka: noredka,
              sheep: nosheep,
-             totalAnimals: totanimal,
-             vaccineExpiryDate: expirydate,
+             totalanimals: totanimal,
              visitDate:visitdate,
-             wastageQuantity:wastageqty
+             type:medicinetype
            };
     $.ajax({
-
-        url:api_url+'vaccineentry.php',
+        url:api_url+'dewormingentry.php',
         type:'POST',
         data:obj,
         dataType:'json',
@@ -300,7 +291,7 @@ $('#savebtncustomerstyle').on('click',function(event){
             swal(response.Message);
             $("#customerstyletable").show();
             $("#customerstyletableform").hide();
-            obj.treatmentid = response.RowId.toString();
+            obj.treatmentId = response.RowId.toString();
             vaccinationList.set(response.RowId.toString(),obj1);
             settabledata(vaccinationList);
           }
@@ -309,6 +300,7 @@ $('#savebtncustomerstyle').on('click',function(event){
           }
         },
         complete:function(response){
+
           // console.log("after");
           $(".preloader").hide();
         }
@@ -361,15 +353,13 @@ $('#updatebtncustomerstyle').on('click',function(event){
   var totanimal = $("#totanimal").html();
   console.log(totanimal);
   var obj={
-              treatmentid:treatmentid,
+              treatmentId:treatmentid,
               medicineids:medicinename,
               visitdate :visitdate,
-              batchnumber :batchnumber,
-              vaccineexpirydate:expirydate,
+              dewormingtype: medicinetype,
               ownerid :'2',
               animalid :'2',
               totalanimals :totanimal,
-              wastagequantity :wastageqty,
               fees :nofees,
               doctorid :'2',
               branchid :'2',
@@ -382,9 +372,8 @@ $('#updatebtncustomerstyle').on('click',function(event){
               sheep :nosheep,
               poultry :nopoultry
            };
-    var obj1 ={
-            treatmentid:treatmentid,
-             batch: batchnumber,
+           var obj1 ={
+             treatmentId:treatmentid,
              branchId: "2",
              buffalo: nobuffalo,
              bull: nobull,
@@ -399,13 +388,12 @@ $('#updatebtncustomerstyle').on('click',function(event){
              poultry:nopoultry,
              redka: noredka,
              sheep: nosheep,
-             totalAnimals: totanimal,
-             vaccineExpiryDate: expirydate,
+             totalanimals: totanimal,
              visitDate:visitdate,
-             wastageQuantity:wastageqty
+             type:medicinetype
            };
   $.ajax({
-      url:api_url+'editvaccineentry.php',
+      url:api_url+'editdewormingentry.php',
       type:'POST',
       data:obj,
       dataType:'json',
@@ -436,7 +424,7 @@ $('#updatebtncustomerstyle').on('click',function(event){
 // This function is created For Remove Button
 function removeMeasurements(id){
   $.ajax({
-      url:api_url+'deletevaccineentry.php',
+      url:api_url+'deletedewormingentry.php',
       type:'POST',
       data:{
         treatmentid : id ,
