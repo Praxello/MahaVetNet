@@ -35,14 +35,17 @@
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Medicine ID</th>
+                    <th>Visit Date</th>
+                    <th>Batch Number</th>
+                    <th>Expiry Date</th>
+                    <th>Total Animal</th>
+                    <th>Total Fees</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody id="styletbldata">
-                  <tr>
+                  <!-- <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
@@ -77,7 +80,7 @@
                     <td>Larry</td>
                     <td>the Bird</td>
                     <td>@twitter</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -88,13 +91,13 @@
               <div class="col-sm-12">
                 <div class="card">
                   <div class="row">
-                  <input type="hidden" id="styleid"/>
+                  <input type="hidden" id="treatmentid"/>
 
                     <div class="col-sm-12">
                       <div class="col-sm-12">
                     <div class="form-group required">
                       <label class="control-label">Medicine Name</label>
-                      <select  class="form-control"  id="medicinename" style="width:100%;" onchange="addtablemedicine()" multiple>
+                      <select  class="form-control"  id="medicinename" style="width:100%;"  multiple>
                         <!-- <option value="">Select Medicine Name</option> -->
                         <option value="2">Medicine1</option>
                         <option value="3">Skuno</option>
@@ -160,35 +163,35 @@
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Calf</label>
-                        <input type="text" class="form-control" id="nocalf"  title="No of Calf" placeholder="No of Calf" onkeypress="javascript:return isNumberKey(event)"/>
+                        <input type="text" class="form-control" id="nocalf"  title="No of Calf" value="0" placeholder="No of Calf" onkeyup="vacciamount()" onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Buffalo</label>
-                        <input type="text" class="form-control" id="nobuffalo"  title="No of Buffalo" placeholder="No of Buffalo" onkeypress="javascript:return isNumberKey(event)"/>
+                        <input type="text" class="form-control" id="nobuffalo"  title="No of Buffalo" value="0" placeholder="No of Buffalo"  onkeyup="vacciamount()" onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group ">
                         <label class="control-label">Redka</label>
-                        <input type="text" class="form-control" id="noredka"  title="No of Redka" placeholder="No of Redka" onkeypress="javascript:return isNumberKey(event)"/>
+                        <input type="text" class="form-control" id="noredka"  title="No of Redka" value="0" placeholder="No of Redka" onkeyup="vacciamount()" onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Sheep</label>
-                        <input type="text" class="form-control" id="nosheep"  title="No of Sheep" placeholder="No of Sheep" onkeypress="javascript:return isNumberKey(event)"/>
+                        <input type="text" class="form-control" id="nosheep"  title="No of Sheep" value="0" placeholder="No of Sheep" onkeyup="vacciamount()" onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Poultry</label>
-                        <input type="text" class="form-control" id="nopoultry"  title="No of Poultry" placeholder="No of Poultry" onkeypress="javascript:return isNumberKey(event)"/>
+                        <input type="text" class="form-control" id="nopoultry"  title="No of Poultry" value="0" placeholder="No of Poultry" onkeyup="vacciamount()"onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
                     </div>
@@ -201,7 +204,7 @@
                     </div>
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label class="control-label">Total Animals </label><span id="totanimal"></span>
+                        <label class="control-label">Total Animals = &nbsp;</label><span class="badge badge-info" id="totanimal"></span>
 
 
                       </div>
