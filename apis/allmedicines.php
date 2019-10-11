@@ -1,9 +1,9 @@
 <?php
-   include "../connection.php";
+     include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
-
+	
 					  $jobQuery = mysqli_query($conn,"SELECT * FROM  medicine_master");
 						if($jobQuery!=null)
 						{
@@ -16,8 +16,8 @@
 									}
 							}
 						}
-
-					$response = array('Message'=>"All medicines fetched Successfully","Data"=>$records ,'Responsecode'=>200);
-
+		
+					$response = array('Message'=>"All medicines fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
+	
 	 print json_encode($response);
 ?>
