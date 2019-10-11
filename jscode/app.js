@@ -7,12 +7,8 @@ const data = {
     branchid: 3391
 };
 
-
 const userid = 1,
     branchid = 3391;
-
-
-
 
 $('#loadfirstpage').on('click', function(e) {
     e.preventDefault();
@@ -32,15 +28,3 @@ const getLastName = (firstName) => {
         return '';
     }
 }
-
-// function addmedicine() {
-//     $('#loadMedicinePage').show();
-//     $('#farmerPage').hide();
-//     loadMedicine(url, medicines, data.branchid);
-// }
-
-// function addstraw() {
-//     $('#loadstrawpage').show();
-//     $('#farmerPage').hide();
-//     loadstraw(url, straw, data.branchid);
-// }

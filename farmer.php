@@ -281,6 +281,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                 </div>
                 <div id="farmerPage">
+                    <input type="hidden"  id="brid" value="<?php echo $_SESSION['branchId'];?>"/>
+                    <input type="hidden"  id="drid" value="<?php echo $_SESSION['userId'];?>"/>
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
 

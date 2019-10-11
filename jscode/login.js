@@ -11,8 +11,9 @@ $('#signin').on('submit', function(event) {
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
-                // var branchId = response.Data.branchId;
-                // var userId = response.Data.userId;
+                var branchId = response.Data.branchId;
+                var userId = response.Data.userId;
+                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId;
             } else {
                 alert('Enter Correct Username and password');
             }
