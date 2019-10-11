@@ -3,8 +3,8 @@ var animals_data = new Map();
 var medicines = new Map();
 var straw = new Map();
 const data = {
-    doctorid: 1,
-    branchid: 3391
+    doctorid: $('#drid').val(),
+    branchid: $('#brid').val()
 };
 
 const userid = 1,
