@@ -36,6 +36,21 @@
                             <i class="fa fa-dashboard"></i> <span>Straws</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="patients.php">
+                            <i class="fa fa-dashboard"></i> <span>All Patients</span>
+                        </a>
+                    </li>
+                    <!-- <li class="treeview">
+                        <a href="vaccination.php">
+                            <i class="fa fa-dashboard"></i> <span>Vaccination</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="deworming.php">
+                            <i class="fa fa-dashboard"></i> <span>Deworming</span>
+                        </a>
+                    </li> -->
                     <!-- <li class="treeview">
                         <a href="index.html">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>

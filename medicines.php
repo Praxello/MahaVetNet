@@ -7,12 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 
 <head>
-    <title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | General Elements
-        :: w3layouts</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+     <?php include "title.php"; ?>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -63,9 +58,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!-- //header-ends -->
         <!-- main content start-->
         <div id="page-wrapper">
-        <?php session_start();?>
-        <input type="hidden"  id="brid" value="<?php echo $_SESSION['branchId'];?>"/>
-        <input type="hidden"  id="drid" value="<?php echo $_SESSION['userId'];?>"/>
+
+        <input type="hidden"  id="brid" value="<?php  echo $brId ;?>"/>
+        <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
             <div class="main-page general">
                 <h2 class="title1">General Elements</h2>
                 <div class="modals widget-shadow">

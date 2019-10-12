@@ -1,10 +1,10 @@
 <?php
-     include "../connection.php";
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	 extract($_GET);
-	
+
 					  $jobQuery = mysqli_query($conn,"SELECT * FROM  animal_owner_master where branchid=$branchid");
 						if($jobQuery!=null)
 						{
@@ -27,13 +27,13 @@
 																}
 														}
 													}
-										
+
 										$records[]= array("AnimalOwner"=>$animalOwnerResult, "Animals"=> $animalData);
 									}
 							}
 						}
-		
-					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
-	
+
+					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+
 	 print json_encode($response);
 ?>

@@ -1,13 +1,15 @@
 <?php
-     include "../connection.php";
+   include "../connection.php";
+   header('Access-Control-Allow-Origin: *');
+   header('Content-Type: application/json');
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	 $visitId=null;
 	 extract($_POST);
-
-
-	if(isset($_POST['animalid']) && isset($_POST['medicineids']) && isset($_POST['visitdate']) && isset($_POST['batchnumber']) && isset($_POST['vaccineexpirydate']) && isset($_POST['ownerid']) && isset($_POST['totalanimals']) && isset($_POST['wastagequantity']) && isset($_POST['fees']) && isset($_POST['treatmentid']) && isset($_POST['goat']) && isset($_POST['cow'])&& isset($_POST['bull'])&& isset($_POST['calf'])&& isset($_POST['buffalo'])&& isset($_POST['redka']) && isset($_POST['sheep']) && isset($_POST['poultry']) )
+	if(isset($_POST['animalid']) && isset($_POST['medicineids']) && isset($_POST['visitdate']) && isset($_POST['batchnumber']) && isset($_POST['vaccineexpirydate']) && isset($_POST['ownerid']) && isset($_POST['totalanimals'])
+  && isset($_POST['wastagequantity']) && isset($_POST['fees']) && isset($_POST['treatmentid']) && isset($_POST['goat']) && isset($_POST['cow'])&& isset($_POST['bull'])&& isset($_POST['calf'])&& isset($_POST['buffalo'])
+  && isset($_POST['redka']) && isset($_POST['sheep']) && isset($_POST['poultry']))
 	 {
      $medicineids = implode(",",$medicineids);
  		   $tempMedicineEntry = mysqli_real_escape_string($conn,$medicineids);
@@ -25,18 +27,6 @@
 			$rowsAffected=mysqli_affected_rows($conn);
 				if($rowsAffected==1)
 				{
-					  // $academicQuery = mysqli_query($conn,"select * from  vaccination_master where branchid=$branchid and isdeleted=0");
-						// if($academicQuery!=null)
-						// {
-						// 	$academicAffected=mysqli_num_rows($academicQuery);
-						// 	if($academicAffected>0)
-						// 	{
-						// 		while($academicResults = mysqli_fetch_assoc($academicQuery))
-						// 			{
-						// 				$records[]=$academicResults;
-						// 			}
-						// 	}
-						// }
 					$response = array('Message'=>"Vaccine record added successfully","Data"=>$records ,'Responsecode'=>200);
 				}
 				else
@@ -48,5 +38,6 @@
 	 {
 		$response=array("Message"=> "Parameters missing","Responsecode"=>403);
 	 }
+   mysqli_close($conn);
 	 print json_encode($response);
 ?>

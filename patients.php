@@ -2,8 +2,6 @@
 if(isset($_SESSION['branchId'])){
     $brId = $_SESSION['branchId'];
     $drid = $_SESSION['userId'];
-    $animalid = $_REQUEST['aniid'];
-    $ownerid = $_REQUEST['oid'];
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -45,7 +43,7 @@ if(isset($_SESSION['branchId'])){
  <script src="js/metisMenu.min.js"></script>
  <script src="js/custom.js"></script>
  <link href="css/custom.css" rel="stylesheet">
- <link href="sweetalert/sweetalert.css" rel="stylesheet">
+ <!-- <link href="sweetalert/sweetalert.css" rel="stylesheet"> -->
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -53,54 +51,57 @@ if(isset($_SESSION['branchId'])){
 		<?php include "header.php"; ?>
 		<div id="page-wrapper">
 			<div class="main-page">
-				<h3 class="title1">Deworming</h3>
+				<h3 class="title1">All Patients</h3>
+        <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
+        <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
-          <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
-          <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
-          <input type="hidden"  id="oid" value="<?php echo $ownerid ;?>"/>
-          <input type="hidden"  id="aid" value="<?php echo $animalid ;?>"/>
+
           <div class="row" id="customerstyletable" style="display:block;">
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12">
-                <button type="button" id="button1" class="btn btn-success" onclick="addStyle()" style="float:right"> New Deworming</button>
+                <button type="button" id="button1" class="btn btn-success" onclick="addStyle()" style="float:right"> New Vaccination</button>
                 <div id="data"></div>
             </div>
-            </div>
+            </div> -->
             <div class="col-md-12" >
             <div class="table-responsive">
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
                 <thead>
                   <tr>
-                    <th>Medicine ID</th>
-                    <th>Visit Date</th>
-                    <!-- <th>Batch Number</th>
-                    <th>Expiry Date</th> -->
-                    <th>Total Animal</th>
-                    <th>Total Fees</th>
+                    <th>MVN ID</th>
+                    <th>Animal Name</th>
+                    <th>Species/ Breed</th>
+                    <th>Owner</th>
+                    <th>Address</th>
+                    <th>Mobile no</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody id="styletbldata">
-
                 </tbody>
               </table>
             </div>
 
             </div>
             </div>
-            <div class="row" id="customerstyletableform" style="display:none;">
+            <!-- <div class="row" id="customerstyletableform" style="display:none;">
               <div class="col-sm-12">
                 <div class="card">
                   <div class="row">
-                  <input type="hidden" id="styleid"/>
+                  <input type="hidden" id="treatmentid"/>
 
                     <div class="col-sm-12">
                       <div class="col-sm-12">
                     <div class="form-group required">
                       <label class="control-label">Medicine Name</label>
                       <select  class="form-control"  id="medicinename" style="width:100%;"  multiple>
-                        <!-- <option value="">Select Medicine Name</option> -->
 
+                        <option value="2">Medicine1</option>
+                        <option value="3">Skuno</option>
+                        <option value="4">Abc</option>
+                        <option value="5">Pqr</option>
+                        <option value="6">xyz</option>
+                        <option value="7">stv</option>
                       </select>
                     </div>
                     </div>
@@ -115,17 +116,6 @@ if(isset($_SESSION['branchId'])){
                       </div>
                     </div>
                     <div class="col-sm-6">
-                      <div class="form-group required">
-                        <label class="control-label">Type</label>
-                        <select  class="form-control"  id="medicinetype" style="width:100%;">
-                          <option value="">Select Type</option>
-                          <option value="Endoparasite">Endoparasite</option>
-                          <option value="Ectoparasite">Ectoparasite</option>
-                        </select>
-
-                      </div>
-                    </div>
-                    <!-- <div class="col-sm-6">
                       <div class="form-group required">
                         <label class="control-label">Batch Number</label>
                         <input type="text" class="form-control" id="batchnumber"  title="Batch Number"/>
@@ -145,7 +135,7 @@ if(isset($_SESSION['branchId'])){
                         <input type="text" class="form-control" id="wastageqty"  title="Wastage Quantity" placeholder="Wastage Quantity" onkeypress="javascript:return isNumberKey(event)"/>
 
                       </div>
-                    </div> -->
+                    </div>
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Goat</label>
@@ -227,7 +217,7 @@ if(isset($_SESSION['branchId'])){
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
 
 				</div>
@@ -239,7 +229,6 @@ if(isset($_SESSION['branchId'])){
   <!-- <script src="js/jquery-1.11.1.min.js"></script> -->
   <script src="jscode/apis.js" type="text/javascript"></script>
   <script src="javascript/validation.js"></script>
-
   <!-- <script src="js/modernizr.custom.js"></script> -->
   <!-- <script src="js/metisMenu.min.js"></script>
   <script src="js/custom.js"></script> -->
@@ -265,7 +254,7 @@ if(isset($_SESSION['branchId'])){
   <script src="datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script> -->
   <!-- <script src="datatables/datatables-init.js"></script> -->
   <script src="sweetalert/sweetalert.min.js"></script>
-  <script src="javascript/deworming.js"></script>
+  <script src="javascript/patients.js"></script>
   <script src="js/classie.js"></script>
   <script src="js/sidebarclose.js"></script>
   <script src="js/jquery.nicescroll.js"></script>
