@@ -1,3 +1,8 @@
+<?php session_start();
+if(isset($_SESSION['branchId'])){
+    $brId = $_SESSION['branchId'];
+    $drid = $_SESSION['userId'];
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -61,7 +66,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <div id="page-wrapper">
             <div class="main-page general">
                 <h2 class="title1">General Elements</h2>
-               
+                <?php session_start();?>
+        <input type="hidden"  id="brid" value="<?php echo $brId;?>"/>
+        <input type="hidden"  id="drid" value="<?php echo  $drid;?>"/>
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Straws List:</h4>
@@ -137,3 +144,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 </body>
 
 </html>
+<?php
+}else{
+    header("Location:index.php");
+}?>
