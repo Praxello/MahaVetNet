@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 	 $response=null;
 	 $records=null;
 	 extract($_POST);
+	 if(isset($_POST['branchid'])){
 	
 					  $jobQuery = mysqli_query($conn,"SELECT * FROM  animal_owner_master where branchid=$branchid");
 						if($jobQuery!=null)
@@ -36,6 +37,8 @@ header('Content-Type: application/json');
 						}
 
 					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
-
+					}else{
+						$response = array('Message'=>"Parameter Missing",'Responsecode'=>200);
+					}
 	 print json_encode($response);
 ?>

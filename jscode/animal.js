@@ -1,5 +1,6 @@
 var ownerid = null;
 const loadAnimals = param => {
+    ownerid = param;
     param = param.toString();
     $('#farmerPage').hide();
     $('#loadAnimalPage').show();
@@ -18,7 +19,6 @@ const loadAnimals = param => {
             animal_list(animals_data);
         }
     }
-
 }
 
 const animal_list = (animals_data) => {
@@ -56,7 +56,7 @@ const edit_animal = param => {
     param = param.toString();
     if (animals_data.has(param)) {
         const animal = animals_data.get(param);
-
+        console.log(animal);
         $('#animalId').val(param);
         $('#ownerid').val(animal.ownerId);
         $('#edit_animalname').val(animal.animalName);

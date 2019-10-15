@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
      include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
@@ -20,7 +22,7 @@
 			$milktemp = $milk;
 		}
 		
-		$sql = "insert into animal_master( ownerId, animalName, gender, specie, breed,weight, dateOfBirth, remarks, firstVisitDate, lastVisitDate, nextVisitDate, isbreedable,milk) values ($ownerid,'$animalname','$gender','$specie','$breed',$weight,'$birthdate','$remarks','$currentDate','$currentDate','$currentDate', $isbreedabletemp, $milktemp)";
+		$sql = "insert into animal_master(ownerId, animalName, gender, specie, breed,weight, dateOfBirth, remarks, firstVisitDate, lastVisitDate, nextVisitDate, isbreedable,milk) values ($ownerid,'$animalname','$gender','$specie','$breed',$weight,'$birthdate','$remarks','$currentDate','$currentDate','$currentDate', $isbreedabletemp, $milktemp)";
 			$query = mysqli_query($conn,$sql);
 		
 			$rowsAffected=mysqli_affected_rows($conn);

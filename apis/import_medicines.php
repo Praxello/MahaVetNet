@@ -1,8 +1,9 @@
 <?php
 // Load the database configuration file
-include_once 'connection.php';
+include_once '../connection.php';
 $response = null;
     // Allowed mime types
+    if(isset($_POST['branchId'])){
    $branchId = $_POST['branchId'];
     $csvMimes =array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
     // Validate whether selected file is a CSV file
@@ -42,5 +43,8 @@ $response = null;
         $qstring = '?status=invalid_file';
         $response = array('Message'=>'Invalid File','ResponseCode'=>500);
     }
+}else{
+    $response = array('Message'=>'Parameter Missing','ResponseCode'=>500);
+}
 exit(json_encode($response));
 ?>

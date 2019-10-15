@@ -52,6 +52,7 @@ const editowner = param => {
     param = param.toString();
     if (farmers.has(param)) {
         const animalOwner = farmers.get(param);
+        console.log(animalOwner);
         const owner = animalOwner.AnimalOwner;
         $('#edit_fname').val(owner.firstName + ' ' + owner.lastName);
         $('#ownerid').val(owner.ownerId);
