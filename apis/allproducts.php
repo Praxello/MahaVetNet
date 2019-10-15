@@ -1,13 +1,15 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $mappingRecords=null;
 	 $proudctRecords=null;
 	 $vendorRecords=null;
 	 $advertisementRecords=null;
-	 
-	 
+
+
 					$query = mysqli_query($conn,"SELECT * FROM advertisement_master");
 						if($query!=null)
 						{
@@ -20,7 +22,7 @@
 									}
 							}
 						}
-	 
+
 					  $query = mysqli_query($conn,"SELECT * FROM product_master where isactive=1");
 						if($query!=null)
 						{
@@ -33,8 +35,8 @@
 									}
 							}
 						}
-		
-		
+
+
 					$query = mysqli_query($conn,"SELECT * FROM vendor_master where isactive=1");
 						if($query!=null)
 						{
@@ -47,8 +49,8 @@
 									}
 							}
 						}
-						
-						
+
+
 						$query = mysqli_query($conn,"SELECT * FROM product_vendor_mapper_master where isactive=1");
 						if($query!=null)
 						{
@@ -61,8 +63,8 @@
 									}
 							}
 						}
-		
-					$response = array('Message'=>"All data fetched Successfully","Advertisements"=>$advertisementRecords, "Vendors"=>$vendorRecords,"Products"=>$proudctRecords, "Mapping"=> $mappingRecords ,'Responsecode'=>200);	
-	
+
+					$response = array('Message'=>"All data fetched Successfully","Advertisements"=>$advertisementRecords, "Vendors"=>$vendorRecords,"Products"=>$proudctRecords, "Mapping"=> $mappingRecords ,'Responsecode'=>200);
+mysqli_close($conn);
 	 print json_encode($response);
 ?>

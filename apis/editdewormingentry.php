@@ -7,7 +7,7 @@
 	 $records=null;
 	 extract($_POST);
 
-	if( isset($_POST['animalid']) && isset($_POST['medicineids']) && isset($_POST['visitdate']) && isset($_POST['ownerid']) && isset($_POST['totalanimals']) && isset($_POST['dewormingtype']) && isset($_POST['fees']) && isset($_POST['doctorid']) && isset($_POST['branchid']) && isset($_POST['goat']) && isset($_POST['cow'])&& isset($_POST['bull'])&& isset($_POST['calf'])&& isset($_POST['buffalo'])&& isset($_POST['redka']) && isset($_POST['sheep']) && isset($_POST['poultry']))
+	if( isset($_POST['treatmentid']) && isset($_POST['animalid']) && isset($_POST['medicineids']) && isset($_POST['visitdate']) && isset($_POST['ownerid']) && isset($_POST['totalanimals']) && isset($_POST['dewormingtype']) && isset($_POST['fees']) && isset($_POST['doctorid']) && isset($_POST['branchid']) && isset($_POST['goat']) && isset($_POST['cow'])&& isset($_POST['bull'])&& isset($_POST['calf'])&& isset($_POST['buffalo'])&& isset($_POST['redka']) && isset($_POST['sheep']) && isset($_POST['poultry']))
 	 {
  		 $medicineids = implode(",",$medicineids);
 		   $tempMedicineEntry = mysqli_real_escape_string($conn,$medicineids);

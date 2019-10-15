@@ -40,6 +40,6 @@
 	 {
 		$response=array("Message"=> "Parameters missing","Responsecode"=>403);
 	 }
-      mysqli_close($conn);
+   mysqli_close($conn);
 	 print json_encode($response);
 ?>

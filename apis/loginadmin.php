@@ -1,8 +1,10 @@
 <?php
-      include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+    include "../connection.php";
 	  mysqli_set_charset($conn,'utf8');
 	  $response=null;
-	 
+
 	 if(isset($_POST['usrname']) &&  isset($_POST['passwrd']))
 	 {
 		extract($_POST);
@@ -17,14 +19,14 @@
 					{
 					$records=$result;
 					}
-					
-							
+
+
 				$response=array("Data"=>$records,"Responsecode"=>200,"Message"=> "Login Successful");
 				}
 				else
 				{
 					$response=array("Message"=> "Invalid username or password!","Responsecode"=>401);
-				}	
+				}
 			}
 			else
 			{
@@ -35,5 +37,6 @@
 	 {
 		$response=array("Message"=> "Check query parameters","Responsecode"=>403);
 	 }
+   mysqli_close($conn);
 	 print json_encode($response);
 ?>

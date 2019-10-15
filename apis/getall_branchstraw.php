@@ -1,5 +1,7 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
@@ -18,9 +20,12 @@
                     }
             }
         }
-    $response = array('Message'=>"All straw fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
-    }else{
+    $response = array('Message'=>"All straw fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+    }
+    else
+    {
         $response = array('Message'=>"Parameter missing","Data"=>$records ,'Responsecode'=>500);
-    }				 
-print json_encode($response);
+    }
+    mysqli_close($conn);
+    print json_encode($response);
 ?>

@@ -1,5 +1,6 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
  include "../connection.php";
 
  mysqli_set_charset($conn,'utf8');
@@ -30,11 +31,11 @@ $records=null;
 					$records=$result['deviceId'];
 					}
 			   }
-			}	
+			}
 
 // The recipient registration tokens for this notification
 
-// https://developer.android.com/google/gcm/    
+// https://developer.android.com/google/gcm/
 
 //	$ids = array('APA91bEp8jep-nelsho_hNt0I891uF93TqVsl083lr9LJqcLG9x-OT3jFJKjm-Xtc9itvWtQJy4aNSLn4ELM0R0Z-q_LkUvct1132Hvv2NfMZrqTYC8LuBePgJnwc8v_sMw1cD0dcJs_');
 
@@ -60,11 +61,11 @@ $records=null;
 
         );
 
-		
 
-		
 
-		
+
+
+
 
         // Open connection
 

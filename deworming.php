@@ -71,7 +71,7 @@ if(isset($_SESSION['branchId'])){
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
                 <thead>
                   <tr>
-                    <th>Medicine ID</th>
+                    <th>Medicine Name</th>
                     <th>Visit Date</th>
                     <!-- <th>Batch Number</th>
                     <th>Expiry Date</th> -->
@@ -125,27 +125,7 @@ if(isset($_SESSION['branchId'])){
 
                       </div>
                     </div>
-                    <!-- <div class="col-sm-6">
-                      <div class="form-group required">
-                        <label class="control-label">Batch Number</label>
-                        <input type="text" class="form-control" id="batchnumber"  title="Batch Number"/>
 
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group required">
-                        <label class="control-label">Vaccine Expiry Date</label>
-                        <input type="date" class="form-control" id="expirydate"  title="Vaccine Expiry Date"/>
-
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group ">
-                        <label class="control-label">Wastage Quantity</label>
-                        <input type="text" class="form-control" id="wastageqty"  title="Wastage Quantity" placeholder="Wastage Quantity" onkeypress="javascript:return isNumberKey(event)"/>
-
-                      </div>
-                    </div> -->
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label class="control-label">Goat</label>

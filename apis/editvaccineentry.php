@@ -16,13 +16,14 @@
 		   $tempBatch = mysqli_real_escape_string($conn,$batchnumber);
 
 			$feesTemp = "Cash-Vaccination";
-		  $checkquery = mysqli_query($conn,"delete from  fees_master where animalId=$animalid and visitDate='$visitdate' and typeOfPayment like '%Vaccination%'") or die(mysqli_error($conn));
+		  // $checkquery = mysqli_query($conn,"delete from  fees_master where animalId=$animalid and visitDate='$visitdate' and typeOfPayment like '%Vaccination%'") or die(mysqli_error($conn));
 
 
       // $sql1= "INSERT INTO fees_master(doctorid,animalId, visitDate, feesAmount, typeOfPayment) VALUES ($doctorid,$animalid,$visitdate,$fees,$feesTemp)";
 			// $query = mysqli_query($conn,$sql1) or die(mysqli_error($conn));
+      $sql1 = "update vaccination_master set medicineids= '$tempMedicineEntry',visitdate='$visitdate', vaccineexpirydate='$vaccineexpirydate', totalanimals = '$totalanimals', wastagequantity='$wastagequantity', fees='$fees',cow='$cow',bull='$bull',calf='$calf',buffalo='$buffalo',redka='$redka',sheep='$sheep',goat='$goat',poultry='$poultry',batch='$batchnumber' where treatmentid = $treatmentid";
 
-			$query = mysqli_query($conn,"update vaccination_master set medicineids= '$tempMedicineEntry',visitdate='$visitdate', vaccineexpirydate='$vaccineexpirydate', totalanimals = '$totalanimals', wastagequantity='$wastagequantity', fees='$fees',cow='$cow',bull='$bull',calf='$calf',buffalo='$buffalo',redka='$redka',sheep='$sheep',goat='$goat',poultry='$poultry',batch='$batchnumber' where treatmentid = $treatmentid") or die(mysqli_error($conn));
+      $query = mysqli_query($conn,$sql1) or die(mysqli_error($conn));
 
 			$rowsAffected=mysqli_affected_rows($conn);
 				if($rowsAffected==1)

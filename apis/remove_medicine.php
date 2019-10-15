@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 include "../connection.php";
 mysqli_set_charset($conn,'utf8');
 $response=null;
@@ -11,9 +13,9 @@ $sql = "DELETE FROM medicine_master WHERE medicineId=$medicineId";
 $query = mysqli_query($conn,$sql);
 $rowsAffected=mysqli_affected_rows($conn);
 if($query==1){
-$response = array('Message'=>"Medicine Removed Successfully",'Responsecode'=>200);	
+$response = array('Message'=>"Medicine Removed Successfully",'Responsecode'=>200);
 }else{
-    $response = array('Message'=>"No data to update",'Responsecode'=>100);	
+    $response = array('Message'=>"No data to update",'Responsecode'=>100);
 }
 }
  else

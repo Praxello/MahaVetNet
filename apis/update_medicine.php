@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 include "../connection.php";
 mysqli_set_charset($conn,'utf8');
 $response=null;
@@ -11,14 +13,15 @@ $sql = "UPDATE  medicine_master SET tradeName='$tradeName', unit='$unit', type='
 $query = mysqli_query($conn,$sql);
 $rowsAffected=mysqli_affected_rows($conn);
 if($query==1){
-$response = array('Message'=>"Medicine updated Successfully",'Responsecode'=>200);	
+$response = array('Message'=>"Medicine updated Successfully",'Responsecode'=>200);
 }else{
-    $response = array('Message'=>"No data to update",'Responsecode'=>200);	
+    $response = array('Message'=>"No data to update",'Responsecode'=>200);
 }
 }
  else
 {
 	$response=array("Message"=> "Parameters missing","Responsecode"=>403);
 }
+mysqli_close($conn);
 print json_encode($response);
 ?>

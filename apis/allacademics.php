@@ -1,5 +1,7 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
@@ -9,8 +11,7 @@
 	 extract($_POST);
 	 	  if(isset($_POST['userid']))
 		  {
-			  
-			  			  $jobQuery = mysqli_query($conn,"select * from  academic_master order by postDateTime desc");
+			  		$jobQuery = mysqli_query($conn,"select * from  academic_master order by postDateTime desc");
 						if($jobQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($jobQuery);
@@ -25,7 +26,7 @@
 										//taking out likes now
 											$userIds = null;
 											$academicQuery = mysqli_query($conn,"select count(*) from  academic_master_likes where postid=$caseId");
-						
+
 											if($academicQuery!=null)
 											{
 											$academicAffected=mysqli_num_rows($academicQuery);
@@ -37,11 +38,11 @@
 													}
 												}
 											}
-						
+
 									$isLiked = false;
-									
+
 									$userIdQuery = mysqli_query($conn,"select * from  academic_master_likes where userid=$userid and postid=$caseId");
-						
+
 									if($userIdQuery!=null)
 									{
 									$userAffected=mysqli_num_rows($userIdQuery);
@@ -53,11 +54,11 @@
 									}
 									}
 									}
-									
-									$likesData =  array("Likes"=>$likeCount,"isLiked"=>$isLiked);	
-									
-									
-									
+
+									$likesData =  array("Likes"=>$likeCount,"isLiked"=>$isLiked);
+
+
+
 									//Academics comments ***********************************
 								  $commentsData = null;
 								  $academicQuery = mysqli_query($conn,"select * from  academic_master_comments where postid=$caseId");
@@ -72,11 +73,11 @@
 											}
 										}
 									}
-									
+
 									$isBookmarked = false;
 									//**************Bookmarks *****************
 									$userIdQuery = mysqli_query($conn,"select  * from  academic_master_bookmark where userId=$userid and postid=$caseId");
-						
+
 									if($userIdQuery!=null)
 									{
 									$userAffected=mysqli_num_rows($userIdQuery);
@@ -85,28 +86,27 @@
 										while($userResults = mysqli_fetch_assoc($userIdQuery))
 										{
 											$isBookmarked = true;
-										}	
+										}
 									}
 									}
-									
-									
-									$masterRecord[] = array("CaseData"=>$caseData,"LikeData"=>$likesData, "CommentsData"=>$commentsData, "IsBookMarked"=>$isBookmarked);	
-					     			
-										
-										
+
+
+									$masterRecord[] = array("CaseData"=>$caseData,"LikeData"=>$likesData, "CommentsData"=>$commentsData, "IsBookMarked"=>$isBookmarked);
+
+
+
 									}
 							}
 						}
-		
-		
-		
-					$response = array('Message'=>"Academics fetched Successfully","Data"=>$masterRecord ,'Responsecode'=>200);	
+
+
+
+					$response = array('Message'=>"Academics fetched Successfully","Data"=>$masterRecord ,'Responsecode'=>200);
 		  }
 		else
 		{
 			$response=array("Message"=> "Parameters missing","Responsecode"=>403);
 		}
-		mysqli_close($conn);
-	
+	 mysqli_close($conn);
 	 print json_encode($response);
 ?>

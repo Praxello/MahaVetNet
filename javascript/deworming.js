@@ -37,20 +37,31 @@ function getallmedicinelist(){
          medicineData.set(response.Data[i].medicineId,response.Data[i]);
          }
          $("#medicinename").html(selectmedicine);
+         $("#dmedicinename").html(selectmedicine);
       }
   });
 }
 function settabledata(styleData){
-  console.log(styleData);
+  // console.log(styleData);
   var html ='';
   $('#styletbl').dataTable().fnDestroy();
   $("#styletbldata").empty();
   for(let k of styleData.keys())
   {
         var AllData= styleData.get(k);
+        var mid =AllData.medicineIds.split(",");
+        var mcount =mid.length;
+        var mname ='';
+        for(var i=0;i<mcount;i++){
+
+           if(medicineData.has(mid[i])){
+             let mn= medicineData.get(mid[i]);
+              mname+=mn.tradeName+"<br>";
+           }
+        }
         html +='<tr>';
         // let isConfirmed = confirmationStatus.get(AllData.isActive);
-        html +="<td>"+AllData.medicineIds+"</td>";
+        html +="<td>"+mname+"</td>";
         html +="<td>"+AllData.visitDate+"</td>";
         // html +="<td>"+AllData.batch+"</td>";
         // html +="<td>"+AllData.vaccineExpiryDate+"</td>";

@@ -16,7 +16,6 @@ function getallmedicinelist(){
       type: "POST",
       url: url+"allmedicines.php",
       data :{
-        // branchid:"2"
         branchid:branchid
       },
       async : false,
@@ -27,7 +26,6 @@ function getallmedicinelist(){
          if(response['Data']!=null){
             count= response['Data'].length;
          }
-          // selectmedicine ='<option value="">Select Medicine Name</option>';
          for(var i=0;i<count;i++)
          {
            selectmedicine +="<option value='"+response['Data'][i].medicineId+"'>"+response['Data'][i].tradeName+"</option>";
@@ -38,16 +36,25 @@ function getallmedicinelist(){
   });
 }
 function settabledata(styleData){
-  console.log(styleData);
   var html ='';
   $('#styletbl').dataTable().fnDestroy();
   $("#styletbldata").empty();
   for(let k of styleData.keys())
   {
         var AllData= styleData.get(k);
+        var mid =AllData.medicineIds.split(",");
+        var mcount =mid.length;
+        var mname ='';
+        for(var i=0;i<mcount;i++){
+
+           if(medicineData.has(mid[i])){
+             let mn= medicineData.get(mid[i]);
+              mname+=mn.tradeName+"<br>";
+           }
+        }
         html +='<tr>';
         // let isConfirmed = confirmationStatus.get(AllData.isActive);
-        html +="<td>"+AllData.medicineIds+"</td>";
+        html +="<td>"+mname+"</td>";
         html +="<td>"+AllData.visitDate+"</td>";
         html +="<td>"+AllData.batch+"</td>";
         html +="<td>"+AllData.vaccineExpiryDate+"</td>";

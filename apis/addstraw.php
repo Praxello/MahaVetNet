@@ -1,16 +1,18 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	 $visitId=null;
 	 extract($_POST);
-	  
+
 	  if(isset($_POST['straw_number'])  && isset($_POST['branchid']))
 	 {
 		$sql = "INSERT INTO  straw_details (straw_number,branchId) values('$straw_number',$branchid)";
 			$query = mysqli_query($conn,$sql);
-			
+
 			$rowsAffected=mysqli_affected_rows($conn);
 				if($rowsAffected==1)
 				{
@@ -27,11 +29,11 @@
 									}
 							}
 						}
-					$response = array('Message'=>"Straw added successfully" ,'Data'=>$records,'Responsecode'=>200);	
+					$response = array('Message'=>"Straw added successfully" ,'Data'=>$records,'Responsecode'=>200);
 				}
 				else
 				{
-					$response = array('Message'=>"No data to update",'Responsecode'=>500);	
+					$response = array('Message'=>"No data to update",'Responsecode'=>500);
 				}
 	 }
 	 else

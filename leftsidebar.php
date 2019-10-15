@@ -38,7 +38,7 @@
                     </li>
                     <li class="treeview">
                         <a href="patients.php">
-                            <i class="fa fa-dashboard"></i> <span>All Patients</span>
+                            <i class="fa fa-dashboard"></i> <span>Vaccination/Deworming</span>
                         </a>
                     </li>
                     <!-- <li class="treeview">

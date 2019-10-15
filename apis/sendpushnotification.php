@@ -1,10 +1,12 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
  include "connection.php";
  mysqli_set_charset($conn,'utf8');
 $url = 'https://fcm.googleapis.com/fcm/send';
 
 	extract($_POST);
-	
+
 $data1 = array('body' => $message);
 $records=null;
   $query = mysqli_query($conn,"select distinct(deviceId) from customer_gcm_apns_master where osType='Android'");
@@ -16,13 +18,13 @@ $records=null;
 					while($result = mysqli_fetch_assoc($query))
 					{
 					$records[]=$result['deviceId'];
-                              
+
 					}
 			   }
-			}	
+			}
 
 // The recipient registration tokens for this notification
-// https://developer.android.com/google/gcm/    
+// https://developer.android.com/google/gcm/
 //	$ids = array('APA91bEp8jep-nelsho_hNt0I891uF93TqVsl083lr9LJqcLG9x-OT3jFJKjm-Xtc9itvWtQJy4aNSLn4ELM0R0Z-q_LkUvct1132Hvv2NfMZrqTYC8LuBePgJnwc8v_sMw1cD0dcJs_');
 
 			$post = array(
@@ -35,9 +37,9 @@ $records=null;
             'Authorization: key='.'AAAAUz66cMg:APA91bFwEjJmak5bm_9M2PZDCrKZXDjCCKNRGAEZBRb9mqFIgEFfcqaep6Ylz8b3iQ0VyGd4ahoayr9nY3lTQ4Lc18O6fXrJFsZVJ4kFwxsjCvN3t5XK_QtXvrXZS1b_ZNW0_8CJnHDW',
             'Content-Type: application/json'
         );
-		
-		
-		
+
+
+
         // Open connection
         $ch = curl_init();
 

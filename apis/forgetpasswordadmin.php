@@ -1,7 +1,9 @@
 <?php
-      include "../connection.php";
-	  mysqli_set_charset($conn,'utf8');
-	  $response=null;
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+  include "../connection.php";
+	mysqli_set_charset($conn,'utf8');
+	$response=null;
 
 	extract($_GET);
 	if(isset($_GET['username']))
@@ -78,21 +80,21 @@ $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: smartpro@esmartsolution.in' . "\r\n";
 mail($to, $subject, $message, $headers);
 					}
-			
+
 			$response=array("Responsecode"=>200,"Message"=>"Your password is delivered to your registered e-Mail");
-			//send mail to the client 
+			//send mail to the client
 			   }
 			else
 			{
 				$response=array("Responsecode"=>200,"Message"=>"No active account available!");
 			}
 		}
-		
+
 	}
 	else
 	{
 			$response=array("Message"=> "Check query parameter","Responsecode"=>403);
 	}
-	
+mysqli_close($conn);
 	 print json_encode($response);
 ?>

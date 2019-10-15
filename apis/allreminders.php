@@ -1,10 +1,12 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	  extract($_POST);
-	
+
 	if (isset($_POST['branchid']))
 	{
 		   $jobQuery = mysqli_query($conn,"select * from medication_master mm inner join animal_master am on mm.animalid=am.animalid inner join animal_owner_master aom on aom.ownerid = am.ownerid where mm.treatment REGEXP 'AIType\":\"Fresh|AIType\":\"Repeat' and mm.doctorid in (select  um.doctorid  from user_master um join branch_master bm on bm.branchId = um.branchId inner join branch_mapper_master bmm on um.branchId = bmm.childBranch where bmm.branchId =$branchid)");
@@ -19,9 +21,6 @@
 									}
 							}
 						}
-		
-		
-
 					$jobQuery = mysqli_query($conn,"select * from medication_master mm inner join animal_master am on mm.animalid=am.animalid inner join animal_owner_master aom on aom.ownerid = am.ownerid where mm.treatment REGEXP '\"AIPD|\"NSPD' and mm.doctorid in (select  um.doctorid  from user_master um join branch_master bm on bm.branchId = um.branchId inner join branch_mapper_master bmm on um.branchId = bmm.childBranch where bmm.branchId =$branchid)");
 						if($jobQuery!=null)
 						{
@@ -34,9 +33,9 @@
 									}
 							}
 						}
-				
-				
-				
+
+
+
 					$jobQuery = mysqli_query($conn,"select * from medication_master mm inner join animal_master am on mm.animalid=am.animalid inner join animal_owner_master aom on aom.ownerid = am.ownerid where mm.treatment REGEXP 'TestReportSexOrgans\":\"[[a-z]|[A-Z]]' and mm.doctorid in (select  um.doctorid  from user_master um join branch_master bm on bm.branchId = um.branchId inner join branch_mapper_master bmm on um.branchId = bmm.childBranch where bmm.branchId =$branchid)");
 						if($jobQuery!=null)
 						{
@@ -49,7 +48,7 @@
 									}
 							}
 						}
-				
+
 
 
 					$jobQuery = mysqli_query($conn,"select * from vaccination_master mm inner join animal_master am on mm.animalid=am.animalid inner join animal_owner_master aom on aom.ownerid = am.ownerid where mm.isdeleted = 0 and   mm.doctorid in (select  um.doctorid  from user_master um join branch_master bm on bm.branchId = um.branchId inner join branch_mapper_master bmm on um.branchId = bmm.childBranch where bmm.branchId=$branchid)");
@@ -82,15 +81,15 @@
 
 
 
-				$response = array('Message'=>"All reminders fetched successfully".mysqli_error($conn),"Data"=>$records ,'Responsecode'=>200);	
+				$response = array('Message'=>"All reminders fetched successfully".mysqli_error($conn),"Data"=>$records ,'Responsecode'=>200);
 
 	}
 	else
 	{
-					$response = array('Message'=>"Parameter missing ".mysqli_error($conn),'Responsecode'=>403);	
+					$response = array('Message'=>"Parameter missing ".mysqli_error($conn),'Responsecode'=>403);
 
-		
+
 	}
-			
+mysqli_close($conn);
 	 print json_encode($response);
 ?>

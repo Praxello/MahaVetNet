@@ -1,9 +1,11 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+  include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
-	
+
 					  $jobQuery = mysqli_query($conn,"SELECT * FROM  medicine_master");
 						if($jobQuery!=null)
 						{
@@ -16,8 +18,8 @@
 									}
 							}
 						}
-		
-					$response = array('Message'=>"All medicines fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
-	
+
+					$response = array('Message'=>"All medicines fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+   mysqli_close($conn);
 	 print json_encode($response);
 ?>

@@ -74,7 +74,7 @@ if(isset($_SESSION['branchId'])){
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
                 <thead>
                   <tr>
-                    <th>Medicine ID</th>
+                    <th>Medicine Name</th>
                     <th>Visit Date</th>
                     <th>Batch Number</th>
                     <th>Expiry Date</th>
@@ -101,7 +101,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="form-group required">
                       <label class="control-label">Medicine Name</label>
                       <select  class="form-control"  id="medicinename" style="width:100%;"  multiple>
-                      
+
                       </select>
                     </div>
                     </div>

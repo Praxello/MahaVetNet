@@ -1,2 +1,2 @@
-// const url = 'https://praxello.com/ahimsa/user/';
+ // const url = 'https://praxello.com/ahimsa/apis/';
 const url = 'apis/';

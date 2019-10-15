@@ -1,5 +1,7 @@
 <?php
-     include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+   include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
@@ -29,7 +31,7 @@
 																}
 														}
 													}
-													
+
 											$animalQuery = mysqli_query($conn,"SELECT * FROM  prescribed_medicine_master pmm inner join medicine_master mm on pmm.medicineid=mm.medicineid where pmm.animalid=$animalid and pmm.visitDate ='$medicationDate'");
 															if($jobQuery!=null)
 													{
@@ -42,15 +44,15 @@
 																}
 														}
 													}
-										
+
 										$records[]= array("MedicationData"=>$medicationResult, "FeesData"=> $feesData ,"MedicineData"=>$medicinesData);
 									}
 							}
 						}
 	 }
-					
-		
-					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
-	
+
+
+					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+   mysqli_close($conn);
 	 print json_encode($response);
 ?>

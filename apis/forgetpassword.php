@@ -1,5 +1,7 @@
 <?php
-      include "../connection.php";
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+    include "../connection.php";
 	  mysqli_set_charset($conn,'utf8');
 	  $response=null;
 	  $records = null;
@@ -8,7 +10,7 @@
 	  $password = null;
 	  $userName = null;
 	  $userFullName = null;
-	  
+
 	extract($_GET);
 	if(isset($_GET['mobile']))
 	{
@@ -16,18 +18,18 @@
 			if($query!=null)
 			{
 			$affected=mysqli_num_rows($query);
-			
+
 				if($affected>0)
 				{
 					while($result = mysqli_fetch_assoc($query))
 					{
 					$userBranch=$result['branchId'];
-				    	
+
 					$userMobile=$result['mobile'];
 			     		$userEmail =$result['email'];
 					$userFullName  = $result['fullName'];
 					$query = mysqli_query($conn,"select * from branch_master where  branchid=$userBranch");
-					
+
 					$affected=mysqli_num_rows($query);
 					if($affected>0)
 					{
@@ -36,7 +38,7 @@
 						   $userName = $result['username'];
 						   $password = $result['password'];
 						}
-						
+
 					}
 
 
@@ -75,7 +77,7 @@ $message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http
             </td>
         </tr>
         <tr>
-                    <td align="left" valign="top" style="padding-left:20px; padding-top:20px; color:#363636; padding-bottom:10px; line-height:12px; font-size:14px; padding-right:20px; font-family:Arial, Helvetica, sans-serif;">Dear '.$userFullName .'  
+                    <td align="left" valign="top" style="padding-left:20px; padding-top:20px; color:#363636; padding-bottom:10px; line-height:12px; font-size:14px; padding-right:20px; font-family:Arial, Helvetica, sans-serif;">Dear '.$userFullName .'
                     </td>
                 </tr>
         <tr>
@@ -104,7 +106,7 @@ mail($to, $subject, $message, $headers);
 //now sending a text sms
 													// Get cURL resource
 														$messageString = "Your%20verification%20credentials%20are%20".$userName."%20and%20".$password."%20Please%20do%20not%20delete%20and%20share%20this%20SMS%20%20%20%20Regards%20%20MAHAVETNET";
-													
+
 														$curl = curl_init();
 														// Set some options - we are passing in a useragent too here
 														curl_setopt_array($curl, array(
@@ -112,7 +114,7 @@ mail($to, $subject, $message, $headers);
 													//	CURLOPT_URL => "http://sms.hspsms.com/sendSMS?username=pvn222666&message=Your%20verification%20credentials%20are%20".$userName."%20and%20".$password."%20Please%20do%20not%20delete%20and%20share%20this%20SMS%20%20%20%20Regards%20MAHAVETNET&sendername=ESMART&smstype=TRANS&numbers=".$userMobile."&apikey=4a096b9f-f599-413d-b804-ce39468cea90",
 													//	print($messageString);
 														CURLOPT_URL => "http://sms.indiatext.in/api/mt/SendSMS?user=mahavetnet&password=MahaVetNet2266&senderid=MAHVET&channel=Trans&DCS=0&flashsms=0&number="."$userMobile"."&text=".$messageString."&route=35",
-												
+
 														CURLOPT_USERAGENT => 'Codular Sample cURL Request'
 														));
 													    // Send the request & save response to $resp
@@ -121,21 +123,21 @@ mail($to, $subject, $message, $headers);
 														curl_close($curl);
 
 					}
-			
+
 			$response=array("Responsecode"=>200,"Message"=>"Your password is delivered to your registered Mobile and Email");
-			//send mail to the client 
+			//send mail to the client
 			   }
 			else
 			{
 				$response=array("Responsecode"=>401,"Message"=>"No active account available!");
 			}
 		}
-		
+
 	}
 	else
 	{
 			$response=array("Message"=> "Check query parameter","Responsecode"=>403);
 	}
-	
+mysqli_close($conn);
 	 print json_encode($response);
 ?>
