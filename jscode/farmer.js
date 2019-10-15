@@ -1,7 +1,7 @@
 const animal_owner = (url, farmers, data) => {
     $.ajax({
         url: url + 'allowners.php',
-        type: 'GET',
+        type: 'POST',
         data: data,
         dataType: 'json',
         success: function(response) {
