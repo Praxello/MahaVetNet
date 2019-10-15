@@ -37,6 +37,9 @@ header('Content-Type: application/json');
 						}
 
 					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+	 }else{
+		$response = array('Message'=>"Parameter Missing",'Responsecode'=>200);
+	 }
    mysqli_close($conn);
 	 print json_encode($response);
 ?>
