@@ -73,7 +73,7 @@ if(isset($_SESSION['branchId'])){
                         <form id="fupForm" name="fupForm" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="file">File</label>
-                                <input type="hidden" name="branchId" id="branchId" value="3351">
+                                <input type="hidden" name="branchId" id="branchId" value="<?php  echo $brId ;?>">
                                 <input type="file" class="form-control form-control-sm"
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     id="medicinefile" name="file" runat="server" required />
@@ -158,8 +158,8 @@ if(isset($_SESSION['branchId'])){
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="jscode/apis.js" type="text/javascript"></script>
-    <script src="jscode/farmer.js" type="text/javascript"></script>
     <script src="jscode/app.js" type="text/javascript"></script>
+    <script src="jscode/farmer.js" type="text/javascript"></script>
     <script src="jscode/medicine.js" type="text/javascript"></script>
     <script src="jscode/import_medicine.js" type="text/javascript"></script>
 

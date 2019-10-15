@@ -1,11 +1,12 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-   include "../connection.php";
+     include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
-	 extract($_GET);
+	 extract($_POST);
+	 if(isset($_POST['branchid'])){
 
 					  $jobQuery = mysqli_query($conn,"SELECT * FROM  animal_owner_master where branchid=$branchid");
 						if($jobQuery!=null)

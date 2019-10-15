@@ -13,7 +13,8 @@ $('#signin').on('submit', function(event) {
             if (response.Data != null) {
                 var branchId = response.Data.branchId;
                 var userId = response.Data.userId;
-                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId;
+                var username = response.Data.fullName;
+                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username;
             } else {
                 alert('Enter Correct Username and password');
             }

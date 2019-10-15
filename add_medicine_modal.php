@@ -11,21 +11,21 @@
 
                 <div class="row">
                 <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Type" id="medicinetype" required>
+                            <input type="text" class="form-control" placeholder="Type" id="medicinetype" required tabindex="1">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Unit" id="medicineunit" required>
+                            <input type="text" class="form-control" placeholder="Unit" id="medicineunit" required tabindex="2">
                         </div>
                         
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="Trade of Medicine" id="medicinetrade" required></textarea>
+                            <textarea class="form-control" placeholder="Trade of Medicine" id="medicinetrade" required tabindex="3"></textarea>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" tabindex="4">Save changes</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

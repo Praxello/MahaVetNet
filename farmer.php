@@ -68,12 +68,15 @@ if(isset($_SESSION['branchId'])){
 
                     </div>
                     <div class="col-md-4">
-                        <form id="farmerUpload" name="farmerup" enctype="multipart/form-data">
+                        <form id="farmerup" name="farmerup" enctype="multipart/form-data">
+
+                    <input type="hidden"  id="branchId" name="branchId" value="<?php echo $brId ;?>"/>
+                    <input type="hidden"  id="ownerid" name="ownerid" value="<?php echo $drid ;?>"/>
                             <div class="form-group">
                                 <label for="farmerfile">File</label>
                                 <input type="file" class="form-control form-control-sm"
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                    id="farmerfile" name="farmerfile" runat="server" required />
+                                    id="file" name="file" runat="server" required />
                             </div>
                             <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
                             <a href="sample_download_farmer.php" type="button" class="btn btn-warning">Download Sample
@@ -203,6 +206,7 @@ if(isset($_SESSION['branchId'])){
     <script src="jscode/app.js" type="text/javascript"></script>
     <script src="jscode/farmer.js" type="text/javascript"></script>
     <script src="jscode/animal.js" type="text/javascript"></script>
+    <script src="jscode/import_farmer.js" type="text/javascript"></script>
 </body>
 
 </html>

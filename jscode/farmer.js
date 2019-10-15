@@ -1,7 +1,7 @@
 const animal_owner = (url, farmers, data) => {
     $.ajax({
         url: url + 'allowners.php',
-        type: 'GET',
+        type: 'POST',
         data: data,
         dataType: 'json',
         success: function(response) {
@@ -48,7 +48,6 @@ function farmer_list(farmers) {
 }
 
 const editowner = param => {
-    console.log(param);
     param = param.toString();
     if (farmers.has(param)) {
         const animalOwner = farmers.get(param);
@@ -172,7 +171,6 @@ $('#editfarmer').on('submit', function(e) {
         dataType: 'json',
         success: function(response) {
             const ownerDetails = farmers.get(farmerData.ownerid.toString());
-            console.log(ownerDetails);
             const Animals = ownerDetails.Animals;
             var mainObj = {};
             if (response.Responsecode == 200) {

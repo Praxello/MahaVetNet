@@ -1,8 +1,8 @@
-$('#fupForm').on('submit', function(e) {
+$('#farmerup').on('submit', function(e) {
     e.preventDefault();
     $.ajax({
         type: 'POST',
-        url: url + 'import_medicines.php',
+        url: url + 'import_farmers.php',
         data: new FormData(this),
         contentType: false,
         cache: false,
