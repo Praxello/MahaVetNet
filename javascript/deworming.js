@@ -1,6 +1,8 @@
 var vaccinationList = new Map(); // This variable globally declare save all Style Data in Array
 let confirmationStatus = new Map();
 var medicineData = new Map(); // Medicine Data Map
+getallmedicinelist();
+
 $('#medicinename').select2({
   allowClear: true,
   placeholder: "Select Medicine Name"
@@ -10,6 +12,34 @@ $('#medicinetype').select2({
   placeholder: "Select Type"
 });
 getlistdeworming();
+function getallmedicinelist(){
+  var branchid = $("#brid").val();
+  var selectmedicine ='';
+  $.ajax({
+      type: "POST",
+      url: url+"allmedicines.php",
+      data :{
+        // branchid:"2"
+        branchid:branchid
+      },
+      async : false,
+      dataType :'json',
+      success: function(response) {
+        // console.log(response);
+        var count;
+         if(response['Data']!=null){
+            count= response['Data'].length;
+         }
+          // selectmedicine ='<option value="">Select Medicine Name</option>';
+         for(var i=0;i<count;i++)
+         {
+           selectmedicine +="<option value='"+response['Data'][i].medicineId+"'>"+response['Data'][i].tradeName+"</option>";
+         medicineData.set(response.Data[i].medicineId,response.Data[i]);
+         }
+         $("#medicinename").html(selectmedicine);
+      }
+  });
+}
 function settabledata(styleData){
   console.log(styleData);
   var html ='';
@@ -45,18 +75,19 @@ function settabledata(styleData){
 }
 
 function getlistdeworming(){
+  var branchid = $("#brid").val();
   $('#styletbl').dataTable().fnDestroy();
   $("#styletbldata").empty();
      $.ajax({
          type: "POST",
-         url: api_url+"listdewormingentry.php",
+         url: url+"listdewormingentry.php",
          data :{
-           branchid:"2"
+           branchid:branchid
          },
          async : false,
          dataType :'json',
          success: function(response) {
-            console.log(response);
+            // console.log(response);
            var count;
             if(response['Data']!=null){
                count= response['Data'].length;
@@ -69,25 +100,6 @@ function getlistdeworming(){
          }
      });
 }
-// function addtablemedicine(){
-//   var medicinename = $("#medicinename").val();
-//             $("#fileList tbody").empty();
-//             for (var n = 0; n < 4; n++) {
-//                 $("#fileList tbody").append(
-//                     "<tr>" +
-//                     "<td style='display:none'>" +n+ "</td>" +
-//                     "<td>Medicine1"+n+"</td>"+
-//                     "<td> <button class='btn btn-danger btnDelete'><i class='fa fa-remove '></i></button></td>" +
-//                     "</tr>"
-//                 );
-//             }
-//             $(".btnDelete").on("click", Delete);
-//             $('#fileList').show()
-//  }
-//   function Delete() {
-//             var rowNumber = $(this).closest('tr').index()+1;
-//             document.getElementById("fileList").deleteRow(rowNumber);
-//   }
 
 // This function is created For Add Button New Style
 function addStyle(){
@@ -225,7 +237,7 @@ $('#savebtncustomerstyle').on('click',function(event){
     nopoultry=0;
   }
   var totanimal = $("#totanimal").html();
-  console.log(totanimal);
+  // console.log(totanimal);
   // console.log("medicinename"+medicinename);
   // console.log("visitdate"+visitdate);
   // console.log("batchnumber"+batchnumber);
@@ -240,16 +252,20 @@ $('#savebtncustomerstyle').on('click',function(event){
   // console.log("nosheep"+nosheep);
   // console.log("nopoultry"+nopoultry);
   // console.log("nofees"+nofees);
+  var docterid = $("#drid").val();
+  var branchid = $("#brid").val();
+  var ownerid = $("#oid").val();
+  var animalid = $("#aid").val();
   var obj={
               medicineids:medicinename,
               visitdate :visitdate,
               dewormingtype: medicinetype,
-              ownerid :'2',
-              animalid :'2',
+              ownerid :ownerid,
+              animalid :animalid,
               totalanimals :totanimal,
               fees :nofees,
-              doctorid :'2',
-              branchid :'2',
+              doctorid :docterid,
+              branchid :branchid,
               goat :nogoat,
               cow :nocow,
               bull :nobull,
@@ -260,17 +276,18 @@ $('#savebtncustomerstyle').on('click',function(event){
               poultry :nopoultry
            };
            var obj1 ={
-             branchId: "2",
+             branchId: branchid,
              buffalo: nobuffalo,
              bull: nobull,
              calf:nocalf,
              cow: nocow,
-             doctorId: "759",
+             doctorId: docterid,
              fees: nofees,
              goat: nogoat,
-             isDeleted: "0",
+             // isDeleted: "0",
+               animalid :animalid,
              medicineIds: medicinename.toString(),
-             ownerId: "10",
+             ownerId: ownerid,
              poultry:nopoultry,
              redka: noredka,
              sheep: nosheep,
@@ -279,7 +296,7 @@ $('#savebtncustomerstyle').on('click',function(event){
              type:medicinetype
            };
     $.ajax({
-        url:api_url+'dewormingentry.php',
+        url:url+'dewormingentry.php',
         type:'POST',
         data:obj,
         dataType:'json',
@@ -310,6 +327,7 @@ $('#savebtncustomerstyle').on('click',function(event){
 
 // This function is created For Update Style Data
 $('#updatebtncustomerstyle').on('click',function(event){
+  console.log("ok");
   event.preventDefault();
   var treatmentid=$("#treatmentid").val();
   var medicinename = $("#medicinename").val();
@@ -351,18 +369,21 @@ $('#updatebtncustomerstyle').on('click',function(event){
     nopoultry=0;
   }
   var totanimal = $("#totanimal").html();
-  console.log(totanimal);
-  var obj={
+  var docterid = $("#drid").val();
+  var branchid = $("#brid").val();
+  var ownerid = $("#oid").val();
+  var animalid = $("#aid").val();
+          var obj={
               treatmentId:treatmentid,
               medicineids:medicinename,
               visitdate :visitdate,
               dewormingtype: medicinetype,
-              ownerid :'2',
-              animalid :'2',
+              ownerid :ownerid,
+              animalid :animalid,
               totalanimals :totanimal,
               fees :nofees,
-              doctorid :'2',
-              branchid :'2',
+              doctorid :docterid,
+              branchid :branchid,
               goat :nogoat,
               cow :nocow,
               bull :nobull,
@@ -372,30 +393,63 @@ $('#updatebtncustomerstyle').on('click',function(event){
               sheep :nosheep,
               poultry :nopoultry
            };
-           var obj1 ={
-             treatmentId:treatmentid,
-             branchId: "2",
-             buffalo: nobuffalo,
-             bull: nobull,
-             calf:nocalf,
-             cow: nocow,
-             doctorId: "759",
-             fees: nofees,
-             goat: nogoat,
-             isDeleted: "0",
-             medicineIds: medicinename.toString(),
-             ownerId: "10",
-             poultry:nopoultry,
-             redka: noredka,
-             sheep: nosheep,
-             totalanimals: totanimal,
-             visitDate:visitdate,
-             type:medicinetype
-           };
+           // var obj1 ={
+           //   treatmentId:treatmentid,
+           //   branchId: branchid,
+           //   buffalo: nobuffalo,
+           //   bull: nobull,
+           //   calf:nocalf,
+           //   cow: nocow,
+           //   doctorId: docterid,
+           //   fees: nofees,
+           //   goat: nogoat,
+           //   animalid :animalid,
+           //   medicineIds: medicinename.toString(),
+           //   ownerId: ownerid,
+           //   poultry:nopoultry,
+           //   redka: noredka,
+           //   sheep: nosheep,
+           //   totalanimals: totanimal,
+           //   visitDate:visitdate,
+           //   type:medicinetype
+           // };
+           $.ajax({
+              url:url+'editdewormingentry.php',
+              type:'POST',
+              data:obj,
+              dataType:'json',
+              success:function(response){
+                  if(response.Responsecode===200){
+                    swal(response.Message);
+                    $("#customerstyletable").show();
+                    $("#customerstyletableform").hide();
+                    // styleData.delete(styleid.toString());
+                    // vaccinationList.set(treatmentid.toString(),obj1);
+                    // settabledata(vaccinationList);
+                  }
+                  else{
+                    swal(response.Message);
+                  }
+                }
+              });
+});
+
+// This function is created For Remove Button
+function removeMeasurements(id){
+  var AllData= vaccinationList.get(id.toString());
+  var visitdate =AllData.visitDate;
+  var animalid = $("#aid").val();
+  var docterid = $("#drid").val();
+  var branchid = $("#brid").val();
   $.ajax({
-      url:api_url+'editdewormingentry.php',
+      url:url+'deletedewormingentry.php',
       type:'POST',
-      data:obj,
+      data:{
+        visitdate:visitdate,
+        animalid : animalid,
+        treatmentid : id ,
+        branchid : branchid
+      },
       dataType:'json',
       beforeSend: function() {
             $(".preloader").show();
@@ -406,45 +460,11 @@ $('#updatebtncustomerstyle').on('click',function(event){
           swal(response.Message);
           $("#customerstyletable").show();
           $("#customerstyletableform").hide();
-          // styleData.delete(styleid.toString());
-          vaccinationList.set(treatmentid.toString(),obj1);
-          settabledata(vaccinationList);
-        }
-        else {
-            swal(response.Message);
-        }
-
-      },
-      complete:function(response){
-        $(".preloader").hide();
-      }
-  });
-});
-
-// This function is created For Remove Button
-function removeMeasurements(id){
-  $.ajax({
-      url:api_url+'deletedewormingentry.php',
-      type:'POST',
-      data:{
-        treatmentid : id ,
-        branchid : 1
-      },
-      dataType:'json',
-      beforeSend: function() {
-            $(".preloader").show();
-            // console.log("before");
-      },
-      success:function(response){
-        if(response.Responsecode===200){
-          alert(response.Message);
-          $("#customerstyletable").show();
-          $("#customerstyletableform").hide();
           vaccinationList.delete(id.toString());
           settabledata(vaccinationList);
         }
         else {
-            alert(response.Message);
+            swal(response.Message);
         }
 
       },

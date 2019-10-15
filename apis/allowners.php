@@ -29,13 +29,13 @@ header('Content-Type: application/json');
 																}
 														}
 													}
-										
+
 										$records[]= array("AnimalOwner"=>$animalOwnerResult, "Animals"=> $animalData);
 									}
 							}
 						}
-		
-					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
-	
+
+					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
+
 	 print json_encode($response);
 ?>

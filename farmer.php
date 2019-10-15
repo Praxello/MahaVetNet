@@ -7,11 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 
 <head>
-    <title>MahaVetNet | Farmer List | add farmer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+     <?php include "title.php"; ?>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -90,13 +86,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                 </div>
                 <div id="farmerPage">
-                 
+
                     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
                     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
 
-                       
+
                             <h4>Farmer List:</h4>
                             <div class="row">
                                 <div class="col-md-12">
@@ -126,12 +122,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
 
-                       
+
                             <h4>Animal List:</h4>
                             <div class="row">
                                 <div class="col-md-12">
                                 <button type="button" id="loadfirstpage" class="btn btn-success"> Back</button>
-                                        
+
                                     <button type="button" id="button1" class="btn btn-success" style="float:right"
                                         data-toggle="modal" data-target="#animalModal"> New
                                         Animal</button>

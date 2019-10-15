@@ -1,18 +1,53 @@
+<?php session_start();
+if(isset($_SESSION['branchId'])){
+    $brId = $_SESSION['branchId'];
+    $drid = $_SESSION['userId'];
+    $animalid = $_REQUEST['aniid'];
+    $ownerid = $_REQUEST['oid'];
+
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
  <?php include "title.php"; ?>
- <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-  <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
- <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet"> -->
- <!-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+ <script type="application/x-javascript">
+ addEventListener("load", function() {
+     setTimeout(hideURLbar, 0);
+ }, false);
 
- <link href="bootstrap/asterisks.css" rel="stylesheet">
+ function hideURLbar() {
+     window.scrollTo(0, 1);
+ }
+ </script>
+ <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+ <!-- <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' /> -->
+ <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+ <!-- Custom CSS -->
  <link href="css/style.css" rel='stylesheet' type='text/css' />
+
+ <!-- font-awesome icons CSS -->
  <link href="css/font-awesome.css" rel="stylesheet">
- <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+ <!-- //font-awesome icons CSS -->
+<link href="bootstrap/asterisks.css" rel="stylesheet">
+ <!-- side nav css file -->
+ <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
+ <!-- side nav css file -->
+
+ <!-- js-->
+ <script src="js/jquery-1.11.1.min.js"></script>
+ <script src="js/modernizr.custom.js"></script>
+
+ <!--webfonts-->
+ <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext"
+     rel="stylesheet">
+ <!--//webfonts-->
+
+ <!-- Metis Menu -->
+ <script src="js/metisMenu.min.js"></script>
+ <script src="js/custom.js"></script>
  <link href="css/custom.css" rel="stylesheet">
  <link href="sweetalert/sweetalert.css" rel="stylesheet">
+
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -21,6 +56,10 @@
 		<div id="page-wrapper">
 			<div class="main-page">
 				<h3 class="title1">Vaccination</h3>
+        <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
+        <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
+        <input type="hidden"  id="oid" value="<?php echo $ownerid ;?>"/>
+        <input type="hidden"  id="aid" value="<?php echo $animalid ;?>"/>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
 
           <div class="row" id="customerstyletable" style="display:block;">
@@ -45,42 +84,6 @@
                   </tr>
                 </thead>
                 <tbody id="styletbldata">
-                  <!-- <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -98,13 +101,7 @@
                     <div class="form-group required">
                       <label class="control-label">Medicine Name</label>
                       <select  class="form-control"  id="medicinename" style="width:100%;"  multiple>
-                        <!-- <option value="">Select Medicine Name</option> -->
-                        <option value="2">Medicine1</option>
-                        <option value="3">Skuno</option>
-                        <option value="4">Abc</option>
-                        <option value="5">Pqr</option>
-                        <option value="6">xyz</option>
-                        <option value="7">stv</option>
+                      
                       </select>
                     </div>
                     </div>
@@ -229,23 +226,25 @@
 		<?php include "footer.php"; ?>
 	</div>
 
-  <script src="js/jquery-1.11.1.min.js"></script>
-  <script src="javascript/apifile.js"></script>
+  <!-- <script src="js/jquery-1.11.1.min.js"></script> -->
+  <script src="jscode/apis.js" type="text/javascript"></script>
   <script src="javascript/validation.js"></script>
   <!-- <script src="js/modernizr.custom.js"></script> -->
-  <script src="js/metisMenu.min.js"></script>
-  <script src="js/custom.js"></script>
+  <!-- <script src="js/metisMenu.min.js"></script> -->
+  <!-- <script src="js/custom.js"></script> -->
 	<!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script> -->
 	<!-- <script>
       $('.sidebar-menu').SidebarNav()
   </script> -->
   <!-- <script src="js/bootstrap.js"> </script> -->
-  <!-- <script src="bootstrap/js/popper.min.js"></script> -->
+  <script src="bootstrap/js/popper.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
 
   <link href="select2/select4.css" rel="stylesheet" />
   <script src="select2/select4.js" type="text/javascript"></script>
-  <script src="datatables/datatables.min.js"></script>
+  <!-- <script src="datatables/datatables.min.js"></script> -->
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
   <!-- <script src="datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
   <script src="datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
   <script src="datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -266,3 +265,7 @@
 
 </body>
 </html>
+<?php
+}else{
+    header("Location:index.php");
+}?>
