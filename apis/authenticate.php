@@ -14,7 +14,7 @@ $sql = "SELECT * FROM  branch_master WHERE username='$usrname' AND password='$pa
         if ($academicAffected > 0) {
             while ($academicResults = mysqli_fetch_assoc($jobQuery)) {
                 $branchid=$academicResults['branchId'];
-                $sql1 ="SELECT doctorId FROM user_master WHERE branchId=$branchid";
+                $sql1 ="SELECT doctorId,fullName FROM user_master WHERE branchId=$branchid";
                 $jobQuery1 = mysqli_query($conn,$sql1);
                 if ($jobQuery1 != null)
                 {
@@ -24,6 +24,7 @@ $sql = "SELECT * FROM  branch_master WHERE username='$usrname' AND password='$pa
                         $academicResults1 = mysqli_fetch_assoc($jobQuery1);
                         $records['userId']=$academicResults1['doctorId'];
                         $records['branchId']=$branchid;
+                        $records['fullName']=$academicResults1['fullName'];
                         $response = array('Message' => "Login Successfully", "Data" => $records, 'Responsecode' => 200);
                         break;
                     }

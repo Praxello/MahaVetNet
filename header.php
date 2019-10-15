@@ -8,11 +8,11 @@
                 <div class="profile_details_left">
                     <!--notifications of menu start -->
                     <ul class="nofitications-dropdown">
-                        <li class="dropdown head-dpdn">
+                        <!-- <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                                     class="fa fa-envelope"></i><span class="badge">4</span></a>
-                            <ul class="dropdown-menu">
-                                <li>
+                            <ul class="dropdown-menu"> -->
+                                <!-- <li>
                                     <div class="notification_header">
                                         <h3>You have 3 new messages</h3>
                                     </div>
@@ -47,8 +47,8 @@
                                     </div>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="dropdown head-dpdn">
+                        </li> -->
+                        <!-- <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                                     class="fa fa-bell"></i><span class="badge blue">4</span></a>
                             <ul class="dropdown-menu">
@@ -87,8 +87,8 @@
                                     </div>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="dropdown head-dpdn">
+                        </li> -->
+                        <!-- <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                                     class="fa fa-tasks"></i><span class="badge blue1">8</span></a>
                             <ul class="dropdown-menu">
@@ -142,7 +142,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="clearfix"> </div>
                 </div>
@@ -153,7 +153,7 @@
 
 
                 <!--search-box-->
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <form class="input">
                         <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search"
                             id="input-31" />
@@ -164,7 +164,7 @@
                             </svg>
                         </label>
                     </form>
-                </div>
+                </div> -->
                 <!--//end-search-box-->
 
                 <div class="profile_details">
@@ -174,7 +174,7 @@
                                 <div class="profile_img">
                                     <span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin Name</p>
+                                        <p><?php echo $_SESSION['username'];?></p>
                                         <span>Administrator</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>

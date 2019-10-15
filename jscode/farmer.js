@@ -48,11 +48,9 @@ function farmer_list(farmers) {
 }
 
 const editowner = param => {
-    console.log(param);
     param = param.toString();
     if (farmers.has(param)) {
         const animalOwner = farmers.get(param);
-        console.log(animalOwner);
         const owner = animalOwner.AnimalOwner;
         $('#edit_fname').val(owner.firstName + ' ' + owner.lastName);
         $('#ownerid').val(owner.ownerId);
@@ -173,7 +171,6 @@ $('#editfarmer').on('submit', function(e) {
         dataType: 'json',
         success: function(response) {
             const ownerDetails = farmers.get(farmerData.ownerid.toString());
-            console.log(ownerDetails);
             const Animals = ownerDetails.Animals;
             var mainObj = {};
             if (response.Responsecode == 200) {
