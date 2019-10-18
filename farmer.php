@@ -61,6 +61,7 @@ if(isset($_SESSION['branchId'])){
         <div id="page-wrapper">
             <div class="main-page general">
                 <h2 class="title1">General Elements</h2>
+                <div id="farmerPage">
                 <div class="modals widget-shadow">
                     <h4 class="title2">Import Farmers</h4>
                     <h6 class="title2"><code>use sample csv</code></h6>
@@ -88,7 +89,7 @@ if(isset($_SESSION['branchId'])){
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div id="farmerPage">
+              
 
                     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
                     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
@@ -123,6 +124,33 @@ if(isset($_SESSION['branchId'])){
                 </div>
                 <div id="loadAnimalPage" style="display:none;">
                 <div class="tables">
+                <div class="modals widget-shadow">
+                    <h4 class="title2">Import Animals</h4>
+                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <form id="animalup" name="animalup" enctype="multipart/form-data">
+
+                    <input type="hidden"   name="branchId1" value="<?php echo $brId ;?>"/>
+                    <input type="hidden" name="doctorid" id="doctorid"/>
+                            <div class="form-group">
+                                <label for="farmerfile">File</label>
+                                <input type="file" class="form-control form-control-sm"
+                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    id="file" name="animalfile" runat="server" required />
+                            </div>
+                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
+                            <a href="sample_download_animals.php" type="button" class="btn btn-warning">Download Sample
+                                File</a>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
                     <div class="table-responsive bs-example widget-shadow">
 
 

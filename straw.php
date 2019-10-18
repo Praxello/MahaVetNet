@@ -64,6 +64,31 @@ if(isset($_SESSION['branchId'])){
                 
         <input type="hidden"  id="brid" value="<?php echo $brId;?>"/>
         <input type="hidden"  id="drid" value="<?php echo  $drid;?>"/>
+        <div class="modals widget-shadow">
+                    <h4 class="title2">Import Straws</h4>
+                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <form id="fupForm" name="fupForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="file">File</label>
+                                <input type="hidden" name="branchId" id="branchId" value="<?php  echo $brId ;?>">
+                                <input type="file" class="form-control form-control-sm"
+                                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                    id="file" name="file" runat="server" required />
+                            </div>
+                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
+                            <a href="sample_download_straw.php" type="button" class="btn btn-warning">Download Sample
+                                File</a>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
                 <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Straws List:</h4>
@@ -135,6 +160,7 @@ if(isset($_SESSION['branchId'])){
     <script src="jscode/apis.js" type="text/javascript"></script>
     <script src="jscode/app.js" type="text/javascript"></script>
     <script src="jscode/straw.js" type="text/javascript"></script>
+    <script src="jscode/import_straws.js" type="text/javascript"></script>
 
 </body>
 
