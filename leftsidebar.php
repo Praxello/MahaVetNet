@@ -41,6 +41,11 @@
                             <i class="fa fa-dashboard"></i> <span>Vaccination/Deworming</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="allpatients.php">
+                            <i class="fa fa-dashboard"></i> <span>All Patients</span>
+                        </a>
+                    </li>
                     <!-- <li class="treeview">
                         <a href="vaccination.php">
                             <i class="fa fa-dashboard"></i> <span>Vaccination</span>

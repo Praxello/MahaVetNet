@@ -29,8 +29,9 @@ header('Content-Type: application/json');
 		//delete all rows mandatoryly
 		 $checkquery = mysqli_query($conn,"delete from   medication_master where animalId=$animalid and visitDate='$visitdate'");
 		//animalId, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate
+    $sql1 = "INSERT INTO medication_master( doctorid, animalId, visitType, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate , presentcondition, samples, nextvisitdate,latitude,longitude) VALUES ($doctorid,$animalid,'$visittype','$symptoms','$diagnosis','$treatment','$inoculation',$totalsamples,'$visitdate', '$presentcondition','$nameOfSamples', '$nextvisitdate',$latitude,$longitude)";
 
-			$query = mysqli_query($conn,"INSERT INTO medication_master( doctorid, animalId, visitType, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate , presentcondition, samples, nextvisitdate,latitude,longitude) VALUES ($doctorid,$animalid,'$visittype','$symptoms','$diagnosis','$treatment','$inoculation',$totalsamples,'$visitdate', '$presentcondition','$nameOfSamples', '$nextvisitdate',$latitude,$longitude)");
+      $query = mysqli_query($conn,$sql1);
 					if($query==1)
 					{
 
