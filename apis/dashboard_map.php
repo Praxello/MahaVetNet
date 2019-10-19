@@ -48,7 +48,13 @@ else if($branchid >= 500001 && $branchid < 600000){
         SELECT  bm.centre_type AS branch,0 Total,0 downloads,COUNT(bm.branchId) remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId NOT IN(SELECT branchId FROM otp_master) AND bm.branchId < 10000 GROUP BY bm.centre_type) countTable 
         GROUP BY countTable.branch";
 }else{
-    $sql = "SELECT bm.branchName,COUNT(bm.branchId) AS Total FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId < 10000 GROUP BY bm.branchName";
+    $sql = "SELECT branch,SUM(Total) AS Total,SUM(downloads) AS Downloads,SUM(remaining) AS remaining FROM(
+        SELECT bm.centre_type AS branch,COUNT(bm.branchId) Total,0 downloads,0 remaining  FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid)  AND bm.branchId < 10000 GROUP BY bm.centre_type
+        UNION
+        SELECT bm.centre_type AS branch,0 Total,COUNT(bm.branchId) downloads,0 remaining  FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId  IN(SELECT branchId FROM otp_master) AND bm.branchId < 10000 GROUP BY bm.centre_type
+        UNION
+        SELECT  bm.centre_type AS branch,0 Total,0 downloads,COUNT(bm.branchId) remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId NOT IN(SELECT branchId FROM otp_master) AND bm.branchId < 10000 GROUP BY bm.centre_type) countTable 
+        GROUP BY countTable.branch";
 }
     $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {

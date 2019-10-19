@@ -10,6 +10,7 @@ var Remaining = [];
 var apiData = [];
 
 function loadMap(param) {
+    console.log(param);
     branch = [];
     downloads = [];
     Remaining = [];
@@ -41,6 +42,7 @@ function loadMap(param) {
 loadMap(data.branchid);
 
 function fetchName(param, branchid) {
+    console.log(param + ' -' + branchid);
     $.ajax({
         url: 'apis/getbranchId.php',
         type: 'POST',
@@ -50,6 +52,7 @@ function fetchName(param, branchid) {
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
+
             }
         },
         complete: function(response) {

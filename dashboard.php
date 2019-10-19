@@ -53,7 +53,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             
             #chartdiv1 {
                 min-width: 300px;
-                height: 400px;
+                height: 358px;
                 margin: 0 auto
             }
         </style>
@@ -465,9 +465,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="col_3">
                         <div class="col-md-3 widget widget1">
                             <div class="r3_counter_box">
-                                <i class="pull-left fa fa-dollar icon-rounded"></i>
+                                <i class="pull-left fa fa-rupee icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>$452</strong></h5>
+                                    <h5><strong id="revenue"></strong></h5>
                                     <span>Total Revenue</span>
                                 </div>
                             </div>
@@ -476,8 +476,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="r3_counter_box">
                                 <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                                 <div class="stats">
-                                    <h5><strong>$1019</strong></h5>
-                                    <span>Online Revenue</span>
+                                    <h5><strong id="vdmarked"></strong></h5>
+                                    <span>Total VD Marked</span>
                                 </div>
                             </div>
                         </div>
@@ -526,31 +526,34 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-3 stat">
                             <div class="content-top-1">
                                 <div class="col-md-6 top-content">
-                                    <h5>Sales</h5>
-                                    <label>1283+</label>
+                                    <h5>Castration</h5>
+                                    <label id="castration"></label>
                                 </div>
-                                <div class="col-md-6 top-content1">
-                                    <div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>
+                                <div class="col-md-6 top-content">
+                                <h5>Case Paper</h5>
+                                    <label id="casepaper">1</label>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="content-top-1">
                                 <div class="col-md-6 top-content">
-                                    <h5>Reviews</h5>
-                                    <label>2262+</label>
+                                    <h5>Vaccinations</h5>
+                                    <label id="vaccinations"></label>
                                 </div>
-                                <div class="col-md-6 top-content1">
-                                    <div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
+                                <div class="col-md-6 top-content">
+                                <h5>Operations</h5>
+                                    <label id="operations"></label>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="content-top-1">
                                 <div class="col-md-6 top-content">
-                                    <h5>Visitors</h5>
-                                    <label>12589+</label>
+                                    <h5>Deworming</h5>
+                                    <label id="deworming"></label>
                                 </div>
-                                <div class="col-md-6 top-content1">
-                                    <div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
+                                <div class="col-md-6 top-content">
+                                <h5>IPD</h5>
+                                    <label id="ipd"></label>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
@@ -558,42 +561,42 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="col-md-2 stat">
                             <div class="content-top">
                                 <div class="top-content facebook">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-download"></i></a>
                                 </div>
                                 <ul class="info">
-                                    <li class="col-md-6"><b>1,296</b>
-                                        <p>Friends</p>
+                                    <li class="col-md-6"><b id="totalApps"></b>
+                                        <p>Total</p>
                                     </li>
-                                    <li class="col-md-6"><b>647</b>
-                                        <p>Likes</p>
+                                    <li class="col-md-6"><b id="totalDownload"></b>
+                                        <p>Downloads</p>
                                     </li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
                             <div class="content-top">
                                 <div class="top-content twitter">
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-paw"></i></a>
                                 </div>
                                 <ul class="info">
-                                    <li class="col-md-6"><b>1,997</b>
-                                        <p>Followers</p>
+                                    <li class="col-md-6"><b id="totalAnimals"></b>
+                                        <p>Animals</p>
                                     </li>
-                                    <li class="col-md-6"><b>389</b>
-                                        <p>Tweets</p>
+                                    <li class="col-md-6"><b id="taggedAnimal"></b>
+                                        <p>Tagged</p>
                                     </li>
                                     <div class="clearfix"></div>
                                 </ul>
                             </div>
                             <div class="content-top">
                                 <div class="top-content google-plus">
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-users"></i></a>
                                 </div>
                                 <ul class="info">
-                                    <li class="col-md-6"><b>1,216</b>
-                                        <p>Followers</p>
+                                    <li class="col-md-6"><b id="totalFarmers"></b>
+                                        <p>Farmers</p>
                                     </li>
                                     <li class="col-md-6"><b>321</b>
-                                        <p>shares</p>
+                                        <p>Downloads</p>
                                     </li>
                                     <div class="clearfix"></div>
                                 </ul>
@@ -604,21 +607,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                     <div class="charts">
                     <div class="mid-content-top">
-                        <!-- <div class="col-md-4 charts-grids widget">
-                            <div class="card-header">
-                                <h3>Bar chart</h3>
-                            </div>
-
-                            <div id="container" style="width: 100%; height:270px;">
-                                <canvas id="canvas"></canvas>
-                            </div>
-                            <button id="randomizeData">Randomize Data</button>
-                            <button id="addDataset">Add Dataset</button>
-                            <button id="removeDataset">Remove Dataset</button>
-                            <button id="addData">Add Data</button>
-                            <button id="removeData">Remove Data</button>
-
-                        </div> -->
+                       
 
                         <div class="col-md-12">
                             
@@ -694,6 +683,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!-- //for index page weekly sales java script -->
         <script src="js/index3.js"></script>
         <script src="js/animal_map.js"></script>
+        <script src="js/dashboard_data.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.js"></script>
         <!-- //Bootstrap Core JavaScript -->

@@ -1,9 +1,10 @@
 var g_branchid = null;
 g_branchid = data.branchid;
 var numberofbranch = [];
-var numberofanimals = [];
-var numberofcases = [];
-var numberofai = [];
+var numberofPD = [];
+var numberofAI = [];
+var numberofInf = [];
+var numberofCB = [];
 var seriesData = [];
 
 const loadMapData = (seriesData) => {
@@ -57,9 +58,10 @@ const loadMapData = (seriesData) => {
 }
 const loadanimalData = (param) => {
     numberofbranch = [];
-    numberofanimals = [];
-    numberofcases = [];
-    numberofai = [];
+    numberofPD = [];
+    numberofAI = [];
+    numberofInf = [];
+    numberofCB = [];
     seriesData = [];
     $.ajax({
         url: 'apis/dashboard_map_animals.php',
@@ -73,13 +75,16 @@ const loadanimalData = (param) => {
                 var i;
                 for (i = 0; i < count; i++) {
                     numberofbranch.push(response.Data[i].branch);
-                    numberofanimals.push(parseInt(response.Data[i].animals));
-                    numberofcases.push(parseInt(response.Data[i].cases));
-                    numberofai.push(parseInt(response.Data[i].AI));
+                    numberofPD.push(parseInt(response.Data[i].PD));
+                    numberofAI.push(parseInt(response.Data[i].AI));
+                    numberofInf.push(parseInt(response.Data[i].Inf));
+                    numberofCB.push(parseInt(response.Data[i].CB));
                 }
-                seriesData.push({ name: 'Animals', data: numberofanimals });
-                seriesData.push({ name: 'Cases', data: numberofcases });
-                seriesData.push({ name: 'Artificial Insemination', data: numberofai });
+
+                seriesData.push({ name: 'Artificial Insemination', data: numberofAI });
+                seriesData.push({ name: 'Pregnancy Diagnosis', data: numberofPD });
+                seriesData.push({ name: 'Calves Born', data: numberofCB });
+                seriesData.push({ name: 'Infertility & Sterility', data: numberofInf });
             }
         },
         complete: function(response) {
