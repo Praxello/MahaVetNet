@@ -1,6 +1,7 @@
 var ownerid = null;
 const loadAnimals = param => {
     ownerid = param;
+    $('#doctorid').val(param);
     param = param.toString();
     $('#farmerPage').hide();
     $('#loadAnimalPage').show();
