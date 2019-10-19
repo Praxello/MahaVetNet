@@ -67,7 +67,7 @@ const loadanimalData = (param) => {
         url: 'apis/dashboard_map_animals.php',
         type: 'POST',
         data: { branchid: param },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
@@ -99,7 +99,7 @@ const getbranchid = (branch, branchId) => {
         url: 'apis/getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {

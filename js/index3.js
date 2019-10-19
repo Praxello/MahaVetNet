@@ -19,7 +19,7 @@ function loadMap(param) {
         url: 'apis/dashboard_map.php',
         type: 'POST',
         data: { branchid: param },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
@@ -47,7 +47,7 @@ function fetchName(param, branchid) {
         url: 'apis/getbranchId.php',
         type: 'POST',
         data: { centretype: param, branchid: branchid },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
