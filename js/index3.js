@@ -10,16 +10,15 @@ var Remaining = [];
 var apiData = [];
 
 function loadMap(param) {
-    console.log(param);
     branch = [];
     downloads = [];
     Remaining = [];
     apiData = [];
     $.ajax({
-        url: 'apis/dashboard_map.php',
+        url: url + 'dashboard_map.php',
         type: 'POST',
         data: { branchid: param },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
@@ -42,12 +41,11 @@ function loadMap(param) {
 loadMap(data.branchid);
 
 function fetchName(param, branchid) {
-    console.log(param + ' -' + branchid);
     $.ajax({
         url: 'apis/getbranchId.php',
         type: 'POST',
         data: { centretype: param, branchid: branchid },
-        async: false,
+        async: true,
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {

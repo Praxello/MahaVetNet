@@ -359,7 +359,7 @@ SELECT SUM(castration) castration,SUM(vaccination) vaccination,SUM(operations) o
 FROM medication_master mm 
 WHERE treatment REGEXP 'Procedure\":\"Closed|Procedure\":\"Open' 
 AND doctorid IN (SELECT  um.doctorid  FROM user_master um JOIN branch_master bm ON bm.branchId = um.branchId 
-                 INNER JOIN branch_mapper_master bmm ON um.branchId = bmm.childBranch WHERE bmm.branchId = 100001)
+                 INNER JOIN branch_mapper_master bmm ON um.branchId = bmm.childBranch WHERE bmm.branchId = 100001 AND bm.branchId < 10000)
     UNION
     SELECT 0 castration,COUNT(*) vaccination,0 operations,0 IPD,0 deworming FROM vaccination_master mm 
 WHERE  doctorid IN (SELECT  um.doctorid  FROM user_master um 
@@ -477,10 +477,94 @@ SELECT SUM(animalCount) animalCount,SUM(tagged) tagged,SUM(farmercount) farmerco
  
 
 #active institutes
-select count(distinct(mm.doctorId)),bm.districtName 
+SELECT bm.districtName branch, COUNT(DISTINCT(mm.doctorId)) AInst
 FROM branch_master bm 
 INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
 INNER JOIN medication_master mm ON mm.branchId = bmm.childBranch 
 WHERE bmm.branchId = 100001 
 AND bm.branchId < 10000 
 GROUP BY bm.districtName
+#Total revenue
+SELECT bm.districtName branch,SUM(fm.feesAmount) FAmt
+FROM branch_master bm INNER JOIN fees_master fm ON fm.branchId = bm.branchId 
+WHERE bm.branchId 
+IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)
+AND bm.branchId < 10000
+GROUP BY bm.districtName
+#vd marked total
+SELECT bm.districtName branch,COUNT(bm.branchId) vds
+FROM branch_master bm 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+WHERE bmm.branchId = 100001 AND bm.branchId < 10000 
+AND bm.isActive = 1 AND bm.latitude != 0 
+AND bm.longitude !=0 GROUP BY bm.districtName
+
+
+#whole query vds amount,active institutes
+SELECT branch,SUM(AInst) AInst,SUM(FAmt) FAmt,SUM(vds) vds FROM(
+SELECT bm.centre_type branch, COUNT(DISTINCT(mm.doctorId)) AInst,0 FAmt,0 vds
+FROM branch_master bm 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+INNER JOIN medication_master mm ON mm.branchId = bmm.childBranch 
+WHERE bmm.branchId = 400001 
+AND bm.branchId < 10000 
+GROUP BY bm.centre_type
+    UNION
+SELECT bm.centre_type branch,0 AInst,SUM(fm.feesAmount) FAmt,0 vds
+FROM branch_master bm INNER JOIN fees_master fm ON fm.branchId = bm.branchId 
+WHERE bm.branchId 
+IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 400001)
+AND bm.branchId < 10000
+GROUP BY bm.centre_type
+    UNION
+    SELECT bm.centre_type branch,0 AInst,0 FAmt,COUNT(bm.branchId) vds
+FROM branch_master bm 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+WHERE bmm.branchId = 400001 AND bm.branchId < 10000 
+AND bm.isActive = 1 AND bm.latitude != 0 
+AND bm.longitude !=0 GROUP BY bm.centre_type
+) CounTable GROUP BY CounTable.branch
+
+SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) IPD,SUM(deworm) deworm FROM(
+        SELECT bm.branchName branch,count(bm.branchId) Castration,0 vaccination,0 IPD,0 deworm
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE treatment REGEXP 'Procedure\":\"Closed|Procedure\":\"Open' 
+        AND bm.branchId < 10000
+        AND bmm.branchId = 200001 
+        GROUP BY bm.branchName
+        UNION
+        SELECT bm.branchName branch,0 Castration,COUNT(*) vaccination,0 IPD,0 deworm
+        FROM vaccination_master vm 
+        INNER JOIN branch_master bm ON bm.branchId = vm.branchId
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+        WHERE bmm.branchId = 200001
+        AND bm.branchId < 10000
+        GROUP BY bm.branchName
+        UNION
+        SELECT bm.branchName branch,0 Castration,0 vaccination ,COUNT(*) IPD,0 deworm
+        FROM ipd_medication_master imm
+        INNER JOIN branch_master bm ON bm.branchId = imm.branchId
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+        WHERE bmm.branchId = 200001
+        AND bm.branchId < 10000
+        GROUP BY bm.branchName
+        UNION
+        SELECT bm.branchName branch,0 Castration,0 vaccination ,0 IPD,COUNT(*) deworm 
+        FROM deworming_master dwm
+        INNER JOIN branch_master bm ON bm.branchId = dwm.branchId
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+        WHERE bmm.branchId = 200001
+        AND bm.branchId < 10000
+        GROUP BY bm.branchName) CounTable
+        GROUP BY CounTable.branch
+
+        SELECT bm.districtName,COUNT(am.animalId) AS animalCount,0 tagged,0 farmercount,0 Total,0 downloads,0 vd,0 revenue
+        FROM branch_master bm
+        INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+        INNER JOIN animal_master am ON am.ownerId = aom.ownerId
+        WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
+        AND bm.branchId < 10000
+        GROUP BY bm.districtName

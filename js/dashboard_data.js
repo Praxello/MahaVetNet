@@ -1,11 +1,10 @@
 const load_downloads = () => {
     $.ajax({
-        url: 'apis/dashboard_map_downloads.php',
+        url: url + 'dashboard_map_downloads.php',
         type: 'POST',
         dataType: 'json',
         data: { branchid: data.branchid },
         success: function(response) {
-            console.log(response.Data);
             if (response.Data != null) {
                 $('#totalApps').html(parseInt(response.Data[0].Total).toLocaleString());
                 $('#totalDownload').html(parseInt(response.Data[0].downloads).toLocaleString());
@@ -14,13 +13,14 @@ const load_downloads = () => {
                 $('#totalFarmers').html(parseInt(response.Data[0].farmercount).toLocaleString());
                 $('#vdmarked').html(parseInt(response.Data[0].vd).toLocaleString());
                 $('#revenue').html(parseInt(response.Data[0].revenue).toLocaleString());
+                $('#mobiles').html(parseInt(response.Data[0].mobiles).toLocaleString());
             }
         }
     });
 }
 const load_operations = () => {
     $.ajax({
-        url: 'apis/dashboard_map_operations.php',
+        url: url + 'dashboard_map_operations.php',
         type: 'POST',
         dataType: 'json',
         data: { branchid: data.branchid },
@@ -31,6 +31,7 @@ const load_operations = () => {
                 $('#castration').html(parseInt(response.Data[0].castration).toLocaleString());
                 $('#ipd').html(parseInt(response.Data[0].IPD).toLocaleString());
                 $('#operations').html(parseInt(response.Data[0].operations).toLocaleString());
+                $('#caseshandled').html(parseInt(response.Data[0].cases).toLocaleString());
             }
         }
     });

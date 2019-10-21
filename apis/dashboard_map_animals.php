@@ -13,7 +13,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
@@ -22,7 +22,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'NSPD|AIPD' 
+        WHERE mm.treatment REGEXP 'NSPD|AIPD' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
@@ -31,7 +31,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
@@ -40,7 +40,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' 
+        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName) CounTable
         GROUP BY CounTable.branch";
@@ -51,7 +51,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
@@ -60,7 +60,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'NSPD|AIPD' 
+        WHERE mm.treatment REGEXP 'NSPD|AIPD' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
@@ -69,7 +69,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
@@ -78,7 +78,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' 
+        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName) CounTable
         GROUP BY CounTable.branch";
@@ -89,7 +89,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
@@ -98,7 +98,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'NSPD|AIPD' 
+        WHERE mm.treatment REGEXP 'NSPD|AIPD' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
@@ -107,7 +107,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
@@ -116,7 +116,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' 
+        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName) CounTable
         GROUP BY CounTable.branch";
@@ -127,7 +127,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
@@ -136,7 +136,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'NSPD|AIPD' 
+        WHERE mm.treatment REGEXP 'NSPD|AIPD' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type
         UNION
@@ -145,7 +145,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
@@ -154,7 +154,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' 
+        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type) CounTable
         GROUP BY CounTable.branch";
@@ -165,7 +165,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
@@ -174,7 +174,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'NSPD|AIPD' 
+        WHERE mm.treatment REGEXP 'NSPD|AIPD' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type
         UNION
@@ -183,7 +183,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' 
+        WHERE mm.treatment REGEXP 'Probable Cause\":\"[[a-z]|[A-Z]]' AND bm.branchId < 10000
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
@@ -192,7 +192,7 @@ if($branchid >= 100001 && $branchid < 200000){
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
-        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' 
+        WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type) CounTable
         GROUP BY CounTable.branch";
