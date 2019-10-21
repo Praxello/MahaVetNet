@@ -62,7 +62,7 @@ function settabledata(styleData){
         // html +='    <ul class="dropdown-menu" >';
         // html +='      <li><button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button></li>';
         // html +='      <li><button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button></li>';
-        html +='      <button class="btn btn-danger" onclick="buttoncasepaper('+k+')">OPD Case Paper</button>';
+        html +='      <button class="btn btn-primary" onclick="buttoncasepaper('+k+')">IPD Case Paper</button>';
         // html +='    </ul>';
         // html +='  </div>';
         // html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
@@ -204,14 +204,13 @@ function getallcasepaperlist(animalid){
   var selectlistpaper='';
   $.ajax({
       type: "POST",
-      url: url+"allcasepapers.php",
+      url: url+"allcasepapersipd.php",
       data:{
         animalid:animalid
       },
       async : false,
       dataType :'json',
       success: function(response) {
-
         var count;
          if(response['Data']!=null){
             count= response['Data'].length;
@@ -220,12 +219,10 @@ function getallcasepaperlist(animalid){
          for(var i=0;i<count;i++){
            casepaperlistData.set(response.Data[i].FeesData.visitDate, response.Data[i]);
            selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";
-           // console.log(response.Data[i].FeesData.visitDate);
-            // console.log(casepaperlistData.get(response.Data[i].FeesData.visitDate));
            datearray.push(response.Data[i].FeesData.visitDate);
          }
-        largedate=max_date(datearray);
-        $("#opdcasepaperdate").html(selectlistpaper);
+         largedate=max_date(datearray);
+         $("#opdcasepaperdate").html(selectlistpaper);
 
       },
       complete: function(response) {
@@ -405,7 +402,6 @@ function attachcasepaperdata(today){
           $("#delstrawno").val(newobj['ArtificialInsemination'].StrawNo);
       }
   }
-
 
 }
 getalllistData();
@@ -691,20 +687,17 @@ function savepage(){
   var branchid = $("#brid").val();
   var animalid = $("#opdaid").val();
   var docternewid = $("#drid").val();
-  // console.log("docterid"+docternewid);
+
   var visitdate = $("#opdselectdate").val();
   var nextvisitdate = $("#nonvdate").val();
   var visittype = $("#opdvisittype").val();
   var totalsamples =0;
-   // $("#nofscol").val();
   var inoculation = $("#inotype").val();
   var diagnosis = $("#textdiagnosis").val();
   var symptoms = $("#textsymptoms").val();
   var medicineData = storeTblValues();
-  // console.log(medicineData);
   var fees = $("#nofserch").val();
   var feestype ="CASH";
-  // $("#selpaymethod").val();
   var presentcondition = $("#selprecond").val();
   var samplenames = ["",""];
   // $("#selnoofsc").val();
@@ -717,7 +710,6 @@ function savepage(){
   var shidden6 = $("#shidden6").val();
   var shidden7 = $("#shidden7").val();
   var shidden8 = $("#shidden8").val();
-  // console.log("shidden1"+shidden1);
   var mainarr =new Object();
   var castrat =new Object();
   if(shidden1=="1"){
@@ -727,8 +719,6 @@ function savepage(){
     castrat['Procedure'] = noprocedurecas;
     mainarr['Castration'] = castrat;
   }
-  // console.log("1");
-  // console.log(mainarr);
   var aiarr =new Object();
   if(shidden2=="1"){
     var aistai = $("#aistai").val();
@@ -743,16 +733,12 @@ function savepage(){
     aiarr['StrawNo'] = aisno;
     mainarr['ArtificialInsemination'] = aiarr;
   }
-  // console.log("2");
-  // console.log(mainarr);
   var opsarr =new Object();
   if(shidden3=="1"){
     var opsust = $("#opsust").val();
     opsarr['Surgery Name'] = opsust;
     mainarr['Surgery'] = opsarr;
   }
-  // console.log("3");
-  // console.log(mainarr);
   var delarr =new Object();
   if(shidden4=="1"){
     var delcadet = $("#delcadet").val();
@@ -771,7 +757,6 @@ function savepage(){
     delarr['StrawNo'] = delstrawno;
     mainarr['Delivery'] = delarr;
   }
-  // console.log("m4"+mainarr);
   var infarr =new Object();
   if(shidden5=="1"){
     var inforo= $("#inforo").val();
@@ -782,10 +767,8 @@ function savepage(){
     infarr['Treatment Suggested'] = ints;
     mainarr['Infertility'] = infarr;
   }
-  // console.log("m5"+mainarr);
   var pdarr =new Object();
   if(shidden6=="1"){
-    // console.log(shidden5);
     var pdsaidate= $("#pdsaidate").val();
     var pdtextreport= $("#pdtextreport").val();
     var pdtype= $("#pdtype").val();
@@ -808,7 +791,6 @@ function savepage(){
     pdarr['Results'] = pdtextreport;
     mainarr['Pregnancy'] = pdarr;
   }
-// console.log("m6"+mainarr);
   var proarr =new Object();
   if(shidden7=="1"){
     var pprocdetail= $("#pprocdetail").val();
@@ -817,29 +799,22 @@ function savepage(){
     proarr['System'] = pdsystem;
     mainarr['Treatment'] = proarr;
   }
-// console.log("m7"+mainarr);
   var trearr =new Object();
   if(shidden8=="1"){
     var treatment= $("#treatment").val();
     trearr['Treatment'] = treatment;
     mainarr['Other'] = trearr;
   }
-// console.log("m8"+mainarr);
-  // console.log("gg"+medicineData['days']);
+
   if(visitdate==""||visittype==""||nextvisitdate==""
   ||fees==""||feestype==""||presentcondition==""){
     alert("Please Fill all required Fields");
   }
   else{
-    // console.log("mainarr ok");
-    // console.log(mainarr);
     var treatment = JSON.stringify(mainarr);
-    // console.log(treatment);
-    // var treatment = {'AllData': mainarr};
-    // console.log("treatment"+treatment.AllData);
     $.ajax({
         type: "POST",
-        url: url+"createcasepaper.php",
+        url: url+"createcasepaperipd.php",
         data :{
           treatment:treatment,
           doctorid:docternewid,
@@ -870,7 +845,7 @@ function savepage(){
           // console.log(response['NewCasePaperId']);
           if(response['Responsecode']==200){
             imgup(response['NewCasePaperId']);
-              alert(response['Message']);
+            alert(response['Message']);
           }
 
           // var count;
@@ -907,7 +882,7 @@ function imgup(imgid){
        dataType:'json',
        async:false,
        success:function(response){
-          console.log(response);
+          // console.log(response);
        }
 });
 }
@@ -964,7 +939,7 @@ function storeTblValues() {
 
 var loadFile = function(event) {
     var output = document.getElementById('setimage');
-    // console.log(output);
+    console.log(output);
     output.src = URL.createObjectURL(event.target.files[0]);
     // $("#eveimg").show();
 };

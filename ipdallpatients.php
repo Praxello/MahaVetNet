@@ -124,7 +124,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty user1 icon-rounded"></i> -->
                             <div class="col-sm-6">
-                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/101.jpg'class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img"></img>
+                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/0.jpg'class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img"></img>
                             </div>
                             <div class="col-sm-6">
                             <div class="stats">
@@ -174,7 +174,7 @@ if(isset($_SESSION['branchId'])){
               <div class="col-md-6 validation-grids widget-shadow" data-example-id="basic-forms" style="overflow-y: scroll; height:600px;">
                 <div class="row">
   							<div class="form-title" style="background-color: yellow;">
-                  <center><label>OPD Case Paper Form</label></center>
+                  <center><label>IPD Case Paper Form</label></center>
   							</div>
                 <!-- collapse -->
   							<div class="form-body" >
@@ -191,8 +191,8 @@ if(isset($_SESSION['branchId'])){
                       <select  class="form-control"  id="opdvisittype" style="width:100%;" required>
                         <option value="">Select Visit Type</option>
                         <option value="HQ">HQ</option>
-                        <option value="Tour">Tour</option>
-                        <option value="Camp">Camp</option>
+                        <!-- <option value="Tour">Tour</option>
+                        <option value="Camp">Camp</option> -->
                       </select>
                     </div>
                     </div>
@@ -891,55 +891,8 @@ if(isset($_SESSION['branchId'])){
                           </div>
                           </div>
                         </div>
-                        <!-- <div class="row">
-                          <div class="col-sm-12">
-                          <div class="form-group">
-                            <label class="control-label">Select of Samples Collected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(optional)</label>
-                            <select  class="form-control"  id="selnoofsc" style="width:100%;" multiple onchange="selectmulsamp()" required>
-                              <option value="">Select Scheme</option>
-
-                            </select>
-                          </div>
-                          </div>
-                        </div> -->
-                        <!-- <div class="row">
-                          <div class="col-sm-6">
-                          <div class="form-group">
-                              <label class="control-label">No of Samples Collected</label>
-                              <input type="text" class="form-control" id="nofscol" onkeypress="javascript:return isNumberKey(event)" placeholder="Enter No of Samples Collected" value="0" readonly>
-                          </div>
-                          </div>
-
-                        </div> -->
-                        <div class="row">
-
-                          <!-- <div class="col-sm-6">
-                          <div class="form-group">
-                            <label class="control-label">Select Payment Method</label><font color="red">*</font>
-                            <select  class="form-control"  id="selpaymethod" style="width:100%;" required>
-                              <option value="">Select Payment Method</option>
-                              <option value="-">-</option>
-                              <option value="CASH">CASH</option>
-                            </select>
-                          </div>
-                          </div> -->
-                        </div>
-                        <!-- <div class="row">
 
 
-                        </div> -->
-                        <!-- <div class="row">
-                            <div class="col-sm-6">
-                          <div class="form-group">
-
-                          </div>
-                          </div>
-                          <div class="col-sm-6">
-                        <div class="form-group">
-                          <button type="reset" class="btn btn-warning" >Reset</button>
-                        </div>
-                        </div>
-                        </div> -->
                       </form>
                       </div>
                     </div>
@@ -997,7 +950,7 @@ if(isset($_SESSION['branchId'])){
   <script src="datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script> -->
   <!-- <script src="datatables/datatables-init.js"></script> -->
   <!-- <script src="sweetalert/sweetalert.min.js"></script> -->
-  <script src="javascript/allpatients.js"></script>
+  <script src="javascript/ipdallpatients.js"></script>
   <!-- <script src="javascript/vaccination.js"></script> -->
   <script src="js/classie.js"></script>
   <script src="js/sidebarclose.js"></script>

@@ -43,7 +43,12 @@
                     </li>
                     <li class="treeview">
                         <a href="allpatients.php">
-                            <i class="fa fa-dashboard"></i> <span>All Patients</span>
+                            <i class="fa fa-dashboard"></i> <span>All Patients (OPD)</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="ipdallpatients.php">
+                            <i class="fa fa-dashboard"></i> <span>All Patients (IPD)</span>
                         </a>
                     </li>
                     <!-- <li class="treeview">

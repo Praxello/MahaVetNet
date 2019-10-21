@@ -59,14 +59,20 @@ function settabledata(styleData){
         html +="<td>"+AllData.mobile+"</td>";
         // html +="<td>"+isConfirmed+"</td>";
         html +='<td>';
-        html +='<div class="btn-group">';
-        html +='    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">';
-        html +='  Action </button>';
-        html +='    <ul class="dropdown-menu" >';
-        html +='      <li><button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button></li>';
-        html +='      <li><button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button></li>';
-        html +='    </ul>';
-        html +='  </div>';
+        html +='<button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button>';
+        html +='</td>';
+        html +='<td>';
+        html +='<button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button>';
+        html +='</td>';
+        // html +='<div class="btn-group">';
+        // html +='    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">';
+        // html +='  Action </button>';
+        // html +='    <ul class="dropdown-menu" >';
+        // html +='      <li><button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button></li>';
+        // html +='      <li><button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button></li>';
+        // html +='    </ul>';
+        // html +='  </div>';
+
         // html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
         html +="</tr>";
   }
@@ -76,7 +82,7 @@ function settabledata(styleData){
   retrieve: true,
   bPaginate: $('tbody tr').length>10,
   order: [],
-  columnDefs: [ { orderable: false, targets: [0,1,2,3] } ],
+  columnDefs: [ { orderable: false, targets: [0,1,2,3,4] } ],
   dom: 'Bfrtip',
   buttons: [],
   destroy: true

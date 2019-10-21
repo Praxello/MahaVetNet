@@ -64,9 +64,10 @@ if(isset($_SESSION['branchId'])){
                     <th style="width:20%;">Animal Name</th>
                     <th style="width:10%;">Species/ Breed</th> -->
                     <th style="width:10%;">Owner</th>
-                    <th style="width:30%;">Address</th>
+                    <th style="width:60%;">Address</th>
                     <th style="width:10%;">Mobile no</th>
-                    <th style="width:10%;">Action</th>
+                    <th style="width:10%;">Vaccination</th>
+                    <th style="width:10%;">Deworming</th>
                   </tr>
                 </thead>
                 <tbody id="styletbldata">
