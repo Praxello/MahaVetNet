@@ -1,28 +1,27 @@
-var g_branchid = null;
-g_branchid = data.branchid;
-var numberofbranch = [];
-var numberofPD = [];
-var numberofAI = [];
-var numberofInf = [];
-var numberofCB = [];
-var seriesData = [];
+var revenue_branchId = null;
+revenue_branchId = data.branchid;
+var regions = [];
+var activeInstitues = [];
+var revenueAmt = [];
+var vdsmarked = [];
+var regionsData = [];
 
-const loadMapData = (seriesData) => {
-    Highcharts.chart('animaldiv', {
+const loadAiData = (regionsData) => {
+    Highcharts.chart('totalVds', {
         chart: {
             type: 'column'
         },
         title: {
-            text: 'AI | PD | CB | IS'
+            text: 'Active Institues/Total VD Marked'
         },
         xAxis: {
-            categories: numberofbranch,
+            categories: regions,
             crosshair: true
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'AI | PD | CB |IS'
+                text: 'Active Institues/VD'
             }
         },
         tooltip: {
@@ -44,24 +43,22 @@ const loadMapData = (seriesData) => {
                     events: {
                         click: function() {
                             //alert('Category: ' + this.category + ', value: ' + this.y);
-                            getbranchid(this.category, g_branchid);
+                            loadbranchId(this.category, revenue_branchId);
                         }
                     }
                 }
             }
         },
-        series: seriesData
+        series: regionsData
     });
 }
-const loadanimalData = (param) => {
-    numberofbranch = [];
-    numberofPD = [];
-    numberofAI = [];
-    numberofInf = [];
-    numberofCB = [];
-    seriesData = [];
+const loadAi = (param) => {
+    regions = [];
+    activeInstitues = [];
+    vdsmarked = [];
+    regionsData = [];
     $.ajax({
-        url: url + 'dashboard_map_animals.php',
+        url: url + 'revenue_map.php',
         type: 'POST',
         data: { branchid: param },
         async: true,
@@ -69,29 +66,27 @@ const loadanimalData = (param) => {
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
-                var i;
+                var i, totalAi = 0;
                 for (i = 0; i < count; i++) {
-                    numberofbranch.push(response.Data[i].branch);
-                    numberofPD.push(parseInt(response.Data[i].PD));
-                    numberofAI.push(parseInt(response.Data[i].AI));
-                    numberofInf.push(parseInt(response.Data[i].Inf));
-                    numberofCB.push(parseInt(response.Data[i].CB));
+                    //for total of active institues
+                    totalAi += parseInt(response.Data[i].AInst);
+                    regions.push(response.Data[i].branch);
+                    activeInstitues.push(parseInt(response.Data[i].AInst));
+                    vdsmarked.push(parseInt(response.Data[i].vds));
                 }
-
-                seriesData.push({ name: 'Artificial Insemination', data: numberofAI });
-                seriesData.push({ name: 'Pregnancy Diagnosis', data: numberofPD });
-                seriesData.push({ name: 'Calves Born', data: numberofCB });
-                seriesData.push({ name: 'Infertility & Sterility', data: numberofInf });
+                regionsData.push({ name: 'Active Institutes', data: activeInstitues });
+                regionsData.push({ name: 'Total VD Marked', data: vdsmarked });
+                $('#totalAi').html(totalAi);
             }
         },
         complete: function(response) {
-            loadMapData(seriesData);
+            loadAiData(regionsData);
         }
     });
 }
-loadanimalData(data.branchid);
+loadAi(data.branchid);
 
-const getbranchid = (branch, branchId) => {
+const loadbranchId = (branch, branchId) => {
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
@@ -100,11 +95,11 @@ const getbranchid = (branch, branchId) => {
         dataType: 'json',
         success: function(response) {
             if (response.Data != null) {
-                g_branchid = response.Data;
+                revenue_branchId = response.Data;
             }
         },
         complete: function(response) {
-            loadanimalData(g_branchid);
+            loadAi(revenue_branchId);
         }
     });
 }

@@ -6,5 +6,5 @@
  $_SESSION['branchId'] =  $branchId;
  $_SESSION['userId'] =  $userId;
  $_SESSION['username'] =  $username;
-header('Location:farmer.php');
+header('Location:dashboard.php');
 ?>
