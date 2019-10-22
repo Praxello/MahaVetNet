@@ -59,8 +59,9 @@ const loadFarmerAnimals = (animalsFarmers) => {
                 cursor: 'pointer',
                 point: {
                     events: {
-                        click: function() {
+                        click: function(e) {
                             // alert('Category: ' + this.category + ', value: ' + this.y);
+                            e.preventDefault();
                             loadAnimalId(this.category, animal_branchId);
                         }
                     }

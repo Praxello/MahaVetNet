@@ -10,8 +10,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h3><
-                  MahaVetNet dashboard</h3>
+                <h5><a class="navbar-brand" href="#">MahaVetNet</a></h5>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="sidebar-menu">
@@ -19,6 +18,11 @@
                     <li class="treeview">
                         <a href="dashboard.php">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="reports.php">
+                            <i class="fa fa-dashboard"></i> <span>Reports</span>
                         </a>
                     </li>
                     <li class="treeview">
