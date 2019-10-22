@@ -1,3 +1,11 @@
+// $('#selpaymethod').select2({
+//   allowClear: true,
+//   placeholder: "Select Payment Method"
+// });
+// $('#selnoofsc').select2({
+//   allowClear: true,
+//   placeholder: "Select of Samples Collected"
+// });
 var animalList = new Map(); // This variable globally declare
 var medicineData = new Map(); // Medicine Data Map
 getallmedicinelist();
@@ -50,22 +58,12 @@ function settabledata(styleData){
         html +="<td style='white-space: normal;'>"+AllData.specie+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.breed+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.gender+"</td>";
-        // html +="<td>"+AllData.specie+"/"+AllData.breed+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.firstName+" "+AllData.lastName+"</td>";
         html +="<td style='white-space: normal;'><code>"+AllData.address+"</code></td>";
         html +="<td style='white-space: normal;'>"+AllData.mobile+"</td>";
-        // html +="<td>"+isConfirmed+"</td>";
         html +='<td style="white-space: normal;">';
-        // html +='<div class="btn-group">';
-        // html +='    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">';
-        // html +='  Action </button>';
-        // html +='    <ul class="dropdown-menu" >';
-        // html +='      <li><button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button></li>';
-        // html +='      <li><button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button></li>';
         html +='      <button class="btn btn-danger" onclick="buttoncasepaper('+k+')">OPD Case Paper</button>';
-        // html +='    </ul>';
-        // html +='  </div>';
-        // html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
+        html +='</td>';
         html +="</tr>";
   }
   $("#styletbldata").html(html);
@@ -85,8 +83,6 @@ function settabledata(styleData){
 function getanimaltabledata(){
   var docterid = $("#drid").val();
   var branchid = $("#brid").val();
-  // $('#styletbl').dataTable().fnDestroy();
-  // $("#styletbldata").empty();
      $.ajax({
          type: "POST",
          url: url+"allpatients.php",
@@ -174,18 +170,12 @@ $('#inotype').select2({
   allowClear: true,
   placeholder: "Select Type"
 });
-// $('#selpaymethod').select2({
-//   allowClear: true,
-//   placeholder: "Select Payment Method"
-// });
+
 $('#selprecond').select2({
   allowClear: true,
   placeholder: "Select Present condition"
 });
-// $('#selnoofsc').select2({
-//   allowClear: true,
-//   placeholder: "Select of Samples Collected"
-// });
+
 $('#opdcasepaperdate').select2({
   allowClear: true,
   placeholder: "Select Case Paper Date"
@@ -197,10 +187,10 @@ var inoculationTypeData = [];
 var surgeryTypes = [];
 var symptoms = [];
 var casepaperlistData =new Map();
-var datearray =[];
+
 var largedate="" ;
 function getallcasepaperlist(animalid){
-  // console.log("Animal Id"+animalid);
+  var datearray =[];
   var selectlistpaper='';
   $.ajax({
       type: "POST",
@@ -211,7 +201,6 @@ function getallcasepaperlist(animalid){
       async : false,
       dataType :'json',
       success: function(response) {
-
         var count;
          if(response['Data']!=null){
             count= response['Data'].length;
@@ -220,17 +209,22 @@ function getallcasepaperlist(animalid){
          for(var i=0;i<count;i++){
            casepaperlistData.set(response.Data[i].FeesData.visitDate, response.Data[i]);
            selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";
-           // console.log(response.Data[i].FeesData.visitDate);
-            // console.log(casepaperlistData.get(response.Data[i].FeesData.visitDate));
-           datearray.push(response.Data[i].FeesData.visitDate);
          }
-        largedate=max_date(datearray);
-        $("#opdcasepaperdate").html(selectlistpaper);
+         for(let k of casepaperlistData.keys())
+            {
+              var AllData= casepaperlistData.get(k);
+              // console.log(AllData);
+                var newobj=JSON.parse(AllData.MedicationData.treatment);
+                if(newobj.hasOwnProperty('ArtificialInsemination')){
+                  datearray.push(AllData.MedicationData.visitDate);
+                }
+            }
 
+         largedate=max_date(datearray);
+        $("#opdcasepaperdate").html(selectlistpaper);
       },
       complete: function(response) {
         var today = new Date();
-        // console.log("Date1"+today);
          attachcasepaperdata(today);
       }
   });
@@ -255,50 +249,43 @@ $("#medicinetab").empty();
 attachcasepaperdata(d);
 }
 function buttoncasepaper(id){
-  // console.log(id);
-   // console.log(animalList.get(id.toString()));
    var AllData= animalList.get(id.toString());
    $("#opdoid").val(id);
    $("#opdaid").val(AllData.animalId);
    $("#firsttable").hide();
-
+   $("#medicinetab").empty();
    $("#fourthtable").show();
    $("#opdowner").html(AllData.firstName);
    $("#opdanimalname").html(AllData.animalName);
    $("#opdanimalage").html(AllData.specie+" / "+AllData.breed);
    $("#opdanimalweight").html(AllData.weight);
    $("#opdanimalgender").html(AllData.gender);
-   getallcasepaperlist(AllData.animalId);
+
    var today = new Date();
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    $("#opdselectdate").val(date);
-   $("#opdcasepaperdate").val(date);
+   // $("#opdcasepaperdate").val(date).trigger('change');
    $("#opdvisittype").val("HQ").trigger('change');
-   // getlistdeworming();
-   // console.log(AllData.animalId);
-   // window.location.href="deworming.php?oid="+id+"&aniid="+AllData.animalId;
+   getallcasepaperlist(AllData.animalId);
 }
 
 function backmain(){
-  // getanimaltabledata();
   $("#firsttable").show();
-  // $("#secondtable").hide();
   $("#fourthtable").hide();
 }
 function attachcasepaperdata(today){
-
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
   if(casepaperlistData.has(date)){
     var AllData = casepaperlistData.get(date);
      $("#setimage").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
      $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
-    // console.log(AllData);
     $("#nofserch").val(AllData.FeesData.feesAmount);
-    // $("#selpaymethod").val(AllData.FeesData.typeOfPayment).trigger('change');
     $("#opdselectdate").val(AllData.FeesData.visitDate);
     $("#opdvisittype").val(AllData.MedicationData.visitType).trigger('change');
     $("#textsymptoms").val(AllData.MedicationData.symptoms);
+    var simptomarr = AllData.MedicationData.symptoms.split(",");
+    $("#selectsymptoms").val(simptomarr).trigger('change');
+
     $("#textdiagnosis").val(AllData.MedicationData.diagnosis);
     $("#inotype").val(AllData.MedicationData.typeOfInoculation).trigger('change');
     var samplearr = AllData.MedicationData.samples.split(",");
@@ -314,8 +301,6 @@ function attachcasepaperdata(today){
       }
     }
 
-    // console.log(AllData.MedicationData.treatment);
-    // var newstring = JSON.stringify(AllData.MedicationData.treatment);
     var newobj=JSON.parse(AllData.MedicationData.treatment);
     if(newobj.hasOwnProperty('Castration')){
       $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
@@ -383,7 +368,7 @@ function attachcasepaperdata(today){
   }
   if(casepaperlistData.has(largedate)){
       var dateData = casepaperlistData.get(largedate);
-      console.log(dateData);
+      // console.log(dateData);
       var newobj=JSON.parse(dateData.MedicationData.treatment);
       if(newobj.hasOwnProperty('ArtificialInsemination')){
         $("#aistai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
@@ -479,15 +464,9 @@ function symtomsdrop(){
   var selectsymptoms=$("#selectsymptoms").val();
   $("#textsymptoms").val(selectsymptoms.toString());
 }
-// function insodrop(){
-//   var inotype=$("#inotype").val();
-//   $("#tyofinoculation").val(inotype.toString());
-// }
 function selectmedication(){
-  var selectmedication = $("#selectmedication").val();
-  // console.log("val"+selectmedication);
+  var selectmedication = $("#selectmedication").val()
   if(selectmedication==''){
-
   }
   else
   {
@@ -496,27 +475,22 @@ function selectmedication(){
   }
 }
 var sm=0;
-$("#medicinetab").empty();
+// $("#medicinetab").empty();
 
 function createmedicationtable(smval){
-  // console.log("ok"+sm);
     sm++;
     var medicinehtml ='';
     if(medicineData.has(smval)){
       let mn= medicineData.get(smval);
-        // console.log(smval);
        medicinehtml+='<tr id="ct'+smval+'">';
-       // medicinehtml+='<th style="display:none;">'+smval+'</th>';
        medicinehtml+='<td style="width:60%;">'+mn.tradeName+'</td>';
        medicinehtml+='<td style="width:20%;"><input  type="text" id="instruction'+smval+'" style="width:100%;"/></td>';
        medicinehtml+='<td style="width:10%;"><input  type="text" id="days'+smval+'" style="width:100%;" onkeypress="javascript:return isNumberKey(event)"/></td>';
        medicinehtml+='<td style="width:10%;display:none"><input type="hidden" value='+smval+'></input></td>';
        medicinehtml+='<td style="width:10%;"><button class="btn btn-danger" onclick="removetrash('+smval+')">X</button></td>';
        medicinehtml+='</tr>';
-
     }
     $("#medicinetab").append(medicinehtml);
-
 }
 
 function removetrash(smid)
@@ -888,6 +862,13 @@ function savepage(){
     });
   }
 }
+
+var loadFile = function(event) {
+    var output = document.getElementById('setimage');
+    // console.log(output);
+    output.src = URL.createObjectURL(event.target.files[0]);
+    // $("#eveimg").show();
+};
 function imgup(imgid){
   // console.log("ok uplaod");
   var fd = new FormData();
@@ -960,11 +941,3 @@ function storeTblValues() {
     // TableData.shift(); // first row will be empty - so remove
     return TableData;
 }
-
-
-var loadFile = function(event) {
-    var output = document.getElementById('setimage');
-    // console.log(output);
-    output.src = URL.createObjectURL(event.target.files[0]);
-    // $("#eveimg").show();
-};

@@ -44,28 +44,16 @@ function settabledata(styleData){
   {
         var AllData= styleData.get(k);
         html +='<tr>';
-        // let isConfirmed = confirmationStatus.get(AllData.isActive);
-        // html +="<td>"+AllData.animalId+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.animalName+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.specie+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.breed+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.gender+"</td>";
-        // html +="<td>"+AllData.specie+"/"+AllData.breed+"</td>";
         html +="<td style='white-space: normal;'>"+AllData.firstName+" "+AllData.lastName+"</td>";
         html +="<td style='white-space: normal;'><code>"+AllData.address+"</code></td>";
         html +="<td style='white-space: normal;'>"+AllData.mobile+"</td>";
-        // html +="<td>"+isConfirmed+"</td>";
         html +='<td style="white-space: normal;">';
-        // html +='<div class="btn-group">';
-        // html +='    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">';
-        // html +='  Action </button>';
-        // html +='    <ul class="dropdown-menu" >';
-        // html +='      <li><button class="btn btn-primary" onclick="buttonvacination('+k+')">Vaccination</button></li>';
-        // html +='      <li><button class="btn btn-secondary" onclick="buttondeworming('+k+')">Deworming</button></li>';
         html +='      <button class="btn btn-primary" onclick="buttoncasepaper('+k+')">IPD Case Paper</button>';
-        // html +='    </ul>';
-        // html +='  </div>';
-        // html +='<td style=""><div class="btn-group" role="group" aria-label="Basic Example"><button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="editStyle('+k+')"><i class="fa fa-edit"></i></button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onclick="removeMeasurements('+k+')"><i class="fa fa-remove"></i></button></div></td>';
+        html +='</td>';
         html +="</tr>";
   }
   $("#styletbldata").html(html);
@@ -85,8 +73,6 @@ function settabledata(styleData){
 function getanimaltabledata(){
   var docterid = $("#drid").val();
   var branchid = $("#brid").val();
-  // $('#styletbl').dataTable().fnDestroy();
-  // $("#styletbldata").empty();
      $.ajax({
          type: "POST",
          url: url+"allpatients.php",
@@ -96,7 +82,6 @@ function getanimaltabledata(){
          async : false,
          dataType :'json',
          success: function(response) {
-            // console.log(response);
            var count;
             if(response['Data']!=null){
                count= response['Data'].length;
@@ -174,18 +159,10 @@ $('#inotype').select2({
   allowClear: true,
   placeholder: "Select Type"
 });
-// $('#selpaymethod').select2({
-//   allowClear: true,
-//   placeholder: "Select Payment Method"
-// });
 $('#selprecond').select2({
   allowClear: true,
   placeholder: "Select Present condition"
 });
-// $('#selnoofsc').select2({
-//   allowClear: true,
-//   placeholder: "Select of Samples Collected"
-// });
 $('#opdcasepaperdate').select2({
   allowClear: true,
   placeholder: "Select Case Paper Date"
@@ -197,10 +174,10 @@ var inoculationTypeData = [];
 var surgeryTypes = [];
 var symptoms = [];
 var casepaperlistData =new Map();
-var datearray =[];
+// var datearray =[];
 var largedate="" ;
 function getallcasepaperlist(animalid){
-  // console.log("Animal Id"+animalid);
+  var datearray =[];
   var selectlistpaper='';
   $.ajax({
       type: "POST",
@@ -218,9 +195,17 @@ function getallcasepaperlist(animalid){
          selectlistpaper="<option value=''>Select Date</option>";
          for(var i=0;i<count;i++){
            casepaperlistData.set(response.Data[i].FeesData.visitDate, response.Data[i]);
-           selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";
-           datearray.push(response.Data[i].FeesData.visitDate);
+           selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";      
          }
+         for(let k of casepaperlistData.keys())
+            {
+              var AllData= casepaperlistData.get(k);
+              // console.log(AllData);
+                var newobj=JSON.parse(AllData.MedicationData.treatment);
+                if(newobj.hasOwnProperty('ArtificialInsemination')){
+                  datearray.push(AllData.MedicationData.visitDate);
+                }
+            }
          largedate=max_date(datearray);
          $("#opdcasepaperdate").html(selectlistpaper);
 
@@ -258,48 +243,43 @@ function buttoncasepaper(id){
    $("#opdoid").val(id);
    $("#opdaid").val(AllData.animalId);
    $("#firsttable").hide();
-
+   $("#medicinetab").empty();
    $("#fourthtable").show();
    $("#opdowner").html(AllData.firstName);
    $("#opdanimalname").html(AllData.animalName);
    $("#opdanimalage").html(AllData.specie+" / "+AllData.breed);
    $("#opdanimalweight").html(AllData.weight);
    $("#opdanimalgender").html(AllData.gender);
-   getallcasepaperlist(AllData.animalId);
    var today = new Date();
    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    $("#opdselectdate").val(date);
-   $("#opdcasepaperdate").val(date);
+   // $("#opdcasepaperdate").val(date);
    $("#opdvisittype").val("HQ").trigger('change');
-   // getlistdeworming();
-   // console.log(AllData.animalId);
-   // window.location.href="deworming.php?oid="+id+"&aniid="+AllData.animalId;
+   getallcasepaperlist(AllData.animalId);
 }
 
 function backmain(){
-  // getanimaltabledata();
   $("#firsttable").show();
-  // $("#secondtable").hide();
   $("#fourthtable").hide();
 }
 function attachcasepaperdata(today){
 
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
   if(casepaperlistData.has(date)){
     var AllData = casepaperlistData.get(date);
      $("#setimage").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
      $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
-    // console.log(AllData);
+
     $("#nofserch").val(AllData.FeesData.feesAmount);
-    // $("#selpaymethod").val(AllData.FeesData.typeOfPayment).trigger('change');
     $("#opdselectdate").val(AllData.FeesData.visitDate);
     $("#opdvisittype").val(AllData.MedicationData.visitType).trigger('change');
     $("#textsymptoms").val(AllData.MedicationData.symptoms);
+    var simptomarr = AllData.MedicationData.symptoms.split(",");
+    $("#selectsymptoms").val(simptomarr).trigger('change');
+
     $("#textdiagnosis").val(AllData.MedicationData.diagnosis);
     $("#inotype").val(AllData.MedicationData.typeOfInoculation).trigger('change');
     var samplearr = AllData.MedicationData.samples.split(",");
-    // $("#selnoofsc").val(samplearr).trigger('change');
     $("#nonvdate").val(AllData.MedicationData.nextVisitDate);
     $("#selprecond").val(AllData.MedicationData.presentCondition).trigger('change');
     if(AllData.MedicineData){
@@ -310,9 +290,6 @@ function attachcasepaperdata(today){
         $("#days"+AllData.MedicineData[i].medicineId).val(AllData.MedicineData[i].days);
       }
     }
-
-    // console.log(AllData.MedicationData.treatment);
-    // var newstring = JSON.stringify(AllData.MedicationData.treatment);
     var newobj=JSON.parse(AllData.MedicationData.treatment);
     if(newobj.hasOwnProperty('Castration')){
       $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
@@ -380,7 +357,6 @@ function attachcasepaperdata(today){
   }
   if(casepaperlistData.has(largedate)){
       var dateData = casepaperlistData.get(largedate);
-      console.log(dateData);
       var newobj=JSON.parse(dateData.MedicationData.treatment);
       if(newobj.hasOwnProperty('ArtificialInsemination')){
         $("#aistai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
@@ -413,7 +389,6 @@ var samlist='',selectpmd='',selectaitype='',selectsymptoms='',selectsurgerytype=
       async : false,
       dataType :'json',
       success: function(response) {
-        // console.log(response);
         var count;
          if(response['Data']!=null){
             count= response['Data'].length;
@@ -426,7 +401,6 @@ var samlist='',selectpmd='',selectaitype='',selectsymptoms='',selectsurgerytype=
          }
          $("#selpaymethod").html(selectpmd);
          let aitype =response['Data']['aiType'].split(";");
-         // console.log(aitype);
          let caitype = aitype.length;
          selectaitype ="<option value=''>Select AI Type</option>";
          for(var i=0;i<caitype;i++){
@@ -436,7 +410,6 @@ var samlist='',selectpmd='',selectaitype='',selectsymptoms='',selectsurgerytype=
          $("#delssch").html(selectaitype);
          $("#pdssch").html(selectaitype);
          let inocutype = response['Data']['inoculationType'].split(";");
-         // console.log("ok"+inocutype);
          let cinocutype = inocutype.length;
          selectinocutype="<option value=''>Select Inoculation</option>";
          for(var i=0;i<cinocutype;i++){
@@ -445,7 +418,6 @@ var samlist='',selectpmd='',selectaitype='',selectsymptoms='',selectsurgerytype=
          $("#inotype").html(selectinocutype);
 
          let surgerytype =response['Data']['surgeryTypes'].split(";");
-         // console.log(surgerytype);
          let csurgerytype = surgerytype.length;
          selectsurgerytype="<option value=''>Select Symtoms</option>";
          for(var i=0;i<csurgerytype;i++){
@@ -475,15 +447,9 @@ function symtomsdrop(){
   var selectsymptoms=$("#selectsymptoms").val();
   $("#textsymptoms").val(selectsymptoms.toString());
 }
-// function insodrop(){
-//   var inotype=$("#inotype").val();
-//   $("#tyofinoculation").val(inotype.toString());
-// }
 function selectmedication(){
   var selectmedication = $("#selectmedication").val();
-  // console.log("val"+selectmedication);
   if(selectmedication==''){
-
   }
   else
   {
@@ -492,17 +458,13 @@ function selectmedication(){
   }
 }
 var sm=0;
-$("#medicinetab").empty();
-
+// $("#medicinetab").empty();
 function createmedicationtable(smval){
-  // console.log("ok"+sm);
     sm++;
     var medicinehtml ='';
     if(medicineData.has(smval)){
       let mn= medicineData.get(smval);
-        // console.log(smval);
        medicinehtml+='<tr id="ct'+smval+'">';
-       // medicinehtml+='<th style="display:none;">'+smval+'</th>';
        medicinehtml+='<td style="width:60%;">'+mn.tradeName+'</td>';
        medicinehtml+='<td style="width:20%;"><input  type="text" id="instruction'+smval+'" style="width:100%;"/></td>';
        medicinehtml+='<td style="width:10%;"><input  type="text" id="days'+smval+'" style="width:100%;" onkeypress="javascript:return isNumberKey(event)"/></td>';
@@ -613,10 +575,6 @@ $("#six1").on('reset',function(event){
   event.preventDefault();
   $("#pdsaidate").val("");
   $("#pdtextreport").val("");
-  // $("#pdtype").val("");
-  // $("#pdprety").val("");
-  // $("#pdstai").val("");
-  // $("#pdssch").val("");
   $("#pdstrawno").val("");
   $("#head6").html('');
   $("#shidden6").val(0);
@@ -658,15 +616,10 @@ $("#nine1").on('submit',function(event){
 });
 $("#nine1").on('reset',function(event){
   event.preventDefault();
-  // $("#tyofinoculation").val("");
   $("#inotype").val("").trigger('change');
-  // $("#nofscol").val("");
-  // $("#selnoofsc").val("").trigger('change');
   $("#nonvdate").val("");
   $("#nofserch").val("");
-  // $("#selpaymethod").val("").trigger('change');
   $("#selprecond").val("").trigger('change');
-  // $("#animalimgname").val("").trigger('change');
 });
 $("#opdform").on('submit',function(event){
   event.preventDefault();
@@ -700,7 +653,6 @@ function savepage(){
   var feestype ="CASH";
   var presentcondition = $("#selprecond").val();
   var samplenames = ["",""];
-  // $("#selnoofsc").val();
   samplenames=samplenames.toString();
   var shidden1 = $("#shidden1").val();
   var shidden2 = $("#shidden2").val();
@@ -841,36 +793,20 @@ function savepage(){
         async : false,
         dataType :'json',
         success: function(response) {
-          // console.log(response);
-          // console.log(response['NewCasePaperId']);
           if(response['Responsecode']==200){
             imgup(response['NewCasePaperId']);
             alert(response['Message']);
           }
-
-          // var count;
-          //  if(response['Data']!=null){
-          //     count= response['Data'].length;
-          //  }
-          //  for(var i=0;i<count;i++)
-          //  {
-          //  selectmedicine +="<option value='"+response['Data'][i].medicineId+"'>"+response['Data'][i].tradeName+"</option>";
-          //  medicineData.set(response.Data[i].medicineId,response.Data[i]);
-          //  }
-          //  $("#medicinename").html(selectmedicine);
-          //  $("#dmedicinename").html(selectmedicine);
         }
     });
   }
 }
 function imgup(imgid){
-  // console.log("ok uplaod");
   var fd = new FormData();
   var files = $('#animalimgname')[0].files[0];
   fd.append('file',files);
   fd.append('imgname',imgid);
   fd.append('foldername',"animalphotos");
-  // fd.append('foldername',"img/"); // Folder Path
   $.ajax({
 
        url:"http://praxello.com/ahimsa/uploadimage1.php",
@@ -882,14 +818,9 @@ function imgup(imgid){
        dataType:'json',
        async:false,
        success:function(response){
-          // console.log(response);
        }
 });
 }
-// function selectmulsamp(){
-//   var selnoofsc = $("#selnoofsc").val();
-//   $("#nofscol").val(selnoofsc.length);
-// }
 function chpregancyval(){
   var pdprety= $("#pdprety").val();
   if(pdprety=="Is Pregnant"){
