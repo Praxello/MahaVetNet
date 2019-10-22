@@ -42,7 +42,7 @@ loadMap(data.branchid);
 
 function fetchName(param, branchid) {
     $.ajax({
-        url: 'apis/getbranchId.php',
+        url: url+'getbranchId.php',
         type: 'POST',
         data: { centretype: param, branchid: branchid },
         async: true,
@@ -50,7 +50,6 @@ function fetchName(param, branchid) {
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
-
             }
         },
         complete: function(response) {
