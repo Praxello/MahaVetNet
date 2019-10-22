@@ -391,20 +391,12 @@ INNER JOIN animal_master am ON am.ownerId = aom.ownerId
 WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
 AND bm.branchId < 10000
 UNION
-SELECT 0 animalCount,COUNT(am.animalId) tagged,0 farmercount,0 Total,0 downloads    
-FROM branch_master bm
-INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
-INNER JOIN animal_master am ON am.ownerId = aom.ownerId
-WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
-AND bm.branchId < 10000
-AND am.animalName regexp '^[0-9]{1,16}$'
-UNION
 SELECT 0 animalCount,0 tagged,COUNT(aom.ownerId) AS farmercount,0 Total,0 downloads  
 FROM branch_master bm
 INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
 INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
 WHERE bmm.branchId = 100001
-AND bm.branchId < 10000
+AND bm.branchId < 10000)CounTable
 UNION
 SELECT 0 animalCount,0 tagged,0 farmercount,COUNT(bm.branchId) Total,0 downloads  FROM branch_master bm 
     WHERE bm.branchId IN(SELECT bmm.childBranch 
@@ -416,7 +408,14 @@ SELECT 0 animalCount,0 tagged,0 farmercount,0 Total,COUNT(bm.branchId) downloads
     WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001) 
     AND bm.branchId  IN(SELECT branchId FROM otp_master) 
     AND bm.branchId < 10000) CounTable
-
+UNION
+SELECT 0 animalCount,COUNT(am.animalId) tagged,0 farmercount,0 Total,0 downloads    
+FROM branch_master bm
+INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+INNER JOIN animal_master am ON am.ownerId = aom.ownerId
+WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
+AND bm.branchId < 10000
+AND am.animalName regexp '^[0-9]{1,16}$'
 #total revenue
 SELECT SUM(fm.feesAmount) FROM branch_master bm INNER JOIN fees_master fm ON fm.branchId = bm.branchId 
 WHERE bm.branchId 
@@ -568,3 +567,40 @@ SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) I
         WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
         AND bm.branchId < 10000
         GROUP BY bm.districtName
+
+
+SELECT branch,SUM(animalCount) animalCount,SUM(farmercount) farmercount FROM(
+SELECT bm.centre_type branch,COUNT(am.animalId) AS animalCount,0 farmercount
+FROM branch_master bm
+INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+INNER JOIN animal_master am ON am.ownerId = aom.ownerId
+WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 500001)  
+AND bm.branchId < 10000
+    GROUP BY bm.centre_type
+UNION
+SELECT bm.centre_type branch,0 animalCount,COUNT(aom.ownerId) AS farmercount
+FROM branch_master bm
+INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+WHERE bmm.branchId = 500001
+AND bm.branchId < 10000
+ GROUP BY bm.centre_type)CounTable
+ GROUP BY CounTable.branch
+
+ SELECT branch,SUM(animalCount) animalCount,SUM(farmercount) farmercount FROM(
+SELECT bm.districtName branch,COUNT(am.animalId) AS animalCount,0 farmercount
+FROM branch_master bm
+INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+INNER JOIN animal_master am ON am.ownerId = aom.ownerId
+WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
+AND bm.branchId < 10000
+    GROUP BY bm.districtName
+UNION
+SELECT bm.districtName branch,0 animalCount,COUNT(aom.ownerId) AS farmercount
+FROM branch_master bm
+INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+WHERE bmm.branchId = 100001
+AND bm.branchId < 10000
+ GROUP BY bm.districtName)CounTable
+ GROUP BY CounTable.branch
