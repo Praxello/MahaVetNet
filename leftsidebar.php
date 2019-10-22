@@ -10,8 +10,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <h1><a class="navbar-brand" href="#"><span class="fa fa-area-chart"></span> Maha<span
-                            class="dashboard_text">MahaVetNet dashboard</span></a></h1>
+                <h3><
+                  MahaVetNet dashboard</h3>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="sidebar-menu">
