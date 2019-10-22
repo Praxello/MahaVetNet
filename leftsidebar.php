@@ -22,6 +22,11 @@
                         </a>
                     </li>
                     <li class="treeview">
+                        <a href="reports.php">
+                            <i class="fa fa-dashboard"></i> <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
                         <a href="farmer.php">
                             <i class="fa fa-dashboard"></i> <span>Farmers</span>
                         </a>

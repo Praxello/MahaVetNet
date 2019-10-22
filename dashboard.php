@@ -124,7 +124,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 widget">
+                    <!-- <div class="col-md-3 widget">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                             <div class="stats">
@@ -132,7 +132,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <span>Total Users</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="clearfix"> </div>
                 </div>
 
@@ -245,6 +245,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
+                
                 <div class="charts">
                     <div class="col-md-4 charts-grids widget">
                     <div class="card-header">
@@ -262,16 +263,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                 </div>
                 <div class="charts">
-                    <div class="col-md-4 charts-grids widget states-mdl">
+                    
+                    <div class="col-md-5 charts-grids widget states-mdl">
                     <div class="card-header">
                             <h3></h3>
                         </div>
                         <div id="farmersanimalDiv"></div>
+                       
                     </div>
-                    
                     <div class="clearfix"> </div>
                 </div>
 
+                <!-- <div class="charts">
+               
+                    <div class="col-md-4 charts-grids widget states-mdl">
+                    <div class="card-header"> </div>
+                       
+                        <div id="farmersanimalDiv"></div>
+                    </div>
+                    <div class="clearfix"> </div>
+                    
+                </div> -->
 
             </div>
         </div>
