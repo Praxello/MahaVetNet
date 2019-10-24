@@ -161,11 +161,12 @@ if(isset($_POST['branchId']) && isset($_POST['reportType']) && isset($_POST['yea
             $count = getCountOfYear($month,$year,$reportType,$branchId);
             while($academicResults = mysqli_fetch_assoc($jobQuery))
                     {
+                        $count++;
                         $temp = $academicResults;
                         $yearly = array('Year'=>$count);
                         $total = array_merge($temp, $yearly);
                         $records[] = $total;
-                        $count++;
+                      
                     }
           $response = array('Message' => "Data Loaded successfull", "Data" => $records, 'Responsecode' => 200);
         } else {

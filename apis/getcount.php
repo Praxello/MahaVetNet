@@ -5,7 +5,7 @@ function getCountOfYear($month,$year,$reportType,$branchId){
     $day1 = 31;
     $yearvar = $year;
     $april_month = 4;
-    $output = 1;
+    $output = 0;
     if($month < 4){
         $yearvar = $year - 1;
     }
@@ -167,13 +167,13 @@ function getCountOfYear($month,$year,$reportType,$branchId){
             $academicResults = mysqli_fetch_assoc($jobQuery);
             $output=  $academicResults['c'];
             if($output == '0') {
-                $output = 1;
+                $output = 0;
             }
         } else {
-            $output = 1;
+            $output = 0;
         }
     }else{
-        $output = 1;
+        $output = 0;
     }
     return $output;
 }
