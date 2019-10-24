@@ -59,6 +59,7 @@ if(isset($_SESSION['branchId'])){
        <?php include 'header.php';?>
         <!-- main content start-->
         <div id="page-wrapper">
+        <input type="hidden" id="branchid" value="<?php echo $brId;?>">
             <div class="main-page">
             <div class="forms">
             <div class="row">
@@ -67,14 +68,14 @@ if(isset($_SESSION['branchId'])){
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="focusedinput" class="col-sm-2 control-label">Year</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                         <select  class="form-control"  id="year" style="width:100%;"  required>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
+                                        <option>2018</option>
+                                        <option>2019</option>
                                         </select>
                                         </div>
                                         <label for="focusedinput" class="col-sm-2 control-label">Month</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                         <select  class="form-control"  id="month" style="width:100%;"  required>
                                         <?php
                                         for ($m=1; $m<=12; $m++) {
@@ -86,58 +87,92 @@ if(isset($_SESSION['branchId'])){
                                         
                                         </div>
                                     <div class="form-group">
-                                        <label for="disabledinput" class="col-sm-2 control-label">Zone</label>
-                                        <div class="col-sm-6">
-                                        <select  class="form-control"  id="zone" style="width:100%;"  required>
+                                        <label for="disabledinput" class="col-sm-2 control-label zone">Zone</label>
+                                        <div class="col-sm-3 zone">
+                                        <select  class="form-control"  id="zone" style="width:100%;"  required onchange="loadDistricts(this.value,2)">
+                                        </select>
+                                        </div>
+                                        <label for="disabledinput" class="col-sm-2 control-label district">District</label>
+                                        <div class="col-sm-3 district">
+                                        <select  class="form-control"  id="district" style="width:100%;"  onchange="loadTaluka(this.value,3)" required>
                                         </select>
                                         </div>
                                     </div>
+                                   
                                     <div class="form-group">
-                                        <label for="disabledinput" class="col-sm-2 control-label">District</label>
-                                        <div class="col-sm-6">
-                                        <select  class="form-control"  id="district" style="width:100%;"  required>
+                                        <label for="disabledinput" class="col-sm-2 control-label taluka">Taluka</label>
+                                        <div class="col-sm-3 taluka">
+                                        <select  class="form-control"  id="taluka" style="width:100%;" onchange="loadDispencery(this.value,4)" required>
                                         </select>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="disabledinput" class="col-sm-2 control-label">Taluka</label>
-                                        <div class="col-sm-6">
-                                        <select  class="form-control"  id="taluka" style="width:100%;"  required>
-                                        </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="disabledinput" class="col-sm-2 control-label">Dispencery</label>
-                                        <div class="col-sm-6">
-                                        <select  class="form-control"  id="dispencery" style="width:100%;"  required>
+                                        <div class="col-sm-3">
+                                        <select  class="form-control"  id="dispencery" style="width:100%;" onchange="getDispenceryBranch(this.value)" required>
                                         </select>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label for="disabledinput" class="col-sm-2 control-label">Dispencery</label>
-                                        <div class="col-sm-6">
+                                        <label for="disabledinput" class="col-sm-2 control-label">Report</label>
+                                        <div class="col-sm-3">
                                         <select  class="form-control"  id="operation" style="width:100%;"  required>
-                                        <option value="AIFresh">Artificial Insemination(Fresh)</option>
-                                        <option value="AIRepeat1">Artificial Insemination(Repeat-1)</option>
-                                        <option value="AIRepeat2">Artificial Insemination(repeat-2)</option>
-                                        <option value="AI">Total Artificial Inseminations</option>
-                                        <option value="Delivery">Calves Born</option>
-                                        <option value="Vaccine">Artificial Insemination(Repeat-1)</option>
-                                        <option value="AIRepeat2">Artificial Insemination(repeat-2)</option>
-                                        <option value="AI">Total Artificial Inseminations</option>
+                                        <option value="1">Artificial Insemination(Fresh)</option>
+                                        <option value="2">Artificial Insemination(Repeat-1)</option>
+                                        <option value="3">Artificial Insemination(repeat-2)</option>
+                                        <option value="4">Total Artificial Inseminations</option>
+                                        <option value="5">Calves Born</option>
+                                        <option value="6">Vaccination</option>
+                                        <option value="7">Infertility</option>
+                                        <option value="8">Deworming</option>
+                                        <option value="9">Cash Register</option>
+                                        <option value="10">Castrations</option>
+                                        <option value="11">Operations</option>
+                                        <option value="12">Pregnancy Diagnosis</option>
+                                        <option value="13">Inpatients</option>
+                                        <option value="14">Outpatients</option>
+                                        <option value="15">Day Book</option>
+                                        <option value="16">Tour Book</option>
                                         </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                      
+                                        <button  class="btn btn-primary" type="button" onclick="get_reports()">Generate Report</button>
+                                       
                                         </div>
                                     </div>
                                    
                                 </form>
                             </div>
+                            <div class="tables">
+                    <div class="table-responsive bs-example widget-shadow">
+
+                            <table class="table table-bordered farmer-table">
+                                <thead>
+                                    <tr>
+                                        <th>Monthly</th>
+                                        <th>Yearly</th>
+                                        <th>Visit Date</th>
+                                        <th>Name  </th>
+                                        <th>Address</th>
+                                        <th>Category</th>
+                                        <th>Species</th>
+                                        <th>Breed</th>
+                                        <th>Scheme</th>  
+                                        <th>Straw Number</th>  
+                                        <th>AI</th>    
+                                    </tr>
+                                </thead>
+                                <tbody class="farmer-data"></tbody>
+                            </table>
+                        </div>
+                    </div>
                         </div>
             </div>
             </div>
         </div>
         <div class="footer">
-            <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p>
+            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
+                    target="_blank">w3layouts</a></p> -->
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

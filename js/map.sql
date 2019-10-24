@@ -560,13 +560,13 @@ SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) I
         GROUP BY bm.branchName) CounTable
         GROUP BY CounTable.branch
 
-        SELECT bm.districtName,COUNT(am.animalId) AS animalCount,0 tagged,0 farmercount,0 Total,0 downloads,0 vd,0 revenue
-        FROM branch_master bm
-        INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
-        INNER JOIN animal_master am ON am.ownerId = aom.ownerId
-        WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
-        AND bm.branchId < 10000
-        GROUP BY bm.districtName
+            SELECT bm.districtName,COUNT(am.animalId) AS animalCount,0 tagged,0 farmercount,0 Total,0 downloads,0 vd,0 revenue
+            FROM branch_master bm
+            INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+            INNER JOIN animal_master am ON am.ownerId = aom.ownerId
+            WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
+            AND bm.branchId < 10000
+            GROUP BY bm.districtName
 
 
 SELECT branch,SUM(animalCount) animalCount,SUM(farmercount) farmercount FROM(
@@ -604,3 +604,45 @@ WHERE bmm.branchId = 100001
 AND bm.branchId < 10000
  GROUP BY bm.districtName)CounTable
  GROUP BY CounTable.branch
+
+ SELECT mm.visitDate AS 'Visit Date' , aom.firstName AS 'First Name', aom.lastName AS 'Last Name',aom.address AS 'Address',aom.category AS 'Category' ,am.specie AS 'Species',  am.breed AS 'Breed',mm.treatment, mm.samples AS 'Samples' FROM medication_master  mm 
+join animal_master am on mm.animalId = am.animalId 
+join animal_owner_master aom on am.ownerId = aom.ownerId 
+where mm.branchId = 419 
+and mm.treatment REGEXP 'AIType":"[[a-z]|[A-Z]]'
+
+SELECT mm.visitDate AS 'Visit Date' , aom.firstName AS 'First Name', aom.lastName AS 'Last Name',aom.address AS 'Address',aom.category AS 'Category' ,am.specie AS 'Species', am.breed AS 'Breed',mm.treatment, mm.samples AS 'Samples' FROM medication_master mm join animal_master am on mm.animalId = am.animalId join animal_owner_master aom on am.ownerId = aom.ownerId where mm.branchId = 3248 and mm.treatment REGEXP '"AIType":"Fresh'
+
+SELECT mm.visitDate AS 'Visit Date' , aom.firstName AS 'First Name', aom.lastName AS 'Last Name',aom.address AS 'Address',aom.category AS 'Category' ,am.specie AS 'Species',  am.breed AS 'Breed',mm.treatment, mm.samples AS 'Samples' FROM medication_master  mm 
+join animal_master am on mm.animalId = am.animalId 
+join animal_owner_master aom on am.ownerId = aom.ownerId 
+where mm.branchId = 3248 
+and mm.treatment REGEXP '"AIType":"Repeat 2'
+
+SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples 
+FROM medication_master  mm 
+    join animal_master am on mm.animalId = am.animalId 
+    join animal_owner_master aom on am.ownerId = aom.ownerId 
+    where mm.branchId = 3248
+    AND MONTH(mm.visitDate) = 10 AND YEAR(mm.visitDate) = 2019
+    and mm.treatment REGEXP 'AIType":"Repeat 1'
+<option value="AIFresh">Artificial Insemination(Fresh)</option>
+                                        <option value="AIRepeat1">Artificial Insemination(Repeat-1)</option>
+                                        <option value="AIRepeat2">Artificial Insemination(repeat-2)</option>
+                                        <option value="AIType">Total Artificial Inseminations</option>
+                                        <option value="Delivery">Calves Born</option>
+                                        <option value="Vaccine">Vaccination</option>
+                                        <option value="Infertility">Infertility</option>
+                                        <option value="Deworming">Deworming</option>
+                                        <option value="CashRegister">Cash Register</option>
+                                        <option value="Castration">Castrations</option>
+                                        <option value="Operation">Operations</option>
+                                        <option value="IPD">Inpatients</option>
+                                        <option value="OPD">Outpatients</option>
+                                        <option value="DayBook">Day Book</option>
+                                        <option value="Tour">Tour Book</option>
+
+                                         JOIN animal_master am ON mm.animalId = am.animalId 
+            JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
+            where mm.branchId = 3248
+            AND MONTH(mm.visitDate) = 09 AND YEAR(mm.visitDate) = 2019
