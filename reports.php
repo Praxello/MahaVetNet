@@ -22,6 +22,8 @@ if(isset($_SESSION['branchId'])){
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' /> -->
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> -->
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
 
@@ -146,8 +148,8 @@ if(isset($_SESSION['branchId'])){
                             <div class="tables">
                     <div class="table-responsive bs-example widget-shadow">
 
-                            <table class="table table-bordered farmer-table">
-                                <thead>
+                            <table class="table table-bordered table-striped  farmer-table">
+                                <thead id="farmer-head">
                                     <tr>
                                         <th>Monthly</th>
                                         <th>Yearly</th>
@@ -159,7 +161,9 @@ if(isset($_SESSION['branchId'])){
                                         <th>Breed</th>
                                         <th>Scheme</th>  
                                         <th>Straw Number</th>  
-                                        <th>AI</th>    
+                                        <th>AIType</th>   
+                                        <th>Status of Reproductive Organ</th> 
+                                        <th>Stage of Oestrus</th>
                                     </tr>
                                 </thead>
                                 <tbody class="farmer-data"></tbody>
@@ -213,6 +217,16 @@ if(isset($_SESSION['branchId'])){
     <script src="js/bootstrap.js"> </script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script src="jscode/apis.js" type="text/javascript"></script>
     <script src="js/reports.js" type="text/javascript"></script>
 </body>
