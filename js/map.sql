@@ -416,6 +416,7 @@ INNER JOIN animal_master am ON am.ownerId = aom.ownerId
 WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = 100001)  
 AND bm.branchId < 10000
 AND am.animalName regexp '^[0-9]{1,16}$'
+
 #total revenue
 SELECT SUM(fm.feesAmount) FROM branch_master bm INNER JOIN fees_master fm ON fm.branchId = bm.branchId 
 WHERE bm.branchId 
@@ -646,3 +647,69 @@ FROM medication_master  mm
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
             where mm.branchId = 3248
             AND MONTH(mm.visitDate) = 09 AND YEAR(mm.visitDate) = 2019
+
+
+            SELECT region,districtname,SUM(login) login,SUM(remaining) remaining FROM(
+Select districtname as region,blockname as districtname,count(centre_type) as login,0 remaining from branch_master
+Where branchid IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname
+    UNION
+    Select districtname as region,blockname as districtname,0 login,count(centre_type) as remaining  from branch_master
+Where branchid NOT IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname) CounTable
+GROUP BY CounTable.districtname ORDER BY CounTable.region
+
+SELECT region,districtname,SUM(login) login,SUM(remaining) remaining,SUM(AI) AI FROM(
+Select districtname as region,blockname as districtname,count(centre_type) as login,0 remaining,0 AI from branch_master
+Where branchid IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname
+    UNION
+    Select districtname as region,blockname as districtname,0 login,count(centre_type) as remaining,0 AI  from branch_master
+Where branchid NOT IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname
+    UNION
+    SELECT districtname as region,blockname as districtname,0 login,0 remaining,COUNT(bm.branchId) AI
+FROM branch_master bm 
+INNER JOIN user_master um ON um.branchId = bm.branchId 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+AND bmm.branchId= 100001 AND bm.branchId < 10000
+GROUP BY bm.blockName
+) CounTable
+GROUP BY CounTable.districtname ORDER BY CounTable.region
+
+#Total Downloads,remaining,AI,cases by blockwise
+SELECT region,districtname,SUM(login) login,SUM(remaining) remaining,SUM(AI) AI,SUM(cases) cases FROM(
+Select districtname as region,blockname as districtname,count(centre_type) as login,0 remaining,0 AI,0 cases from branch_master
+Where branchid IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname
+    UNION
+    Select districtname as region,blockname as districtname,0 login,count(centre_type) as remaining,0 AI,0 cases  from branch_master
+Where branchid NOT IN (Select branchid from otp_master where isverified=1 and branchid < 10000)
+And branchid <10000 
+Group by blockname
+    UNION
+    SELECT districtname as region,blockname as districtname,0 login,0 remaining,COUNT(bm.branchId) AI,0 cases
+FROM branch_master bm 
+INNER JOIN user_master um ON um.branchId = bm.branchId 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+WHERE mm.treatment REGEXP 'AIType\":\"[[a-z]|[A-Z]]' 
+AND bmm.branchId= 100001 AND bm.branchId < 10000
+GROUP BY bm.blockName
+    UNION
+    SELECT districtname as region,blockname as districtname,0 login,0 remaining,0 AI,COUNT(bm.branchId) as cases
+    FROM branch_master bm 
+INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+INNER JOIN user_master um ON um.branchId = bm.branchId 
+INNER JOIN medication_master mm ON mm.doctorId = um.doctorId
+WHERE bmm.branchId = 100001 AND bm.branchId < 10000
+GROUP BY bm.blockName
+) CounTable
+GROUP BY CounTable.districtname ORDER BY CounTable.region

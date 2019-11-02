@@ -147,6 +147,16 @@ const getDispenceryBranch = param => {
         }
     });
 }
+const getTreatment = param => {
+    var ke = [];
+    for (var k in param) {
+        var j = Object.values(param[k]);
+        if (j[0] != "") {
+            ke.push(k);
+        }
+    }
+    return ke;
+}
 const get_reports = () => {
     const reportData = {
         year: $('#year').val(),
@@ -367,40 +377,147 @@ const get_reports = () => {
                         tableData += "<td>" + response.Data[i].Breed + "</td>";
                         tableData += "<td>" + surgery + "</td></tr>";
                     }
+                } else if (reportData.reportType == 12) {
+                    tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Visit Date</th> <th>Name  </th> <th>Address</th>";
+                    tableHead += "<th>Category</th> <th>Species</th> <th>Breed</th><th>Pregnant</th><th>PD Type</th>";
+                    tableHead += "<th>Scheme</th> <th>StrawNo</th> <th>Expected Delivery Date</th><th>Results</th><th>AIDate</th><th>AI-Type</th><th>Pregancy Tenure</th></tr>";
+                    for (var i = 0; i < count; i++) {
+                        var jsonObject = JSON.parse(response.Data[i].treatment);
+                        var Pregnant = null,
+                            aiType = null,
+                            AIDate = null,
+                            PregnancyTenure = null,
+                            ExpectedDeliveryDate = null,
+                            PDType = null,
+                            scheme = null,
+                            Results = null,
+                            strawNumber = null;
+                        if (jsonObject.hasOwnProperty('Pregnancy')) {
+                            AIDate = jsonObject['Pregnancy'].AIDate;
+                            aiType = jsonObject['Pregnancy']['AI-TYPE'];
+                            PregnancyTenure = jsonObject['Pregnancy']['Pregnancy Tenure'];
+                            ExpectedDeliveryDate = jsonObject['Pregnancy']['Expected Delivery Date'];
+                            Pregnant = jsonObject['Pregnancy']['Pregnant'];
+                            PDType = jsonObject['Pregnancy']['PD Type'];
+                            scheme = jsonObject['Pregnancy'].Scheme;
+                            strawNumber = jsonObject['Pregnancy'].StrawNo;
+                            Results = jsonObject['Pregnancy'].Results
+                        }
+                        tableData += "<tr><td>" + (i + 1) + "</td>";
+                        tableData += "<td>" + response.Data[i].Year + "</td>";
+                        tableData += "<td>" + response.Data[i].Visit_Date + "</td>";
+                        tableData += "<td>" + response.Data[i].FirstName + ' ' + response.Data[i].LastName + "</td>";
+                        tableData += "<td>" + response.Data[i].ownerAddress + "</td>";
+                        tableData += "<td>" + response.Data[i].Category + "</td>";
+                        tableData += "<td>" + response.Data[i].Species + "</td>";
+                        tableData += "<td>" + response.Data[i].Breed + "</td>";
+                        tableData += "<td>" + Pregnant + "</td>";
+                        tableData += "<td>" + PDType + "</td>";
+                        tableData += "<td>" + scheme + "</td>";
+                        tableData += "<td>" + strawNumber + "</td>";
+                        tableData += "<td>" + ExpectedDeliveryDate + "</td>";
+                        tableData += "<td>" + Results + "</td>";
+                        tableData += "<td>" + AIDate + "</td>";
+                        tableData += "<td>" + aiType + "</td>";
+                        tableData += "<td>" + PregnancyTenure + "</td></tr>";
+                    }
+                } else if (reportData.reportType == 13) {
+                    tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Admission Date</th> <th>Name  </th> <th>Address</th>";
+                    tableHead += "<th>Category</th> <th>Species</th><th>Breed</th><th>DateOfBirth</th><th>Gender</th><th>Weight</th>";
+                    tableHead += "<th>Symptoms</th><th>Diagnosis</th><th>Treatment</th><th>DischargeDate</th></tr>";
+                    for (var i = 0; i < count; i++) {
+                        var jsonObject = JSON.parse(response.Data[i].treatment);
+                        var treatments = getTreatment(jsonObject);
+                        tableData += "<tr><td>" + (i + 1) + "</td>";
+                        tableData += "<td>" + response.Data[i].Year + "</td>";
+                        tableData += "<td>" + response.Data[i].visitDate + "</td>";
+                        tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
+                        tableData += "<td>" + response.Data[i].address + "</td>";
+                        tableData += "<td>" + response.Data[i].category + "</td>";
+                        tableData += "<td>" + response.Data[i].specie + "</td>";
+                        tableData += "<td>" + response.Data[i].breed + "</td>";
+                        tableData += "<td>" + response.Data[i].dateOfBirth + "</td>";
+                        tableData += "<td>" + response.Data[i].gender + "</td>";
+                        tableData += "<td>" + response.Data[i].weight + "</td>";
+                        tableData += "<td>" + response.Data[i].symptoms + "</td>";
+                        tableData += "<td>" + response.Data[i].diagnosis + "</td>";
+                        tableData += "<td>" + treatments.toString() + "</td>";
+                        tableData += "<td>" + response.Data[i].dischargeDate + "</td></tr>";
+                    }
+                } else if (reportData.reportType == 14) {
+                    tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Visit Date</th> <th>Name  </th> <th>Address</th>";
+                    tableHead += "<th>Category</th> <th>Species</th><th>Breed</th><th>DateOfBirth</th><th>Gender</th><th>Weight</th>";
+                    tableHead += "<th>Symptoms</th><th>Diagnosis</th><th>Treatment</th></tr>";
+                    for (var i = 0; i < count; i++) {
+                        var jsonObject = JSON.parse(response.Data[i].treatment);
+                        var treatments = getTreatment(jsonObject);
+                        tableData += "<tr><td>" + (i + 1) + "</td>";
+                        tableData += "<td>" + response.Data[i].Year + "</td>";
+                        tableData += "<td>" + response.Data[i].visitDate + "</td>";
+                        tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
+                        tableData += "<td>" + response.Data[i].address + "</td>";
+                        tableData += "<td>" + response.Data[i].category + "</td>";
+                        tableData += "<td>" + response.Data[i].specie + "</td>";
+                        tableData += "<td>" + response.Data[i].breed + "</td>";
+                        tableData += "<td>" + response.Data[i].dateOfBirth + "</td>";
+                        tableData += "<td>" + response.Data[i].gender + "</td>";
+                        tableData += "<td>" + response.Data[i].weight + "</td>";
+                        tableData += "<td>" + response.Data[i].symptoms + "</td>";
+                        tableData += "<td>" + response.Data[i].diagnosis + "</td>";
+                        tableData += "<td>" + treatments.toString() + "</td></tr>";
+
+                    }
+                } else if (reportData.reportType == 15) {
+                    tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Visit Date</th> <th>Name  </th> <th>Address</th>";
+                    tableHead += "<th>Category</th> <th>Species</th><th>Breed</th><th>DateOfBirth</th><th>Gender</th><th>Weight</th>";
+                    tableHead += "<th>Symptoms</th><th>Diagnosis</th><th>Treatment</th></tr>";
+                    for (var i = 0; i < count; i++) {
+                        var disease = response.Data[i].symptoms;
+                        if (!(((disease.toLowerCase().includes("fever") && disease.toLowerCase().includes("diarrhea") && disease.toLowerCase().includes("mouth lesions"))) || ((disease.toLowerCase().includes("fever") && disease.toLowerCase().includes("diarrhoea") && disease.toLowerCase().includes("mouth lesions"))))) {
+
+                            var jsonObject = JSON.parse(response.Data[i].treatment);
+                            var treatments = getTreatment(jsonObject);
+                            tableData += "<tr><td>" + (i + 1) + "</td>";
+                            tableData += "<td>" + response.Data[i].Year + "</td>";
+                            tableData += "<td>" + response.Data[i].visitDate + "</td>";
+                            tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
+                            tableData += "<td>" + response.Data[i].address + "</td>";
+                            tableData += "<td>" + response.Data[i].category + "</td>";
+                            tableData += "<td>" + response.Data[i].specie + "</td>";
+                            tableData += "<td>" + response.Data[i].breed + "</td>";
+                            tableData += "<td>" + response.Data[i].dateOfBirth + "</td>";
+                            tableData += "<td>" + response.Data[i].gender + "</td>";
+                            tableData += "<td>" + response.Data[i].weight + "</td>";
+                            tableData += "<td>" + response.Data[i].symptoms + "</td>";
+                            tableData += "<td>" + response.Data[i].diagnosis + "</td>";
+                            tableData += "<td>" + treatments.toString() + "</td></tr>";
+                        }
+                    }
+                } else if (reportData.reportType == 16) {
+                    tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Visit Date</th> <th>Name  </th> <th>Address</th>";
+                    tableHead += "<th>Category</th> <th>Species</th><th>Breed</th><th>DateOfBirth</th><th>Gender</th><th>Weight</th>";
+                    tableHead += "<th>Symptoms</th><th>Diagnosis</th><th>Treatment</th></tr>";
+                    for (var i = 0; i < count; i++) {
+                        var jsonObject = JSON.parse(response.Data[i].treatment);
+                        var treatments = getTreatment(jsonObject);
+                        tableData += "<tr><td>" + (i + 1) + "</td>";
+                        tableData += "<td>" + response.Data[i].Year + "</td>";
+                        tableData += "<td>" + response.Data[i].visitDate + "</td>";
+                        tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
+                        tableData += "<td>" + response.Data[i].address + "</td>";
+                        tableData += "<td>" + response.Data[i].category + "</td>";
+                        tableData += "<td>" + response.Data[i].specie + "</td>";
+                        tableData += "<td>" + response.Data[i].breed + "</td>";
+                        tableData += "<td>" + response.Data[i].dateOfBirth + "</td>";
+                        tableData += "<td>" + response.Data[i].gender + "</td>";
+                        tableData += "<td>" + response.Data[i].weight + "</td>";
+                        tableData += "<td>" + response.Data[i].symptoms + "</td>";
+                        tableData += "<td>" + response.Data[i].diagnosis + "</td>";
+                        tableData += "<td>" + treatments.toString() + "</td></tr>";
+
+                    }
                 }
-                // else if (reportData.reportType == 12) {
-                //     tableHead += "<tr><th>Monthly</th><th>Yearly</th> <th>Visit Date</th> <th>Name  </th> <th>Address</th>";
-                //     tableHead += "<th>Category</th> <th>Species</th> <th>Breed</th><th>Pregnant</th><th>PD Type</th>";
-                //     tableHead += "<th>Scheme</th> <th>StrawNo</th> <th>Expected Delivery Date</th><th>Results</th><th>AIDate</th></th><th>Pregancy Tenure</th></tr>";
-                //     for (var i = 0; i < count; i++) {
-                //         var jsonObject = JSON.parse(response.Data[i].treatment);
-                //         var Pregnant = null,
-                //             AIDate = null,
-                //             CalfBDate = null,
-                //             CalfDetails = null,
-                //             CalfGender = null,
-                //             scheme = null,
-                //             strawNumber = null;
-                //         if (jsonObject.hasOwnProperty('Delivery')) {
-                //             AIDate = jsonObject['Delivery'].AIDate;
-                //             aiType = jsonObject['Delivery']['AI-TYPE'];
-                //             CalfBDate = jsonObject['Delivery']['CalfBDate'];
-                //             CalfDetails = jsonObject['Delivery']['CalfDetails'];
-                //             CalfGender = jsonObject['Delivery']['CalfGender'];
-                //             scheme = jsonObject['Delivery'].Scheme;
-                //             strawNumber = jsonObject['Delivery'].StrawNo;
-                //         }
-                //         tableData += "<tr><td>" + (i + 1) + "</td>";
-                //         tableData += "<td>" + response.Data[i].Year + "</td>";
-                //         tableData += "<td>" + response.Data[i].Visit_Date + "</td>";
-                //         tableData += "<td>" + response.Data[i].FirstName + ' ' + response.Data[i].LastName + "</td>";
-                //         tableData += "<td>" + response.Data[i].ownerAddress + "</td>";
-                //         tableData += "<td>" + response.Data[i].Category + "</td>";
-                //         tableData += "<td>" + response.Data[i].Species + "</td>";
-                //         tableData += "<td>" + response.Data[i].Breed + "</td>";
-                //         tableData += "<td>" + surgery + "</td></tr>";
-                //     }
-                // }
+
 
             }
             $('#farmer-head').html(tableHead);

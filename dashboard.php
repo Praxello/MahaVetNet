@@ -156,7 +156,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="col-md-6 top-content">
                                 <h5>Case Paper</h5>
-                                <label id="casepaper">1</label>
+                                <label id="casepaper"></label>
                             </div>
                             <div class="clearfix"> </div>
                         </div>

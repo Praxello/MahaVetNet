@@ -152,6 +152,14 @@ function getCountOfYear($month,$year,$reportType,$branchId){
             where mm.branchId = $branchId
             AND mm.visitDate BETWEEN '$from' AND '$to'";
     }
+    else if($reportType == 15){
+        $sql = "SELECT count(*) c
+        FROM medication_master  mm 
+            JOIN animal_master am ON mm.animalId = am.animalId 
+            JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
+            where mm.branchId = $branchId
+            AND mm.visitDate BETWEEN '$from' AND '$to'";
+    }
     else if($reportType == 16){
         $sql = "SELECT  count(*) c
         FROM medication_master  mm 

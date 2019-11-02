@@ -120,7 +120,7 @@ if(isset($_POST['branchId']) && isset($_POST['reportType']) && isset($_POST['yea
     else if($reportType == 12){
         //Pregnancy Diagnosis
         $operation = 'NSPD|AIPD';
-        $sql = "SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples 
+        $sql = "SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples,mm.treatment 
         FROM medication_master  mm 
             JOIN animal_master am ON mm.animalId = am.animalId 
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
@@ -137,15 +137,23 @@ if(isset($_POST['branchId']) && isset($_POST['reportType']) && isset($_POST['yea
         AND MONTH(ipd.visitDate) = $month AND YEAR(ipd.visitDate) = $year";
     }
     else if($reportType == 14){
-        $sql = "SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples 
+        $sql = "SELECT mm.visitDate , aom.firstName , aom.lastName,aom.address ,aom.category ,am.specie,  am.breed , mm.samples AS Samples,am.gender,am.dateOfBirth,am.weight,mm.symptoms,mm.diagnosis,mm.treatment 
         FROM medication_master  mm 
             JOIN animal_master am ON mm.animalId = am.animalId 
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year";
     }
+    else if($reportType == 15){
+        $sql = "SELECT mm.visitDate , aom.firstName , aom.lastName,aom.address ,aom.category ,am.specie,  am.breed , mm.samples AS Samples,am.gender,am.dateOfBirth,am.weight,mm.symptoms,mm.diagnosis,mm.treatment
+        FROM medication_master  mm 
+            JOIN animal_master am ON mm.animalId = am.animalId 
+            JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
+            where mm.branchId = $branchId 
+            AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year";
+    }
     else if($reportType == 16){
-        $sql = "SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples 
+        $sql = "SELECT mm.visitDate , aom.firstName , aom.lastName,aom.address ,aom.category ,am.specie,  am.breed , mm.samples AS Samples,am.gender,am.dateOfBirth,am.weight,mm.symptoms,mm.diagnosis,mm.treatment
         FROM medication_master  mm 
             JOIN animal_master am ON mm.animalId = am.animalId 
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
