@@ -156,7 +156,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                             <div class="col-md-6 top-content">
                                 <h5>Case Paper</h5>
-                                <label id="casepaper">1</label>
+                                <label id="casepaper"></label>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
@@ -289,8 +289,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         </div>
         <!--footer-->
         <div class="footer">
-            <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p>
+            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
+                    target="_blank">w3layouts</a></p> -->
         </div>
         <!--//footer-->
     </div>

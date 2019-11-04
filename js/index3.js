@@ -20,6 +20,9 @@ function loadMap(param) {
         data: { branchid: param },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            //chart.showLoading();
+        },
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
@@ -34,6 +37,7 @@ function loadMap(param) {
             }
         },
         complete: function(response) {
+            //chart.hideLoading();
             loadData(apiData);
         }
     });
@@ -42,17 +46,21 @@ loadMap(data.branchid);
 
 function fetchName(param, branchid) {
     $.ajax({
-        url: url+'getbranchId.php',
+        url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: param, branchid: branchid },
         async: true,
         dataType: 'json',
+        // beforeSend: function() {
+        //     chart.showLoading();
+        // },
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
             }
         },
         complete: function(response) {
+            // chart.showLoading();
             loadMap(branchid_g);
         }
     });
@@ -69,6 +77,10 @@ function loadData(apiData) {
         },
         xAxis: {
             categories: branch
+        },
+        loading: {
+            hideDuration: 1000,
+            showDuration: 1000
         },
         yAxis: {
             min: 0,

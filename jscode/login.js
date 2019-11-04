@@ -9,6 +9,11 @@ $('#signin').on('submit', function(event) {
         type: 'POST',
         data: loginData,
         dataType: 'json',
+        beforeSend: function() {
+            console.log('in');
+            // Show image container
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Data != null) {
                 var branchId = response.Data.branchId;
@@ -19,6 +24,11 @@ $('#signin').on('submit', function(event) {
             } else {
                 alert('Enter Correct Username and password');
             }
+        },
+        complete: function(data) {
+            // Hide image container
+            console.log('out');
+            $("#wait").css("display", "none");
         }
     });
 });

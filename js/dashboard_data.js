@@ -32,6 +32,7 @@ const load_operations = () => {
                 $('#ipd').html(parseInt(response.Data[0].IPD).toLocaleString());
                 $('#operations').html(parseInt(response.Data[0].operations).toLocaleString());
                 $('#caseshandled').html(parseInt(response.Data[0].cases).toLocaleString());
+                $('#casepaper').html(parseInt(response.Data[0].cases).toLocaleString());
             }
         }
     });
