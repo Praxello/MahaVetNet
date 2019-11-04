@@ -5,9 +5,9 @@ var activeInstitues = [];
 var revenueAmt = [];
 var vdsmarked = [];
 var regionsData = [];
-
+var chart5,chartvar5=0;
 const loadAiData = (regionsData) => {
-    Highcharts.chart('totalVds', {
+    chart5=Highcharts.chart('totalVds', {
         chart: {
             type: 'column'
         },
@@ -80,6 +80,9 @@ const loadAi = (param) => {
             }
         },
         complete: function(response) {
+          if(chartvar5!=0){
+            chart5.hideLoading();
+          }
             loadAiData(regionsData);
         }
     });
@@ -87,12 +90,17 @@ const loadAi = (param) => {
 loadAi(data.branchid);
 
 const loadbranchId = (branch, branchId) => {
+  chartvar5=1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            chart5.showLoading();
+            // console.log("ok1");
+        },
         success: function(response) {
             if (response.Data != null) {
                 revenue_branchId = response.Data;

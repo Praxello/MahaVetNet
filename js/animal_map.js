@@ -6,9 +6,9 @@ var numberofAI = [];
 var numberofInf = [];
 var numberofCB = [];
 var seriesData = [];
-
+var chart3,chartvar3=0;
 const loadMapData = (seriesData) => {
-    Highcharts.chart('animaldiv', {
+    chart3=Highcharts.chart('animaldiv', {
         chart: {
             type: 'column'
         },
@@ -85,6 +85,9 @@ const loadanimalData = (param) => {
             }
         },
         complete: function(response) {
+          if(chartvar3!=0){
+            chart3.hideLoading();
+          }
             loadMapData(seriesData);
         }
     });
@@ -92,12 +95,17 @@ const loadanimalData = (param) => {
 loadanimalData(data.branchid);
 
 const getbranchid = (branch, branchId) => {
+     chartvar3=1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            chart3.showLoading();
+            // console.log("ok1");
+        },
         success: function(response) {
             if (response.Data != null) {
                 g_branchid = response.Data;

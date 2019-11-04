@@ -3,9 +3,9 @@ re_branchId = data.branchid;
 var re_regions = [];
 var revenueAmt = [];
 var re_regionsData = [];
-
+var chart4,chartvar4=0;
 const loadRevenueData = (re_regionsData) => {
-    Highcharts.chart('totalRevenue', {
+      chart4=Highcharts.chart('totalRevenue', {
         chart: {
             type: 'column'
         },
@@ -71,6 +71,9 @@ const loadTotalRevenue = (param) => {
             }
         },
         complete: function(response) {
+          if(chartvar4!=0){
+            chart4.hideLoading();
+          }
             loadRevenueData(re_regionsData);
         }
     });
@@ -78,12 +81,17 @@ const loadTotalRevenue = (param) => {
 loadTotalRevenue(data.branchid);
 
 const fetchbranch = (branch, branchId) => {
+   chartvar4=1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            chart4.showLoading();
+            // console.log("ok1");
+        },
         success: function(response) {
             if (response.Data != null) {
                 re_branchId = response.Data;

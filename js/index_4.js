@@ -6,9 +6,9 @@ var numberofVaccination = [];
 var numberofIPD = [];
 var numberofDeworming = [];
 var setmapchart = [];
-
+var chart1,chartvar1=0;
 const loadCatData = (setmapchart) => {
-    Highcharts.chart('castrationDiv', {
+    chart1=Highcharts.chart('castrationDiv', {
 
         chart: {
             type: 'column'
@@ -104,6 +104,9 @@ const loadvaccinations = (param) => {
             }
         },
         complete: function(response) {
+          if(chartvar1!=0){
+            chart1.hideLoading();
+          }
             loadCatData(setmapchart);
         }
     });
@@ -111,12 +114,17 @@ const loadvaccinations = (param) => {
 loadvaccinations(data.branchid);
 
 const fetchmapid = (branch, branchId) => {
+   chartvar1=1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            chart1.showLoading();
+            // console.log("ok1");
+        },
         success: function(response) {
             if (response.Data != null) {
                 cat_branchId = response.Data;
