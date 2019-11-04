@@ -88,7 +88,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="col_3">
-                    <div class="col-md-3 widget widget1">
+                    <div class="col-md-3">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-rupee icon-rounded"></i>
                             <div class="stats">
@@ -97,7 +97,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 widget widget1">
+                    <div class="col-md-3">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                             <div class="stats">
@@ -106,7 +106,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 widget widget1">
+                    <div class="col-md-3">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-money user2 icon-rounded"></i>
                             <div class="stats">
@@ -115,7 +115,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 widget widget1">
+                    <div class="col-md-3">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                             <div class="stats">
@@ -245,7 +245,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                
+
                 <div class="charts">
                     <div class="col-md-4 charts-grids widget">
                     <div class="card-header">
@@ -258,31 +258,31 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <h3></h3>
                         </div>
                         <div id="animaldiv"></div>
-                       
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>
                 <div class="charts">
-                    
+
                     <div class="col-md-5 charts-grids widget states-mdl">
                     <div class="card-header">
                             <h3></h3>
                         </div>
                         <div id="farmersanimalDiv"></div>
-                       
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>
 
                 <!-- <div class="charts">
-               
+
                     <div class="col-md-4 charts-grids widget states-mdl">
                     <div class="card-header"> </div>
-                       
+
                         <div id="farmersanimalDiv"></div>
                     </div>
                     <div class="clearfix"> </div>
-                    
+
                 </div> -->
 
             </div>

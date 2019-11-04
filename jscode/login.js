@@ -14,6 +14,7 @@ $('#signin').on('submit', function(event) {
                 var branchId = response.Data.branchId;
                 var userId = response.Data.userId;
                 var username = response.Data.fullName;
+                console.log("use"+username);
                 window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username;
             } else {
                 alert('Enter Correct Username and password');

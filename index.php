@@ -36,16 +36,137 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <script src="js/custom.js"></script>
         <link href="css/custom.css" rel="stylesheet">
         <!--//Metis Menu -->
-
+         <style media="screen">
+         body{
+padding:0;
+margin:0;
+}
+.vid-container{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+.bgvid{
+position:absolute;
+left:0;
+top:0;
+width:100vw;
+}
+.inner-container{
+width:400px;
+height:400px;
+position:absolute;
+top:calc(50vh - 200px);
+left:calc(50vw - 200px);
+overflow:hidden;
+}
+.bgvid.inner{
+top:calc(-50vh + 200px);
+left:calc(-50vw + 200px);
+filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
+-webkit-filter:blur(10px);
+-ms-filter: blur(10px);
+-o-filter: blur(10px);
+filter:blur(10px);
+}
+.box{
+position:absolute;
+height:100%;
+width:100%;
+font-family:Helvetica;
+color:#fff;
+background:rgba(0,0,0,0.13);
+padding:30px 0px;
+}
+.box h1{
+text-align:center;
+margin:30px 0;
+font-size:30px;
+}
+.box input{
+display:block;
+width:300px;
+margin:20px auto;
+padding:15px;
+background:rgba(0,0,0,0.2);
+color:#fff;
+border:0;
+}
+.box input:focus,.box input:active,.box button:focus,.box button:active{
+outline:none;
+}
+.box button{
+background:#2ecc71;
+border:0;
+color:#fff;
+padding:10px;
+font-size:20px;
+width:330px;
+margin:20px auto;
+display:block;
+cursor:pointer;
+}
+.box button:active{
+background:#27ae60;
+}
+.box p{
+font-size:14px;
+text-align:center;
+}
+.box p span{
+cursor:pointer;
+color:#666;
+}
+         </style>
     </head>
 
     <body>
+
         <div class="main-content">
             <!--left-fixed -navigation-->
 
             <!-- main content start-->
-            <div id="page-wrapper">
+
+            <div class="vid-container">
+              <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
+                  <source src="cow.mp4" type="video/mp4">
+              </video>
+              <div class="inner-container">
+                <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop>
+                  <source src="cow.mp4" type="video/mp4">
+                </video>
+                <div class="box">
+                  <h1>Login</h1>
+                  <form id="signin" method="post">
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="usrname" id="usrname" placeholder="Enter Your Username" required="">
+                      </div>
+                      <div class="form-group">
+                          <input type="password" name="passwrd" id="passwrd" class="form-control" placeholder="Password" required="">
+                      </div>
+                      <div class="forgot-grid">
+                          <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>
+                           <div class="clearfix"> </div>
+                      </div>
+                      <input type="submit" name="Sign In" value="Sign In">
+                  </form>
+                </div>
+              </div>
+
+            <!-- <video autoplay muted loop id="myVideo">
+                <source src="cow.mp4" type="video/mp4">
+
+            </video> -->
+            <!-- <div id="page-wrapper">
                 <div class="main-page login-page ">
+                  <div class="vid-container">
+                    <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
+                        <source src="cow.mp4" type="video/mp4">
+                    </video>
+                    <div class="inner-container">
+                      <video class="bgvid inner" autoplay="autoplay" muted="muted" preload="auto" loop>
+                        <source src="cow.mp4" type="video/mp4">
+                      </video>
                     <h2 class="title1">Login</h2>
                     <div class="widget-shadow">
                         <div class="login-body">
@@ -58,24 +179,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </div>
                                 <div class="forgot-grid">
                                     <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>
-                                    <!-- <div class="forgot">
-                                        <a href="#">forgot password?</a>
-                                    </div> -->
-                                    <div class="clearfix"> </div>
+                                     <div class="clearfix"> </div>
                                 </div>
                                 <input type="submit" name="Sign In" value="Sign In">
-                                <!-- <div class="registration">
-								Don't have an account ?
-								<a class="" href="signup.html">
-									Create an account
-								</a>
-							</div> -->
                             </form>
                         </div>
                     </div>
-
+                  </div>
                 </div>
-            </div>
+                </div>
+            </div> -->
             <!--footer-->
             <div class="footer">
                 <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
