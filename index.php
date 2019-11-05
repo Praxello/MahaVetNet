@@ -40,9 +40,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="video-w3l" data-vide-bg="video/cow">
 		<!-- title -->
 		<h1>
-			<span>M</span>aha
-			<span>V</span>et
-			<span>N</span>et</h1>
+		<span class="prfil-img"><img src="images/AHD.png" alt="" width="55px" height="55px"> </span>
+			<span>M</span>aha<span>V</span>et<span>N</span>et
+			<span class="prfil-img"><img src="images/praxello.jpeg" alt="" width="55" height="55px"> </span>
+		</h1>
 		<!-- //title -->
 		<!-- content -->
 		<div class="sub-main-w3">

@@ -26,7 +26,7 @@ function straw_list(straw) {
         let straws = straw.get(k);
         responseData += "<tr>";
         responseData += "<td>" + (i) + "</td>";
-        responseData += "<td><code>" + straws.straw_number + "</code></td>";
+        responseData += "<td>" + straws.straw_number + "</td>";
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
         responseData += '<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onClick="editstraw(' + k + ')"><i class="fa fa-edit"></i>';
         responseData += '</button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onClick="removeStraw(' + k + ')"><i class="fa fa-trash"></i></button>';
@@ -104,18 +104,21 @@ $('#editstraw').on('submit', function(e) {
 });
 
 const removeStraw = param => {
-    $.ajax({
-        url: url + 'remove_straw.php',
-        type: 'POST',
-        data: { strawId: param },
-        dataType: 'json',
-        success: function(response) {
-            param = param.toString();
-            if (response.Responsecode == 200) {
-                straw.delete(param);
+    var r = confirm("Are you Sure to delete this Straw number!");
+    if (r == true) {
+        $.ajax({
+            url: url + 'remove_straw.php',
+            type: 'POST',
+            data: { strawId: param },
+            dataType: 'json',
+            success: function(response) {
+                param = param.toString();
+                if (response.Responsecode == 200) {
+                    straw.delete(param);
+                }
+                straw_list(straw);
             }
-            straw_list(straw);
-        }
-    });
+        });
+    }
 }
 loadstraw(url, straw, data.branchid);

@@ -162,7 +162,6 @@ if(isset($_POST['branchId']) && isset($_POST['reportType']) && isset($_POST['yea
     }
     
     $jobQuery = mysqli_query($conn,$sql);
-    // echo $sql;
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {

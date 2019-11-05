@@ -172,7 +172,10 @@
                         <li class="dropdown profile_details_drop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <div class="profile_img">
-                                    <span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
+                                    <?php if($_SESSION['branchId'] == 100001){?>
+                                        <span class="prfil-img"><img src="images/<?php echo $_SESSION['branchId'];?>.jpeg" alt="" width="55px" height="55px"> </span>
+                                    <?}else{?>
+                                        <span class="prfil-img"><img src="images/profile.jpeg" alt=""  width="55px" height="55px"> </span><?}?>
                                     <div class="user-name">
                                         <p><?php echo $_SESSION['username'];?></p>
                                         <span>Administrator</span>

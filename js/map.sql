@@ -713,3 +713,10 @@ WHERE bmm.branchId = 100001 AND bm.branchId < 10000
 GROUP BY bm.blockName
 ) CounTable
 GROUP BY CounTable.districtname ORDER BY CounTable.region
+
+SELECT COUNT(aom.ownerId) AS farmercount
+            FROM branch_master bm
+            INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+            INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+            WHERE bmm.branchId = 100001 AND aom.mobile in(SELECT mobile FROM otp_master_farmer)
+            AND bm.branchId < 10000

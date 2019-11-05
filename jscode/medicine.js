@@ -108,18 +108,21 @@ $('#editmedicine').on('submit', function(e) {
 });
 
 const remove_medicine = param => {
-    $.ajax({
-        url: url + 'remove_medicine.php',
-        type: 'POST',
-        data: { medicineId: param },
-        dataType: 'json',
-        success: function(response) {
-            param = param.toString();
-            if (response.Responsecode == 200) {
-                medicines.delete(param);
+    var r = confirm("Are you Sure to delete this medicine!");
+    if (r == true) {
+        $.ajax({
+            url: url + 'remove_medicine.php',
+            type: 'POST',
+            data: { medicineId: param },
+            dataType: 'json',
+            success: function(response) {
+                param = param.toString();
+                if (response.Responsecode == 200) {
+                    medicines.delete(param);
+                }
+                medicine_list(medicines);
             }
-            medicine_list(medicines);
-        }
-    });
+        });
+    }
 }
 loadMedicine(url, medicines, data.branchid);

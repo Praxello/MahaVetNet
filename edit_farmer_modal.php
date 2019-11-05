@@ -11,7 +11,7 @@
 
                     <div class="row">
                     <div class="form-group">
-                            <input type="hidden" id="ownerid">
+                            <input type="hidden" id="eownerid"/>
                             <input type="text" class="form-control" placeholder="Name" id="edit_fname" required>
                         </div>
                         <div class="form-group">

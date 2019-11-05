@@ -56,8 +56,13 @@ if(isset($_POST['branchid'])){
             IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid)
             AND bm.branchId < 10000
         UNION
-            SELECT 0 animalCount,0 tagged,0 farmercount,0 Total,0 downloads ,0 vd,0 revenue,COUNT(DISTINCT(om.mobile)) mobiles
-            FROM otp_master_farmer om
+        SELECT 0 animalCount,0 tagged,0 farmercount,0 Total,0 downloads ,0 vd,0 revenue,COUNT(*)  mobiles
+            FROM branch_master bm
+            INNER JOIN animal_owner_master aom ON aom.branchId = bm.branchId
+            INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+            INNER JOIN otp_master_farmer om ON om.mobile = aom.mobile
+            WHERE bmm.branchId = $branchid 
+            AND bm.branchId < 10000
          ) CounTable";
 
     $jobQuery = mysqli_query($conn,$sql);

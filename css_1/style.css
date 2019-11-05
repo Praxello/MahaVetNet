@@ -253,7 +253,7 @@ h1 {
     text-align: center;
     /* font-weight: 600; */
     margin: 0 2vw 3vw;
-    font-family: 'Marck Script', cursive;
+    font-family: 'Arial';
     padding-top: 2vw;
 }
 
@@ -669,7 +669,7 @@ i.icon_g_plus {
 
 @media(max-width:1920px) {
     h1 {
-        font-size: 3.5vw;
+        font-size: 44px;
     }
 }
 

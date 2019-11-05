@@ -18,7 +18,7 @@
 
 
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Mobile No." id="fmobile" required>
+                            <input type="text" class="form-control" placeholder="Mobile No." id="fmobile" required onkeypress="javascript:return isNumberKey(event)" pattern="^\d{10}$">
 
                         </div>
                         <div class="form-group">

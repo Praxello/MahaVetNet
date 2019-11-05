@@ -26,7 +26,7 @@ function farmer_list(farmers) {
         const AnimalOwner = farmerData.AnimalOwner;
         responseData += "<tr>";
         responseData += "<td>" + AnimalOwner.firstName + ' ' + AnimalOwner.lastName + "</td>";
-        responseData += "<td><code>" + AnimalOwner.mobile + "</code></td>";
+        responseData += "<td>" + AnimalOwner.mobile + "</td>";
         responseData += "<td>" + AnimalOwner.sex + "</td>";
         responseData += "<td><address>" + AnimalOwner.address + "</address></td>";
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
@@ -53,7 +53,7 @@ const editowner = param => {
         const animalOwner = farmers.get(param);
         const owner = animalOwner.AnimalOwner;
         $('#edit_fname').val(owner.firstName + ' ' + owner.lastName);
-        $('#ownerid').val(owner.ownerId);
+        $('#eownerid').val(owner.ownerId);
         $('#edit_fmobile').val(owner.mobile);
         $('#edit_faddress').val(owner.address);
         $('#edit_fcategory').val(owner.category).trigger('change');
@@ -133,7 +133,7 @@ $('#editfarmer').on('submit', function(e) {
     var firstName = getFirstName($('#edit_fname').val());
     var lastName = getLastName($('#edit_fname').val());
     var farmerData = {
-        ownerid: $('#ownerid').val(),
+        ownerid: $('#eownerid').val(),
         gender: $("input[name='edit_optradio']:checked").val(),
         userid: userid,
         firstname: firstName,
@@ -149,7 +149,7 @@ $('#editfarmer').on('submit', function(e) {
         adharid: adharid
     };
     var farmerData_set = {
-        ownerid: $('#ownerid').val(),
+        ownerId: $('#eownerid').val(),
         sex: $("input[name='edit_optradio']:checked").val(),
         userid: userid,
         firstName: firstName,
@@ -170,8 +170,8 @@ $('#editfarmer').on('submit', function(e) {
         data: farmerData,
         dataType: 'json',
         success: function(response) {
-            const ownerDetails = farmers.get(farmerData.ownerid.toString());
-            const Animals = ownerDetails.Animals;
+            var ownerDetails = farmers.get(farmerData.ownerid.toString());
+            var Animals = ownerDetails.Animals;
             var mainObj = {};
             if (response.Responsecode == 200) {
                 if (response.Data != null) {
@@ -187,3 +187,12 @@ $('#editfarmer').on('submit', function(e) {
     });
 });
 animal_owner(url, farmers, data);
+
+function isNumberKey(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}

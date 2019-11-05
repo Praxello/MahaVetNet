@@ -31,13 +31,13 @@ const animal_list = (animals_data) => {
         ownerid = animalData.ownerId;
         responseData += "<tr>";
         responseData += "<td>" + animalData.animalName + "</td>";
-        responseData += "<td><code>" + animalData.breed + "</code></td>";
+        responseData += "<td>" + animalData.breed + "</td>";
         responseData += "<td>" + animalData.gender + "</td>";
         responseData += "<td><address>" + animalData.specie + "</address></td>";
         responseData += "<td><code>" + animalData.weight + "</code></td>";
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
         responseData += '<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onclick="edit_animal(' + k + ')"><i class="fa fa-edit"></i>';
-        responseData += '</button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>';
+        // responseData += '</button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>';
         responseData += "</div></td></tr>";
     }
     $('.animal-data').html(responseData);
@@ -57,7 +57,6 @@ const edit_animal = param => {
     param = param.toString();
     if (animals_data.has(param)) {
         const animal = animals_data.get(param);
-        console.log(animal);
         $('#animalId').val(param);
         $('#ownerid').val(animal.ownerId);
         $('#edit_animalname').val(animal.animalName);
