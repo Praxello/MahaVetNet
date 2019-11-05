@@ -116,7 +116,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="jscode/apis.js"></script>
   <script src="jscode/login.js"></script>
 	<!-- Jquery -->
-	
+
 	<!-- //Jquery -->
 
 	<!-- Video js -->

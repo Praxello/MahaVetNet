@@ -4,10 +4,9 @@ var animal_branches = [];
 var numberofAnimals = [];
 var numberofFarmers = [];
 var animalsFarmers = [];
-
+var chart2,chartvar2=0;
 const loadFarmerAnimals = (animalsFarmers) => {
-    Highcharts.chart('farmersanimalDiv', {
-
+    chart2=Highcharts.chart('farmersanimalDiv', {
         chart: {
             type: 'column'
         },
@@ -97,6 +96,9 @@ const load_animals_farmers = (param) => {
             }
         },
         complete: function(response) {
+          if(chartvar2!=0){
+            chart2.hideLoading();
+          }
             loadFarmerAnimals(animalsFarmers);
         }
     });
@@ -104,12 +106,17 @@ const load_animals_farmers = (param) => {
 load_animals_farmers(data.branchid);
 
 const loadAnimalId = (branch, branchId) => {
+    chartvar2=1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
         data: { centretype: branch, branchid: branchId },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            chart2.showLoading();
+            // console.log("ok1");
+        },
         success: function(response) {
             if (response.Data != null) {
                 animal_branchId = response.Data;
