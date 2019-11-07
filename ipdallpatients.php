@@ -54,6 +54,7 @@ if(isset($_SESSION['branchId'])){
 		<?php include "header.php"; ?>
     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
+    <input type="hidden"  id="currentdate" value="<?php echo date('Y-m-d');?>"/>
 		<div id="page-wrapper">
 			<div class="main-page">
         <div id="firsttable">
@@ -111,7 +112,7 @@ if(isset($_SESSION['branchId'])){
            </div> -->
             <div class="row">
               <div class="col_3">
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <i class="pull-left fa fa-empty icon-rounded"></i>
                             <div class="stats">
@@ -120,7 +121,7 @@ if(isset($_SESSION['branchId'])){
                             </div>
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty user1 icon-rounded"></i> -->
                             <div class="col-sm-6">
@@ -134,26 +135,27 @@ if(isset($_SESSION['branchId'])){
                             </div>
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <div class="stats">
-                              <label>Species/Breed</label>
+                              <label><font color='red'>Species</font>/<font color='green'>Breed</font>/<font color='blue'>Gender</font></label>
                               <div id="opdanimalage"></div>
                             </div>
 
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <!-- <div class="col-md-3">
                   <div class="r3_counter_box">
 
                     <div class="stats">
                       <label>Gender</label>
-                      <!-- <div id="opdanimalweight"></div>/ -->
+
                       <div id="opdanimalgender"></div>
                     </div>
                         </div>
-                   </div>
-                  <div class="col-md-3 widget">
+                   </div> -->
+                     <!-- <div id="opdanimalweight"></div>/ -->
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty dollar2 icon-rounded"></i>
                             <div class="stats">
@@ -339,8 +341,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="aistai" style="width:100%;">
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
                           </div>
                           </div>
@@ -500,8 +502,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="delstai" style="width:100%;" required>
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
                           </div>
                           </div>
@@ -674,8 +676,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="pdstai" style="width:100%;" required>
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
 
                           </div>

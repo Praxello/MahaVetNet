@@ -195,7 +195,7 @@ function getallcasepaperlist(animalid){
          selectlistpaper="<option value=''>Select Date</option>";
          for(var i=0;i<count;i++){
            casepaperlistData.set(response.Data[i].FeesData.visitDate, response.Data[i]);
-           selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";      
+           selectlistpaper +="<option value='"+response.Data[i].FeesData.visitDate+"'>"+response.Data[i].FeesData.visitDate+"</option>";
          }
          for(let k of casepaperlistData.keys())
             {
@@ -211,7 +211,8 @@ function getallcasepaperlist(animalid){
 
       },
       complete: function(response) {
-        var today = new Date();
+        var today = $("#currentdate").val();
+        // var today = new Date();
         // console.log("Date1"+today);
          attachcasepaperdata(today);
       }
@@ -232,9 +233,9 @@ all_dates.forEach(function(dt, index)
 }
 function selectcasepaper(){
 var opddate = $("#opdcasepaperdate").val();
-var d = new Date(opddate);
+// var d = new Date(opddate);
 $("#medicinetab").empty();
-attachcasepaperdata(d);
+attachcasepaperdata(opddate);
 }
 function buttoncasepaper(id){
   // console.log(id);
@@ -247,11 +248,13 @@ function buttoncasepaper(id){
    $("#fourthtable").show();
    $("#opdowner").html(AllData.firstName);
    $("#opdanimalname").html(AllData.animalName);
-   $("#opdanimalage").html(AllData.specie+" / "+AllData.breed);
-   $("#opdanimalweight").html(AllData.weight);
-   $("#opdanimalgender").html(AllData.gender);
-   var today = new Date();
-   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    $("#opdanimalage").html("<font color='red'>"+AllData.specie+"</font>/<font color='green'>"+AllData.breed+"</font>/<font color='blue'>"+AllData.gender+"</font>");
+   // $("#opdanimalweight").html(AllData.weight);
+   // $("#opdanimalgender").html(AllData.gender);
+    var date = $("#currentdate").val();
+     console.log("Current"+date);
+   // var today = new Date();
+   // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
    $("#opdselectdate").val(date);
    // $("#opdcasepaperdate").val(date);
    $("#opdvisittype").val("HQ").trigger('change');
@@ -263,10 +266,12 @@ function backmain(){
   $("#fourthtable").hide();
 }
 function attachcasepaperdata(today){
+var date = today;
 
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   if(casepaperlistData.has(date)){
     var AllData = casepaperlistData.get(date);
+    console.log(casepaperlistData.get(date));
      $("#setimage").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
      $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
 
@@ -291,14 +296,16 @@ function attachcasepaperdata(today){
       }
     }
     var newobj=JSON.parse(AllData.MedicationData.treatment);
-    if(newobj.hasOwnProperty('Castration')){
+    // console.log("new1"+newobj['Castration'].NoOfAnimals);
+    // console.log("new2"+newobj['ArtificialInsemination'].StrawNo);
+    if(newobj.hasOwnProperty('Castration')&&(newobj['Castration'].NoOfAnimals!="")){
       $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
       $("#noprocedurecas").val(newobj['Castration'].Procedure).trigger('change');
       $("#head1").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden1").val(1);
     }
 
-    if(newobj.hasOwnProperty('ArtificialInsemination')){
+    if(newobj.hasOwnProperty('ArtificialInsemination')&&(newobj['ArtificialInsemination'].AIType!="")){
       $("#aistai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
       $("#aisooes").val(newobj['ArtificialInsemination']['Stage of Oestrus']).trigger('change');
       $("#aisoror").val(newobj['ArtificialInsemination']['Status of reproductive organ']);
@@ -307,12 +314,12 @@ function attachcasepaperdata(today){
       $("#head2").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden2").val(1);
     }
-    if(newobj.hasOwnProperty('Surgery')){
+    if(newobj.hasOwnProperty('Surgery')&&(newobj['Surgery']['Surgery Name']!="")){
       $("#opsust").val(newobj['Surgery']['Surgery Name']).trigger('change');
       $("#head3").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden3").val(1);
     }
-    if(newobj.hasOwnProperty('Delivery')){
+    if(newobj.hasOwnProperty('Delivery')&&(newobj['Delivery']['CalfDetails']!="")){
       $("#delcadet").val(newobj['Delivery']['CalfDetails']);
       $("#delcage").val(newobj['Delivery'].CalfGender).trigger('change');
       $("#delcbirtdate").val(newobj['Delivery']['CalfBDate']);
@@ -323,14 +330,14 @@ function attachcasepaperdata(today){
       $("#head4").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden4").val(1);
     }
-    if(newobj.hasOwnProperty('Infertility')){
+    if(newobj.hasOwnProperty('Infertility')&&(newobj['Infertility']['Findings of Reproductive Organ']!="")){
       $("#inforo").val(newobj['Infertility']['Findings of Reproductive Organ']);
       $("#ints").val(newobj['Infertility']['Treatment Suggested']);
       $("#inpcoi").val(newobj['Infertility']['Probable Cause']);
       $("#head5").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden5").val(1);
     }
-    if(newobj.hasOwnProperty('Pregnancy')){
+    if(newobj.hasOwnProperty('Pregnancy')&&(newobj['Pregnancy']['AIDate']!="")){
       $("#pdsaidate").val(newobj['Pregnancy']['AIDate']);
       $("#pdtextreport").val(newobj['Pregnancy']['Results']);
       $("#pdtype").val(newobj['Pregnancy']['PD Type']).trigger('change');
@@ -343,13 +350,13 @@ function attachcasepaperdata(today){
       $("#head6").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden6").val(1);
     }
-    if(newobj.hasOwnProperty('Treatment')){
+    if(newobj.hasOwnProperty('Treatment')&&(newobj['Treatment']['Treatment']!="")){
       $("#pprocdetail").val(newobj['Treatment']['Treatment']);
       $("#pdsystem").val(newobj['Treatment']['System']);
       $("#head7").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden7").val(1);
     }
-    if(newobj.hasOwnProperty('Other')){
+    if(newobj.hasOwnProperty('Other')&&(newobj['Other']['Treatment']!="")){
       $("#treatment").val(newobj['Other']['Treatment']);
       $("#head8").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden8").val(1);
