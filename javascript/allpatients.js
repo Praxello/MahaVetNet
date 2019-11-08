@@ -1117,3 +1117,18 @@ function storeTblValues() {
     // TableData.shift(); // first row will be empty - so remove
     return TableData;
 }
+function imgon(value){
+    var modal = document.getElementById("myModal");
+    var img =value;
+    var modalImg = document.getElementById("img01");
+    var captionText = "Image";
+    modal.style.display = "block";
+    modalImg.src = value;
+    captionText.innerHTML = this.alt;
+
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+}

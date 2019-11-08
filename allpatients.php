@@ -48,6 +48,7 @@ if(isset($_SESSION['branchId'])){
   }
  </style>
 
+
  <!-- <link href="sweetalert/sweetalert.css" rel="stylesheet"> -->
 </head>
 <body class="cbp-spmenu-push">
@@ -60,7 +61,11 @@ if(isset($_SESSION['branchId'])){
     <input type="hidden"  id="currentdate" value="<?php echo date('Y-m-d');?>"/>
 		<div id="page-wrapper">
 			<div class="main-page">
-
+        <div id="myModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="img01"/>
+          <div id="caption"></div>
+        </div>
         <div id="firsttable">
 				<h3 class="title1">All Patient</h3>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
@@ -132,7 +137,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty user1 icon-rounded"></i> -->
                             <div class="col-sm-6">
-                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/' class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img"></img>
+                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/' class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img" onclick="imgon(this.src);"></img>
                             </div>
                             <div class="col-sm-6">
                             <div class="stats">
@@ -887,7 +892,7 @@ if(isset($_SESSION['branchId'])){
                               <div class="form-group">
 
                                   <!-- <input type='file' id='customerstylepic' accept='image/*'/> -->
-                                 <img class='img-thumbnail'  src='http://praxello.com/ahimsa/animalphotos/1.jpg'  style='cursor: pointer;'  id="setimage" alt ='No Image' title='Upload Image' width='200px' height='400px'></img>
+                                 <img class='img-thumbnail'  src='http://praxello.com/ahimsa/animalphotos/1.jpg'  style='cursor: pointer;'  id="setimage" alt ='No Image' title='Upload Image' width='200px' height='400px' onclick="imgon(this.src);"></img>
 
                                   <!-- <img src="images/1.jpg" alt="No Image Uploaded"/> -->
                               </div>

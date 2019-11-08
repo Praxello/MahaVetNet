@@ -1063,3 +1063,18 @@ var loadFile = function(event) {
     output.src = URL.createObjectURL(event.target.files[0]);
     // $("#eveimg").show();
 };
+function imgon(value){
+    var modal = document.getElementById("myModal");
+    var img =value;
+    var modalImg = document.getElementById("img01");
+    var captionText = "Image";
+    modal.style.display = "block";
+    modalImg.src = value;
+    captionText.innerHTML = this.alt;
+
+    var span = document.getElementsByClassName("close")[0];
+
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+}
