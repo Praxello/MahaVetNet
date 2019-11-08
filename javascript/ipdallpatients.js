@@ -36,7 +36,7 @@ $('#selectmedication').select2({
 });
 getanimaltabledata();
 function settabledata(styleData){
-   // console.log(styleData);
+
   var html ='';
   $('#styletbl').dataTable().fnDestroy();
   $("#styletbldata").empty();
@@ -91,6 +91,11 @@ function getanimaltabledata(){
             animalList.set(response.Data[i].animalId,response.Data[i]);
             }
             settabledata(animalList);
+         },
+         complete: function(data) {
+             // Hide image container
+              // console.log('out');
+             $("#wait").css("display", "none");
          }
      });
 }
@@ -187,6 +192,10 @@ function getallcasepaperlist(animalid){
       },
       async : false,
       dataType :'json',
+      beforeSend: function() {
+          // console.log('in');
+          $("#wait").css("display", "block");
+      },
       success: function(response) {
         var count;
          if(response['Data']!=null){
@@ -233,11 +242,71 @@ all_dates.forEach(function(dt, index)
 }
 function selectcasepaper(){
 var opddate = $("#opdcasepaperdate").val();
+$("#opdselectdate").val(opddate);
+$("#opdvisittype").val("HQ").trigger('change');
+$("#selectsymptoms").val("").trigger('change');
+$("#textdiagnosis").val("");
+$("#inotype").val("").trigger('change');
+// $("#nonvdate").val(opddate);
+$("#nofserch").val("1");
+$("#selprecond").val("").trigger('change');
+
+
+$("#nocastrated").val("");
+$("#noprocedurecas").val("").trigger('change');
+$("#head1").html("");
+$("#shidden1").val(0);
+
+$("#aistai").val("").trigger('change');
+$("#aisooes").val("").trigger('change');
+$("#aisoror").val("");
+$("#aissch").val("").trigger('change');
+$("#aisno").val("");
+$("#head2").html("");
+$("#shidden2").val(0);
+
+$("#opsust").val("").trigger('change');
+$("#head3").html("");
+$("#shidden3").val(0);
+
+$("#delcadet").val("");
+$("#delcage").val("").trigger('change');
+$("#delcbirtdate").val("");
+$("#delcaidate").val("");
+$("#delstai").val("").trigger('change');
+$("#delssch").val("").trigger('change');
+$("#delstrawno").val("");
+$("#head4").html('');
+$("#shidden4").val(0);
+$("#inforo").val("");
+$("#ints").val("");
+$("#inpcoi").val("");
+$("#head5").html('');
+$("#shidden5").val(0);
+$("#pdsaidate").val("");
+$("#pdtextreport").val("");
+$("#pdtype").val("").trigger('change');
+$("#pdprety").val("").trigger('change');
+$("#pdstai").val("").trigger('change');
+$("#pdssch").val("").trigger('change');
+$("#pdstrawno").val("");
+$("#head6").html('');
+$("#shidden6").val(0);
+$("#pprocdetail").val("");
+$("#pdsystem").val("");
+$("#head7").html('');
+$("#shidden7").val(0);
+$("#treatment").val("");
+$("#head8").html('');
+$("#shidden8").val(0);
 // var d = new Date(opddate);
 $("#medicinetab").empty();
+// console.log('in');
+$("#wait").css("display", "block");
 attachcasepaperdata(opddate);
 }
 function buttoncasepaper(id){
+casepaperlistData=new Map();
   // console.log(id);
    // console.log(animalList.get(id.toString()));
    var AllData= animalList.get(id.toString());
@@ -248,16 +317,68 @@ function buttoncasepaper(id){
    $("#fourthtable").show();
    $("#opdowner").html(AllData.firstName);
    $("#opdanimalname").html(AllData.animalName);
+   $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.animalId+".jpg");
     $("#opdanimalage").html("<font color='red'>"+AllData.specie+"</font>/<font color='green'>"+AllData.breed+"</font>/<font color='blue'>"+AllData.gender+"</font>");
    // $("#opdanimalweight").html(AllData.weight);
    // $("#opdanimalgender").html(AllData.gender);
     var date = $("#currentdate").val();
-     console.log("Current"+date);
-   // var today = new Date();
-   // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-   $("#opdselectdate").val(date);
-   // $("#opdcasepaperdate").val(date);
-   $("#opdvisittype").val("HQ").trigger('change');
+    $("#opdselectdate").val(date);
+    $("#opdvisittype").val("HQ").trigger('change');
+    $("#selectsymptoms").val("").trigger('change');
+    $("#textdiagnosis").val("");
+    $("#inotype").val("").trigger('change');
+    $("#nonvdate").val(date);
+    $("#nofserch").val("1");
+    $("#selprecond").val("").trigger('change');
+
+
+    $("#nocastrated").val("");
+    $("#noprocedurecas").val("").trigger('change');
+    $("#head1").html("");
+    $("#shidden1").val(0);
+
+    $("#aistai").val("").trigger('change');
+    $("#aisooes").val("").trigger('change');
+    $("#aisoror").val("");
+    $("#aissch").val("").trigger('change');
+    $("#aisno").val("");
+    $("#head2").html("");
+    $("#shidden2").val(0);
+
+    $("#opsust").val("").trigger('change');
+    $("#head3").html("");
+    $("#shidden3").val(0);
+
+    $("#delcadet").val("");
+    $("#delcage").val("").trigger('change');
+    $("#delcbirtdate").val("");
+    $("#delcaidate").val("");
+    $("#delstai").val("").trigger('change');
+    $("#delssch").val("").trigger('change');
+    $("#delstrawno").val("");
+    $("#head4").html('');
+    $("#shidden4").val(0);
+    $("#inforo").val("");
+    $("#ints").val("");
+    $("#inpcoi").val("");
+    $("#head5").html('');
+    $("#shidden5").val(0);
+    $("#pdsaidate").val("");
+    $("#pdtextreport").val("");
+    $("#pdtype").val("").trigger('change');
+    $("#pdprety").val("").trigger('change');
+    $("#pdstai").val("").trigger('change');
+    $("#pdssch").val("").trigger('change');
+    $("#pdstrawno").val("");
+    $("#head6").html('');
+    $("#shidden6").val(0);
+    $("#pprocdetail").val("");
+    $("#pdsystem").val("");
+    $("#head7").html('');
+    $("#shidden7").val(0);
+    $("#treatment").val("");
+    $("#head8").html('');
+    $("#shidden8").val(0);
    getallcasepaperlist(AllData.animalId);
 }
 
@@ -271,9 +392,9 @@ var date = today;
   // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   if(casepaperlistData.has(date)){
     var AllData = casepaperlistData.get(date);
-    console.log(casepaperlistData.get(date));
-     $("#setimage").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
-     $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.MedicationData.medicationId+".jpg");
+    // console.log(casepaperlistData.get(date));
+     $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.FeesData.animalId+".jpg");
+     $("#setimage").attr("src","http://praxello.com/ahimsa/casephotos/"+AllData.MedicationData.medicationId+".jpg");
 
     $("#nofserch").val(AllData.FeesData.feesAmount);
     $("#opdselectdate").val(AllData.FeesData.visitDate);
@@ -285,19 +406,20 @@ var date = today;
     $("#textdiagnosis").val(AllData.MedicationData.diagnosis);
     $("#inotype").val(AllData.MedicationData.typeOfInoculation).trigger('change');
     var samplearr = AllData.MedicationData.samples.split(",");
-    $("#nonvdate").val(AllData.MedicationData.nextVisitDate);
+    // $("#nonvdate").val(AllData.MedicationData.nextVisitDate);
     $("#selprecond").val(AllData.MedicationData.presentCondition).trigger('change');
     if(AllData.MedicineData){
       var countmedicaldata = AllData.MedicineData.length;
       for(var i=0;i<countmedicaldata;i++){
         $("#selectmedication").val(AllData.MedicineData[i].medicineId).trigger('change');
+        if(AllData.MedicineData[i].instruction!="null")
         $("#instruction"+AllData.MedicineData[i].medicineId).val(AllData.MedicineData[i].instruction);
+        if(AllData.MedicineData[i].days!="null")
         $("#days"+AllData.MedicineData[i].medicineId).val(AllData.MedicineData[i].days);
       }
     }
     var newobj=JSON.parse(AllData.MedicationData.treatment);
-    // console.log("new1"+newobj['Castration'].NoOfAnimals);
-    // console.log("new2"+newobj['ArtificialInsemination'].StrawNo);
+
     if(newobj.hasOwnProperty('Castration')&&(newobj['Castration'].NoOfAnimals!="")){
       $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
       $("#noprocedurecas").val(newobj['Castration'].Procedure).trigger('change');
@@ -385,7 +507,8 @@ var date = today;
           $("#delstrawno").val(newobj['ArtificialInsemination'].StrawNo);
       }
   }
-
+  // console.log('end');
+  $("#wait").css("display", "none");
 }
 getalllistData();
 function getalllistData(){
@@ -433,7 +556,7 @@ var samlist='',selectpmd='',selectaitype='',selectsymptoms='',selectsurgerytype=
          $("#opsust").html(selectsurgerytype);
          let symptoms =response['Data']['symptoms'].split(";");
          let csymptoms = symptoms.length;
-         selectsymptoms="<option value=''>Select Symtoms</option>";
+         // selectsymptoms="<option value=''>Select Symtoms</option>";
          for(var i=0;i<csymptoms;i++){
            selectsymptoms +="<option value='"+symptoms[i]+"'>"+symptoms[i]+"</option>";
          }
@@ -565,9 +688,9 @@ $("#five1").on('submit',function(event){
 });
 $("#five1").on('reset',function(event){
   event.preventDefault();
-  $("#inforo").html("");
-  $("#ints").html("");
-  $("#inpcoi").html("");
+  $("#inforo").val("");
+  $("#ints").val("");
+  $("#inpcoi").val("");
   $("#head5").html('');
   $("#shidden5").val(0);
     $('#collapseFive').collapse('toggle');
@@ -630,7 +753,7 @@ $("#nine1").on('reset',function(event){
 });
 $("#opdform").on('submit',function(event){
   event.preventDefault();
-  // console.log("ok");
+
 
 });
 $("#opdform").on('reset',function(event){
@@ -649,7 +772,7 @@ function savepage(){
   var docternewid = $("#drid").val();
 
   var visitdate = $("#opdselectdate").val();
-  var nextvisitdate = $("#nonvdate").val();
+  // var nextvisitdate = $("#nonvdate").val();
   var visittype = $("#opdvisittype").val();
   var totalsamples =0;
   var inoculation = $("#inotype").val();
@@ -677,6 +800,10 @@ function savepage(){
     castrat['NoOfAnimals'] = nocastrated;
     castrat['Procedure'] = noprocedurecas;
     mainarr['Castration'] = castrat;
+  }else{
+    castrat['NoOfAnimals'] = "";
+    castrat['Procedure'] = "";
+    mainarr['Castration'] = castrat;
   }
   var aiarr =new Object();
   if(shidden2=="1"){
@@ -691,11 +818,21 @@ function savepage(){
     aiarr['Scheme'] = aissch;
     aiarr['StrawNo'] = aisno;
     mainarr['ArtificialInsemination'] = aiarr;
+  }else{
+    aiarr['AIType'] = "";
+    aiarr['Status of reproductive organ'] ="";
+    aiarr['Stage of Oestrus'] = "";
+    aiarr['Scheme'] = "";
+    aiarr['StrawNo'] = "";
+    mainarr['ArtificialInsemination'] = aiarr;
   }
   var opsarr =new Object();
   if(shidden3=="1"){
     var opsust = $("#opsust").val();
     opsarr['Surgery Name'] = opsust;
+    mainarr['Surgery'] = opsarr;
+  }else{
+    opsarr['Surgery Name'] = "";
     mainarr['Surgery'] = opsarr;
   }
   var delarr =new Object();
@@ -715,6 +852,15 @@ function savepage(){
     delarr['Scheme'] = delssch;
     delarr['StrawNo'] = delstrawno;
     mainarr['Delivery'] = delarr;
+  }else{
+    delarr['AIDate'] = "";
+    delarr['AI-TYPE'] = "";
+    delarr['CalfBDate'] = "";
+    delarr['CalfDetails'] ="";
+    delarr['CalfGender'] ="";
+    delarr['Scheme'] ="";
+    delarr['StrawNo'] = "";
+    mainarr['Delivery'] = delarr;
   }
   var infarr =new Object();
   if(shidden5=="1"){
@@ -725,6 +871,11 @@ function savepage(){
     infarr['Findings of Reproductive Organ'] = inforo;
     infarr['Treatment Suggested'] = ints;
     mainarr['Infertility'] = infarr;
+  }else{
+    infarr['Probable Cause'] = "";
+    infarr['Findings of Reproductive Organ'] = "";
+    infarr['Treatment Suggested'] = "";
+    mainarr['Infertility'] =infarr;
   }
   var pdarr =new Object();
   if(shidden6=="1"){
@@ -749,6 +900,17 @@ function savepage(){
     pdarr['StrawNo'] = pdstrawno;
     pdarr['Results'] = pdtextreport;
     mainarr['Pregnancy'] = pdarr;
+  }else{
+    pdarr['Pregnancy Tenure'] = "";
+    pdarr['Expected Delivery Date'] ="";
+    pdarr['AIDate'] = "";
+    pdarr['AI-TYPE'] = "";
+    pdarr['Pregnant'] = "";
+    pdarr['PD Type'] = "";
+    pdarr['Scheme'] = "";
+    pdarr['StrawNo'] ="";
+    pdarr['Results'] ="";
+    mainarr['Pregnancy'] = pdarr;
   }
   var proarr =new Object();
   if(shidden7=="1"){
@@ -758,14 +920,23 @@ function savepage(){
     proarr['System'] = pdsystem;
     mainarr['Treatment'] = proarr;
   }
+  else{
+    proarr['Treatment'] = "";
+    proarr['System'] = "";
+    mainarr['Treatment'] = proarr;
+  }
   var trearr =new Object();
   if(shidden8=="1"){
     var treatment= $("#treatment").val();
     trearr['Treatment'] = treatment;
     mainarr['Other'] = trearr;
   }
+  else{
+    trearr['Treatment'] = "";
+    mainarr['Other'] = trearr;
+  }
 
-  if(visitdate==""||visittype==""||nextvisitdate==""
+  if(visitdate==""||visittype==""
   ||fees==""||feestype==""||presentcondition==""){
     alert("Please Fill all required Fields");
   }
@@ -779,7 +950,7 @@ function savepage(){
           doctorid:docternewid,
           animalid:animalid,
           visitdate : visitdate,
-          nextvisitdate :nextvisitdate,
+          nextvisitdate :visitdate,
           visittype:visittype,
           totalsamples : totalsamples,
           inoculation :inoculation,
@@ -799,11 +970,21 @@ function savepage(){
         },
         async : false,
         dataType :'json',
+        beforeSend: function() {
+            // console.log('in');
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
           if(response['Responsecode']==200){
             imgup(response['NewCasePaperId']);
-            alert(response['Message']);
+// alert(response['Message']);
           }
+        },
+        complete: function(data) {
+
+              alert("Data Saved");
+             // console.log('out');
+            $("#wait").css("display", "none");
         }
     });
   }
@@ -813,7 +994,7 @@ function imgup(imgid){
   var files = $('#animalimgname')[0].files[0];
   fd.append('file',files);
   fd.append('imgname',imgid);
-  fd.append('foldername',"animalphotos");
+  fd.append('foldername',"casephotos");
   $.ajax({
 
        url:"http://praxello.com/ahimsa/uploadimage1.php",
@@ -877,7 +1058,7 @@ function storeTblValues() {
 
 var loadFile = function(event) {
     var output = document.getElementById('setimage');
-    console.log(output);
+    // console.log(output);
     output.src = URL.createObjectURL(event.target.files[0]);
     // $("#eveimg").show();
 };

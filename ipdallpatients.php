@@ -7,6 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 <head>
  <?php include "title.php"; ?>
+ <link href="css/loader.css" rel="stylesheet">
  <script type="application/x-javascript">
  addEventListener("load", function() {
      setTimeout(hideURLbar, 0);
@@ -50,6 +51,7 @@ if(isset($_SESSION['branchId'])){
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
+    <div id="wait"></div>
 	  <?php include "leftsidebar.php"; ?>
 		<?php include "header.php"; ?>
     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
@@ -840,12 +842,12 @@ if(isset($_SESSION['branchId'])){
                                 </select>
                               </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                             <div class="form-group">
                               <label class="control-label">Next Visit Date</label><font color="red">*</font>
                               <input type="date" class="form-control" id="nonvdate" placeholder="Select Next Visit Date" required>
                             </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Service Charge</label><font color="red">*</font>

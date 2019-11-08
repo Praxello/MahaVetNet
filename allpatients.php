@@ -7,6 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 <head>
  <?php include "title.php"; ?>
+ <link href="css/loader.css" rel="stylesheet">
  <script type="application/x-javascript">
  addEventListener("load", function() {
      setTimeout(hideURLbar, 0);
@@ -46,10 +47,12 @@ if(isset($_SESSION['branchId'])){
     background-color: white;
   }
  </style>
+
  <!-- <link href="sweetalert/sweetalert.css" rel="stylesheet"> -->
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
+    <div id="wait"></div>
 	  <?php include "leftsidebar.php"; ?>
 		<?php include "header.php"; ?>
     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
@@ -57,6 +60,7 @@ if(isset($_SESSION['branchId'])){
     <input type="hidden"  id="currentdate" value="<?php echo date('Y-m-d');?>"/>
 		<div id="page-wrapper">
 			<div class="main-page">
+
         <div id="firsttable">
 				<h3 class="title1">All Patient</h3>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
@@ -96,6 +100,7 @@ if(isset($_SESSION['branchId'])){
                   </div>
               </div>
             </div>
+
             <input type="hidden"  id="opdoid" value=""/>
             <input type="hidden"  id="opdaid" value=""/>
             <!-- <div class="row">
@@ -110,6 +115,7 @@ if(isset($_SESSION['branchId'])){
                </div>
             </div>
            </div> -->
+
             <div class="row">
               <div class="col_3">
                   <div class="col-md-3">
@@ -118,6 +124,7 @@ if(isset($_SESSION['branchId'])){
                             <div class="stats">
                               <span><strong>Owner Name</strong></span>
                               <h5><div id="opdowner"></div></h5>
+
                             </div>
                         </div>
                   </div>
@@ -162,7 +169,7 @@ if(isset($_SESSION['branchId'])){
                               <h5><div id="opdanimalgender"></div></h5>
                             </div> -->
 
-                        <label class="control-label">Select Date</label><font color="red">*</font>
+                        <label class="control-label">Select Old Case Paper Date</label><font color="red">*</font>
                         <select  class="form-control"  id="opdcasepaperdate" style="width:100%;" onchange="selectcasepaper()">
                           <option value="">Select Case Paper Date</option>
                         </select>

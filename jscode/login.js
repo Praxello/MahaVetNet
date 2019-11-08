@@ -27,7 +27,7 @@ $('#signin').on('submit', function(event) {
         },
         complete: function(data) {
             // Hide image container
-            console.log('out');
+            // console.log('out');
             $("#wait").css("display", "none");
         }
     });
