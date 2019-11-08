@@ -394,7 +394,7 @@ var date = today;
     var AllData = casepaperlistData.get(date);
     // console.log(casepaperlistData.get(date));
      $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.FeesData.animalId+".jpg");
-     $("#setimage").attr("src","http://praxello.com/ahimsa/casephotos/"+AllData.MedicationData.medicationId+".jpg");
+     $("#setimage").attr("src","http://praxello.com/ahimsa/ipdcasephotos/"+AllData.MedicationData.medicationId+".jpg");
 
     $("#nofserch").val(AllData.FeesData.feesAmount);
     $("#opdselectdate").val(AllData.FeesData.visitDate);
@@ -976,6 +976,7 @@ function savepage(){
         },
         success: function(response) {
           if(response['Responsecode']==200){
+            console.log(response['NewCasePaperId']);
             imgup(response['NewCasePaperId']);
 // alert(response['Message']);
           }
@@ -994,7 +995,7 @@ function imgup(imgid){
   var files = $('#animalimgname')[0].files[0];
   fd.append('file',files);
   fd.append('imgname',imgid);
-  fd.append('foldername',"casephotos");
+  fd.append('foldername',"ipdcasephotos");
   $.ajax({
 
        url:"http://praxello.com/ahimsa/uploadimage1.php",
