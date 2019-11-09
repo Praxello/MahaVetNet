@@ -50,7 +50,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -60,8 +60,10 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 
         <!-- header-starts -->
        <?php include 'header.php';?>
+       
         <!-- main content start-->
         <div id="page-wrapper">
+        <div id="wait"></div>
         <input type="hidden" id="branchid" value="<?php echo $brId;?>">
         <input type="hidden" id="emailid" value="<?php echo $email;?>">
             <div class="main-page">
@@ -138,16 +140,14 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                         <option value="16">Tour Book</option>
                                         </select>
                                         </div>
+                                        <div class="btn btn-group">
                                         <div class="col-sm-3">
                                       
-                                        <button  class="btn btn-primary" type="button" onclick="get_reports()">Generate Report</button>
-                                       
+                                        <button  class="btn btn-primary" type="button" onclick="get_reports()">View Report</button>
+                                        <button  class="btn btn-success" type="button" onclick="get_mrp()">Download and Email MPR</button>
                                         </div>
-                                        <div class="col-sm-3">
-                                      
-                                        <button  class="btn btn-success" type="button" onclick="get_mrp()">Download MPR</button>
-                                       
                                         </div>
+                                       
                                     </div>
                                    
                                 </form>

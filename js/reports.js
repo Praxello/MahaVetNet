@@ -40,6 +40,9 @@ const loadZones = (param, level) => {
         data: { branchid: param },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
@@ -57,6 +60,9 @@ const loadZones = (param, level) => {
                 else if (level == 4)
                     $('#dispencery').html(zonesData);
             }
+        },
+        complete: function(response) {
+            $("#wait").css("display", "none");
         }
     });
 }
@@ -140,10 +146,16 @@ const getDispenceryBranch = param => {
         data: { centretype: param },
         async: true,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Data != null) {
                 dispeneryId = response.Data;
             }
+        },
+        complete: function(response) {
+            $("#wait").css("display", "none");
         }
     });
 }
@@ -175,6 +187,9 @@ const get_reports = () => {
             data: reportData,
             async: true,
             dataType: 'json',
+            beforeSend: function() {
+                $("#wait").css("display", "block");
+            },
             success: function(response) {
                 console.log(response);
                 $('.farmer-table').dataTable().fnDestroy();
@@ -544,6 +559,9 @@ const get_reports = () => {
                     destroy: true
                 });
 
+            },
+            complete: function(response) {
+                $("#wait").css("display", "none");
             }
         });
     } else {
