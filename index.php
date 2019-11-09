@@ -54,7 +54,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- content -->
 		<div class="sub-main-w3">
 			<form id="signin" method="post">
-			<div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;"><img src='images/spinner.gif' width="64" height="64" /><br>Loading..</div>
+			<div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
+				<img src='images/spinner.gif' width="64" height="64" />
+				<br>Loading..</div>
 				<div class="form-style-agile">
 					<label>
 						<i class="fas fa-user"></i>Username</label>

@@ -7,6 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 <head>
  <?php include "title.php"; ?>
+ <link href="css/loader.css" rel="stylesheet">
  <script type="application/x-javascript">
  addEventListener("load", function() {
      setTimeout(hideURLbar, 0);
@@ -50,12 +51,19 @@ if(isset($_SESSION['branchId'])){
 </head>
 <body class="cbp-spmenu-push">
 	<div class="main-content">
+    <div id="wait"></div>
 	  <?php include "leftsidebar.php"; ?>
 		<?php include "header.php"; ?>
     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
+    <input type="hidden"  id="currentdate" value="<?php echo date('Y-m-d');?>"/>
 		<div id="page-wrapper">
 			<div class="main-page">
+        <div id="myModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="img01"/>
+          <div id="caption"></div>
+        </div>
         <div id="firsttable">
 				<h3 class="title1">All Patient</h3>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
@@ -111,7 +119,7 @@ if(isset($_SESSION['branchId'])){
            </div> -->
             <div class="row">
               <div class="col_3">
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <i class="pull-left fa fa-empty icon-rounded"></i>
                             <div class="stats">
@@ -120,11 +128,11 @@ if(isset($_SESSION['branchId'])){
                             </div>
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty user1 icon-rounded"></i> -->
                             <div class="col-sm-6">
-                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/0.jpg'class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img"></img>
+                            <img id="setnavanimal" src='http://praxello.com/ahimsa/animalphotos/0.jpg'class="rounded-circle" style="width: 40px;height: 45px;" alt="No Img" onclick="imgon(this.src);"></img>
                             </div>
                             <div class="col-sm-6">
                             <div class="stats">
@@ -134,26 +142,27 @@ if(isset($_SESSION['branchId'])){
                             </div>
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <div class="stats">
-                              <label>Species/Breed</label>
+                              <label><font color='red'>Species</font>/<font color='green'>Breed</font>/<font color='blue'>Gender</font></label>
                               <div id="opdanimalage"></div>
                             </div>
 
                         </div>
                   </div>
-                  <div class="col-md-3 widget widget1">
+                  <!-- <div class="col-md-3">
                   <div class="r3_counter_box">
 
                     <div class="stats">
                       <label>Gender</label>
-                      <!-- <div id="opdanimalweight"></div>/ -->
+
                       <div id="opdanimalgender"></div>
                     </div>
                         </div>
-                   </div>
-                  <div class="col-md-3 widget">
+                   </div> -->
+                     <!-- <div id="opdanimalweight"></div>/ -->
+                  <div class="col-md-3">
                     <div class="r3_counter_box">
                             <!-- <i class="pull-left fa fa-empty dollar2 icon-rounded"></i>
                             <div class="stats">
@@ -339,8 +348,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="aistai" style="width:100%;">
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
                           </div>
                           </div>
@@ -500,8 +509,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="delstai" style="width:100%;" required>
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
                           </div>
                           </div>
@@ -674,8 +683,8 @@ if(isset($_SESSION['branchId'])){
                             <select  class="form-control"  id="pdstai" style="width:100%;" required>
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
-                              <option value="Repeat1">Repeat1</option>
-                              <option value="Repeat2">Repeat2</option>
+                              <option value="Repeat 1">Repeat 1</option>
+                              <option value="Repeat 2">Repeat 2</option>
                             </select>
 
                           </div>
@@ -838,12 +847,12 @@ if(isset($_SESSION['branchId'])){
                                 </select>
                               </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                             <div class="form-group">
                               <label class="control-label">Next Visit Date</label><font color="red">*</font>
                               <input type="date" class="form-control" id="nonvdate" placeholder="Select Next Visit Date" required>
                             </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Service Charge</label><font color="red">*</font>
@@ -879,7 +888,7 @@ if(isset($_SESSION['branchId'])){
                               <div class="form-group">
 
                                   <!-- <input type='file' id='customerstylepic' accept='image/*'/> -->
-                                 <img class='img-thumbnail'  src='http://praxello.com/ahimsa/animalphotos/1.jpg'  style='cursor: pointer;'  id="setimage" alt ='No Image' title='Upload Image' width='200px' height='400px'></img>
+                                 <img class='img-thumbnail'  src='http://praxello.com/ahimsa/animalphotos/1.jpg'  style='cursor: pointer;'  id="setimage" alt ='No Image' title='Upload Image' width='200px' height='400px' onclick="imgon(this.src);"></img>
 
                                   <!-- <img src="images/1.jpg" alt="No Image Uploaded"/> -->
                               </div>
