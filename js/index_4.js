@@ -6,15 +6,15 @@ var numberofVaccination = [];
 var numberofIPD = [];
 var numberofDeworming = [];
 var setmapchart = [];
-var chart1,chartvar1=0;
+var chart1, chartvar1 = 0;
 const loadCatData = (setmapchart) => {
-    chart1=Highcharts.chart('castrationDiv', {
+    chart1 = Highcharts.chart('castrationDiv', {
 
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Castration | Vaccination | IPD | Deworming'
+            text: 'Castration | IPD '
         },
         xAxis: {
             categories: total_branches
@@ -22,7 +22,7 @@ const loadCatData = (setmapchart) => {
         yAxis: {
             min: 0,
             title: {
-                text: 'Total of C | V | I | D'
+                text: 'Total of C | I '
             },
             stackLabels: {
                 enabled: true,
@@ -92,21 +92,21 @@ const loadvaccinations = (param) => {
                 for (i = 0; i < count; i++) {
                     total_branches.push(response.Data[i].branch);
                     numberofCastration.push(parseInt(response.Data[i].Castration));
-                    numberofVaccination.push(parseInt(response.Data[i].vaccination));
+                    //numberofVaccination.push(parseInt(response.Data[i].vaccination));
                     numberofIPD.push(parseInt(response.Data[i].IPD));
-                    numberofDeworming.push(parseInt(response.Data[i].deworm));
+                    //numberofDeworming.push(parseInt(response.Data[i].deworm));
                 }
 
                 setmapchart.push({ name: 'Castration', data: numberofCastration });
-                setmapchart.push({ name: 'Vaccination', data: numberofVaccination });
+                //setmapchart.push({ name: 'Vaccination', data: numberofVaccination });
                 setmapchart.push({ name: 'IPD', data: numberofIPD });
-                setmapchart.push({ name: 'Deworming', data: numberofDeworming });
+                //setmapchart.push({ name: 'Deworming', data: numberofDeworming });
             }
         },
         complete: function(response) {
-          if(chartvar1!=0){
-            chart1.hideLoading();
-          }
+            if (chartvar1 != 0) {
+                chart1.hideLoading();
+            }
             loadCatData(setmapchart);
         }
     });
@@ -114,7 +114,7 @@ const loadvaccinations = (param) => {
 loadvaccinations(data.branchid);
 
 const fetchmapid = (branch, branchId) => {
-   chartvar1=1;
+    chartvar1 = 1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',

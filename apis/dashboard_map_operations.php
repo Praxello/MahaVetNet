@@ -14,7 +14,7 @@ if(isset($_POST['branchid'])){
     AND doctorid IN (SELECT  um.doctorid  FROM user_master um JOIN branch_master bm ON bm.branchId = um.branchId 
                      INNER JOIN branch_mapper_master bmm ON um.branchId = bmm.childBranch WHERE bmm.branchId = $branchid AND bm.branchId < 10000)
         UNION
-        SELECT 0 castration,COUNT(*) vaccination,0 operations,0 IPD,0 deworming,0 cases 
+        SELECT 0 castration,SUM(mm.cow + mm.bull + mm.buffalo + mm.redka + mm.calf + mm.goat + mm.sheep + mm.poultry) vaccination,0 operations,0 IPD,0 deworming,0 cases 
         FROM vaccination_master mm 
     WHERE  doctorid IN (SELECT  um.doctorid  FROM user_master um 
                         JOIN branch_master bm ON bm.branchId = um.branchId 
@@ -26,7 +26,7 @@ if(isset($_POST['branchid'])){
     AND doctorid IN (SELECT  um.doctorid  FROM user_master um JOIN branch_master bm ON bm.branchId = um.branchId 
                      INNER JOIN branch_mapper_master bmm ON um.branchId = bmm.childBranch WHERE bmm.branchId = $branchid AND bm.branchId < 10000)
         UNION
-        SELECT 0 castration, 0 vaccination,0 operations,0 IPD,COUNT(*) deworming,0 cases  
+        SELECT 0 castration, 0 vaccination,0 operations,0 IPD,SUM(mm.cow + mm.bull + mm.buffalo + mm.redka + mm.calf + mm.goat + mm.sheep + mm.poultry) deworming,0 cases  
         FROM deworming_master mm 
     WHERE  doctorid IN (SELECT  um.doctorid  FROM user_master um JOIN branch_master bm ON bm.branchId = um.branchId 
                         INNER JOIN branch_mapper_master bmm ON um.branchId = bmm.childBranch WHERE bmm.branchId = $branchid AND bm.branchId < 10000)

@@ -19,13 +19,13 @@ $('#signin').on('submit', function(event) {
                 var branchId = response.Data.branchId;
                 var userId = response.Data.userId;
                 var username = response.Data.fullName;
-                console.log("use"+username);
-                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username;
+                var email = response.Data.email;
+                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center;
             } else {
                 alert('Enter Correct Username and password');
             }
         },
-        complete: function(data) {
+        complete: function(response) {
             // Hide image container
             console.log('out');
             $("#wait").css("display", "none");

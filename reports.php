@@ -1,7 +1,8 @@
 <?php session_start();
-if(isset($_SESSION['branchId'])){
+if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     $brId = $_SESSION['branchId'];
     $drid = $_SESSION['userId'];
+    $email = $_SESSION['email'];
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -62,6 +63,7 @@ if(isset($_SESSION['branchId'])){
         <!-- main content start-->
         <div id="page-wrapper">
         <input type="hidden" id="branchid" value="<?php echo $brId;?>">
+        <input type="hidden" id="emailid" value="<?php echo $email;?>">
             <div class="main-page">
             <div class="forms">
             <div class="row">
@@ -139,6 +141,11 @@ if(isset($_SESSION['branchId'])){
                                         <div class="col-sm-3">
                                       
                                         <button  class="btn btn-primary" type="button" onclick="get_reports()">Generate Report</button>
+                                       
+                                        </div>
+                                        <div class="col-sm-3">
+                                      
+                                        <button  class="btn btn-success" type="button" onclick="get_mrp()">Download MPR</button>
                                        
                                         </div>
                                     </div>

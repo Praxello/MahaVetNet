@@ -1,10 +1,10 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-include "../connection.php";
-mysqli_set_charset($conn, 'utf8');
-$response1=null;
-function getAlldata(){
+// header('Access-Control-Allow-Origin: *');
+// header('Content-Type: application/json');
+// include "../connection.php";
+// mysqli_set_charset($conn, 'utf8');
+
+function getAlldata($branchId,$year,$month){
 include "../connection.php";
 include 'getcount.php';
 $tours = null;
@@ -24,9 +24,7 @@ $inpatients = null;
 $outpatients = null;
 $daybook = null;
 $response=null;
-extract($_POST);
-if(isset($_POST['branchId']) && isset($_POST['reportType']) && isset($_POST['year']) && isset($_POST['month'])){
-    
+
         $operation = '"AIType":"Fresh';
         $sql = "SELECT mm.visitDate AS Visit_Date , aom.firstName AS FirstName, aom.lastName AS LastName,aom.address AS ownerAddress,aom.category AS Category ,am.specie AS Species,  am.breed AS Breed, mm.samples AS Samples,mm.treatment 
         FROM medication_master  mm 
@@ -122,7 +120,7 @@ if ($jobQuery != null) {
                     $temp = $academicResults;
                     $yearly = array('Year'=>$count);
                     $total = array_merge($temp, $yearly);
-                    $totalAi [] = $total;
+                   $totalAi[] = $total;
                     }
                 } 
             }
@@ -137,6 +135,7 @@ if ($jobQuery != null) {
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year
             AND mm.treatment REGEXP '$operation'";
+            
     $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
@@ -148,7 +147,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $calvesborn [] = $total;
+            $calvesborn[] = $total;
             }
         } 
     }
@@ -170,7 +169,7 @@ if ($jobQuery != null) {
              $temp = $academicResults;
              $yearly = array('Year'=>$count);
              $total = array_merge($temp, $yearly);
-             $vaccination [] = $total;
+             $vaccination[] = $total;
              }
          } 
      }
@@ -184,6 +183,7 @@ if ($jobQuery != null) {
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year
             AND mm.treatment REGEXP '$operation'";
+             $jobQuery = mysqli_query($conn,$sql);
      if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -194,7 +194,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $infertility [] = $total;
+            $infertility[] = $total;
             }
         } 
     }
@@ -206,6 +206,7 @@ if ($jobQuery != null) {
             join animal_owner_master aom on am.ownerId = aom.ownerId 
             where vm.branchId = $branchId
             AND MONTH(vm.visitDate) = $month AND YEAR(vm.visitDate) = $year";
+             $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -216,7 +217,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $Deworming [] = $total;
+            $Deworming[] = $total;
             }
         } 
     }
@@ -228,19 +229,21 @@ if ($jobQuery != null) {
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
             where fm.branchId = $branchId
             AND MONTH(fm.visitDate) = $month AND YEAR(fm.visitDate) = $year";
+            $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
             $count = getCountOfYear($month,$year,9,$branchId);
+            echo $count;
          while($academicResults = mysqli_fetch_assoc($jobQuery))
             {
             $count++;
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $cashregister [] = $total;
+            $cashregister[] = $total;
             }
-        } 
+        }
     }
    
         //Castration
@@ -252,6 +255,7 @@ if ($jobQuery != null) {
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year
             AND mm.treatment REGEXP '$operation'";
+             $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -262,7 +266,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $Castration [] = $total;
+            $Castration[] = $total;
             }
         } 
     }
@@ -276,6 +280,7 @@ if ($jobQuery != null) {
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year
             AND mm.treatment REGEXP '$operation'";
+             $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -286,7 +291,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $Operation [] = $total;
+            $Operation[] = $total;
             }
         } 
     }
@@ -300,6 +305,7 @@ if ($jobQuery != null) {
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year
             AND mm.treatment REGEXP '$operation'";
+             $jobQuery = mysqli_query($conn,$sql);
             if ($jobQuery != null) {
                 $academicAffected = mysqli_num_rows($jobQuery);
                 if ($academicAffected > 0) {
@@ -310,7 +316,7 @@ if ($jobQuery != null) {
                     $temp = $academicResults;
                     $yearly = array('Year'=>$count);
                     $total = array_merge($temp, $yearly);
-                    $pregDignosis [] = $total;
+                   $pregDignosis[] = $total;
                     }
                 } 
             }
@@ -322,6 +328,7 @@ if ($jobQuery != null) {
         INNER JOIN animal_owner_master aom ON aom.ownerId = am.ownerId
         WHERE ipd.branchId = $branchId
         AND MONTH(ipd.visitDate) = $month AND YEAR(ipd.visitDate) = $year";
+         $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -332,7 +339,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $inpatients [] = $total;
+            $inpatients[] = $total;
             }
         } 
     }
@@ -343,6 +350,7 @@ if ($jobQuery != null) {
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
             where mm.branchId = $branchId
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year";
+             $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
         if ($academicAffected > 0) {
@@ -353,7 +361,7 @@ if ($jobQuery != null) {
             $temp = $academicResults;
             $yearly = array('Year'=>$count);
             $total = array_merge($temp, $yearly);
-            $outpatients [] = $total;
+            $outpatients[] = $total;
             }
         } 
     }
@@ -365,6 +373,7 @@ if ($jobQuery != null) {
             JOIN animal_owner_master aom ON am.ownerId = aom.ownerId 
             where mm.branchId = $branchId 
             AND MONTH(mm.visitDate) = $month AND YEAR(mm.visitDate) = $year";
+             $jobQuery = mysqli_query($conn,$sql);
              if ($jobQuery != null) {
                 $academicAffected = mysqli_num_rows($jobQuery);
                 if ($academicAffected > 0) {
@@ -375,7 +384,7 @@ if ($jobQuery != null) {
                     $temp = $academicResults;
                     $yearly = array('Year'=>$count);
                     $total = array_merge($temp, $yearly);
-                    $daybook [] = $total;
+                    $daybook[] = $total;
                     }
                 } 
             }
@@ -401,11 +410,7 @@ if ($jobQuery != null) {
                     }
                 } 
             }
-}
-$response = array('Message' => "Data Loaded successfull", "aitypefresh"=>$Aitypefresh,"Aityperepeat1"=>$Aityperepeat1,"Aityperepeat2"=>$Aityperepeat2,"TotalAi" => $totalAi,"Tours" => $tours,"vaccination"=> $vaccination ,"infertility"=> $infertility ,"Deworming"=>$Deworming,"cashregister"=>$cashregister,"Castration"=>$Castration,"Operation"=>$Operation,"inpatients"=>$inpatients,"pregDignosis"=> $pregDignosis,"outpatients"=>$outpatients,"daybook"=>$daybook,'Responsecode' => 200);
+$response = array('Message' => "Data Loaded successfull", "aitypefresh" => $Aitypefresh,"Aityperepeat1" => $Aityperepeat1,"Aityperepeat2" => $Aityperepeat2,"TotalAi" => $totalAi,"vaccination" => $vaccination ,"calvesborn"=>$calvesborn,"infertility" => $infertility ,"Deworming" => $Deworming,"cashregister" => $cashregister,"Castration" => $Castration,"Operation" => $Operation,"inpatients" => $inpatients,"pregDignosis" => $pregDignosis,"outpatients" => $outpatients,"daybook" =>$daybook,"Tours" => $tours,'Responsecode' => 200);
 return $response;
 }
-$response1 = getAlldata();
-mysqli_close($conn);
-exit(json_encode($response1));
 ?>

@@ -37,13 +37,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 
 <body>
-	<div class="video-w3l" data-vide-bg="video/cow">
+	
+	
+	
+	
+	<div class="video-w3l" >
+	<!-- <div class="video-w3l" data-vide-bg="video/cow"> -->
+	<h1>
+	<span class="prfil-img"><img src="images/AHD.png" alt="" style="float:left;"> </span>
+			<span>MahaVetNet</span>
+			<span class="prfil-img"><img src="images/praxello.png" alt="" style="float:right;"> </span>
+	</h1>
 		<!-- title -->
-		<h1>
-		<span class="prfil-img"><img src="images/AHD.png" alt="" width="55px" height="55px"> </span>
-			<span>M</span>aha<span>V</span>et<span>N</span>et
-			<span class="prfil-img"><img src="images/praxello.jpeg" alt="" width="55" height="55px"> </span>
-		</h1>
+		
 		<!-- //title -->
 		<!-- content -->
 		<div class="sub-main-w3">
@@ -106,8 +112,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		<!-- copyright -->
 		<div class="footer" >
-			<p>&copy; 2019 Department Login Form. All rights reserved | Design by
-				<a href="http://praxello.com">Praxello</a>
+			<p>&copy; 2020 All rights reserved | Design by
+				<a href="http://praxello.com" target="_blank">Praxello</a>
 			</p>
 		</div>
 		<!-- //copyright -->

@@ -155,7 +155,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <label id="castration"></label>
                             </div>
                             <div class="col-md-6 top-content">
-                                <h5>Case Paper</h5>
+                                <h5>Cases</h5>
                                 <label id="casepaper"></label>
                             </div>
                             <div class="clearfix"> </div>
@@ -262,28 +262,23 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div class="charts">
+              
 
-                    <div class="col-md-5 charts-grids widget states-mdl">
-                    <div class="card-header">
-                            <h3></h3>
+                <div class="charts">
+                    <div class="col-md-4 charts-grids widget">
+                        <div class="card-header">
+                            <h3>Dewoming | Vaccinations</h3>
+                        </div>
+                        <div id="dewormingmap"></div>
+                    </div>
+                    <div class="col-md-4 charts-grids widget states-mdl">
+                        <div class="card-header">
+                        <h3>Animals | Farmers</h3>
                         </div>
                         <div id="farmersanimalDiv"></div>
-
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-
-                <!-- <div class="charts">
-
-                    <div class="col-md-4 charts-grids widget states-mdl">
-                    <div class="card-header"> </div>
-
-                        <div id="farmersanimalDiv"></div>
-                    </div>
-                    <div class="clearfix"> </div>
-
-                </div> -->
 
             </div>
         </div>
@@ -353,6 +348,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="js/activeInst.js" type="text/javascript"></script>
     <script src="js/total_revenue_map.js" type="text/javascript"></script>
     <script src="js/dashboard_data.js" type="text/javascript"></script>
+    <script src="js/index_6.js" type="text/javascript"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.js"></script>
     <!-- //Bootstrap Core JavaScript -->
