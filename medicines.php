@@ -117,8 +117,8 @@ if(isset($_SESSION['branchId'])){
             </div>
         </div>
         <div class="footer">
-            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p> -->
+            <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
+                    target="_blank">Praxello</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

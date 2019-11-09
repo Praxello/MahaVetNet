@@ -33,7 +33,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- web-fonts -->
 	<link href="//fonts.googleapis.com/css?family=Marck+Script&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext"
-	    rel="stylesheet">
+		rel="stylesheet">
+		<style>
+		@media  screen and (max-width: 1440px) {
+.footer{
+padding-bottom:20vw;
+}
+}</style>
 	<!-- //web-fonts -->
 </head>
 
@@ -42,11 +48,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	
 	
-	<div class="video-w3l" >
+	<div class="video-w3l" data-vide-bg="video/cow">
 	<!-- <div class="video-w3l" data-vide-bg="video/cow"> -->
 	<h1>
 	<span class="prfil-img"><img src="images/AHD.png" alt="" style="float:left;"> </span>
-			<span>MahaVetNet</span>
+			<span style="color:red;">MahaVetNet</span>
 			<span class="prfil-img"><img src="images/praxello.png" alt="" style="float:right;"> </span>
 	</h1>
 		<!-- title -->
@@ -69,7 +75,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<input placeholder="Password" name="Password" type="password" required="" id="passwrd">
 				</div>
 				<!-- switch -->
-				<div class="checkout-w3l">
+				<!-- <div class="checkout-w3l">
 					<div class="demo5">
 						<div class="switch demo3">
 							<input type="checkbox">
@@ -79,48 +85,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 					</div>
 					<a href="#">Remember Me</a>
-				</div>
+				</div> -->
 				<!-- //switch -->
 				<input type="submit" value="Log In">
-				<!-- social icons -->
-				<!-- <div class="footer-social">
-					<h2>Or Login With</h2>
-					<ul>
-						<li>
-							<a href="#">
-								<i class="fab fa-facebook-f icon_facebook"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-twitter icon_twitter"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-dribbble icon_dribbble"></i>
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<i class="fab fa-google-plus-g icon_g_plus"></i>
-							</a>
-						</li>
-					</ul>
-				</div> -->
-				<!-- //social icons -->
+				
 			</form>
 		</div>
 		<!-- //content -->
 
 		<!-- copyright -->
+		
+		<!-- //copyright -->
 		<div class="footer" >
 			<p>&copy; 2020 All rights reserved | Design by
 				<a href="http://praxello.com" target="_blank">Praxello</a>
 			</p>
 		</div>
-		<!-- //copyright -->
 	</div>
+	
     <script src="js_1/jquery-2.2.3.min.js"></script>
 	<script src="jscode/apis.js"></script>
   <script src="jscode/login.js"></script>

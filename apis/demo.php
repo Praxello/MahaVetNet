@@ -1,72 +1,83 @@
 <?php 
-include "reportsnew.php";
-$branchId =3248;
-$year = 2019;
-$month = '09';
-$response = getAlldata($branchId,$year,$month);
-function getTreatment($json){
-    $treatment = [];
-    if(array_key_exists('ArtificialInsemination', $json)){
-       if($json['ArtificialInsemination']['AIType']!=''){
-        array_push($treatment,'ArtificialInsemination');
-       }
-    }
-    if(array_key_exists('Castration', $json)){
-        if($json['Castration']['NoOfAnimals']!=''){
-         array_push($treatment,'Castration');
-        }
-     }
-     if(array_key_exists('Delivery', $json)){
-        if($json['Delivery']['CalfGender']!=''){
-         array_push($treatment,'Delivery');
-        }
-     }
-     if(array_key_exists('Infertility', $json)){
-        if($json['Infertility']['Probable Cause']!=''){
-         array_push($treatment,'Infertility');
-        }
-     }
-     if(array_key_exists('Other', $json)){
-        if($json['Other']['Treatment']!=''){
-         array_push($treatment,'Other');
-        }
-     }
-     if(array_key_exists('Pregnancy', $json)){
-        if($json['Pregnancy']['AI-TYPE']!=''){
-         array_push($treatment,'Pregnancy');
-        }
-     }
-     if(array_key_exists('Surgery', $json)){
-        if($json['Surgery']['Surgery Name']!=''){
-         array_push($treatment,'Surgery');
-        }
-     }
-     if(array_key_exists('Treatment', $json)){
-        if($json['Treatment']['System']!=''){
-         array_push($treatment,'Treatment');
-        }
-     }
-  return implode(" ",$treatment);
-}
-if($response["aitypefresh"]!=null){
-    echo count($response["aitypefresh"]);
-    for($i=0;$i<count($response["aitypefresh"]);$i++){
-        $a =  json_decode($response["aitypefresh"][$i]["treatment"],true);
-        $c = getData($a);
-        echo $c;
-        // if(array_key_exists('ArtificialInsemination', $a)){
-        //  echo ($i+1).'</br>';
-        //  echo $a['ArtificialInsemination']['AIType'].'<br>';
-        // }else{
-        //     echo '0';
-        // }
-    }
+// include "reportsnew.php";
+// $branchId =3248;
+// $year = 2019;
+// $month = '09';
+// $response = getAlldata($branchId,$year,$month);
+// function getTreatment($json){
+//     $treatment = [];
+//     if(array_key_exists('ArtificialInsemination', $json)){
+//        if($json['ArtificialInsemination']['AIType']!=''){
+//         array_push($treatment,'ArtificialInsemination');
+//        }
+//     }
+//     if(array_key_exists('Castration', $json)){
+//         if($json['Castration']['NoOfAnimals']!=''){
+//          array_push($treatment,'Castration');
+//         }
+//      }
+//      if(array_key_exists('Delivery', $json)){
+//         if($json['Delivery']['CalfGender']!=''){
+//          array_push($treatment,'Delivery');
+//         }
+//      }
+//      if(array_key_exists('Infertility', $json)){
+//         if($json['Infertility']['Probable Cause']!=''){
+//          array_push($treatment,'Infertility');
+//         }
+//      }
+//      if(array_key_exists('Other', $json)){
+//         if($json['Other']['Treatment']!=''){
+//          array_push($treatment,'Other');
+//         }
+//      }
+//      if(array_key_exists('Pregnancy', $json)){
+//         if($json['Pregnancy']['AI-TYPE']!=''){
+//          array_push($treatment,'Pregnancy');
+//         }
+//      }
+//      if(array_key_exists('Surgery', $json)){
+//         if($json['Surgery']['Surgery Name']!=''){
+//          array_push($treatment,'Surgery');
+//         }
+//      }
+//      if(array_key_exists('Treatment', $json)){
+//         if($json['Treatment']['System']!=''){
+//          array_push($treatment,'Treatment');
+//         }
+//      }
+//   return implode(" ",$treatment);
+// }
+// if($response["aitypefresh"]!=null){
+//     echo count($response["aitypefresh"]);
+//     for($i=0;$i<count($response["aitypefresh"]);$i++){
+//         $a =  json_decode($response["aitypefresh"][$i]["treatment"],true);
+//         $c = getData($a);
+//         echo $c;
+//         // if(array_key_exists('ArtificialInsemination', $a)){
+//         //  echo ($i+1).'</br>';
+//         //  echo $a['ArtificialInsemination']['AIType'].'<br>';
+//         // }else{
+//         //     echo '0';
+//         // }
+//     }
   
     
-}
-if($response["vaccination"]==null){
-    echo $response["Message"];
-}
+// }
+// if($response["vaccination"]==null){
+//     echo $response["Message"];
+// }
+
+$array = array(0 => 100, "color" => "red");
+print_r(array_keys($array));
+
+$array = array("blue", "red", "green", "blue", "blue");
+print_r(array_keys($array, "blue"));
+
+$array = array("color" => array("blue", "red", "green"),
+               "size"  => array("small", "medium", "large"));
+print_r(array_key($array[0]));
+
 // include "../connection.php";
 // include 'getcount.php';
 
