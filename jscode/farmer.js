@@ -82,7 +82,7 @@ $('#addnewfarmer').on('submit', function(e) {
     var lastName = getLastName($('#fname').val());
     var farmerData = {
         gender: $("input[name='optradio']:checked").val(),
-        userid: userid,
+        userid: data.doctorid,
         firstname: firstName,
         lastname: lastName,
         profession: '',
@@ -91,7 +91,7 @@ $('#addnewfarmer').on('submit', function(e) {
         state: '',
         address: $('#faddress').val(),
         landmark: '',
-        branchid: branchid,
+        branchid: data.branchid,
         category: category,
         adharid: adharid
     };
@@ -135,7 +135,7 @@ $('#editfarmer').on('submit', function(e) {
     var farmerData = {
         ownerid: $('#eownerid').val(),
         gender: $("input[name='edit_optradio']:checked").val(),
-        userid: userid,
+        userid: data.doctorid,
         firstname: firstName,
         lastname: lastName,
         profession: '',
@@ -144,14 +144,14 @@ $('#editfarmer').on('submit', function(e) {
         state: '',
         address: $('#edit_faddress').val(),
         landmark: '',
-        branchid: branchid,
+        branchid: data.branchid,
         category: category,
         adharid: adharid
     };
     var farmerData_set = {
         ownerId: $('#eownerid').val(),
         sex: $("input[name='edit_optradio']:checked").val(),
-        userid: userid,
+        userid: data.doctorid,
         firstName: firstName,
         lastName: lastName,
         profession: '',
@@ -160,7 +160,7 @@ $('#editfarmer').on('submit', function(e) {
         state: '',
         address: $('#edit_faddress').val(),
         landmark: '',
-        branchid: branchid.toString(),
+        branchid: data.branchid.toString(),
         category: category,
         adharid: adharid
     };
