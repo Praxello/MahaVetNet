@@ -6,7 +6,7 @@ if(isset($_SESSION['branchId'])){
 <!DOCTYPE HTML>
 <html>
 <head>
- <?php include "title.php"; ?>
+<title>Mahavetnet | OPD</title>
  <link href="css/loader.css" rel="stylesheet">
  <script type="application/x-javascript">
  addEventListener("load", function() {
@@ -22,7 +22,7 @@ if(isset($_SESSION['branchId'])){
  <!-- <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
  <!-- Custom CSS -->
  <link href="css/style.css" rel='stylesheet' type='text/css' />
-
+ <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
  <!-- font-awesome icons CSS -->
  <link href="css/font-awesome.css" rel="stylesheet">
  <!-- //font-awesome icons CSS -->

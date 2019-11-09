@@ -26,6 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- css files -->
 	<link rel="stylesheet" href="css_1/style.css" type="text/css" media="all" />
 	<!-- Style-CSS -->
+	<link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
 	<link rel="stylesheet" href="css_1/fontawesome-all.css">
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //css files -->

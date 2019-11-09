@@ -8,7 +8,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 <html>
 
 <head>
-     <?php include "title.php"; ?>
+    <title>Mahavetnet | Reports</title>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -27,7 +27,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> -->
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
-
+    <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
     <!-- font-awesome icons CSS -->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome icons CSS -->
