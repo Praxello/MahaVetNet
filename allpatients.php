@@ -70,6 +70,16 @@ if(isset($_SESSION['branchId'])){
 				<h3 class="title1">All Patient</h3>
 				<div class="blank-page widget-shadow scroll" id="style-2 div1">
           <div class="row" id="customerstyletable" style="display:block;">
+            <div class="row" >
+              <div class="col-sm-8">
+
+              </div>
+              <div class="col-sm-4" >
+                <div class="form-group">
+                  <a href="farmer.php" target="_blank"><button type="button" class="btn btn-primary" style="float:right"><i class="fa fa-plus">Add Farmer</i></button></a>
+                </div>
+              </div>
+            </div>
             <div class="col-md-12" >
             <div class="table-responsive">
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
@@ -184,7 +194,7 @@ if(isset($_SESSION['branchId'])){
             </div>
             </div>
             <div class="row">
-              <div class="col-md-6 validation-grids widget-shadow" data-example-id="basic-forms" style="overflow-y: scroll; height:600px;">
+              <div class="col-md-6 validation-grids widget-shadow" data-example-id="basic-forms" style="overflow-y: scroll; height:700px;">
                 <div class="row">
   							<div class="form-title" style="background-color: yellow;">
                   <center><label>OPD Case Paper Form</label></center>
@@ -209,13 +219,8 @@ if(isset($_SESSION['branchId'])){
                       </select>
                     </div>
                     </div>
-                    <div class="col-sm-6">
-  									<div class="form-group">
-                      <label class="control-label">Select Symptoms</label>
-                      <input type="text" class="form-control" id="textsymptoms" placeholder="Select Symptoms" required>
-  									</div>
-                    </div>
-                    <div class="col-sm-6">
+
+                    <div class="col-sm-12">
   									<div class="form-group">
                       <label class="control-label">Select Symptoms (Dropdown)</label>
                       <select  class="form-control"  id="selectsymptoms" style="width:100%;" onchange="symtomsdrop();" multiple >
@@ -228,8 +233,16 @@ if(isset($_SESSION['branchId'])){
                     </div>
                     <div class="col-sm-6">
   									<div class="form-group">
+                      <label class="control-label">Select Symptoms (For Manual Entry)</label>
+                      <!-- <textarea type="text" class="form-control" ></textarea> -->
+                       <textarea class="form-control rounded-0" id="textsymptoms" placeholder="Select Symptoms For Manual Entry" required rows="3"></textarea>
+  									</div>
+                    </div>
+                    <div class="col-sm-6">
+  									<div class="form-group">
                       <label class="control-label">Diagnosis</label>
-                      <input type="text" class="form-control" id="textdiagnosis" placeholder="Enter Diagnosis" required>
+                      <!-- <input type="text" class="form-control" id="textdiagnosis" placeholder="Enter Diagnosis" required> -->
+                      <textarea class="form-control" id="textdiagnosis" placeholder="Enter Diagnosis" required rows="3"></textarea>
   									</div>
                     </div>
                     <div class="col-sm-6">
@@ -262,7 +275,7 @@ if(isset($_SESSION['branchId'])){
                                 <thead>
                                   <tr>
                                   <th style="width:60%;">Medicine Name</th>
-                                  <th style="width:20%;">Instruction</th>
+                                  <th style="width:20%;">Remarks</th>
                                    <th style="width:10%;">Days</th>
                                    <th style="display:none;width:10%;">Mid</th>
                                    <th style="width:10%;">Action</th>
@@ -276,7 +289,7 @@ if(isset($_SESSION['branchId'])){
               </div>
 
   						</div>
-              <div class="col-md-6  widget-shadow" data-example-id="basic-forms" style="overflow-y: scroll; height:600px;">
+              <div class="col-md-6  widget-shadow" data-example-id="basic-forms" style="overflow-y: scroll; height:700px;">
                 <div id="accordion">
                   <div class="card">
                     <div class="row">
@@ -289,7 +302,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title" style="background-color: beige;">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" style="width: 100%;text-align: left;" aria-expanded="true" aria-controls="collapseOne">
-                          Castration<input id="shidden1" type="hidden" value="0"></input><div id="head1" style="float: right;"></div>
+                          +Castration<input id="shidden1" type="hidden" value="0"></input><div id="head1" style="float: right;"></div>
                         </button>
 
                           </div>
@@ -299,15 +312,16 @@ if(isset($_SESSION['branchId'])){
                       <div class="card-body">
                         <form id="one1" method="post">
                         <div class="row">
-                          <div class="col-sm-6">
+                          <!-- <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Number of Animal</label>
                             <input type="text" class="form-control" id="nocastrated" onkeypress="javascript:return isNumberKey(event)" required>
                           </div>
-                          </div>
+                          </div> -->
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Procedure</label>
+                            <font color="red">*</font>
                             <select  class="form-control"  id="noprocedurecas" style="width:100%;" required>
                               <option value="">Select Procedure</option>
                               <option value="Closed">Closed</option>
@@ -337,7 +351,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Artificial Insemination (AI)<input id="shidden2" type="hidden"value="0"></input><div id="head2" style="float: right;"></div>
+                          +Artificial Insemination (AI)<input id="shidden2" type="hidden"value="0"></input><div id="head2" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -349,7 +363,8 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Select Type AI</label>
-                            <select  class="form-control"  id="aistai" style="width:100%;">
+                              <font color="red">*</font>
+                            <select  class="form-control"  id="aistai" style="width:100%;" required>
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
                               <option value="Repeat 1">Repeat 1</option>
@@ -373,13 +388,14 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6 ">
                           <div class="form-group">
                             <label class="control-label">Status of Reproductive Organs</label>
-                            <input type="text" class="form-control" id="aisoror" placeholder="Status of Reproductive Organs" required>
+                            <input type="text" class="form-control" id="aisoror" placeholder="Status of Reproductive Organs" >
                           </div>
                           </div>
                           <div class="col-sm-6 ">
                           <div class="form-group">
                             <label class="control-label">Select Scheme</label>
-                            <select  class="form-control"  id="aissch" style="width:100%;">
+                              <font color="red">*</font>
+                            <select  class="form-control"  id="aissch" style="width:100%;" required>
                               <option value="">Select Scheme</option>
                               <option value="GK">GK</option>
                               <option value="Govenment">Govenment</option>
@@ -391,7 +407,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6 ">
                           <div class="form-group">
                             <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="aisno" placeholder="Straw Number" required>
+                            <input type="text" class="form-control" id="aisno" placeholder="Straw Number" >
                           </div>
                           </div>
                           <div class="col-sm-6">
@@ -420,7 +436,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title" style="background-color: beige;">
                         <button class="btn btn-link collapsed" data-toggle="collapse" style="width: 100%;text-align: left;" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Operation / Surgery<input id="shidden3" type="hidden" value="0"></input><div id="head3" style="float: right;"></div>
+                          +Operation / Surgery<input id="shidden3" type="hidden" value="0"></input><div id="head3" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -466,7 +482,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                          Delivery<input id="shidden4" type="hidden" value="0"></input><div id="head4" style="float: right;"></div>
+                          +Delivery<input id="shidden4" type="hidden" value="0"></input><div id="head4" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -478,12 +494,12 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Calf Details (TD/Tag)</label>
-                            <input type="text" class="form-control" id="delcadet" placeholder="Enter Calf Details" required>
+                            <input type="text" class="form-control" id="delcadet" placeholder="Enter Calf Details" >
                           </div>
                           </div>
                           <div class="col-sm-6">
                           <div class="form-group">
-                              <label class="control-label">Calf Gender</label>
+                              <label class="control-label">Calf Gender</label>  <font color="red">*</font>
                             <select  class="form-control" id="delcage" style="width:100%;" required>
                               <option value="">Select Calf Gender</option>
                               <option value="Male">Male</option>
@@ -495,14 +511,14 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                           <div class="col-sm-6">
                           <div class="form-group">
-                            <label class="control-label">Calf Birth Date</label>
+                            <label class="control-label">Calf Birth Date</label>  <font color="red">*</font>
                             <input type="date" class="form-control" id="delcbirtdate" placeholder="Enter Calf Birth Date" required>
                           </div>
                           </div>
                           <div class="col-sm-6">
                           <div class="form-group">
                               <label class="control-label">AI Date</label>
-                            <input type="date" class="form-control" id="delcaidate" placeholder="Enter Calf AI Date" required>
+                            <input type="date" class="form-control" id="delcaidate" placeholder="Enter Calf AI Date" >
                           </div>
                           </div>
                         </div>
@@ -510,7 +526,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Select Type AI</label>
-                            <select  class="form-control"  id="delstai" style="width:100%;" required>
+                            <select  class="form-control"  id="delstai" style="width:100%;" >
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
                               <option value="Repeat 1">Repeat 1</option>
@@ -521,7 +537,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Select Scheme</label>
-                            <select  class="form-control"  id="delssch" style="width:100%;" required>
+                            <select  class="form-control"  id="delssch" style="width:100%;" >
                               <option value="">Select Scheme</option>
                               <option value="GK">GK</option>
                               <option value="Govenment">Govenment</option>
@@ -533,7 +549,7 @@ if(isset($_SESSION['branchId'])){
                             <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="delstrawno" placeholder="Enter Straw Number" required>
+                            <input type="text" class="form-control" id="delstrawno" placeholder="Enter Straw Number" >
                           </div>
                         </div>
                         <div class="col-sm-6">
@@ -561,7 +577,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title" style="background-color: beige;">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                          Infertility<input id="shidden5" type="hidden" value="0"></input><div id="head5" style="float: right;"></div>
+                          +Infertility<input id="shidden5" type="hidden" value="0"></input><div id="head5" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -619,7 +635,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                         Pregnacy Diagnosis<input id="shidden6" type="hidden" value="0"></input><div id="head6" style="float: right;"></div>
+                         +Pregnacy Diagnosis<input id="shidden6" type="hidden" value="0"></input><div id="head6" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -631,13 +647,13 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                               <label class="control-label">Select AI Date</label>
-                            <input type="date" class="form-control" id="pdsaidate" placeholder="AI Date" required>
+                            <input type="date" class="form-control" id="pdsaidate" placeholder="AI Date" >
                           </div>
                           </div>
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Text Report</label>
-                            <input type="text" class="form-control" id="pdtextreport" placeholder="Enter Text Report" required>
+                            <input type="text" class="form-control" id="pdtextreport" placeholder="Enter Text Report" >
                           </div>
                           </div>
                         </div>
@@ -645,7 +661,7 @@ if(isset($_SESSION['branchId'])){
 
                           <div class="col-sm-6">
                           <div class="form-group">
-                              <label class="control-label">Select Type</label>
+                              <label class="control-label">Select Type</label>  <font color="red">*</font>
                               <select  class="form-control"  id="pdtype" style="width:100%;" required>
                                 <option value="">Select Type</option>
                                 <option value="NSPD">NSPD</option>
@@ -655,7 +671,7 @@ if(isset($_SESSION['branchId'])){
                           </div>
                           <div class="col-sm-6">
                           <div class="form-group">
-                            <label class="control-label">Pregnant Type</label>
+                            <label class="control-label">Pregnant Type</label>  <font color="red">*</font>
                             <select  class="form-control"  id="pdprety" style="width:100%;" onchange="chpregancyval()" required>
                               <option value="">Select Pregnant Type</option>
                               <option value="Is Pregnant">Is Pregnant</option>
@@ -684,7 +700,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Select Type AI</label>
-                            <select  class="form-control"  id="pdstai" style="width:100%;" required>
+                            <select  class="form-control"  id="pdstai" style="width:100%;" >
                               <option value="">Select Type AI</option>
                               <option value="Fresh">Fresh</option>
                               <option value="Repeat 1">Repeat 1</option>
@@ -696,7 +712,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Select Scheme</label>
-                            <select  class="form-control"  id="pdssch" style="width:100%;" required>
+                            <select  class="form-control"  id="pdssch" style="width:100%;" >
                               <option value="">Select Scheme</option>
                               <option value="GK">GK</option>
                               <option value="Govenment">Govenment</option>
@@ -708,7 +724,7 @@ if(isset($_SESSION['branchId'])){
                             <div class="col-sm-6">
                           <div class="form-group">
                             <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="pdstrawno" placeholder="Enter Straw Number" required>
+                            <input type="text" class="form-control" id="pdstrawno" placeholder="Enter Straw Number" >
 
                           </div>
                         </div>
@@ -739,7 +755,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         <div class="form-title" style="background-color: beige;">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                          Procedure<input id="shidden7" type="hidden" value="0"></input><div id="head7" style="float: right;"></div>
+                          +Procedure<input id="shidden7" type="hidden" value="0"></input><div id="head7" style="float: right;"></div>
                         </button>
                         </div>
                       </h5>
@@ -782,7 +798,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                           <div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-                          Treatment<input id="shidden8" type="hidden" value="0"></input><div id="head8" style="float: right;"></div>
+                          +Treatment<input id="shidden8" type="hidden" value="0"></input><div id="head8" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -882,7 +898,7 @@ if(isset($_SESSION['branchId'])){
                             <div class="form-group">
                               <label class="control-label">Select Present Condition Photo (optional)</label>
                               <!-- <form id='custstyleform' method='post' enctype='multipart/form-data'> -->
-                              <input type="file" id="animalimgname" alt="no Image" accept="image/*" onchange="loadFile(event)"/>
+                              <input type="file" id="animalimgname" alt="no Image"  accept=".png, .jpg, .jpeg" onchange="loadFile(event)"/>
                               <!-- <button type="button" class="btn btn-primary" onclick="imgup();" >Save</button> -->
                               <!-- </form> -->
 
@@ -897,11 +913,11 @@ if(isset($_SESSION['branchId'])){
                                   <!-- <img src="images/1.jpg" alt="No Image Uploaded"/> -->
                               </div>
                             </div>
-                            <div class="col-sm-12">
+                            <!-- <div class="col-sm-12">
                           <div class="form-group">
                             <button type="reset" class="btn btn-warning" >Reset</button>
                           </div>
-                          </div>
+                          </div> -->
                           </div>
                         </div>
                         <!-- <div class="row">
@@ -936,6 +952,18 @@ if(isset($_SESSION['branchId'])){
                             </select>
                           </div>
                           </div> -->
+
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                          <button type="button" class="btn btn-default" style="width: 100%;background-color: #5d793d;" onclick="backmain();">Main Page</button>
+                          </div>
+                          <div class="col-md-4">
+                          </div>
+                          <div class="col-sm-4">
+                          <button type="button" class="btn btn-success" style="width: 100%;background-color: #ae16bb;" onclick="savepage();">SAVE</button>
+                          </div>
+
                         </div>
                         <!-- <div class="row">
 
@@ -960,7 +988,7 @@ if(isset($_SESSION['branchId'])){
               </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-4">
           <button type="button" class="btn btn-default" style="width: 100%;background-color: #5d793d;" onclick="backmain();">Main Page</button>
           </div>
@@ -970,7 +998,7 @@ if(isset($_SESSION['branchId'])){
           <button type="button" class="btn btn-success" style="width: 100%;background-color: #ae16bb;" onclick="savepage();">SAVE</button>
           </div>
 
-        </div>
+        </div> -->
 			</div>
 
 		</div>

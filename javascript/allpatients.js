@@ -266,7 +266,7 @@ $("#nofserch").val("1");
 $("#selprecond").val("").trigger('change');
 
 
-$("#nocastrated").val("");
+// $("#nocastrated").val("");
 $("#noprocedurecas").val("").trigger('change');
 $("#head1").html("");
 $("#shidden1").val(0);
@@ -345,7 +345,7 @@ function buttoncasepaper(id){
    $("#selprecond").val("").trigger('change');
 
 
-   $("#nocastrated").val("");
+   // $("#nocastrated").val("");
    $("#noprocedurecas").val("").trigger('change');
    $("#head1").html("");
    $("#shidden1").val(0);
@@ -405,15 +405,15 @@ function attachcasepaperdata(today){
   if(casepaperlistData.has(date))
   {
     var AllData = casepaperlistData.get(date);
-    // console.log(casepaperlistData.get(date));
+     // console.log(casepaperlistData.get(date));
      $("#setnavanimal").attr("src","http://praxello.com/ahimsa/animalphotos/"+AllData.FeesData.animalId+".jpg");
      $("#setimage").attr("src","http://praxello.com/ahimsa/casephotos/"+AllData.MedicationData.medicationId+".jpg");
     $("#nofserch").val(AllData.FeesData.feesAmount);
     $("#opdselectdate").val(AllData.FeesData.visitDate);
     $("#opdvisittype").val(AllData.MedicationData.visitType).trigger('change');
     $("#textsymptoms").val(AllData.MedicationData.symptoms);
-    var simptomarr = AllData.MedicationData.symptoms.split(",");
-    $("#selectsymptoms").val(simptomarr).trigger('change');
+    // var simptomarr = AllData.MedicationData.symptoms.split(",");
+    // $("#selectsymptoms").val(simptomarr).trigger('change');
 
     $("#textdiagnosis").val(AllData.MedicationData.diagnosis);
     $("#inotype").val(AllData.MedicationData.typeOfInoculation).trigger('change');
@@ -435,7 +435,7 @@ function attachcasepaperdata(today){
     var newobj=JSON.parse(AllData.MedicationData.treatment);
 
     if(newobj.hasOwnProperty('Castration')&&(newobj['Castration'].NoOfAnimals!="")){
-      $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
+      // $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
       $("#noprocedurecas").val(newobj['Castration'].Procedure).trigger('change');
       $("#head1").html('<span class="badge badge-success">Data Added</span>');
       $("#shidden1").val(1);
@@ -498,28 +498,39 @@ function attachcasepaperdata(today){
       $("#shidden8").val(1);
     }
   }
+  var pdsaidate = $("#pdsaidate").val();
+  if(pdsaidate==""){
   if(casepaperlistData.has(largedate)){
       var dateData = casepaperlistData.get(largedate);
-
+      // console.log(dateData);
       var newobj=JSON.parse(dateData.MedicationData.treatment);
       if(newobj.hasOwnProperty('ArtificialInsemination')){
-        $("#aistai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
-        $("#aisooes").val(newobj['ArtificialInsemination']['Stage of Oestrus']).trigger('change');
-        $("#aisoror").val(newobj['ArtificialInsemination']['Status of reproductive organ']);
-        $("#aissch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
-        $("#aisno").val(newobj['ArtificialInsemination'].StrawNo);
-        $("#head2").html('<span class="badge badge-success">Data Added</span>');
-        $("#shidden2").val(1);
+        // $("#aistai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
+        // $("#aisooes").val(newobj['ArtificialInsemination']['Stage of Oestrus']).trigger('change');
+        // $("#aisoror").val(newobj['ArtificialInsemination']['Status of reproductive organ']);
+        // $("#aissch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
+        // $("#aisno").val(newobj['ArtificialInsemination'].StrawNo);
+        // $("#head2").html('<span class="badge badge-success">Data Added</span>');
+        // $("#shidden2").val(1);
+          // var pdsaidate = $("#pdsaidate").val();
+          // console.log("PD AI Date"+pdsaidate);
+          // var pdstaitype = $("#pdstai").val();
+          // console.log("PD AI Date"+pdstaitype);
+          // if(pdsaidate==""){
+          //
+          // }
+          // else{
+            $("#pdstai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
+            $("#pdssch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
+            $("#pdstrawno").val(newobj['ArtificialInsemination'].StrawNo);
+            $("#delcaidate").val(largedate);
+            $("#pdsaidate").val(largedate);
 
-          $("#pdstai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
-          $("#pdssch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
-          $("#pdstrawno").val(newobj['ArtificialInsemination'].StrawNo);
-          $("#delcaidate").val(largedate);
-          $("#pdsaidate").val(largedate);
+            $("#delstai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
+            $("#delssch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
+            $("#delstrawno").val(newobj['ArtificialInsemination'].StrawNo);
+          }
 
-          $("#delstai").val(newobj['ArtificialInsemination'].AIType).trigger('change');
-          $("#delssch").val(newobj['ArtificialInsemination'].Scheme).trigger('change');
-          $("#delstrawno").val(newobj['ArtificialInsemination'].StrawNo);
       }
   }
   // console.log('end');
@@ -639,7 +650,7 @@ $("#one1").on('submit',function(event){
 });
 $("#one1").on('reset',function(event){
   event.preventDefault();
-  $("#nocastrated").val("");
+  // $("#nocastrated").val("");
   $("#noprocedurecas").val("").trigger('change');
   $("#head1").html('');
   $("#shidden1").val(0);
@@ -828,14 +839,16 @@ function savepage(){
   var mainarr =new Object();
   var castrat =new Object();
   if(shidden1=="1"){
-    var nocastrated = $("#nocastrated").val();
+    // var nocastrated = $("#nocastrated").val();
+    var nocastrated =1;
     var noprocedurecas = $("#noprocedurecas").val();
     castrat['NoOfAnimals'] = nocastrated;
     castrat['Procedure'] = noprocedurecas;
     mainarr['Castration'] = castrat;
   }
   else{
-    castrat['NoOfAnimals'] = "";
+    var nocastrated =1;
+    castrat['NoOfAnimals'] =nocastrated;
     castrat['Procedure'] = "";
     mainarr['Castration'] = castrat;
   }

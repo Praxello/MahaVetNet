@@ -37,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 
 <body>
-	<div class="video-w3l" data-vide-bg="video/cow">
+	<div class="video-w3l" >
 		<!-- title -->
 		<h1>
 		<span class="prfil-img"><img src="images/AHD.png" alt="" width="55px" height="55px"> </span>
