@@ -37,7 +37,34 @@ function getallmedicinelist(){
       }
   });
 }
-
+var strawData = new Map(); // StrawData Map DataTable
+getstrawDatalist();
+function getstrawDatalist(){
+  var branchid = $("#brid").val();
+  var selectmedicine ='';
+  $.ajax({
+      type: "POST",
+      url: url+"getall_branchstraw.php",
+      data :{
+        branchid:branchid
+      },
+      async : false,
+      dataType :'json',
+      success: function(response) {
+        var count;
+         if(response['Data']!=null){
+            count= response['Data'].length;
+         }
+         selectmedicine ="<option value=''>Select Straw Number</option>";
+         for(var i=0;i<count;i++)
+         {
+         selectmedicine +="<option value='"+response['Data'][i].strawId+"'>"+response['Data'][i].straw_number+"</option>";
+         strawData.set(response.Data[i].strawId,response.Data[i]);
+         }
+         $("#aiselstrawno").html(selectmedicine);
+       }
+   });
+}
 $('#selectmedication').select2({
   allowClear: true,
   placeholder: "Select Medicine Type"
@@ -138,6 +165,10 @@ $('#aisooes').select2({
 $('#aissch').select2({
   allowClear: true,
   placeholder: "Select Scheme"
+});
+$('#aiselstrawno').select2({
+  allowClear: true,
+  placeholder: "Select Straw Number"
 });
 $('#opsust').select2({
   allowClear: true,

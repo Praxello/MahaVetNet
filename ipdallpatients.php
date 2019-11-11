@@ -410,6 +410,11 @@ if(isset($_SESSION['branchId'])){
                           </div>
                           <div class="col-sm-6">
                         <div class="form-group">
+                          <label class="control-label">Straw Number(Select From Dropdown)</label>
+                          <select  class="form-control"  id="aiselstrawno" style="width:100%;" >
+                            <option value="">Select Straw Number</option>
+
+                          </select>
                         </div>
                         </div>
                         </div>
@@ -551,8 +556,9 @@ if(isset($_SESSION['branchId'])){
                           </div>
                         </div>
                         <div class="col-sm-6">
-                      <div class="form-group">
-                      </div>
+                        <div class="form-group">
+
+                        </div>
                     </div>
                       </div>
                         <div class="row">
