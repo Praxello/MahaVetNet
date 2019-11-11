@@ -536,7 +536,7 @@ SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) I
         AND bmm.branchId = 200001 
         GROUP BY bm.branchName
         UNION
-        SELECT bm.branchName branch,0 Castration,COUNT(*) vaccination,0 IPD,0 deworm
+        SELECT bm.branchName branch,0 Castration,SUM(vm.cow + vm.bull + vm.buffalo + vm.redka + vm.calf + vm.goat + vm.sheep + vm.poultry) vaccination,0 IPD,0 deworm
         FROM vaccination_master vm 
         INNER JOIN branch_master bm ON bm.branchId = vm.branchId
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
@@ -720,3 +720,18 @@ SELECT COUNT(aom.ownerId) AS farmercount
             INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
             WHERE bmm.branchId = 100001 AND aom.mobile in(SELECT mobile FROM otp_master_farmer)
             AND bm.branchId < 10000
+        SELECT branch,SUM(vaccination) vaccination,SUM(deworm) deworm FROM(
+        SELECT bm.districtName branch,SUM(mm.cow + mm.bull + mm.buffalo + mm.redka + mm.calf + mm.goat + mm.sheep + mm.poultry) vaccination,0 deworm
+        FROM vaccination_master mm 
+         INNER JOIN branch_master bm ON bm.branchId = mm.branchId
+         INNER JOIN branch_mapper_master bmm ON bm.branchId = bmm.childBranch WHERE bmm.branchId = 100001 AND bm.branchId < 10000
+         GROUP BY bm.districtName
+         UNION
+         SELECT bm.districtName branch,0 vaccination,SUM(dwm.cow + dwm.bull + dwm.buffalo + dwm.redka + dwm.calf + dwm.goat + dwm.sheep + dwm.poultry) deworm 
+        FROM deworming_master dwm
+        INNER JOIN branch_master bm ON bm.branchId = dwm.branchId
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId
+        WHERE bmm.branchId = 100001
+        AND bm.branchId < 10000
+        GROUP BY bm.districtName)CounTable GROUP BY CounTable.branch
+ 

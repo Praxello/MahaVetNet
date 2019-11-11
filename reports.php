@@ -1,13 +1,14 @@
 <?php session_start();
-if(isset($_SESSION['branchId'])){
+if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     $brId = $_SESSION['branchId'];
     $drid = $_SESSION['userId'];
+    $email = $_SESSION['email'];
 ?>
 <!DOCTYPE HTML>
 <html>
 
 <head>
-     <?php include "title.php"; ?>
+    <title>Mahavetnet | Reports</title>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -26,7 +27,7 @@ if(isset($_SESSION['branchId'])){
 	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> -->
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
-
+    <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
     <!-- font-awesome icons CSS -->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome icons CSS -->
@@ -49,7 +50,7 @@ if(isset($_SESSION['branchId'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -59,9 +60,12 @@ if(isset($_SESSION['branchId'])){
 
         <!-- header-starts -->
        <?php include 'header.php';?>
+       
         <!-- main content start-->
         <div id="page-wrapper">
+        <div id="wait"></div>
         <input type="hidden" id="branchid" value="<?php echo $brId;?>">
+        <input type="hidden" id="emailid" value="<?php echo $email;?>">
             <div class="main-page">
             <div class="forms">
             <div class="row">
@@ -136,11 +140,14 @@ if(isset($_SESSION['branchId'])){
                                         <option value="16">Tour Book</option>
                                         </select>
                                         </div>
+                                        <div class="btn btn-group">
                                         <div class="col-sm-3">
                                       
-                                        <button  class="btn btn-primary" type="button" onclick="get_reports()">Generate Report</button>
-                                       
+                                        <button  class="btn btn-primary" type="button" onclick="get_reports()">View Report</button>
+                                        <button  class="btn btn-success" type="button" onclick="get_mrp()">Download and Email MPR</button>
                                         </div>
+                                        </div>
+                                       
                                     </div>
                                    
                                 </form>
@@ -175,8 +182,8 @@ if(isset($_SESSION['branchId'])){
             </div>
         </div>
         <div class="footer">
-            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p> -->
+            <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
+                    target="_blank">Praxello</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

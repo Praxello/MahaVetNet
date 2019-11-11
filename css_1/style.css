@@ -239,7 +239,7 @@ body {
 }
 
 .video-w3l {
-    background: rgba(0, 0, 0, 0.28);
+    /* background: rgba(0, 0, 0, 0.28); */
     min-height: -webkit-fill-available;
 }
 
@@ -632,7 +632,7 @@ i.icon_g_plus {
 
 .footer {
     margin: 3.5vw .3vw 0;
-    padding-bottom: 2.4vw;
+    padding-bottom: 14.4vw;
 }
 
 .footer p {

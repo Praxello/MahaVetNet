@@ -22,17 +22,33 @@
                     </li>
                     <li class="treeview">
                         <a href="reports.php">
-                            <i class="fa fa-dashboard"></i> <span>Reports</span>
+                            <i class="fa fa-file"></i> <span>Reports</span>
+                        </a>
+                    </li>
+                    <?php if($brId < 50000){?>
+                        <li class="treeview">
+                        <a href="allpatients.php">
+                            <i class="fa fa-user-md"></i> <span>All Patients (OPD)</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="ipdallpatients.php">
+                            <i class="fa fa-stethoscope"></i> <span>All Patients (IPD)</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="patients.php">
+                            <i class="fa fa-plus-square"></i> <span>Vaccination/Deworming</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="farmer.php">
-                            <i class="fa fa-dashboard"></i> <span>Farmers</span>
+                            <i class="fa fa-users"></i> <span>Farmers</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="medicines.php">
-                            <i class="fa fa-dashboard"></i> <span>Medicines</span>
+                            <i class="fa fa-medkit"></i> <span>Medicines</span>
                         </a>
                     </li>
                     <li class="treeview">
@@ -40,36 +56,7 @@
                             <i class="fa fa-dashboard"></i> <span>Straws</span>
                         </a>
                     </li>
-                    <li class="treeview">
-                        <a href="patients.php">
-                            <i class="fa fa-dashboard"></i> <span>Vaccination/Deworming</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="allpatients.php">
-                            <i class="fa fa-dashboard"></i> <span>All Patients (OPD)</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="ipdallpatients.php">
-                            <i class="fa fa-dashboard"></i> <span>All Patients (IPD)</span>
-                        </a>
-                    </li>
-                    <!-- <li class="treeview">
-                        <a href="vaccination.php">
-                            <i class="fa fa-dashboard"></i> <span>Vaccination</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="deworming.php">
-                            <i class="fa fa-dashboard"></i> <span>Deworming</span>
-                        </a>
-                    </li> -->
-                    <!-- <li class="treeview">
-                        <a href="index.html">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
-                    </li> -->
+                    <?php }?>
 
                 </ul>
             </div>

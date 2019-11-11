@@ -7,9 +7,6 @@ const data = {
     branchid: $('#brid').val()
 };
 
-const userid = 1,
-    branchid = 3391;
-
 $('#loadfirstpage').on('click', function(e) {
     e.preventDefault();
     $('#farmerPage').show();

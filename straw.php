@@ -7,7 +7,7 @@ if(isset($_SESSION['branchId'])){
 <html>
 
 <head>
-    <?php include "title.php"; ?>
+<title>Mahavetnet | Straws</title>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -24,7 +24,7 @@ if(isset($_SESSION['branchId'])){
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
-
+    <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
     <!-- font-awesome icons CSS -->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome icons CSS -->
@@ -47,7 +47,7 @@ if(isset($_SESSION['branchId'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -90,6 +90,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="clearfix"> </div>
                 </div>
                 <div class="tables">
+                <div id="wait"></div>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Straws List:</h4>
                         <div class="row">
@@ -117,8 +118,8 @@ if(isset($_SESSION['branchId'])){
             </div>
         </div>
         <div class="footer">
-            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p> -->
+            <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
+                    target="_blank">Praxello</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

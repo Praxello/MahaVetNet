@@ -16,7 +16,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-
+    <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
 
@@ -155,7 +155,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <label id="castration"></label>
                             </div>
                             <div class="col-md-6 top-content">
-                                <h5>Case Paper</h5>
+                                <h5>Cases</h5>
                                 <label id="casepaper"></label>
                             </div>
                             <div class="clearfix"> </div>
@@ -245,7 +245,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-
+                
                 <div class="charts">
                     <div class="col-md-4 charts-grids widget">
                     <div class="card-header">
@@ -262,35 +262,40 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div class="charts">
+              
 
-                    <div class="col-md-5 charts-grids widget states-mdl">
-                    <div class="card-header">
-                            <h3></h3>
+                <div class="charts">
+                    <div class="col-md-4 charts-grids widget">
+                        <div class="card-header">
+                            <h3>Dewoming | Vaccinations</h3>
+                        </div>
+                        <div id="dewormingmap"></div>
+                    </div>
+                    <div class="col-md-4 charts-grids widget states-mdl">
+                        <div class="card-header">
+                        <h3>Animals | Farmers</h3>
                         </div>
                         <div id="farmersanimalDiv"></div>
-
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-
-                <!-- <div class="charts">
-
-                    <div class="col-md-4 charts-grids widget states-mdl">
-                    <div class="card-header"> </div>
-
-                        <div id="farmersanimalDiv"></div>
+                
+                <div class="charts">
+                    <div class="col-md-12 charts-grids states-mdl">
+                        <div class="card-header">
+                            <h3>Symptoms</h3>
+                        </div>
+                        <div id="symptomschart"></div>
                     </div>
+                    
                     <div class="clearfix"> </div>
-
-                </div> -->
-
+                </div>
             </div>
         </div>
         <!--footer-->
         <div class="footer">
-            <!-- <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/"
-                    target="_blank">w3layouts</a></p> -->
+            <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
+                    target="_blank">Praxello</a></p>
         </div>
         <!--//footer-->
     </div>
@@ -341,6 +346,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <!-- //for index page weekly sales java script -->
@@ -353,6 +359,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="js/activeInst.js" type="text/javascript"></script>
     <script src="js/total_revenue_map.js" type="text/javascript"></script>
     <script src="js/dashboard_data.js" type="text/javascript"></script>
+    <script src="js/index_6.js" type="text/javascript"></script>
+    <script src="js/index_7.js" type="text/javascript"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.js"></script>
     <!-- //Bootstrap Core JavaScript -->

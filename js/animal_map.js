@@ -6,37 +6,53 @@ var numberofAI = [];
 var numberofInf = [];
 var numberofCB = [];
 var seriesData = [];
-var chart3,chartvar3=0;
+var chart3, chartvar3 = 0;
 const loadMapData = (seriesData) => {
-    chart3=Highcharts.chart('animaldiv', {
+
+    chart3 = Highcharts.chart('animaldiv', {
         chart: {
-            type: 'column'
+            type: 'area'
         },
         title: {
             text: 'AI | PD | CB | IS'
         },
         xAxis: {
             categories: numberofbranch,
-            crosshair: true
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'AI | PD | CB |IS'
+                text: 'AI | PD | CB | IS'
             }
+            // labels: {
+            //     formatter: function() {
+            //         return this.value / 1000;
+            //     }
+            // }
         },
         tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
+            split: true,
+            valueSuffix: ''
+                // headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                // pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                //     '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                // footerFormat: '</table>',
+                // shared: true,
+                // useHTML: true
         },
         plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
             },
             series: {
                 cursor: 'pointer',
@@ -52,6 +68,50 @@ const loadMapData = (seriesData) => {
         },
         series: seriesData
     });
+    // chart3=Highcharts.chart('animaldiv', {
+    //     chart: {
+    //         type: 'column'
+    //     },
+    //     title: {
+    //         text: 'AI | PD | CB | IS'
+    //     },
+    //     xAxis: {
+    //         categories: numberofbranch,
+    //         crosshair: true
+    //     },
+    //     yAxis: {
+    //         min: 0,
+    //         title: {
+    //             text: 'AI | PD | CB |IS'
+    //         }
+    //     },
+    //     tooltip: {
+    //         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //             '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+    //         footerFormat: '</table>',
+    //         shared: true,
+    //         useHTML: true
+    //     },
+    //     plotOptions: {
+    //         column: {
+    //             pointPadding: 0.2,
+    //             borderWidth: 0
+    //         },
+    //         series: {
+    //             cursor: 'pointer',
+    //             point: {
+    //                 events: {
+    //                     click: function() {
+    //                         //alert('Category: ' + this.category + ', value: ' + this.y);
+    //                         getbranchid(this.category, g_branchid);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     series: seriesData
+    // });
 }
 const loadanimalData = (param) => {
     numberofbranch = [];
@@ -85,9 +145,9 @@ const loadanimalData = (param) => {
             }
         },
         complete: function(response) {
-          if(chartvar3!=0){
-            chart3.hideLoading();
-          }
+            if (chartvar3 != 0) {
+                chart3.hideLoading();
+            }
             loadMapData(seriesData);
         }
     });
@@ -95,7 +155,7 @@ const loadanimalData = (param) => {
 loadanimalData(data.branchid);
 
 const getbranchid = (branch, branchId) => {
-     chartvar3=1;
+    chartvar3 = 1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',

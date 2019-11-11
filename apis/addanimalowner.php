@@ -22,8 +22,8 @@
 
  }
 		   $tempaddress = mysqli_real_escape_string($conn,$address);
-
-			$query = mysqli_query($conn,"insert into animal_owner_master(doctorid,firstName, LastName,profession, mobile, city, state, country, address, sex, accCreationDate,branchid, category,adharid) values ($userid,'$firstname','$lastname','$profession','$mobile','$city','Maharashtra','India','$tempaddress','$gender','$currentDate',$branchid,'$categorytemp','$adharidtemp')");
+ $sql = "insert into animal_owner_master(doctorid,firstName, LastName,profession, mobile, city, state, country, address, sex, accCreationDate,branchid, category,adharid) values ($userid,'$firstname','$lastname','$profession','$mobile','$city','Maharashtra','India','$tempaddress','$gender','$currentDate',$branchid,'$categorytemp','$adharidtemp')";
+			$query = mysqli_query($conn,$sql);
 
 			$rowsAffected=mysqli_affected_rows($conn);
 				if($rowsAffected==1)
@@ -40,7 +40,7 @@
 									}
 							}
 						}
-					$response = array('Message'=>"Animal Owner added Successfully","Data"=>$records ,'Responsecode'=>200);
+					$response = array('Message'=>"Animal Owner added Successfully","Data"=>$records,'Responsecode'=>200);
 				}
 				else
 				{
@@ -52,5 +52,5 @@
 		$response=array("Message"=> "Parameters missing","Responsecode"=>403);
 	 }
    mysqli_close($conn);
-	 print json_encode($response);
+print json_encode($response);
 ?>
