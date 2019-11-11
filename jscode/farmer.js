@@ -4,6 +4,9 @@ const animal_owner = (url, farmers, data) => {
         type: 'POST',
         data: data,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
@@ -13,6 +16,9 @@ const animal_owner = (url, farmers, data) => {
                 }
                 farmer_list(farmers);
             }
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 }
@@ -31,7 +37,7 @@ function farmer_list(farmers) {
         responseData += "<td><address>" + AnimalOwner.address + "</address></td>";
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
         responseData += '<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onClick="editowner(' + k + ')"><i class="fa fa-edit"></i>';
-        responseData += '</button><button class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Animals" onClick="loadAnimals(' + k + ')"><i class="fa fa-eye"></i>';
+        responseData += '</button><button class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Animals" onClick="loadAnimals(' + k + ')"><img src="img/cow.png">';
         responseData += "</button></div></td></tr>";
     }
     $('.farmer-data').html(responseData);
@@ -113,6 +119,7 @@ $('#addnewfarmer').on('submit', function(e) {
                 }
                 $('#addnewfarmer')[0].reset();
                 $('#farmerModal').modal('toggle');
+                loadAnimals(lastEntry.ownerId);
             }
             farmer_list(farmers);
         }

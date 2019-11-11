@@ -4,6 +4,9 @@ const loadMedicine = (url, medicines, branchid) => {
         type: 'POST',
         data: { branchid: branchid },
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
@@ -13,6 +16,9 @@ const loadMedicine = (url, medicines, branchid) => {
                 }
                 medicine_list(medicines);
             }
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 }

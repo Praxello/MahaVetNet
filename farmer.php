@@ -32,7 +32,6 @@ if(isset($_SESSION['branchId'])){
     <!-- side nav css file -->
     <link href='css/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css' />
     <!-- side nav css file -->
-
     <!-- js-->
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
@@ -41,13 +40,14 @@ if(isset($_SESSION['branchId'])){
     <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext"
         rel="stylesheet">
     <!--//webfonts-->
-
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+    
     <!-- Metis Menu -->
     <script src="js/metisMenu.min.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -79,7 +79,7 @@ if(isset($_SESSION['branchId'])){
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     id="file" name="file" runat="server" required />
                             </div>
-                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
+                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import Farmers" />
                             <a href="sample_download_farmer.php" type="button" class="btn btn-warning">Download Sample
                                 File</a>
                         </form>
@@ -94,6 +94,7 @@ if(isset($_SESSION['branchId'])){
                     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
                     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
                 <div class="tables">
+                <div id="wait"></div>
                     <div class="table-responsive bs-example widget-shadow">
 
 
@@ -136,12 +137,12 @@ if(isset($_SESSION['branchId'])){
                     <input type="hidden"   name="branchId1" value="<?php echo $brId ;?>"/>
                     <input type="hidden" name="doctorid" id="doctorid"/>
                             <div class="form-group">
-                                <label for="farmerfile">File</label>
+                                <label for="animalfile">File</label>
                                 <input type="file" class="form-control form-control-sm"
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     id="file" name="animalfile" runat="server" required />
                             </div>
-                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
+                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import Animals" />
                             <a href="sample_download_animals.php" type="button" class="btn btn-warning">Download Sample
                                 File</a>
                         </form>

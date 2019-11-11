@@ -47,7 +47,7 @@ if(isset($_SESSION['branchId'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -89,6 +89,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="clearfix"> </div>
                 </div>
                 <div class="tables">
+                <div id="wait"></div>
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Medicine List:</h4>
                         <div class="row">
