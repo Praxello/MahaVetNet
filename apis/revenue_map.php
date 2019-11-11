@@ -13,7 +13,7 @@ if($branchid >= 100001 && $branchid < 200000){
         FROM branch_master bm 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.branchId = bmm.childBranch 
-        WHERE bmm.branchId = 100001 AND mm.visitDate >= DATE_SUB(CURDATE(), INTERVAL 3 DAY) 
+        WHERE bmm.branchId = $branchid AND mm.visitDate >= DATE_SUB(CURDATE(), INTERVAL 3 DAY) 
         AND bm.branchId < 10000 
         GROUP BY bm.districtName
             UNION
