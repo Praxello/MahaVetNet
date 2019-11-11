@@ -52,7 +52,7 @@ padding-bottom:20vw;
 	<!-- <div class="video-w3l" data-vide-bg="video/cow"> -->
 	<h1>
 	<span class="prfil-img"><img src="images/AHD.png" alt="" style="float:left;"> </span>
-			<span style="color:red;">MahaVetNet</span>
+			<span style="color: white;font-family: Arial Rounded MT;font-weight: bold;">MahaVetNet</span>
 			<span class="prfil-img"><img src="images/praxello.png" alt="" style="float:right;"> </span>
 	</h1>
 		<!-- title -->
@@ -98,7 +98,7 @@ padding-bottom:20vw;
 		<!-- //copyright -->
 		<div class="footer" >
 			<p>&copy; 2020 All rights reserved | Design by
-				<a href="http://praxello.com" target="_blank">Praxello</a>
+				<a href="http://praxello.com" target="_blank">Praxello Solutions.</a>
 			</p>
 		</div>
 	</div>
