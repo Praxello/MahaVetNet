@@ -40,7 +40,20 @@ if(!isset($_SESSION['branchId'])){
         .footer {
             padding-bottom: 20vw;
         }
-    }
+	}
+	@media only screen and (max-device-width: 480px) {
+.ahd{
+	width:20%;
+}
+.praxello{
+	width:20%;
+	margin-top:-20%!important;
+}
+.example{
+	margin-left:-22%;
+	font-size: 30px;
+}
+}
     </style>
 
     <!-- //web-fonts -->
@@ -53,7 +66,7 @@ if(!isset($_SESSION['branchId'])){
         <div class="row">
             <div class="col-sm-4">
                 <h1>
-                    <span class="prfil-img"><img src="images/AHD.png" alt="" style="float:left;"> </span>
+                    <span><img class="ahd" src="images/AHD.png" alt="" style="float:left;"> </span>
                 </h1>
 
             </div>
@@ -65,7 +78,7 @@ if(!isset($_SESSION['branchId'])){
             </div>
             <div class="col-sm-4">
                 <h1>
-                    <span class="prfil-img"><img src="images/praxello.png" alt="" style="float:right;"> </span></h1>
+                    <span ><img class="praxello" src="images/praxello.png" alt="" style="float:right;"> </span></h1>
             </div>
 
         </div>
