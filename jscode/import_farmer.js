@@ -8,11 +8,17 @@ $('#farmerup').on('submit', function(e) {
         cache: false,
         processData: false,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             alert(response.Message);
             if (response.ResponseCode == '200') {
-                $('#fupForm')[0].reset();
+                $('#farmerup')[0].reset();
             }
+        },
+        complete: function() {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -27,11 +33,17 @@ $('#animalup').on('submit', function(e) {
         cache: false,
         processData: false,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             alert(response.Message);
             if (response.ResponseCode == '200') {
-                $('#animaup')[0].reset();
+                $('#animalup')[0].reset();
             }
+        },
+        complete: function() {
+            $("#wait").css("display", "none");
         }
     });
 });

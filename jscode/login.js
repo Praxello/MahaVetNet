@@ -20,7 +20,7 @@ $('#signin').on('submit', function(event) {
                 var userId = response.Data.userId;
                 var username = response.Data.fullName;
                 var email = response.Data.email;
-                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center;
+                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center + '&designation=' + response.Data.designation;
             } else {
                 alert('Enter Correct Username and password');
             }

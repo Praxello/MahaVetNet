@@ -8,11 +8,17 @@ $('#fupForm').on('submit', function(e) {
         cache: false,
         processData: false,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             alert(response.Message);
             if (response.ResponseCode == '200') {
                 $('#fupForm')[0].reset();
             }
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });

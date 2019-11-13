@@ -52,7 +52,7 @@ padding-bottom:20vw;
 	<!-- <div class="video-w3l" data-vide-bg="video/cow"> -->
 	<h1>
 	<span class="prfil-img"><img src="images/AHD.png" alt="" style="float:left;"> </span>
-			<span style="color: white;font-family: Arial Rounded MT;font-weight: bold;">MahaVetNet</span>
+			<span style="color: black;font-family: Arial Rounded MT;font-weight: bold;">MahaVetNet</span>
 			<span class="prfil-img"><img src="images/praxello.png" alt="" style="float:right;"> </span>
 	</h1>
 		<!-- title -->

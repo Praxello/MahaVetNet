@@ -106,6 +106,10 @@ $('#addnewfarmer').on('submit', function(e) {
         type: 'POST',
         data: farmerData,
         dataType: 'json',
+        beforeSend: function() {
+            console.log('in');
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             const Animals = null;
             var mainObj = {};
@@ -122,6 +126,11 @@ $('#addnewfarmer').on('submit', function(e) {
                 loadAnimals(lastEntry.ownerId);
             }
             farmer_list(farmers);
+        },
+        complete: function(data) {
+            // Hide image container
+            console.log('out');
+            $("#wait").css("display", "none");
         }
     });
 });

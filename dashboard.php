@@ -295,7 +295,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!--footer-->
         <div class="footer">
             <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
-                    target="_blank">Praxello</a></p>
+                    target="_blank">Praxello Solutions</a></p>
         </div>
         <!--//footer-->
     </div>

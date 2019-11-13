@@ -73,6 +73,9 @@ $('#addnewstraw').on('submit', function(e) {
         type: 'POST',
         data: strawData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 if (response.Data != null) {
@@ -82,6 +85,9 @@ $('#addnewstraw').on('submit', function(e) {
                 $('#strawmodal').modal('toggle');
             }
             straw_list(straw);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -98,6 +104,9 @@ $('#editstraw').on('submit', function(e) {
         type: 'POST',
         data: strawData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 straw.set(strawData.strawId, strawData);
@@ -105,6 +114,9 @@ $('#editstraw').on('submit', function(e) {
                 $('#edit_strawmodal').modal('toggle');
             }
             straw_list(straw);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -117,12 +129,18 @@ const removeStraw = param => {
             type: 'POST',
             data: { strawId: param },
             dataType: 'json',
+            beforeSend: function() {
+                $("#wait").css("display", "block");
+            },
             success: function(response) {
                 param = param.toString();
                 if (response.Responsecode == 200) {
                     straw.delete(param);
                 }
                 straw_list(straw);
+            },
+            complete: function(data) {
+                $("#wait").css("display", "none");
             }
         });
     }

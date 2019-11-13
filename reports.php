@@ -183,7 +183,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
         </div>
         <div class="footer">
             <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
-                    target="_blank">Praxello</a></p>
+                    target="_blank">Praxello Solutions</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

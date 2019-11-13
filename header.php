@@ -32,7 +32,7 @@
                                         <span class="prfil-img"><img src="images/profile.jpeg" alt=""  width="55px" height="55px"> </span>
                                     <div class="user-name">
                                         <p><?php echo $_SESSION['username'];?></p>
-                                        <span>Administrator</span>
+                                        <span><?php echo $_SESSION['designation'];?></span>
                                     </div><?}?>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>

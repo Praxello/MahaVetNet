@@ -47,18 +47,27 @@ if(isset($_SESSION['branchId'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-    <link href="css/loader.css" rel="stylesheet">
+    <style>
+        #wait{
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9999;
+  background:url("../images/preloader.gif") no-repeat center center rgba(0,0,0,0.25)
+}
+</style>
 </head>
 
 <body class="cbp-spmenu-push">
     <div class="main-content">
+   
     <?php include 'leftsidebar.php';?>
         <!--left-fixed -navigation-->
 <?php include 'header.php';?>
         <!-- //header-ends -->
         <!-- main content start-->
         <div id="page-wrapper">
-
+        <div id="wait"></div>
         <input type="hidden"  id="brid" value="<?php  echo $brId ;?>"/>
         <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
             <div class="main-page general">
@@ -78,7 +87,7 @@ if(isset($_SESSION['branchId'])){
                                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                     id="medicinefile" name="file" runat="server" required />
                             </div>
-                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import" />
+                            <input type="submit" name="submit" class="btn btn-success submitBtn" value="Import Medicines" />
                             <a href="sample_download_medicine.php" type="button" class="btn btn-warning">Download Sample
                                 File</a>
                         </form>
@@ -89,7 +98,7 @@ if(isset($_SESSION['branchId'])){
                     <div class="clearfix"> </div>
                 </div>
                 <div class="tables">
-                <div id="wait"></div>
+              
                     <div class="table-responsive bs-example widget-shadow">
                         <h4>Medicine List:</h4>
                         <div class="row">
@@ -119,7 +128,7 @@ if(isset($_SESSION['branchId'])){
         </div>
         <div class="footer">
             <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
-                    target="_blank">Praxello</a></p>
+                    target="_blank">Praxello Solutions</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>
