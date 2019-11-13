@@ -98,6 +98,9 @@ $('#addnewanimal').on('submit', function(e) {
         type: 'POST',
         data: animalData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 if (response.NewAnimal != null) {
@@ -107,6 +110,9 @@ $('#addnewanimal').on('submit', function(e) {
                 $('#animalModal').modal('toggle');
                 animal_list(animals_data);
             }
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -152,6 +158,9 @@ $('#edit_animal').on('submit', function(e) {
         type: 'POST',
         data: animalData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 animals_data.set(animalData_set.animalid.toString(), animalData_set);
@@ -159,6 +168,9 @@ $('#edit_animal').on('submit', function(e) {
                 $('#edit_animalModal').modal('toggle');
                 animal_list(animals_data);
             }
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
