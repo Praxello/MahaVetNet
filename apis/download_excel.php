@@ -1187,13 +1187,11 @@ if($daybook!=null){
     $objPHPExcel->getActiveSheet()->setCellValue('B1',  $response[0]["centre_type"]);
     $objPHPExcel->getActiveSheet()->setCellValue('B3',$date);
     $objPHPExcel->getActiveSheet()->setCellValue('D3',$date1);
+    $j=0;
 for ($i = 0; $i < $count; $i++) {
-    $cell = $i + 5;
-    $disease = $response[$i]["symptoms"];
-    $fever = strpos($disease,"fever");
-    $diarrhea = strpos($disease,"diarrhea");
-    $mouth = strpos($disease,"mouth lesions");
-    if(($fever && $diarrhea) || ($fever && $mouth) || ($diarrhea && $mouth)) {
+    $cell = $j + 5;
+    $disease = strtolower($response[$i]["symptoms"]);
+    if((strpos($disease,"fever") !== false && strpos($disease,"diarrhea") !==false) || (strpos($disease,"fever") !== false && strpos($disease,"mouth lesions") !==false) || (strpos($disease,"diarrhea") !==false && strpos($disease,"mouth lesions") !==false)) {
     $treatment = json_decode($response[$i]["treatment"],true);
     $object = getTreatment($treatment);
     $objPHPExcel->getActiveSheet()->setCellValue('A' . $cell, $i+1)
@@ -1211,6 +1209,7 @@ for ($i = 0; $i < $count; $i++) {
      ->setCellValue('M' . $cell, $response[$i]["symptoms"])
      ->setCellValue('N' . $cell, $response[$i]["diagnosis"])
      ->setCellValue('O' . $cell,$object);
+     $j++;
     }
 }
 }//end for add data

@@ -67,7 +67,11 @@
 // if($response["vaccination"]==null){
 //     echo $response["Message"];
 // }
+$a = 'How are you?';
 
+if (strpos($a, 'are1') !== false) {
+    echo 'true';
+}
 $array = array(0 => 100, "color" => "red");
 print_r(array_keys($array));
 

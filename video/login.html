@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<title>Bootstrap Example</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.content {
+  position: relative;
+
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+</style>
+	</head>
+	<body>
+		<div class="container">
+			<video autoplay muted loop id="myVideo">
+			  <source src="cow.mp4" type="video/mp4">
+			  Your browser does not support HTML5 video.
+			</video>
+				<div class="content">
+					<div class="row">
+					<div class="col-md-2">
+						<img src="../images/AHD.png" class="img-responsive" style="float: left;">
+					</div>
+					<div class="col-md-8">
+						<center><h1>MahaVetNet</h1></center>
+					</div>
+					<div class="col-md-2">
+						<img src="../images/praxello.png" class="img-responsive" style="float: right;">
+					</div>
+					</div>
+				</div>
+			<div class="row">
+				<div class="col-md-2">
+
+				</div>
+				<div class="col-md-8 col-sm-12">
+					<div class="content" style="background:rgba(0, 0, 0, 0.5);">
+
+					  <center>
+					    <h1>Login</h1>
+					    <input type="text" class="form-control">
+					    <br>
+					    <input type="text" class="form-control">
+					    <br><br>
+					    <button class="btn btn-danger">Login</button>
+					    <br>
+					 </center>
+					</div>
+				</div>
+				<div class="col-md-2">
+
+				</div>
+			</div>
+<script>
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+
+</div>
+
+
+
+	</body>
+</html>
