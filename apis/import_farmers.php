@@ -1,9 +1,12 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+include "../connection.php";
+mysqli_set_charset($conn, 'utf8');
 // Load the database configuration file
-include_once '../connection.php';
 $response = null;
     // Allowed mime types
-    if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
+if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
    $branchId = $_POST['branchId'];
    $ownerid = $_POST['ownerid'];
     $csvMimes =array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
