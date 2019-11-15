@@ -406,7 +406,7 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                           <div class="col-sm-6 ">
                           <div class="form-group">
-                            <label class="control-label">Straw Number</label>
+                            <label class="control-label">Enter Straw Number OR</label>
                             <input type="text" class="form-control" id="aisno" placeholder="Straw Number" >
                           </div>
                           </div>

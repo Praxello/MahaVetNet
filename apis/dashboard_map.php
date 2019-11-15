@@ -22,7 +22,7 @@ if($branchid >= 100001 && $branchid < 200000){
         UNION
         SELECT  bm.blockName AS branch,0 Total,0 downloads,COUNT(bm.branchId) remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId NOT IN(SELECT branchId FROM otp_master) AND bm.branchId < 10000 GROUP BY bm.blockName) countTable 
         GROUP BY countTable.branch";
-}else if($branchid >= 300001 && $branchid < 400000){//ddc
+}else if($branchid >= 300001 && $branchid < 400000){//daho
     $sql = "SELECT branch,SUM(Total) AS Total,SUM(downloads) AS Downloads,SUM(remaining) AS remaining FROM(
         SELECT bm.branchName AS branch,COUNT(bm.branchId) Total,0 downloads,0 remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId < 10000 GROUP BY bm.branchName 
         UNION
@@ -30,7 +30,7 @@ if($branchid >= 100001 && $branchid < 200000){
         UNION 
         SELECT bm.branchName AS branch,0 Total,0 downloads,COUNT(bm.branchId) remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId NOT IN(SELECT branchId FROM otp_master) AND bm.branchId < 10000 GROUP BY bm.branchName) countTable 
         GROUP BY countTable.branch";
-}else if($branchid >= 400001 && $branchid < 500000){//daho 
+}else if($branchid >= 400001 && $branchid < 500000){//ddc 
     $sql = "SELECT branch,SUM(Total) AS Total,SUM(downloads) AS Downloads,SUM(remaining) AS remaining FROM(
         SELECT bm.branchName AS branch,COUNT(bm.branchId) Total,0 downloads,0 remaining FROM branch_master bm WHERE bm.branchId IN(SELECT bmm.childBranch FROM branch_mapper_master bmm WHERE bmm.branchId = $branchid) AND bm.branchId < 10000 GROUP BY bm.branchName 
         UNION

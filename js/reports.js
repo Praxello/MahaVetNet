@@ -79,7 +79,12 @@ const loadBranchLevel = branchid => {
         branchId_dispencery = branchid;
         $('.zone').hide();
         $('.district').hide();
-    } else if (branchid >= 400001 && branchid < 600000) { //daho 
+    } else if (branchid >= 400001 && branchid < 500000) { //ddc
+        level = 3;
+        branchId_dispencery = branchid;
+        $('.zone').hide();
+        $('.district').hide();
+    } else if (branchid >= 500001 && branchid < 600000) { //daho 
         level = 4;
         $('.zone').hide();
         $('.district').hide();

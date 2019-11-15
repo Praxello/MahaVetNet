@@ -735,3 +735,6 @@ SELECT COUNT(aom.ownerId) AS farmercount
         AND bm.branchId < 10000
         GROUP BY bm.districtName)CounTable GROUP BY CounTable.branch
  
+ rjc_pune rjt8x7ac id=200007
+ daho_pune 497a1df7 id=300030
+ tal_ambegaon tzzrjnht id=500289

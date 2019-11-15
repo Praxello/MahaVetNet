@@ -78,7 +78,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bm.branchId < 10000
         GROUP BY bm.blockName) CounTable
         GROUP BY CounTable.branch";
-}else if($branchid >= 300001 && $branchid < 400000){//ddc
+}else if($branchid >= 300001 && $branchid < 500000){//ddc
     $sql = "SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) IPD,SUM(deworm) deworm FROM(
         SELECT bm.branchName branch,count(bm.branchId) Castration,0 vaccination,0 IPD,0 deworm
         FROM branch_master bm 
@@ -114,7 +114,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bm.branchId < 10000
         GROUP BY bm.branchName) CounTable
         GROUP BY CounTable.branch";
-}else if($branchid >= 400001 && $branchid < 500000){//daho 
+}else if($branchid >= 500001 && $branchid < 600000){//daho 
     $sql = "SELECT branch,SUM(Castration) Castration,SUM(vaccination) vaccination,SUM(IPD) IPD,SUM(deworm) deworm FROM(
         SELECT bm.centre_type branch,count(bm.branchId) Castration,0 vaccination,0 IPD,0 deworm
         FROM branch_master bm 

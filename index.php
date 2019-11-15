@@ -43,7 +43,7 @@ if(!isset($_SESSION['branchId'])){
 	}
 	@media only screen and (max-device-width: 480px) {
 .ahd{
-	width:20%;
+	width:18%;
 }
 .praxello{
 	width:20%;

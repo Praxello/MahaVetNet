@@ -7,7 +7,7 @@ $response=null;
 $records = null;
 extract($_POST);
 if (isset($_POST['usrname']) && isset($_POST['passwrd'])) {
-$sql = "SELECT branchId,centre_type FROM  branch_master WHERE username='$usrname' AND password='$passwrd' AND isActive=1";
+$sql = "SELECT branchId,centre_type FROM  branch_master WHERE username='$usrname' AND password='$passwrd'";
     $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {
         $academicAffected = mysqli_num_rows($jobQuery);
