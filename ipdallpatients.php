@@ -273,7 +273,7 @@ if(isset($_SESSION['branchId'])){
                                 <thead>
                                   <tr>
                                   <th style="width:60%;">Medicine Name</th>
-                                  <th style="width:20%;">Remarks</th>
+                                  <th style="width:20%;">Remarks/Time</th>
                                    <th style="width:10%;">Days</th>
                                    <th style="display:none;width:10%;">Mid</th>
                                    <th style="width:10%;">Action</th>
@@ -404,14 +404,14 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                           <div class="col-sm-6 ">
                           <div class="form-group">
-                            <label class="control-label">Straw Number</label>
+                            <label class="control-label">Enter Straw Number OR</label>
                             <input type="text" class="form-control" id="aisno" placeholder="Straw Number" >
                           </div>
                           </div>
                           <div class="col-sm-6">
                         <div class="form-group">
                           <label class="control-label">Straw Number(Select From Dropdown)</label>
-                          <select  class="form-control"  id="aiselstrawno" style="width:100%;" >
+                          <select  class="form-control"  id="aiselstrawno" style="width:100%;" onchange="loadstraw(this.value);">
                             <option value="">Select Straw Number</option>
 
                           </select>

@@ -115,6 +115,7 @@ if(isset($_SESSION['branchId'])){
                                 <tr>
                                     <th>Sr.no</th>
                                     <th>Straw Number</th>
+                                    <th>Consumed</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

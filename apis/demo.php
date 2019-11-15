@@ -54,3 +54,4 @@ if($branchid >= 100001 && $branchid < 200000){
 mysqli_close($conn);
 exit(json_encode($response));
 ?>
+

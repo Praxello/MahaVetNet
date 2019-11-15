@@ -26,7 +26,9 @@ header('Content-Type: application/json');
 		{
 			$nameOfSamples = $samplenames;
 		}
-
+		if(isset($_POST['strawnumber'])){
+			mysqli_query($conn,"UPDATE straw_details SET isConsumed = 1 WHERE strawId = $strawnumber");
+		}
 		//delete all rows mandatoryly
 		 $checkquery = mysqli_query($conn,"delete from   ipd_medication_master where animalId=$animalid and visitDate='$visitdate'");
 		//animalId, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate

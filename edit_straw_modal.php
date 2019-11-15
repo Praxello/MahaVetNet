@@ -16,6 +16,16 @@
                         </div>
                        
                     </div>
+                    <div class="row">
+                    <div class="form-group">
+                        <label>is consumed</label>
+                            <select  class="form-control" id="estraw_consumed">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                       
+                    </div>
 
                 </div>
                 <div class="modal-footer">

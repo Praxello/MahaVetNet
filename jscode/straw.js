@@ -30,9 +30,14 @@ function straw_list(straw) {
     var i = 1;
     for (let k of straw.keys()) {
         let straws = straw.get(k);
+        var consumed = "<td>No</td>";
+        if (straws.isConsumed == '1') {
+            consumed = "<td>Yes</td>";
+        }
         responseData += "<tr>";
         responseData += "<td>" + (i) + "</td>";
         responseData += "<td>" + straws.straw_number + "</td>";
+        responseData += consumed;
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
         responseData += '<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onClick="editstraw(' + k + ')"><i class="fa fa-edit"></i>';
         responseData += '</button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onClick="removeStraw(' + k + ')"><i class="fa fa-trash"></i></button>';
@@ -45,7 +50,7 @@ function straw_list(straw) {
         retrieve: true,
         bPaginate: $('tbody tr').length > 10,
         order: [],
-        columnDefs: [{ orderable: false, targets: [0, 1, 2] }],
+        columnDefs: [{ orderable: false, targets: [0, 1, 2, 3] }],
         dom: 'Bfrtip',
         buttons: ['copy', 'csv', 'excel', 'pdf'],
         destroy: true
@@ -56,8 +61,10 @@ const editstraw = param => {
     param = param.toString();
     if (straw.has(param)) {
         const straws = straw.get(param);
+        console.log(straws);
         $('#estraw_number').val(straws.straw_number);
         $('#strawId').val(param);
+        $('#estraw_consumed').val(straws.isConsumed).trigger('change');
         $('#edit_strawmodal').modal();
     }
 }
@@ -97,6 +104,7 @@ $('#editstraw').on('submit', function(e) {
     var strawData = {
         strawId: $('#strawId').val(),
         straw_number: $('#estraw_number').val(),
+        isConsumed: $('#estraw_consumed').val(),
         branchid: data.branchid
     };
     $.ajax({
