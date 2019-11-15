@@ -15,6 +15,7 @@ $('#fupForm').on('submit', function(e) {
             alert(response.Message);
             if (response.ResponseCode == '200') {
                 $('#fupForm')[0].reset();
+                loadMedicine(url, medicines, data.branchid);
             }
         },
         complete: function(data) {

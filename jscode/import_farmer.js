@@ -15,6 +15,7 @@ $('#farmerup').on('submit', function(e) {
             alert(response.Message);
             if (response.ResponseCode == '200') {
                 $('#farmerup')[0].reset();
+                animal_owner(url, farmers, data);
             }
         },
         complete: function() {

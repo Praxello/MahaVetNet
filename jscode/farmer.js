@@ -107,7 +107,6 @@ $('#addnewfarmer').on('submit', function(e) {
         data: farmerData,
         dataType: 'json',
         beforeSend: function() {
-            console.log('in');
             $("#wait").css("display", "block");
         },
         success: function(response) {
@@ -129,7 +128,6 @@ $('#addnewfarmer').on('submit', function(e) {
         },
         complete: function(data) {
             // Hide image container
-            console.log('out');
             $("#wait").css("display", "none");
         }
     });
