@@ -406,16 +406,16 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                           <div class="col-sm-6 ">
                           <div class="form-group">
-                            <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="aisno" placeholder="Straw Number" >
+                            <label class="control-label">Bull Number</label>
+                            <input type="text" class="form-control" id="aisno" placeholder="Bull Number" >
                           </div>
                           </div>
                           <div class="col-sm-6">
                           <div class="form-group">
-                          <label class="control-label">Straw Number(Select From Dropdown)</label>
+                          <label class="control-label">Bull Number(Select From Dropdown)</label>
                           <select  class="form-control"  id="aiselstrawno" style="width:100%;" >
-                            <option value="">Select Straw Number</option>
-                          
+                            <option value="">Select Bull Number</option>
+
                           </select>
                         </div>
                         </div>
@@ -553,8 +553,8 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                             <div class="col-sm-6">
                           <div class="form-group">
-                            <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="delstrawno" placeholder="Enter Straw Number" >
+                            <label class="control-label">Bull Number</label>
+                            <input type="text" class="form-control" id="delstrawno" placeholder="Enter Bull Number" >
                           </div>
                         </div>
                         <div class="col-sm-6">
@@ -728,8 +728,8 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                             <div class="col-sm-6">
                           <div class="form-group">
-                            <label class="control-label">Straw Number</label>
-                            <input type="text" class="form-control" id="pdstrawno" placeholder="Enter Straw Number" >
+                            <label class="control-label">Bull Number</label>
+                            <input type="text" class="form-control" id="pdstrawno" placeholder="Enter Bull Number" >
 
                           </div>
                         </div>
