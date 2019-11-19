@@ -19,7 +19,7 @@
                  for (var i = 0; i < count; i++) {
                      // sessionStorage.setItem(i, JSON.stringify(response.Data[i]));
                      tblData += '<li><a href="#"><div class="notification_desc"><p>' + response.Data[i].centre_type + '</p>';
-                     tblData += '<p><span>' + response.Data[i].mobile + '(' + response.Data[i].branchId + ')</span></p></div><div class="clearfix"></div> </a>';
+                     tblData += '<p><span>' + response.Data[i].mobile + '(' + response.Data[i].branchId + ')</span></p><a class="btn btn-primary btn-sm float-right" type="button" onclick="getanemail(\'' + response.Data[i].branchId + '\',\'' + response.Data[i].centre_type + '\',\'' + response.Data[i].mobile + '\')";>Not My VD</a> </div><div class="clearfix"></div> </a>';
                      tblData += '</li>';
                  }
                  tblData += '<hr></hr>';
@@ -30,21 +30,19 @@
      });
  }
 
- // function loadHeaderData() {
- //     var count = sessionStorage.length;
- //     var str = '',
- //         tblData = '';
- //     if (count > 0) {
- //         tblData += '<li><div class="notification_header">';
- //         tblData += '<h3>You have ' + count + ' new messages</h3></div></li>';
- //         for (var i = 0; i < count; i++) {
- //             str = JSON.parse(sessionStorage.getItem(i));
- //             tblData += '<li><a href="#"><div class="notification_desc"><p>' + str.centre_type + '</p>';
- //             tblData += '<p><span>' + str.mobile + '</span></p></div><div class="clearfix"></div> </a>';
- //             tblData += '</li>';
- //         }
- //         tblData += '<hr></hr>';
- //         console.log(tblData);
- //         $('.loadmobile').prepend(tblData);
- //     }
- // }
+ function getanemail(branchId, centre_type, mobile) {
+     const data = {
+         branchId: branchId,
+         center: centre_type,
+         mobile: mobile
+     };
+     $.ajax({
+         url: url + 'sendEmail.php',
+         type: 'POST',
+         data: data,
+         dataType: 'json',
+         success: function(response) {
+             alert(response.Message);
+         }
+     });
+ }

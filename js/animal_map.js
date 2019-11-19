@@ -129,19 +129,26 @@ const loadanimalData = (param) => {
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
-                var i;
+                var i, totalartins = 0,
+                    totalpd = 0,
+                    totalCB = 0;
                 for (i = 0; i < count; i++) {
+                    totalartins += parseInt(response.Data[i].AI);
+                    totalpd += parseInt(response.Data[i].PD);
+                    totalCB += parseInt(response.Data[i].CB);
                     numberofbranch.push(response.Data[i].branch);
                     numberofPD.push(parseInt(response.Data[i].PD));
                     numberofAI.push(parseInt(response.Data[i].AI));
                     numberofInf.push(parseInt(response.Data[i].Inf));
                     numberofCB.push(parseInt(response.Data[i].CB));
                 }
-
                 seriesData.push({ name: 'Artificial Insemination', data: numberofAI });
                 seriesData.push({ name: 'Pregnancy Diagnosis', data: numberofPD });
                 seriesData.push({ name: 'Calves Born', data: numberofCB });
                 seriesData.push({ name: 'Infertility & Sterility', data: numberofInf });
+                $('#totalartins').html(totalartins.toLocaleString());
+                $('#totalCB').html(totalCB.toLocaleString());
+                $('#totalPD').html(totalpd.toLocaleString());
             }
         },
         complete: function(response) {

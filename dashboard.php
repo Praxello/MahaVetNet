@@ -57,6 +57,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         height: 358px;
         margin: 0 auto
     }
+    .widget2{
+        width: 295px;
+    }
     </style>
     <!--pie-chart -->
     <!-- index page sales reviews visitors pie chart -->
@@ -88,7 +91,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <div id="page-wrapper">
             <div class="main-page">
                 <div class="col_3">
-                    <div class="col-md-3">
+                    <div class="col-md-3 widget2">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-rupee icon-rounded"></i>
                             <div class="stats">
@@ -97,7 +100,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3  widget2">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
                             <div class="stats">
@@ -106,7 +109,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 widget2">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-money user2 icon-rounded"></i>
                             <div class="stats">
@@ -115,7 +118,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 widget2">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                             <div class="stats">
@@ -124,15 +127,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-md-3 widget">
+                    <div class="col-md-3 widget2">
                         <div class="r3_counter_box">
                             <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
                             <div class="stats">
-                                <h5><strong>1450</strong></h5>
-                                <span>Total Users</span>
+                                <h5><strong id="totalartins"></strong></h5>
+                                <span>Total AI</span>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="clearfix"> </div>
                 </div>
 
@@ -155,8 +158,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <label id="castration"></label>
                             </div>
                             <div class="col-md-6 top-content">
-                                <h5>Cases</h5>
-                                <label id="casepaper"></label>
+                                <h5>Calf Born</h5>
+                                <label id="totalCB"></label>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
@@ -166,8 +169,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 <label id="vaccinations"></label>
                             </div>
                             <div class="col-md-6 top-content">
-                                <h5>Operations</h5>
-                                <label id="operations"></label>
+                                <h5>Total PD</h5>
+                                <label id="totalPD"></label>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
