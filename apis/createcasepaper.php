@@ -16,6 +16,11 @@ header('Content-Type: application/json');
 	 //isset($_POST['latitude']) && isset($_POST['longitude']) &&
 	 if( isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['doctorid']) && isset($_POST['visittype']) && isset($_POST['feestype']) && isset($_POST['fees']) && isset($_POST['nextvisitdate']) && isset($_POST['inoculation']) && isset($_POST['totalsamples']) &&  isset($_POST['diagnosis']) && isset($_POST['symptoms']) && isset($_POST['treatment']) && isset($_POST['animalid']) && isset($_POST['visitdate']) &&  isset($_POST['medicineids']) && isset($_POST['dosages']) && isset($_POST['instructions']) && isset($_POST['days']) && isset($_POST['presentcondition']))
 	 {
+    $tagnum =  $_POST['tagno'];
+    $taglen = strlen($tagnum);
+    if($taglen==12){
+      	mysqli_query($conn,"UPDATE animal_master SET  animalName='$tagnum' WHERE animalId=$animalid");
+    }
 		$medicinesValues = explode(",", $medicineids);
 		$dosageValues = explode(",", $dosages);
 		$instructionValues = explode(",", $instructions);

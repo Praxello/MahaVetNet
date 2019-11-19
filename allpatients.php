@@ -422,6 +422,23 @@ if(isset($_SESSION['branchId'])){
                         </div>
                         <div class="row">
                           <div class="col-sm-6">
+                          <div class="form-group">
+                          <label class="control-label">Tag Number</label>
+                            <input type="text" class="form-control" id="aientanimalno" placeholder="Enter Animal Number"   onkeypress="javascript:return isNumberKey(event)">
+
+                          <!-- <select  class="form-control"  id="aiselstrawno" style="width:100%;" >
+                            <option value="">Select Bull Number</option>
+
+                          </select> -->
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                          <div class="form-group">
+                          </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
                         <div class="form-group">
                           <button type="submit" class="btn btn-primary">Save</button>
                         </div>

@@ -359,6 +359,18 @@ function buttoncasepaper(id) {
     $("#fourthtable").show();
     $("#opdowner").html(AllData.firstName);
     $("#opdanimalname").html(AllData.animalName);
+    var num = parseInt(AllData.animalName);
+    // console.log("num"+num);
+    // num="123";
+    if(isNaN(num)){
+      // console.log("Okif");
+        $("#aientanimalno").val();
+    }
+    else{
+        // console.log("Okelse");
+        $("#aientanimalno").val(AllData.animalName);
+    }
+
     $("#setnavanimal").attr("src", "http://praxello.com/ahimsa/animalphotos/" + AllData.animalId + ".jpg");
     $("#opdanimalage").html("<font color='red'>" + AllData.specie + "</font>/<font color='green'>" + AllData.breed + "</font>/<font color='blue'>" + AllData.gender + "</font>");
     // $("#opdanimalweight").html(AllData.weight);
@@ -678,6 +690,7 @@ function removetrash(smid) {
 
 $("#one1").on('submit', function(event) {
     event.preventDefault();
+
     $("#head1").html('<span class="badge badge-success">Data Added</span>');
     $("#shidden1").val(1);
     $('#collapseOne').collapse('toggle');
@@ -691,10 +704,19 @@ $("#one1").on('reset', function(event) {
     $('#collapseOne').collapse('toggle');
 });
 $("#two1").on('submit', function(event) {
+    var aientanimalno = $("#aientanimalno").val().length;
     event.preventDefault();
-    $("#head2").html('<span class="badge badge-success">Data Added</span>');
-    $("#shidden2").val(1);
-    $('#collapseTwo').collapse('toggle');
+    if(aientanimalno==12){
+      $("#head2").html('<span class="badge badge-success">Data Added</span>');
+      $("#shidden2").val(1);
+      $('#collapseTwo').collapse('toggle');
+    }
+    else{
+      $("#head2").html('');
+      $("#shidden2").val(0);
+      alert("Please Enter 12 Digit Correct Animal Tag Number");
+    }
+
 
 });
 $("#two1").on('reset', function(event) {
@@ -858,6 +880,8 @@ function savepage() {
     var feestype = "CASH";
     // $("#selpaymethod").val();
     var presentcondition = $("#selprecond").val();
+    var aientanimalno = $("#aientanimalno").val();
+    // console.log(aientanimalno);
     var samplenames = [""];
     // $("#selnoofsc").val();
     samplenames = samplenames.toString();
@@ -1061,7 +1085,7 @@ function savepage() {
                 samplenames: samplenames,
                 latitude: '0',
                 longitude: '0',
-
+                tagno:aientanimalno
             },
             async: false,
             dataType: 'json',
