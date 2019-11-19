@@ -738,3 +738,5 @@ SELECT COUNT(aom.ownerId) AS farmercount
  rjc_pune rjt8x7ac id=200007
  daho_pune 497a1df7 id=300030
  tal_ambegaon tzzrjnht id=500289
+
+ SELECT * FROM advertisement_mapping amm INNER JOIN advertisement_master am ON amm.addId = am.adId WHERE CURRENT_DATE BETWEEN amm.fromDate AND amm.toDate
