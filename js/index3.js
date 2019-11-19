@@ -8,7 +8,8 @@ var branch = [];
 var downloads = [];
 var Remaining = [];
 var apiData = [];
-var chart,chartvar=0;
+var chart, chartvar = 0;
+
 function loadMap(param) {
     branch = [];
     downloads = [];
@@ -37,8 +38,8 @@ function loadMap(param) {
             }
         },
         complete: function(response) {
-            if(chartvar!=0){
-              chart.hideLoading();
+            if (chartvar != 0) {
+                chart.hideLoading();
             }
             loadData(apiData);
         }
@@ -47,7 +48,7 @@ function loadMap(param) {
 loadMap(data.branchid);
 
 function fetchName(param, branchid) {
-   chartvar=1;
+    chartvar = 1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
@@ -61,18 +62,19 @@ function fetchName(param, branchid) {
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
+
             }
         },
         complete: function(response) {
-          // console.log("ok2");
-          //  chart.showLoading();
+            // console.log("ok2");
+            //  chart.showLoading();
             loadMap(branchid_g);
         }
     });
 }
 
 function loadData(apiData) {
-    chart=Highcharts.chart('chartdiv1', {
+    chart = Highcharts.chart('chartdiv1', {
 
         chart: {
             type: 'column'

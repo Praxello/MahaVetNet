@@ -36,7 +36,7 @@ if($branchid >= 100001 && $branchid < 200000){
         WHERE bmm.branchId = $branchid
         AND bm.branchId < 10000
         GROUP BY bm.blockName)CounTable GROUP BY CounTable.branch";
-}else if($branchid >= 300001 && $branchid < 400000){//ddc
+}else if($branchid >= 300001 && $branchid < 500000){//ddc
     $sql = "SELECT branch,SUM(vaccination) vaccination,SUM(deworm) deworm FROM(
         SELECT bm.branchName branch,SUM(mm.cow + mm.bull + mm.buffalo + mm.redka + mm.calf + mm.goat + mm.sheep + mm.poultry) vaccination,0 deworm
         FROM vaccination_master mm 
@@ -51,7 +51,7 @@ if($branchid >= 100001 && $branchid < 200000){
         WHERE bmm.branchId = $branchid
         AND bm.branchId < 10000
         GROUP BY bm.branchName)CounTable GROUP BY CounTable.branch";
-}else if($branchid >= 400001 && $branchid < 500000){//daho 
+}else if($branchid >= 500001 && $branchid < 600000){//daho 
     $sql = "SELECT branch,SUM(vaccination) vaccination,SUM(deworm) deworm FROM(
         SELECT bm.centre_type branch,SUM(mm.cow + mm.bull + mm.buffalo + mm.redka + mm.calf + mm.goat + mm.sheep + mm.poultry) vaccination,0 deworm
         FROM vaccination_master mm 

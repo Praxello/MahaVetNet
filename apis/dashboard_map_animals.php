@@ -82,7 +82,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName) CounTable
         GROUP BY CounTable.branch";
-}else if($branchid >= 300001 && $branchid < 400000){//ddc
+}else if($branchid >= 300001 && $branchid < 500000){//ddc
     $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
         SELECT bm.branchName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
         FROM branch_master bm 
@@ -120,7 +120,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName) CounTable
         GROUP BY CounTable.branch";
-}else if($branchid >= 400001 && $branchid < 500000){//daho 
+}else if($branchid >= 500001 && $branchid < 600000){//daho 
     $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
         SELECT bm.centre_type branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
         FROM branch_master bm 

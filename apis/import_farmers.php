@@ -1,9 +1,12 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+include "../connection.php";
+mysqli_set_charset($conn, 'utf8');
 // Load the database configuration file
-include_once '../connection.php';
 $response = null;
     // Allowed mime types
-    if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
+if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
    $branchId = $_POST['branchId'];
    $ownerid = $_POST['ownerid'];
     $csvMimes =array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
@@ -30,9 +33,9 @@ $response = null;
                 $aadhar = $line[5];
                 $profession = $line[6];
                 $city = $line[7];
-                $state = $line[8];
-                $country = $line[9];
-                $category = $line[10];
+                $state = 'Maharashtra';
+                $country = 'India';
+                $category = $line[8];
             $sql = "INSERT INTO animal_owner_master(doctorId,firstName,lastName,profession,mobile,city,state,country,address,sex,branchId,category,adharId) VALUES";              
             $sql .= "($ownerid,'$fname','$lname','$profession','$contactNumber','$city','$state','$country','$contactAddress','$gender',$branchId,'$category','$aadhar')";
             $query = mysqli_query($conn,$sql);                 

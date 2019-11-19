@@ -106,22 +106,29 @@ $('#addnewfarmer').on('submit', function(e) {
         type: 'POST',
         data: farmerData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             const Animals = null;
             var mainObj = {};
             if (response.Responsecode == 200) {
                 if (response.Data != null) {
-                    var count = response.Data.length;
-                    var lastEntry = response.Data[count - 1];
+                    var lastEntry = response.Data;
                     mainObj.AnimalOwner = lastEntry;
                     mainObj.Animals = Animals;
                     farmers.set(lastEntry.ownerId, mainObj);
+                    loadAnimals(lastEntry.ownerId);
                 }
                 $('#addnewfarmer')[0].reset();
                 $('#farmerModal').modal('toggle');
-                loadAnimals(lastEntry.ownerId);
+
             }
             farmer_list(farmers);
+        },
+        complete: function(data) {
+            // Hide image container
+            $("#wait").css("display", "none");
         }
     });
 });

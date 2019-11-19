@@ -28,16 +28,15 @@
 			$rowsAffected=mysqli_affected_rows($conn);
 				if($rowsAffected==1)
 				{
-					  $academicQuery = mysqli_query($conn,"select * from  animal_owner_master where branchid=$branchid ");
+					$owner_id = $conn->insert_id;
+					  $academicQuery = mysqli_query($conn,"SELECT * FROM  animal_owner_master WHERE ownerId=$owner_id");
 						if($academicQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($academicQuery);
 							if($academicAffected>0)
 							{
-								while($academicResults = mysqli_fetch_assoc($academicQuery))
-									{
-										$records[]=$academicResults;
-									}
+								$academicResults = mysqli_fetch_array($academicQuery);
+								$records=$academicResults;
 							}
 						}
 					$response = array('Message'=>"Animal Owner added Successfully","Data"=>$records,'Responsecode'=>200);

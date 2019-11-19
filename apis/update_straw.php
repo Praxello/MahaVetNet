@@ -7,9 +7,9 @@ $response=null;
 $records=null;
 $visitId=null;
 extract($_POST);
-if(isset($_POST['straw_number']) && isset($_POST['strawId']))
+if(isset($_POST['straw_number']) && isset($_POST['strawId']) && isset($_POST['isConsumed']))
 {
-$sql = "UPDATE  straw_details SET straw_number='$straw_number' WHERE strawId=$strawId";
+$sql = "UPDATE  straw_details SET straw_number='$straw_number',isConsumed=$isConsumed WHERE strawId=$strawId";
 $query = mysqli_query($conn,$sql);
 $rowsAffected=mysqli_affected_rows($conn);
 if($query==1){

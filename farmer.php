@@ -17,7 +17,7 @@ if(isset($_SESSION['branchId'])){
         window.scrollTo(0, 1);
     }
     </script>
-
+    <!-- <link href="css/loader.css" rel="stylesheet"> -->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' /> -->
@@ -47,7 +47,15 @@ if(isset($_SESSION['branchId'])){
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-    <link href="css/loader.css" rel="stylesheet">
+    <style>
+        #wait{
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9999;
+  background:url("../images/preloader.gif") no-repeat center center rgba(0,0,0,0.25)
+}
+    </style>
 </head>
 
 <body class="cbp-spmenu-push">
@@ -59,6 +67,7 @@ if(isset($_SESSION['branchId'])){
        <?php include 'header.php';?>
         <!-- main content start-->
         <div id="page-wrapper">
+        <div id="wait"></div>
             <div class="main-page general">
                 <h2 class="title1">General Elements</h2>
                 <div id="farmerPage">
@@ -94,7 +103,7 @@ if(isset($_SESSION['branchId'])){
                     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
                     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
                 <div class="tables">
-                <div id="wait"></div>
+                
                     <div class="table-responsive bs-example widget-shadow">
 
 
@@ -192,7 +201,7 @@ if(isset($_SESSION['branchId'])){
         </div>
         <div class="footer">
             <p>&copy; 2020 All Rights Reserved | Design by <a href="http://praxello.com/"
-                    target="_blank">Praxello</a></p>
+                    target="_blank">Praxello Solutions</a></p>
         </div>
     </div>
     <!-- <script src='js/SidebarNav.min.js' type='text/javascript'></script>

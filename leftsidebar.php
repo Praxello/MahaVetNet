@@ -15,25 +15,15 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
-                        <a href="dashboard.php">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="reports.php">
-                            <i class="fa fa-file"></i> <span>Reports</span>
-                        </a>
-                    </li>
                     <?php if($brId < 50000){?>
                         <li class="treeview">
                         <a href="allpatients.php">
-                            <i class="fa fa-user-md"></i> <span>All Patients (OPD)</span>
+                            <i class="fa fa-user-md"></i> <span>Create OPD Case</span>
                         </a>
                     </li>
                     <li class="treeview">
                         <a href="ipdallpatients.php">
-                            <i class="fa fa-stethoscope"></i> <span>All Patients (IPD)</span>
+                            <i class="fa fa-stethoscope"></i> <span>Create IPD Case</span>
                         </a>
                     </li>
                     <li class="treeview">
@@ -43,7 +33,7 @@
                     </li>
                     <li class="treeview">
                         <a href="farmer.php">
-                            <i class="fa fa-users"></i> <span>Farmers</span>
+                            <i class="fa fa-users"></i> <span>Farmers & Animals</span>
                         </a>
                     </li>
                     <li class="treeview">
@@ -57,6 +47,16 @@
                         </a>
                     </li>
                     <?php }?>
+                    <li class="treeview">
+                        <a href="dashboard.php">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="reports.php">
+                            <i class="fa fa-file"></i> <span>Reports</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>

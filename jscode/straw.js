@@ -30,9 +30,14 @@ function straw_list(straw) {
     var i = 1;
     for (let k of straw.keys()) {
         let straws = straw.get(k);
+        var consumed = "<td>No</td>";
+        if (straws.isConsumed == '1') {
+            consumed = "<td>Yes</td>";
+        }
         responseData += "<tr>";
         responseData += "<td>" + (i) + "</td>";
         responseData += "<td>" + straws.straw_number + "</td>";
+        responseData += consumed;
         responseData += "<td><div class='btn-group' role='group' aria-label='Basic example'>";
         responseData += '<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Edit" onClick="editstraw(' + k + ')"><i class="fa fa-edit"></i>';
         responseData += '</button><button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete" onClick="removeStraw(' + k + ')"><i class="fa fa-trash"></i></button>';
@@ -45,7 +50,7 @@ function straw_list(straw) {
         retrieve: true,
         bPaginate: $('tbody tr').length > 10,
         order: [],
-        columnDefs: [{ orderable: false, targets: [0, 1, 2] }],
+        columnDefs: [{ orderable: false, targets: [0, 1, 2, 3] }],
         dom: 'Bfrtip',
         buttons: ['copy', 'csv', 'excel', 'pdf'],
         destroy: true
@@ -56,8 +61,10 @@ const editstraw = param => {
     param = param.toString();
     if (straw.has(param)) {
         const straws = straw.get(param);
+        console.log(straws);
         $('#estraw_number').val(straws.straw_number);
         $('#strawId').val(param);
+        $('#estraw_consumed').val(straws.isConsumed).trigger('change');
         $('#edit_strawmodal').modal();
     }
 }
@@ -73,6 +80,9 @@ $('#addnewstraw').on('submit', function(e) {
         type: 'POST',
         data: strawData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 if (response.Data != null) {
@@ -82,6 +92,9 @@ $('#addnewstraw').on('submit', function(e) {
                 $('#strawmodal').modal('toggle');
             }
             straw_list(straw);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -91,6 +104,7 @@ $('#editstraw').on('submit', function(e) {
     var strawData = {
         strawId: $('#strawId').val(),
         straw_number: $('#estraw_number').val(),
+        isConsumed: $('#estraw_consumed').val(),
         branchid: data.branchid
     };
     $.ajax({
@@ -98,6 +112,9 @@ $('#editstraw').on('submit', function(e) {
         type: 'POST',
         data: strawData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 straw.set(strawData.strawId, strawData);
@@ -105,6 +122,9 @@ $('#editstraw').on('submit', function(e) {
                 $('#edit_strawmodal').modal('toggle');
             }
             straw_list(straw);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -117,12 +137,18 @@ const removeStraw = param => {
             type: 'POST',
             data: { strawId: param },
             dataType: 'json',
+            beforeSend: function() {
+                $("#wait").css("display", "block");
+            },
             success: function(response) {
                 param = param.toString();
                 if (response.Responsecode == 200) {
                     straw.delete(param);
                 }
                 straw_list(straw);
+            },
+            complete: function(data) {
+                $("#wait").css("display", "none");
             }
         });
     }

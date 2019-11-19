@@ -30,9 +30,9 @@ const load_operations = () => {
                 $('#vaccinations').html(parseInt(response.Data[0].vaccination).toLocaleString());
                 $('#castration').html(parseInt(response.Data[0].castration).toLocaleString());
                 $('#ipd').html(parseInt(response.Data[0].IPD).toLocaleString());
-                $('#operations').html(parseInt(response.Data[0].operations).toLocaleString());
+                // $('#operations').html(parseInt(response.Data[0].operations).toLocaleString());
                 $('#caseshandled').html(parseInt(response.Data[0].cases).toLocaleString());
-                $('#casepaper').html(parseInt(response.Data[0].cases).toLocaleString());
+                // $('#casepaper').html(parseInt(response.Data[0].cases).toLocaleString());
             }
         }
     });

@@ -275,7 +275,7 @@ if(isset($_SESSION['branchId'])){
                                 <thead>
                                   <tr>
                                   <th style="width:60%;">Medicine Name</th>
-                                  <th style="width:20%;">Remarks</th>
+                                  <th style="width:20%;">Remarks/Time</th>
                                    <th style="width:10%;">Days</th>
                                    <th style="display:none;width:10%;">Mid</th>
                                    <th style="width:10%;">Action</th>

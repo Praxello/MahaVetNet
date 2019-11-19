@@ -10,8 +10,6 @@ $('#signin').on('submit', function(event) {
         data: loginData,
         dataType: 'json',
         beforeSend: function() {
-            console.log('in');
-            // Show image container
             $("#wait").css("display", "block");
         },
         success: function(response) {
@@ -20,14 +18,14 @@ $('#signin').on('submit', function(event) {
                 var userId = response.Data.userId;
                 var username = response.Data.fullName;
                 var email = response.Data.email;
-                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center;
+                sessionStorage.setItem('mobile', response.Data.mobile);
+                console.log(sessionStorage.getItem('mobile'));
+                window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center + '&designation=' + response.Data.designation;
             } else {
                 alert('Enter Correct Username and password');
             }
         },
         complete: function(response) {
-            // Hide image container
-            // console.log('out');
             $("#wait").css("display", "none");
         }
     });

@@ -76,6 +76,9 @@ $('#addnewmedicine').on('submit', function(e) {
         type: 'POST',
         data: medicineData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 if (response.Data != null) {
@@ -85,6 +88,9 @@ $('#addnewmedicine').on('submit', function(e) {
                 $('#medicinemodal').modal('toggle');
             }
             medicine_list(medicines);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -102,6 +108,9 @@ $('#editmedicine').on('submit', function(e) {
         type: 'POST',
         data: medicineData,
         dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
         success: function(response) {
             if (response.Responsecode == 200) {
                 medicines.set(medicineData.medicineId, medicineData);
@@ -109,6 +118,9 @@ $('#editmedicine').on('submit', function(e) {
                 $('#edit_medicinemodal').modal('toggle');
             }
             medicine_list(medicines);
+        },
+        complete: function(data) {
+            $("#wait").css("display", "none");
         }
     });
 });
@@ -121,12 +133,18 @@ const remove_medicine = param => {
             type: 'POST',
             data: { medicineId: param },
             dataType: 'json',
+            beforeSend: function() {
+                $("#wait").css("display", "block");
+            },
             success: function(response) {
                 param = param.toString();
                 if (response.Responsecode == 200) {
                     medicines.delete(param);
                 }
                 medicine_list(medicines);
+            },
+            complete: function(data) {
+                $("#wait").css("display", "none");
             }
         });
     }

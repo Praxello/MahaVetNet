@@ -1,0 +1,233 @@
+<html>
+
+    <head>
+
+        <title></title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <style>
+            header {
+                position: relative;
+                background-color: black;
+                height: 75vh;
+                min-height: 25rem;
+                width: 100%;
+                overflow: hidden;
+            }
+            
+            header video {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: 0;
+                -ms-transform: translateX(-50%) translateY(-50%);
+                -moz-transform: translateX(-50%) translateY(-50%);
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+            }
+            
+            header .container {
+                position: relative;
+                z-index: 2;
+            }
+            
+            header .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background-color: black;
+                opacity: 0.5;
+                z-index: 1;
+            }
+            
+            @media (pointer: coarse) and (hover: none) {
+                header {
+                    background: url('http://localhost/MahaVetNet/video/cow.mp4') black no-repeat center center scroll;
+                }
+                header video {
+                    display: none;
+                }
+            }
+            
+            @import url('https://fonts.googleapis.com/css?family=Numans');
+            /* html,body{
+background-image: url('video/v.mp4.mp4');
+
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+} */
+            
+            .container {
+                height: 100%;
+                align-content: center;
+            }
+            
+            .card {
+                height: 370px;
+                margin-top: auto;
+                margin-bottom: auto;
+                width: 400px;
+                background-color: rgba(0, 0, 0, 0.5) !important;
+            }
+            
+            .social_icon span {
+                font-size: 60px;
+                margin-left: 10px;
+                color: #FFC312;
+            }
+            
+            .social_icon span:hover {
+                color: white;
+                cursor: pointer;
+            }
+            
+            .card-header h3 {
+                color: white;
+            }
+            
+            .social_icon {
+                position: absolute;
+                right: 20px;
+                top: -45px;
+            }
+            
+            .input-group-prepend span {
+                width: 50px;
+                background-color: #FFC312;
+                color: black;
+                border: 0 !important;
+            }
+            
+            input:focus {
+                outline: 0 0 0 0 !important;
+                box-shadow: 0 0 0 0 !important;
+            }
+            
+            .remember {
+                color: white;
+            }
+            
+            .remember input {
+                width: 20px;
+                height: 20px;
+                margin-left: 15px;
+                margin-right: 5px;
+            }
+            
+            .login_btn {
+                color: black;
+                background-color: #FFC312;
+                width: 100px;
+            }
+            
+            .login_btn:hover {
+                color: black;
+                background-color: white;
+            }
+            
+            .links {
+                color: white;
+            }
+            
+            .links a {
+                margin-left: 4px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <header>
+            <div class="overlay"></div>
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="http://localhost/MahaVetNet/video/cow.mp4" type="video/mp4">
+  </video>
+
+            <div class="container">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sign In</h3>
+                            <div class="d-flex justify-content-end social_icon">
+                                <span><i class="fab fa-facebook-square"></i></span>
+                                <span><i class="fab fa-google-plus-square"></i></span>
+                                <span><i class="fab fa-twitter-square"></i></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="username">
+
+                                </div>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="row align-items-center remember">
+                                    <input type="checkbox">Remember Me
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Login" class="btn float-right login_btn">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                Don't have an account?<a href="#">Sign Up</a>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="#">Forgot your password?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="container h-100">
+    <div class="d-flex h-100 text-center align-items-center">
+      <div class="w-100 text-white">
+        <h1 class="display-3">Video Header</h1>
+        <p class="lead mb-0">With HTML5 Video and Bootstrap 4</p>
+      </div>
+    </div>
+  </div> -->
+        </header>
+
+        <!-- <section class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <p>The HTML5 video element uses an mp4 video as a source. Change the source video to add in your own background! The header text is vertically centered using flex utilities that are build into Bootstrap 4.</p>
+        <p>The overlay color can be changed by changing the <code>background-color</code> of the <code>.overlay</code> class in the CSS.</p>
+        <p>Set the mobile fallback image in the CSS by changing the background image of the header element within the media query at the bottom of the CSS snippet.</p>
+        <p class="mb-0">
+          Created by <a href="https://startbootstrap.com">Start Bootstrap</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+    </body>
+
+</html>
