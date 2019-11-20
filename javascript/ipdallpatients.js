@@ -463,7 +463,7 @@ function attachcasepaperdata(today) {
         }
         var newobj = JSON.parse(AllData.MedicationData.treatment);
 
-        if (newobj.hasOwnProperty('Castration') && (newobj['Castration'].NoOfAnimals != "")) {
+        if (newobj.hasOwnProperty('Castration') && (newobj['Castration'].Procedure != "")) {
             // $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
             $("#noprocedurecas").val(newobj['Castration'].Procedure).trigger('change');
             $("#head1").html('<span class="badge badge-success">Data Added</span>');

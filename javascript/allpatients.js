@@ -352,6 +352,7 @@ function selectcasepaper() {
 function buttoncasepaper(id) {
     casepaperlistData = new Map();
     var AllData = animalList.get(id.toString());
+    // console.log(AllData);
     $("#opdoid").val(id);
     $("#opdaid").val(AllData.animalId);
     $("#firsttable").hide();
@@ -448,7 +449,7 @@ function attachcasepaperdata(today) {
 
     if (casepaperlistData.has(date)) {
         var AllData = casepaperlistData.get(date);
-        // console.log(casepaperlistData.get(date));
+
         $("#setnavanimal").attr("src", "http://praxello.com/ahimsa/animalphotos/" + AllData.FeesData.animalId + ".jpg");
         $("#setimage").attr("src", "http://praxello.com/ahimsa/casephotos/" + AllData.MedicationData.medicationId + ".jpg");
         $("#nofserch").val(AllData.FeesData.feesAmount);
@@ -477,7 +478,7 @@ function attachcasepaperdata(today) {
 
         var newobj = JSON.parse(AllData.MedicationData.treatment);
 
-        if (newobj.hasOwnProperty('Castration') && (newobj['Castration'].NoOfAnimals != "")) {
+        if (newobj.hasOwnProperty('Castration') && (newobj['Castration'].Procedure != "")) {
             // $("#nocastrated").val(newobj['Castration'].NoOfAnimals);
             $("#noprocedurecas").val(newobj['Castration'].Procedure).trigger('change');
             $("#head1").html('<span class="badge badge-success">Data Added</span>');
