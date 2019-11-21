@@ -411,7 +411,7 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                         <div class="form-group">
                           <label class="control-label">Bull Number(Select From Dropdown)</label>
-                          <select  class="form-control"  id="aiselstrawno" style="width:100%;" >
+                          <select  class="form-control"  id="aiselstrawno" style="width:100%;" onchange="loadstraw(this.value);">
                             <option value="">Select Bull Number</option>
 
                           </select>
