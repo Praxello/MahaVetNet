@@ -43,7 +43,7 @@ header('Content-Type: application/json');
 	  }
 	  else
 	  {
-		  				$jobQuery = mysqli_query($conn,"SELECT * FROM advertisement_mapping amm INNER JOIN advertisement_master am ON amm.addId = am.adId WHERE CURRENT_DATE BETWEEN amm.fromDate AND amm.toDate");
+		  				$jobQuery = mysqli_query($conn,"SELECT * FROM advertisement_mapping amm INNER JOIN advertisement_master am ON amm.addId = am.adId");
 						if($jobQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($jobQuery);
@@ -60,6 +60,5 @@ header('Content-Type: application/json');
 					$response = array('Message'=>"All ads fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
 	  }
 	  mysqli_close($conn);
-	 print json_encode($response);
-	  
+	 print json_encode($response);  
 ?>

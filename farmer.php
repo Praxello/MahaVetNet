@@ -73,7 +73,7 @@ if(isset($_SESSION['branchId'])){
                 <div id="farmerPage">
                 <div class="modals widget-shadow">
                     <h4 class="title2">Import Farmers</h4>
-                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <h6 class="title2"><code style="color:red;">Note:Please upload only csv file(do not change the column sequence)</code></h6>
                     <div class="col-md-4">
 
                     </div>
@@ -136,7 +136,7 @@ if(isset($_SESSION['branchId'])){
                 <div class="tables">
                 <div class="modals widget-shadow">
                     <h4 class="title2">Import Animals</h4>
-                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <h6 class="title2"><code style="color:red;">Note:Please upload only csv file(do not change the column sequence of a downloded file)</code></h6>
                     <div class="col-md-4">
 
                     </div>

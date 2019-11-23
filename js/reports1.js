@@ -36,13 +36,37 @@ var regionMap = [];
 var districtMap = new Map();
 var TalukaMap = new Map();
 var dispenceryMap = new Map();
-//loadMaps();
+loadMaps();
+getyear();
+
+function getyear() {
+
+    var year = '';
+    $.ajax({
+        type: "POST",
+        url: url + "fetchyearfrommedication.php",
+        async: false,
+        dataType: 'json',
+        success: function(response) {
+
+            var count;
+            if (response['Data'] != null) {
+                count = response['Data'].length;
+
+            }
+            for (var i = 0; i < count; i++) {
+                year += "<option value='" + response['Data'][i].year + "'>" + response['Data'][i].year + "</option>";
+            }
+            $("#year").html(year);
+        }
+    });
+}
 
 function loadMaps() {
     $.ajax({
-        url: url + 'demo.php',
+        url: url + 'download_report_data.php',
         type: 'POST',
-        async: true,
+        async: false,
         dataType: 'json',
         beforeSend: function() {
             $("#wait").css("display", "block");
@@ -70,30 +94,38 @@ function loadMaps() {
                         key = key.toString();
                         TalukaMap.set(key, response.Taluka[i]);
                     }
-                    // console.log(TalukaMap);
+                    //console.log(TalukaMap);
                 }
                 if (response.Dispencery != null) {
-                    // console.log(response.Dispencery);
+                    //console.log(response.Dispencery);
                     var count = response.Dispencery.length;
                     // console.log(TalukaMap);
-                    var last = null;
-                    var str = null;
-                    for (var i = 0; i < count; i++) {
-                        var key = Object.keys(response.Dispencery[i]);
-                        key = key.toString();
-                        var concatkey = null;
+                    // console.log(count);
+                    var last1 = null;
+                    var bknstr = null; //Block name string
+                    var brnnstr = null; //Branch name string
 
+                    key = key.toString();
+                    var concatkey = null;
+                    let i = 0;
+                    let sum = 0;
+                    for (let value of TalukaMap) {
+                        let name1 = value[0];
 
-                        if (TalukaMap.has(key)) {
-                            last = TalukaMap.get(key);
-                            str = last[key][0].blockName;
-
+                        let name2 = value[1];
+                        let talcount = name2[name1].length;
+                        for (let j = 0; j < talcount; j++) {
+                            bknstr = name2[name1][j].blockName;
+                            brnnstr = name2[name1][j].branchName;
+                            concatkey = bknstr + brnnstr;
+                            dispenceryMap.set(concatkey, response.Dispencery[i]);
+                            i++;
                         }
-                        concatkey = str + key;
 
-                        dispenceryMap.set(concatkey, response.Dispencery[i]);
+
                     }
-                    console.log(dispenceryMap);
+
+                    // console.log(dispenceryMap);
                 }
             }
         },
@@ -102,137 +134,156 @@ function loadMaps() {
         }
     });
 }
-const loadZones = (param, level) => {
+const loadZones = level => {
+    var count = regionMap.length;
+    var zonesData = '';
+    for (var i = 0; i < count; i++) {
+        zonesData += "<option value=''>Select Region</option>";
+        zonesData += "<option>" + regionMap[i] + "</option>";
+    }
+    $('#zone').html(zonesData);
+
+}
+const loadDistricts = (param, level) => {
+    console.log("distmap" + param);
+    var zonesData = '';
+    if (districtMap.has(param)) {
+        var districts = districtMap.get(param);
+        var count = districts[param].length;
+        for (var i = 0; i < count; i++) {
+            zonesData += "<option value=''>Select District</option>";
+            zonesData += "<option>" + districts[param][i] + "</option>";
+        }
+        $('#district').html(zonesData);
+    }
+}
+
+const loadTaluka = (param, level) => {
+    var zonesData = '';
+    if (TalukaMap.has(param)) {
+        var talukas = TalukaMap.get(param);
+        console.log(talukas);
+        var count = talukas[param].length;
+        for (var i = 0; i < count; i++) {
+            zonesData += "<option value=''>Select Taluka</option>";
+            zonesData += "<option value=" + talukas[param][i].blockName + talukas[param][i].branchName + ">" + talukas[param][i].branchName + "</option>";
+        }
+        $('#taluka').html(zonesData);
+    }
+}
+const loadDispencery = (param, level) => {
+    var zonesData = '';
+    console.log(param);
+    console.log(dispenceryMap);
+
+    if (dispenceryMap.has(param)) {
+        var dispencery = dispenceryMap.get(param);
+        // console.log(dispencery);
+        var key = Object.keys(dispencery);
+        var count = dispencery[key].length;
+
+        for (var i = 0; i < count; i++) {
+            zonesData += "<option value=''>Select Dispencery</option>";
+            zonesData += "<option value=" + dispencery[key][i].branchId + ">" + dispencery[key][i].centre_type + "</option>";
+        }
+        $('#dispencery').html(zonesData);
+    }
+}
+const fetchDispencery = branchid => {
+    var zonesData = '';
     $.ajax({
-        url: url + 'dashboard_map.php',
+        url: url + 'fetchDispencerybyid.php',
         type: 'POST',
-        data: { branchid: param },
+        data: { branchid: branchid },
         async: true,
         dataType: 'json',
-        beforeSend: function() {
-            $("#wait").css("display", "block");
-        },
         success: function(response) {
             if (response.Data != null) {
+                // console.log(response.Data);
                 var count = response.Data.length;
-                var zonesData = '';
                 for (var i = 0; i < count; i++) {
-                    zonesData += "<option></option>";
-                    zonesData += "<option>" + response.Data[i].branch + "</option>";
+                    zonesData += "<option value=''>Select Dispencery</option>";
+                    zonesData += "<option value=" + response.Data[i].branchId + ">" + response.Data[i].centre_type + "</option>";
                 }
-                if (level == 1)
-                    $('#zone').html(zonesData);
-                else if (level == 2)
-                    $('#district').html(zonesData);
-                else if (level == 3)
-                    $('#taluka').html(zonesData);
-                else if (level == 4)
-                    $('#dispencery').html(zonesData);
+                $('#dispencery').html(zonesData);
             }
-        },
-        complete: function(response) {
-            $("#wait").css("display", "none");
         }
     });
+}
+const singleDispencery = (param, branchId) => {
+    var zonesData = '';
+    // console.log(param);
+    // console.log(branchId);
+    zonesData += "<option value=''>Select Dispencery</option>";
+    zonesData += "<option value=" + branchId + " selected>" + param + "</option>";
+    $('#dispencery').html(zonesData);
 }
 const loadBranchLevel = branchid => {
     var level = 1;
+    var centerid = $("#centerid").val();
     if (branchid >= 100001 && branchid < 200000) {
         level = 1;
+        loadZones(level);
     } else if (branchid >= 200001 && branchid < 300000) {
         level = 2;
         branchId_taluka = branchid;
         $('.zone').hide();
+        loadDistricts(centerid, level);
     } else if (branchid >= 300001 && branchid < 400000) { //ddc
         level = 3;
         branchId_dispencery = branchid;
         $('.zone').hide();
         $('.district').hide();
+        loadTaluka(centerid, level);
     } else if (branchid >= 400001 && branchid < 500000) { //ddc
         level = 3;
         branchId_dispencery = branchid;
         $('.zone').hide();
         $('.district').hide();
-    } else if (branchid >= 500001 && branchid < 600000) { //daho 
+        loadTaluka(centerid, level);
+    } else if (branchid >= 500001 && branchid < 600000) { //daho
         level = 4;
         $('.zone').hide();
         $('.district').hide();
         $('.taluka').hide();
+        // loadDispencery(centerid,level);
+        fetchDispencery(branchid);
     } else {
         level = 4;
         $('.zone').hide();
         $('.district').hide();
         $('.taluka').hide();
+        singleDispencery(centerid, branchid);
+
     }
-    loadZones(data.branchid, level);
+    //loadZones(data.branchid, level);
 }
 loadBranchLevel(data.branchid);
 
 
-const loadDistricts = (param, level) => {
-    $.ajax({
-        url: url + 'getbranchId.php',
-        type: 'POST',
-        data: { centretype: param, branchid: data.branchid },
-        async: true,
-        dataType: 'json',
-        success: function(response) {
-            if (response.Data != null) {
-                branchId_taluka = response.Data;
-                loadZones(response.Data, level);
-            }
-        }
-    });
-}
-const loadTaluka = (param, level) => {
-    $.ajax({
-        url: url + 'getbranchId.php',
-        type: 'POST',
-        data: { centretype: param, branchid: branchId_taluka },
-        async: true,
-        dataType: 'json',
-        success: function(response) {
-            if (response.Data != null) {
-                branchId_dispencery = response.Data;
-                loadZones(response.Data, level);
-            }
-        }
-    });
-}
-const loadDispencery = (param, level) => {
-    $.ajax({
-        url: url + 'getbranchId.php',
-        type: 'POST',
-        data: { centretype: param, branchid: branchId_dispencery },
-        async: true,
-        dataType: 'json',
-        success: function(response) {
-            if (response.Data != null) {
-                loadZones(response.Data, level);
-            }
-        }
-    });
-}
-const getDispenceryBranch = param => {
-    $.ajax({
-        url: url + 'getbranchName.php',
-        type: 'POST',
-        data: { centretype: param },
-        async: true,
-        dataType: 'json',
-        beforeSend: function() {
-            $("#wait").css("display", "block");
-        },
-        success: function(response) {
-            if (response.Data != null) {
-                dispeneryId = response.Data;
-            }
-        },
-        complete: function(response) {
-            $("#wait").css("display", "none");
-        }
-    });
-}
+
+
+
+// const getDispenceryBranch = param => {
+//     $.ajax({
+//         url: url + 'getbranchName.php',
+//         type: 'POST',
+//         data: { centretype: param },
+//         async: true,
+//         dataType: 'json',
+//         beforeSend: function() {
+//             $("#wait").css("display", "block");
+//         },
+//         success: function(response) {
+//             if (response.Data != null) {
+//                 dispeneryId = response.Data;
+//             }
+//         },
+//         complete: function(response) {
+//             $("#wait").css("display", "none");
+//         }
+//     });
+// }
 const getTreatment = param => {
     var ke = [];
     for (var k in param) {
@@ -252,9 +303,8 @@ const get_reports = () => {
         taluka: $('#taluka').val(),
         dispencery: $('#dispencery').val(),
         reportType: $('#operation').val(),
-        branchId: dispeneryId
+        branchId: $('#dispencery').val()
     };
-    console.log(reportData);
     if (reportData.branchId != null && reportData.month != '' && reportData.year != '') {
         $.ajax({
             url: url + 'get_reports.php',
@@ -645,7 +695,7 @@ const get_reports = () => {
 }
 
 function get_mrp() {
-    var branchId = dispeneryId;
+    var branchId = $('#dispencery').val();
     var month = $('#month').val();
     var year = $('#year').val();
     var email = $('#emailid').val();
