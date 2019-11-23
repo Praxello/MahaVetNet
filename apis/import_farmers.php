@@ -12,19 +12,20 @@ if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
     $csvMimes =array('application/vnd.ms-excel','text/plain','text/csv','text/tsv');
     // Validate whether selected file is a CSV file
     if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
-        
+
         // If the file is uploaded
         if(is_uploaded_file($_FILES['file']['tmp_name'])){
-            
+            // echo $_FILES['file']['name'];
             // Open uploaded CSV file with read-only mode
-            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-            
+            $csvFile = fopen($_FILES['file']['name'], 'r');
+
             // Skip the first line
             fgetcsv($csvFile);
-            
+
             // Parse data from CSV file line by line
             while(($line = fgetcsv($csvFile)) !== FALSE){
                 // Get row data
+                // echo $line[0];
                 $fname   = $line[0];
                 $lname  = $line[1];
                 $contactNumber  = $line[2];
@@ -39,12 +40,13 @@ if(isset($_POST['branchId']) && isset($_POST['ownerid'])){
                 // if(strlen($fname)>0 && )
             $sql = "INSERT INTO animal_owner_master(doctorId,firstName,lastName,profession,mobile,city,state,country,address,sex,branchId,category,adharId) VALUES";              
             $sql .= "($ownerid,'$fname','$lname','$profession','$contactNumber','$city','$state','$country','$contactAddress','$gender',$branchId,'$category','$aadhar')";
-            $query = mysqli_query($conn,$sql);                 
+            $query = mysqli_query($conn,$sql);
+            // echo $sql;
             }
-        
+
             // Close opened CSV file
             fclose($csvFile);
-            
+
             $qstring = '?status=succ';
             $response = array('Message'=>'Imported Successfully','ResponseCode'=>200);
         }else{
