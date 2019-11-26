@@ -7,8 +7,8 @@ $response=null;
 $records = null;
 extract($_POST);
 if($branchid >= 100001 && $branchid < 200000){
-    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
-        SELECT bm.districtName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
+    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB,SUM(SC) SC FROM(
+        SELECT bm.districtName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -17,7 +17,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
-        SELECT bm.districtName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB
+        SELECT bm.districtName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -26,7 +26,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
-        SELECT bm.districtName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB
+        SELECT bm.districtName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -35,18 +35,27 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName
         UNION
-        SELECT bm.districtName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB
+        SELECT bm.districtName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
         WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
+        AND bmm.branchId = $branchid 
+        GROUP BY bm.districtName
+        UNION
+        SELECT bm.districtName branch,0 PD,0 AI,0 Inf,0 CB,count(bm.branchId) SC
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE mm.treatment REGEXP 'Scheme\":\"HYIB' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.districtName) CounTable
         GROUP BY CounTable.branch";
 }else if($branchid >= 200001 && $branchid < 300000){
-    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
-        SELECT bm.blockName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
+    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB,SUM(SC) SC FROM(
+        SELECT bm.blockName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -55,7 +64,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
-        SELECT bm.blockName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB
+        SELECT bm.blockName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -64,7 +73,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
-        SELECT bm.blockName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB
+        SELECT bm.blockName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -73,18 +82,27 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName
         UNION
-        SELECT bm.blockName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB
+        SELECT bm.blockName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
         WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
+        AND bmm.branchId = $branchid 
+        GROUP BY bm.blockName
+        UNION
+        SELECT bm.blockName branch,0 PD,0 AI,0 Inf,0 CB,count(bm.branchId) SC
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE mm.treatment REGEXP 'Scheme\":\"HYIB' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.blockName) CounTable
         GROUP BY CounTable.branch";
 }else if($branchid >= 300001 && $branchid < 500000){//ddc
-    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
-        SELECT bm.branchName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
+    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB,SUM(SC) SC FROM(
+        SELECT bm.branchName branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -93,7 +111,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
-        SELECT bm.branchName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB
+        SELECT bm.branchName branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -102,7 +120,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
-        SELECT bm.branchName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB
+        SELECT bm.branchName branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -111,18 +129,27 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName
         UNION
-        SELECT bm.branchName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB
+        SELECT bm.branchName branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
         WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
+        AND bmm.branchId = $branchid 
+        GROUP BY bm.branchName
+        UNION
+        SELECT bm.branchName branch,0 PD,0 AI,0 Inf,0 CB,count(bm.branchId) SC
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE mm.treatment REGEXP 'Scheme\":\"HYIB' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
         GROUP BY bm.branchName) CounTable
         GROUP BY CounTable.branch";
 }else if($branchid >= 500001 && $branchid < 600000){//daho 
-    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
-        SELECT bm.centre_type branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
+    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB,SUM(SC) SC FROM(
+        SELECT bm.centre_type branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -131,7 +158,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB
+        SELECT bm.centre_type branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -140,7 +167,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB
+        SELECT bm.centre_type branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -149,18 +176,27 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB
+        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
         WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
+        GROUP BY bm.centre_type
+        UNION
+        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf,0 CB,count(bm.branchId) SC
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE mm.treatment REGEXP 'Scheme\":\"HYIB' AND bm.branchId < 10000
+        AND bmm.branchId = $branchid
         GROUP BY bm.centre_type) CounTable
         GROUP BY CounTable.branch";
 }else{
-    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB FROM(
-        SELECT bm.centre_type branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB
+    $sql = "SELECT branch,SUM(PD) PD,SUM(AI) AI,SUM(Inf) Inf,SUM(CB) CB,SUM(SC) SC FROM(
+        SELECT bm.centre_type branch,0 PD,count(bm.branchId) AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -169,7 +205,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB
+        SELECT bm.centre_type branch,count(bm.branchId) PD,0 AI,0 Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -178,7 +214,7 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid 
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB
+        SELECT bm.centre_type branch,0 PD,0 AI,count(bm.branchId) Inf,0 CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
@@ -187,13 +223,22 @@ if($branchid >= 100001 && $branchid < 200000){
         AND bmm.branchId = $branchid
         GROUP BY bm.centre_type
         UNION
-        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB
+        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf, count(bm.branchId) CB,0 SC
         FROM branch_master bm 
         INNER JOIN user_master um ON um.branchId = bm.branchId 
         INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
         INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
         WHERE mm.treatment REGEXP 'CalfGender\":\"Male|CalfGender\":\"Female' AND bm.branchId < 10000
         AND bmm.branchId = $branchid 
+        GROUP BY bm.centre_type
+        UNION
+        SELECT bm.centre_type branch,0 PD,0 AI,0 Inf,0 CB,count(bm.branchId) SC
+        FROM branch_master bm 
+        INNER JOIN user_master um ON um.branchId = bm.branchId 
+        INNER JOIN branch_mapper_master bmm ON bmm.childBranch = bm.branchId 
+        INNER JOIN medication_master mm ON mm.doctorId = um.doctorId 
+        WHERE mm.treatment REGEXP 'Scheme\":\"HYIB' AND bm.branchId < 10000
+        AND bmm.branchId = $branchid
         GROUP BY bm.centre_type) CounTable
         GROUP BY CounTable.branch";
 }

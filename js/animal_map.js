@@ -5,6 +5,7 @@ var numberofPD = [];
 var numberofAI = [];
 var numberofInf = [];
 var numberofCB = [];
+var numberofHYIB = [];
 var seriesData = [];
 var chart3, chartvar3 = 0;
 const loadMapData = (seriesData) => {
@@ -14,7 +15,7 @@ const loadMapData = (seriesData) => {
             type: 'area'
         },
         title: {
-            text: 'AI | PD | CB | IS'
+            text: 'AI | PD | CB | IS | AI-scheme(HYIB)'
         },
         xAxis: {
             categories: numberofbranch,
@@ -120,6 +121,7 @@ const loadanimalData = (param) => {
     numberofInf = [];
     numberofCB = [];
     seriesData = [];
+    numberofHYIB = [];
     $.ajax({
         url: url + 'dashboard_map_animals.php',
         type: 'POST',
@@ -141,11 +143,13 @@ const loadanimalData = (param) => {
                     numberofAI.push(parseInt(response.Data[i].AI));
                     numberofInf.push(parseInt(response.Data[i].Inf));
                     numberofCB.push(parseInt(response.Data[i].CB));
+                    numberofHYIB.push(parseInt(response.Data[i].SC));
                 }
                 seriesData.push({ name: 'Artificial Insemination', data: numberofAI });
                 seriesData.push({ name: 'Pregnancy Diagnosis', data: numberofPD });
                 seriesData.push({ name: 'Calves Born', data: numberofCB });
                 seriesData.push({ name: 'Infertility & Sterility', data: numberofInf });
+                seriesData.push({ name: 'Artificial Insemination(Scheme:HYIB)', data: numberofHYIB });
                 $('#totalartins').html(totalartins.toLocaleString());
                 $('#totalCB').html(totalCB.toLocaleString());
                 $('#totalPD').html(totalpd.toLocaleString());

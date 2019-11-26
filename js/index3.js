@@ -200,7 +200,7 @@ function loadData(apiData) {
         exporting: {
             buttons: {
                 customButton: {
-                    x: -62,
+                    x: -90,
                     onclick: function() {
                         // alert('Category: ' + back_btn_val + ', value: ' + branchid_g);
                         console.log("level in back " + level);

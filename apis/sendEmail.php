@@ -26,7 +26,7 @@ $headers .= 'Cc:pvn2266@gmail.com,'."\r\n";
 $headers .= "From:".$email_from."\r\n";
 //$headers = 'From: '.$email_to."\r\n".'Reply-To: '.$email_from."\r\n" .'X-Mailer: PHP/' . phpversion();
 if(@mail($email_to, $email_subject, $email_message, $headers)){
-   $response = array('Message' => "Thank You for contact us.", 'Responsecode' => 200);
+   $response = array('Message' => "Your request for change successfully submitted to IT HUB.", 'Responsecode' => 200);
   }else{
    $response = array('Message' => "Mail is not send", 'Responsecode' => 200); 
   }
