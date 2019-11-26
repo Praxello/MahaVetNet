@@ -59,10 +59,7 @@ if(isset($_SESSION['branchId'])){
             <div class="table-responsive">
               <table id="styletbl" class="display nowrap table table-hover  table-bordered">
                 <thead>
-                  <tr>
-                    <!-- <th style="width:10%;">MVN ID</th>
-                    <th style="width:20%;">Animal Name</th>
-                    <th style="width:10%;">Species/ Breed</th> -->
+                  <tr>                    
                     <th style="width:10%;">Owner</th>
                     <th style="width:60%;">Address</th>
                     <th style="width:10%;">Mobile no</th>

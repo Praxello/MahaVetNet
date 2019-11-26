@@ -240,7 +240,7 @@ const loadBranchLevel = branchid => {
         branchId_dispencery = branchid;
         $('.zone').hide();
         $('.district').hide();
-        loadTaluka(centerid, level);
+        loadTaluka(centerid,level);
     } else if (branchid >= 500001 && branchid < 600000) { //daho
         level = 4;
         $('.zone').hide();
@@ -253,7 +253,7 @@ const loadBranchLevel = branchid => {
         $('.zone').hide();
         $('.district').hide();
         $('.taluka').hide();
-        singleDispencery(centerid, branchid);
+        singleDispencery(centerid,branchid);
 
     }
     //loadZones(data.branchid, level);

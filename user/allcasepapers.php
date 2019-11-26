@@ -1,14 +1,12 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-   include "../connection.php";
+     include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	  extract($_POST);
 	 if(isset($_POST['animalid']))
 	 {
-		   $jobQuery = mysqli_query($conn,"SELECT * FROM  ipd_medication_master where animalid=$animalid");
+		   $jobQuery = mysqli_query($conn,"SELECT * FROM  medication_master where animalid=$animalid order by visitDate desc");
 						if($jobQuery!=null)
 						{
 							$affected=mysqli_num_rows($jobQuery);
@@ -31,8 +29,8 @@ header('Content-Type: application/json');
 																}
 														}
 													}
-
-											$animalQuery = mysqli_query($conn,"SELECT * FROM  ipd_prescribed_medicine_master pmm inner join medicine_master mm on pmm.medicineid=mm.medicineid where pmm.animalid=$animalid and pmm.visitDate ='$medicationDate'");
+													
+											$animalQuery = mysqli_query($conn,"SELECT * FROM  prescribed_medicine_master pmm inner join medicine_master mm on pmm.medicineid=mm.medicineid where pmm.animalid=$animalid and pmm.visitDate ='$medicationDate'");
 															if($jobQuery!=null)
 													{
 														$animalAffected=mysqli_num_rows($animalQuery);
@@ -44,15 +42,16 @@ header('Content-Type: application/json');
 																}
 														}
 													}
-
+										
 										$records[]= array("MedicationData"=>$medicationResult, "FeesData"=> $feesData ,"MedicineData"=>$medicinesData);
 									}
 							}
 						}
 	 }
-
-
-					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);
-   mysqli_close($conn);
+					
+		
+					$response = array('Message'=>"All animal oweners fetched Successfully","Data"=>$records ,'Responsecode'=>200);	
+	
 	 print json_encode($response);
+	  mysqli_close($conn);
 ?>

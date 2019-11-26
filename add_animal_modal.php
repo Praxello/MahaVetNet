@@ -20,7 +20,7 @@
                             <input type="text" class="form-control" placeholder="Breed" required="" id="breed">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Weight" required="" id="weight">
+                            <input type="text" class="form-control" placeholder="Weight" required="" id="weight"  onkeypress="javascript:return isNumberKey(event)">
                         </div>
                         <div class="form-group">
                             <label>Gender: </label>
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="number" placeholder="Age" class="form-control" id="age">
+                                    <input type="number" placeholder="Age" class="form-control" id="age" onkeypress="javascript:return isNumberKey(event)">
                                 </div>
                                 <div class="col-md-6">
                                     <select class="form-control" style="height: 2.43em!important;" id="year">
