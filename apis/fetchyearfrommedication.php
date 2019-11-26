@@ -1,15 +1,14 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-   include "../connection.php";
+  include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	 extract($_POST);
 
-	if(isset($_POST['branchid']) && isset($_POST['ownerid']))
-	 {
- 					  $academicQuery = mysqli_query($conn,"select * from  deworming_master where branchid=$branchid and ownerId=$ownerid and isdeleted =0 ");
+
+ 					  $academicQuery = mysqli_query($conn,"SELECT DISTINCT(year(visitDate)) as year FROM medication_master WHERE year(visitDate) >0");
 						if($academicQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($academicQuery);
@@ -21,13 +20,9 @@ header('Content-Type: application/json');
 									}
 							}
 						}
-					$response = array('Message'=>"Vaccine record added successfully","Data"=>$records ,'Responsecode'=>200);
+					$response = array('Message'=>"record fetch successfully","Data"=>$records ,'Responsecode'=>200);
 
-	 }
-	 else
-	 {
-		$response=array("Message"=> "Parameters missing","Responsecode"=>403);
-	 }
+
    mysqli_close($conn);
 	 print json_encode($response);
 ?>

@@ -1,5 +1,5 @@
- // const url = 'https://praxello.com/ahimsa/apis/';
-  const url = 'apis/';
+ const url = 'https://praxello.com/ahimsa/apis/';
+  // const url = 'apis/';
  getMobileNumber();
 
  function getMobileNumber() {

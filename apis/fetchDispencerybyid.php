@@ -1,15 +1,15 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-   include "../connection.php";
+  include "../connection.php";
 	 mysqli_set_charset($conn,'utf8');
 	 $response=null;
 	 $records=null;
 	 extract($_POST);
 
-	if(isset($_POST['branchid']) && isset($_POST['ownerid']))
+	if(isset($_POST['branchid']))
 	 {
- 					  $academicQuery = mysqli_query($conn,"select * from  deworming_master where branchid=$branchid and ownerId=$ownerid and isdeleted =0 ");
+ 					  $academicQuery = mysqli_query($conn,"SELECT * FROM branch_mapper_master bmm inner join branch_master bm on bm.branchId= bmm.childBranch WHERE bmm.branchId=$branchid");
 						if($academicQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($academicQuery);

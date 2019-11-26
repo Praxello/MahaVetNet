@@ -41,9 +41,10 @@ if(isset($_SESSION['branchId'])){
         rel="stylesheet">
     <!--//webfonts-->
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-    
+
     <!-- Metis Menu -->
     <script src="js/metisMenu.min.js"></script>
+    <script src="javascript/validation.js"></script>
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
@@ -98,12 +99,12 @@ if(isset($_SESSION['branchId'])){
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-              
+
 
                     <input type="hidden"  id="brid" value="<?php echo $brId ;?>"/>
                     <input type="hidden"  id="drid" value="<?php echo $drid ;?>"/>
                 <div class="tables">
-                
+
                     <div class="table-responsive bs-example widget-shadow">
 
 

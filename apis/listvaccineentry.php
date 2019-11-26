@@ -7,9 +7,9 @@ header('Content-Type: application/json');
 	 $records=null;
 	 extract($_POST);
 
-	if(isset($_POST['branchid']))
+	if(isset($_POST['branchid'])  && isset($_POST['ownerid']))
 	 {
- 					  $academicQuery = mysqli_query($conn,"select * from  vaccination_master where branchid=$branchid and isdeleted=0");
+ 					  $academicQuery = mysqli_query($conn,"select * from  vaccination_master where branchid=$branchid and ownerId=$ownerid and isdeleted=0");
 						if($academicQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($academicQuery);

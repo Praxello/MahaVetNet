@@ -3,6 +3,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     $brId = $_SESSION['branchId'];
     $drid = $_SESSION['userId'];
     $email = $_SESSION['email'];
+    $centretype = $_SESSION['center'];
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -60,10 +61,12 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 
         <!-- header-starts -->
        <?php include 'header.php';?>
-       
+
         <!-- main content start-->
         <div id="page-wrapper">
         <div id="wait"></div>
+
+        <input type="hidden" id="centerid" value="<?php echo $centretype;?>">
         <input type="hidden" id="branchid" value="<?php echo $brId;?>">
         <input type="hidden" id="emailid" value="<?php echo $email;?>">
             <div class="main-page">
@@ -90,7 +93,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                             }?>
                                          </select>
                                         </div>
-                                        
+
                                         </div>
                                     <div class="form-group">
                                         <label for="disabledinput" class="col-sm-2 control-label zone">Zone</label>
@@ -104,7 +107,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                         </select>
                                         </div>
                                     </div>
-                                   
+
                                     <div class="form-group">
                                         <label for="disabledinput" class="col-sm-2 control-label taluka">Taluka</label>
                                         <div class="col-sm-3 taluka">
@@ -113,11 +116,11 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                         </div>
                                         <label for="disabledinput" class="col-sm-2 control-label">Dispencery</label>
                                         <div class="col-sm-3">
-                                        <select  class="form-control"  id="dispencery" style="width:100%;" onchange="getDispenceryBranch(this.value)" required>
+                                        <select  class="form-control"  id="dispencery" style="width:100%;"  required>
                                         </select>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="disabledinput" class="col-sm-2 control-label">Report</label>
                                         <div class="col-sm-3">
@@ -142,14 +145,14 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                         </div>
                                         <div class="btn btn-group">
                                         <div class="col-sm-3">
-                                      
+
                                         <button  class="btn btn-primary" type="button" onclick="get_reports()">View Report</button>
                                         <button  class="btn btn-success" type="button" onclick="get_mrp()">Download and Email MPR</button>
                                         </div>
                                         </div>
-                                       
+
                                     </div>
-                                   
+
                                 </form>
                             </div>
                             <div class="tables">
@@ -166,10 +169,10 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                         <th>Category</th>
                                         <th>Species</th>
                                         <th>Breed</th>
-                                        <th>Scheme</th>  
-                                        <th>Straw Number</th>  
-                                        <th>AIType</th>   
-                                        <th>Status of Reproductive Organ</th> 
+                                        <th>Scheme</th>
+                                        <th>Straw Number</th>
+                                        <th>AIType</th>
+                                        <th>Status of Reproductive Organ</th>
                                         <th>Stage of Oestrus</th>
                                     </tr>
                                 </thead>
@@ -235,7 +238,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script src="jscode/apis.js" type="text/javascript"></script>
-    <script src="js/reports.js" type="text/javascript"></script>
+    <script src="js/reports1.js" type="text/javascript"></script>
 </body>
 </html>
 <?php

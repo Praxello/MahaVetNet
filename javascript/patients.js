@@ -201,18 +201,18 @@ function setvaccinationtabledata(styleData){
 function getlistvaccineentry(){
   var docterid = $("#drid").val();
   var branchid = $("#brid").val();
-  // $('#styletbl').dataTable().fnDestroy();
-  // $("#styletbldata").empty();
+  var ownerid= $("#oid").val();
      $.ajax({
          type: "POST",
          url: url+"listvaccineentry.php",
          data :{
-           // branchid:"2"
-           branchid:branchid
+           branchid:branchid,
+           ownerid:ownerid
          },
          async : false,
          dataType :'json',
          success: function(response) {
+           console.log(response);
            var count;
             if(response['Data']!=null){
                count= response['Data'].length;
@@ -708,13 +708,15 @@ function setdewormingtabledata(styleData){
 }
 function getlistdeworming(){
   var branchid = $("#brid").val();
+  var ownerid=$("#doid").val()
   // $('#styletbl').dataTable().fnDestroy();
   // $("#styletbldata").empty();
      $.ajax({
          type: "POST",
          url: url+"listdewormingentry.php",
          data :{
-           branchid:branchid
+           branchid:branchid,
+           ownerid:ownerid
          },
          async : false,
          dataType :'json',
