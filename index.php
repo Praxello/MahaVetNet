@@ -88,7 +88,9 @@ if(!isset($_SESSION['branchId'])){
         <!-- //title -->
         <!-- content -->
         <div class="sub-main-w3">
+            
             <form id="signin" method="post">
+            <strong style="color:red;padding-left:115px;">Note:Please Confirm your VD once login</strong>
                 <div id="wait"
                     style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
                     <img src='images/spinner.gif' width="64" height="64" />
@@ -104,17 +106,17 @@ if(!isset($_SESSION['branchId'])){
                     <input placeholder="Password" name="Password" type="password" required="" id="passwrd">
                 </div>
                 <!-- switch -->
-                <!-- <div class="checkout-w3l">
-					<div class="demo5">
+                <div class="checkout-w3l">
+					<!-- <div class="demo5">
 						<div class="switch demo3">
 							<input type="checkbox">
 							<label>
 								<i></i>
 							</label>
 						</div>
-					</div>
-					<a href="#">Remember Me</a>
-				</div> -->
+					</div> -->
+					
+				</div>
                 <!-- //switch -->
                 <input type="submit" value="Log In">
 

@@ -74,7 +74,7 @@ if(isset($_SESSION['branchId'])){
                 <h2 class="title1">General Elements</h2>
                 <div class="modals widget-shadow">
                     <h4 class="title2">Import Medicines</h4>
-                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <h6 class="title2"><code style="color:red;">Note:Please upload only csv file(do not change the column sequence of a downloded file)</code></h6>
                     <div class="col-md-4">
 
                     </div>

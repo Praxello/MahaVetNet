@@ -9,8 +9,33 @@ var downloads = [];
 var Remaining = [];
 var apiData = [];
 var chart, chartvar = 0;
+var back_button = data.branchid;
+var level1_data = {};
+var level2_data = {};
+var level3_data = {};
+var level4_data = {};
+var level = null;
+const level_data = {};
+
+function loadBranchLevel(branchid) {
+    level_data.centretype = '';
+    level_data.branchid = branchid;
+    if (branchid >= 100001 && branchid < 200000) {
+        level = 1;
+    } else if (branchid >= 200001 && branchid < 300000) {
+        level = 2;
+    } else if (branchid >= 300001 && branchid < 500000) { //ddc
+        level = 3;
+    } else if (branchid >= 500001 && branchid < 600000) { //daho 
+        level = 4;
+    } else {
+        level = 5;
+    }
+}
+loadBranchLevel(data.branchid);
 
 function loadMap(param) {
+    console.log("level in first load " + level);
     branch = [];
     downloads = [];
     Remaining = [];
@@ -47,12 +72,13 @@ function loadMap(param) {
 }
 loadMap(data.branchid);
 
-function fetchName(param, branchid) {
+function fetchName(level_data) {
+    console.log(level_data);
     chartvar = 1;
     $.ajax({
         url: url + 'getbranchId.php',
         type: 'POST',
-        data: { centretype: param, branchid: branchid },
+        data: level_data,
         async: true,
         dataType: 'json',
         beforeSend: function() {
@@ -62,6 +88,7 @@ function fetchName(param, branchid) {
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
+                console.log("BranchId:" + branchid_g);
 
             }
         },
@@ -132,10 +159,71 @@ function loadData(apiData) {
                 point: {
                     events: {
                         click: function() {
-                            // alert('Category: ' + this.category + ', value: ' + this.y);
-                            fetchName(this.category, branchid_g);
+                            back_btn_val = this.category;
+                            level_data.centretype = this.category;
+                            level_data.branchid = branchid_g;
+                            console.log(level_data);
+                            console.log("level in click " + level);
+                            if (level == 1) {
+                                level1_data.centretype = this.category;
+                                level1_data.branchid = data.branchid;
+                                level = 2;
+                                fetchName(level_data);
+                            } else if (level == 2) {
+                                level2_data.centretype = level1_data.centretype;
+                                level2_data.branchid = data.branchid;
+                                level = 3;
+                                console.log(level2_data);
+                                level3_data.centretype = level_data.centretype;
+                                level3_data.branchid = level_data.branchid;
+                                fetchName(level_data);
+                            } else if (level == 3) {
+                                level = 4;
+                                console.log(level3_data);
+                                fetchName(level_data);
+                            } else if (level == 4) {
+                                level4_data.centretype = level_data.centretype;
+                                level4_data.branchid = data.branchid;
+                                level = 5;
+                                fetchName(level_data);
+                            } else {
+                                level4_data.centretype = this.category;
+                                level4_data.branchid = branchid_g;
+                                fetchName(level_data);
+                            }
+
                         }
                     }
+                }
+            }
+        },
+        exporting: {
+            buttons: {
+                customButton: {
+                    x: -62,
+                    onclick: function() {
+                        // alert('Category: ' + back_btn_val + ', value: ' + branchid_g);
+                        console.log("level in back " + level);
+                        if (level == 2) {
+                            level = 1;
+                            branchid_g = data.branchid;
+                            loadMap(data.branchid);
+                        } else if (level == 3) {
+                            level = 2;
+                            branchid_g = level2_data.branchid;
+                            console.log(level2_data);
+                            console.log("in level back " + level2_data);
+                            fetchName(level2_data);
+                        } else if (level == 4) {
+                            level = 3;
+                            console.log(level3_data);
+                            fetchName(level3_data);
+                        } else {
+                            level = 4;
+                            fetchName(level4_data);
+                        }
+                    },
+                    symbol: 'download'
                 }
             }
         },

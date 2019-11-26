@@ -606,7 +606,7 @@ AND bm.branchId < 10000
  GROUP BY bm.districtName)CounTable
  GROUP BY CounTable.branch
 
- SELECT mm.visitDate AS 'Visit Date' , aom.firstName AS 'First Name', aom.lastName AS 'Last Name',aom.address AS 'Address',aom.category AS 'Category' ,am.specie AS 'Species',  am.breed AS 'Breed',mm.treatment, mm.samples AS 'Samples' FROM medication_master  mm 
+SELECT mm.visitDate AS 'Visit Date' , aom.firstName AS 'First Name', aom.lastName AS 'Last Name',aom.address AS 'Address',aom.category AS 'Category' ,am.specie AS 'Species',  am.breed AS 'Breed',mm.treatment, mm.samples AS 'Samples' FROM medication_master  mm 
 join animal_master am on mm.animalId = am.animalId 
 join animal_owner_master aom on am.ownerId = aom.ownerId 
 where mm.branchId = 419 
@@ -738,3 +738,5 @@ SELECT COUNT(aom.ownerId) AS farmercount
  rjc_pune rjt8x7ac id=200007
  daho_pune 497a1df7 id=300030
  tal_ambegaon tzzrjnht id=500289
+
+ SELECT * FROM advertisement_mapping amm INNER JOIN advertisement_master am ON amm.addId = am.adId WHERE CURRENT_DATE BETWEEN amm.fromDate AND amm.toDate

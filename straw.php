@@ -76,7 +76,7 @@ if(isset($_SESSION['branchId'])){
         <input type="hidden"  id="drid" value="<?php echo  $drid;?>"/>
         <div class="modals widget-shadow">
                     <h4 class="title2">Import Straws</h4>
-                    <h6 class="title2"><code>use sample csv</code></h6>
+                    <h6 class="title2"><code style="color:red;">Note:Please upload only csv file(do not change the column sequence of a downloded file)</code></h6>
                     <div class="col-md-4">
 
                     </div>

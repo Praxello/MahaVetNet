@@ -32,7 +32,76 @@ $('#operation').select2({
     allowClear: true,
     placeholder: "Select Report To be Generated"
 });
+var regionMap = [];
+var districtMap = new Map();
+var TalukaMap = new Map();
+var dispenceryMap = new Map();
+//loadMaps();
 
+function loadMaps() {
+    $.ajax({
+        url: url + 'demo.php',
+        type: 'POST',
+        async: true,
+        dataType: 'json',
+        beforeSend: function() {
+            $("#wait").css("display", "block");
+        },
+        success: function(response) {
+            if (response.Responsecode == 200) {
+                if (response.Regions != null) {
+                    regionMap = [...response.Regions];
+                    //console.log(regionMap);
+                }
+                if (response.Blocks != null) {
+                    var count = response.Blocks.length;
+                    for (var i = 0; i < count; i++) {
+                        var key = Object.keys(response.Blocks[i]);
+                        key = key.toString();
+                        districtMap.set(key, response.Blocks[i]);
+                    }
+                    // console.log(districtMap);
+                }
+                if (response.Taluka != null) {
+                    // console.log(response.Taluka);
+                    var count = response.Taluka.length;
+                    for (var i = 0; i < count; i++) {
+                        var key = Object.keys(response.Taluka[i]);
+                        key = key.toString();
+                        TalukaMap.set(key, response.Taluka[i]);
+                    }
+                    // console.log(TalukaMap);
+                }
+                if (response.Dispencery != null) {
+                    // console.log(response.Dispencery);
+                    var count = response.Dispencery.length;
+                    // console.log(TalukaMap);
+                    var last = null;
+                    var str = null;
+                    for (var i = 0; i < count; i++) {
+                        var key = Object.keys(response.Dispencery[i]);
+                        key = key.toString();
+                        var concatkey = null;
+
+
+                        if (TalukaMap.has(key)) {
+                            last = TalukaMap.get(key);
+                            str = last[key][0].blockName;
+
+                        }
+                        concatkey = str + key;
+
+                        dispenceryMap.set(concatkey, response.Dispencery[i]);
+                    }
+                    console.log(dispenceryMap);
+                }
+            }
+        },
+        complete: function(response) {
+            $("#wait").css("display", "none");
+        }
+    });
+}
 const loadZones = (param, level) => {
     $.ajax({
         url: url + 'dashboard_map.php',
@@ -185,6 +254,7 @@ const get_reports = () => {
         reportType: $('#operation').val(),
         branchId: dispeneryId
     };
+    console.log(reportData);
     if (reportData.branchId != null && reportData.month != '' && reportData.year != '') {
         $.ajax({
             url: url + 'get_reports.php',

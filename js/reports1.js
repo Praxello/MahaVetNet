@@ -38,32 +38,33 @@ var TalukaMap = new Map();
 var dispenceryMap = new Map();
 loadMaps();
 getyear();
-function getyear(){
 
-  var year ='';
-  $.ajax({
-      type: "POST",
-      url: url+"fetchyearfrommedication.php",
-      async : false,
-      dataType :'json',
-      success: function(response) {
+function getyear() {
 
-        var count;
-         if(response['Data']!=null){
-            count= response['Data'].length;
+    var year = '';
+    $.ajax({
+        type: "POST",
+        url: url + "fetchyearfrommedication.php",
+        async: false,
+        dataType: 'json',
+        success: function(response) {
 
-         }
-         for(var i=0;i<count;i++)
-         {
-         year +="<option value='"+response['Data'][i].year+"'>"+response['Data'][i].year+"</option>";
-         }
-         $("#year").html(year);
-      }
-  });
+            var count;
+            if (response['Data'] != null) {
+                count = response['Data'].length;
+
+            }
+            for (var i = 0; i < count; i++) {
+                year += "<option value='" + response['Data'][i].year + "'>" + response['Data'][i].year + "</option>";
+            }
+            $("#year").html(year);
+        }
+    });
 }
+
 function loadMaps() {
     $.ajax({
-        url: url + 'demo.php',
+        url: url + 'download_report_data.php',
         type: 'POST',
         async: false,
         dataType: 'json',
@@ -144,7 +145,7 @@ const loadZones = level => {
 
 }
 const loadDistricts = (param, level) => {
-  console.log("distmap"+param);
+    console.log("distmap" + param);
     var zonesData = '';
     if (districtMap.has(param)) {
         var districts = districtMap.get(param);
@@ -189,25 +190,25 @@ const loadDispencery = (param, level) => {
     }
 }
 const fetchDispencery = branchid => {
-  var zonesData = '';
-      $.ajax({
-          url: url + 'fetchDispencerybyid.php',
-          type: 'POST',
-          data: { branchid: branchid },
-          async: true,
-          dataType: 'json',
-          success: function(response) {
-              if (response.Data != null) {
-                 // console.log(response.Data);
-                   var count = response.Data.length;
-                   for (var i = 0; i < count; i++) {
-                       zonesData += "<option value=''>Select Dispencery</option>";
-                       zonesData += "<option value=" + response.Data[i].branchId + ">" + response.Data[i].centre_type + "</option>";
-                   }
-                   $('#dispencery').html(zonesData);
-              }
-          }
-      });
+    var zonesData = '';
+    $.ajax({
+        url: url + 'fetchDispencerybyid.php',
+        type: 'POST',
+        data: { branchid: branchid },
+        async: true,
+        dataType: 'json',
+        success: function(response) {
+            if (response.Data != null) {
+                // console.log(response.Data);
+                var count = response.Data.length;
+                for (var i = 0; i < count; i++) {
+                    zonesData += "<option value=''>Select Dispencery</option>";
+                    zonesData += "<option value=" + response.Data[i].branchId + ">" + response.Data[i].centre_type + "</option>";
+                }
+                $('#dispencery').html(zonesData);
+            }
+        }
+    });
 }
 const singleDispencery = (param, branchId) => {
     var zonesData = '';
@@ -219,7 +220,7 @@ const singleDispencery = (param, branchId) => {
 }
 const loadBranchLevel = branchid => {
     var level = 1;
-    var centerid =$("#centerid").val();
+    var centerid = $("#centerid").val();
     if (branchid >= 100001 && branchid < 200000) {
         level = 1;
         loadZones(level);
@@ -227,13 +228,13 @@ const loadBranchLevel = branchid => {
         level = 2;
         branchId_taluka = branchid;
         $('.zone').hide();
-        loadDistricts(centerid,level);
+        loadDistricts(centerid, level);
     } else if (branchid >= 300001 && branchid < 400000) { //ddc
         level = 3;
         branchId_dispencery = branchid;
         $('.zone').hide();
         $('.district').hide();
-        loadTaluka(centerid,level);
+        loadTaluka(centerid, level);
     } else if (branchid >= 400001 && branchid < 500000) { //ddc
         level = 3;
         branchId_dispencery = branchid;
