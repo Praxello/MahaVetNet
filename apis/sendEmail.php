@@ -23,6 +23,7 @@ $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'Cc:sunnypinjanpatil@gmail.com,'."\r\n";
 $headers .= 'Cc:sunny.pinjan@praxello.com,'."\r\n";
 $headers .= 'Cc:pvn2266@gmail.com,'."\r\n";
+$headers .= 'Cc:support@mahavetnet.com,'."\r\n";
 $headers .= "From:".$email_from."\r\n";
 //$headers = 'From: '.$email_to."\r\n".'Reply-To: '.$email_from."\r\n" .'X-Mailer: PHP/' . phpversion();
 if(@mail($email_to, $email_subject, $email_message, $headers)){

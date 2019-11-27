@@ -64,13 +64,16 @@ if(!isset($_SESSION['branchId'])){
     <div class="video-w3l" data-vide-bg="video/cow">
         <!-- <div class="video-w3l" data-vide-bg="video/cow"> -->
         <div class="row">
-            <div class="col-sm-4">
+            <h1>
+            <span><img  src="images/mvn.png" alt=""> </span>
+            </h1>
+            <!-- <div class="col-sm-12">
                 <h1>
                     <span><img class="ahd" src="images/AHD.png" alt="" style="float:left;"> </span>
                 </h1>
 
-            </div>
-            <div class="col-sm-4">
+            </div> -->
+            <!-- <div class="col-sm-4">
                 <h1>
                     <span style="color: black;font-family: Arial Rounded MT;font-weight: bold;"
                         class="example">MahaVetNet</span>
@@ -79,7 +82,7 @@ if(!isset($_SESSION['branchId'])){
             <div class="col-sm-4">
                 <h1>
                     <span ><img class="praxello" src="images/praxello.png" alt="" style="float:right;"> </span></h1>
-            </div>
+            </div> -->
 
         </div>
 
@@ -90,7 +93,7 @@ if(!isset($_SESSION['branchId'])){
         <div class="sub-main-w3">
             
             <form id="signin" method="post">
-            <strong style="color:red;padding-left:115px;">Note:Please Confirm your VD once login</strong>
+            <strong style="color:red;text-align:center;">Note: Please confirm your VD by clicking on the option under profile settings on the top right menu item.</strong>
                 <div id="wait"
                     style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
                     <img src='images/spinner.gif' width="64" height="64" />

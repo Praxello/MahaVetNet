@@ -189,7 +189,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class="col-md-2 stat">
                         <div class="content-top">
                             <div class="top-content facebook">
-                                <a href="#"><i class="fa fa-download"></i></a>
+                                <a href="#"><i class="fa fa-download">
+                                    <span style="font-size: xx-large;font-weight: bolder;">Downloads</span>
+                                </i></a>
                             </div>
                             <ul class="info">
                                 <li class="col-md-6"><b id="totalApps"></b>
@@ -203,7 +205,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <div class="content-top">
                             <div class="top-content twitter">
-                                <a href="#"><i class="fa fa-paw"></i></a>
+                                <a href="#"><i class="fa fa-paw">
+                                <span style="font-size: xx-large;font-weight: bolder;">Animals</span>
+                                </i></a>
                             </div>
                             <ul class="info">
                                 <li class="col-md-6"><b id="totalAnimals"></b>
@@ -217,7 +221,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         </div>
                         <div class="content-top">
                             <div class="top-content google-plus">
-                                <a href="#"><i class="fa fa-users"></i></a>
+                                <a href="#"><i class="fa fa-users">
+                                <span style="font-size: xx-large;font-weight: bolder;">Farmers</span>
+                                </i></a>
                             </div>
                             <ul class="info">
                                 <li class="col-md-6"><b id="totalFarmers"></b>
