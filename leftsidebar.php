@@ -46,6 +46,16 @@
                             <i class="fa fa-dashboard"></i> <span>Straws</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                        <a href="collection.php">
+                            <i class="fa fa-usd"></i> <span>Collection</span>
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="casepaper.php">
+                            <i class="fa fa-search"></i> <span>Case Papers</span>
+                        </a>
+                    </li>
                     <?php }?>
                     <li class="treeview">
                         <a href="dashboard.php">

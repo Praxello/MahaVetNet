@@ -93,20 +93,20 @@ if(!isset($_SESSION['branchId'])){
         <div class="sub-main-w3">
             
             <form id="signin" method="post">
-            <strong style="color:red;text-align:center;">Note: Please confirm your VD by clicking on the option under profile settings on the top right menu item.</strong>
+            <!-- <strong style="color:red;text-align:center;">Note: Please confirm your VD by clicking on the option under profile settings on the top right menu item.</strong> -->
                 <div id="wait"
                     style="display:none;width:69px;height:89px;border:1px solid black;position:absolute;top:50%;left:50%;padding:2px;">
                     <img src='images/spinner.gif' width="64" height="64" />
                     <br>Loading..</div>
                 <div class="form-style-agile">
-                    <label>
-                        <i class="fas fa-user"></i>Username</label>
-                    <input placeholder="Username" name="Name" type="text" required="" id="usrname">
+                    <label style="color:black;">
+                        <i class="fas fa-user" ></i>Username</label>
+                    <input placeholder="Username" name="Name" type="text" required="" id="usrname" style="border: 1px solid black;">
                 </div>
                 <div class="form-style-agile">
-                    <label>
+                    <label  style="color:black;">
                         <i class="fas fa-unlock-alt"></i>Password</label>
-                    <input placeholder="Password" name="Password" type="password" required="" id="passwrd">
+                    <input placeholder="Password" name="Password" type="password" required="" id="passwrd" style="border: 1px solid black;">
                 </div>
                 <!-- switch -->
                 <div class="checkout-w3l">
@@ -131,7 +131,7 @@ if(!isset($_SESSION['branchId'])){
 
         <!-- //copyright -->
         <div class="footer">
-            <p>&copy; 2020 All rights reserved | Design by
+            <p style="color:red;">&copy; 2020 All rights reserved | Design by
                 <a href="http://praxello.com" target="_blank">Praxello Solutions.</a>
             </p>
         </div>
