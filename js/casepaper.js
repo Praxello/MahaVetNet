@@ -18,6 +18,9 @@ function loadcasepaper() {
             type: 'POST',
             data: details,
             dataType: 'json',
+            beforeSend: function() {
+                $("#wait").css("display", "block");
+            },
             success: function(response) {
                 if (response.Data != null) {
                     var tableData = '';
@@ -43,6 +46,9 @@ function loadcasepaper() {
                     buttons: ['copy', 'excel', 'csv', 'pdf', 'colvis'],
                     destroy: true
                 });
+            },
+            complete: function() {
+                $("#wait").css("display", "none");
             }
 
         });

@@ -10,6 +10,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 
 <head>
     <title>Mahavetnet | Reports</title>
+    <?php include 'metatag.php';?>
     <script type="application/x-javascript">
     addEventListener("load", function() {
         setTimeout(hideURLbar, 0);
@@ -64,7 +65,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
 
         <!-- main content start-->
         <div id="page-wrapper">
-            <!-- <div id="wait"></div> -->
+        <div id="wait" style="display:none;"></div>
 
             <input type="hidden" id="centerid" value="<?php echo $centretype;?>">
             <input type="hidden" id="branchid" value="<?php echo $brId;?>">
