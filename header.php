@@ -7,7 +7,7 @@
               <?php if($brId < 50000){
                      $center =  $_SESSION['center'];
                     ?>
-             <code style="text-align:center;float:right;color:red;">Please Confirm your VD first (click on user name to see your vd) </code>
+             <!-- <code style="text-align:center;float:right;color:red;">Please Confirm your VD first (click on user name to see your vd) </code> -->
               <strong style="text-align:center;float:right;"><?php echo $center;?></strong><?php }?>
           </div>
 

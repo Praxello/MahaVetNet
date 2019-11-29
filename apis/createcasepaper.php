@@ -1,9 +1,7 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
-   include "../connection.php";
-	 mysqli_set_charset($conn,'utf8');
-	 $response=null;
+      include "../connection.php";
+	  mysqli_set_charset($conn,'utf8');
+	  $response=null;
 	 extract($_POST);
 	 $flag = true;
 	 $casePaperId = null;
@@ -16,11 +14,35 @@ header('Content-Type: application/json');
 	 //isset($_POST['latitude']) && isset($_POST['longitude']) &&
 	 if( isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['doctorid']) && isset($_POST['visittype']) && isset($_POST['feestype']) && isset($_POST['fees']) && isset($_POST['nextvisitdate']) && isset($_POST['inoculation']) && isset($_POST['totalsamples']) &&  isset($_POST['diagnosis']) && isset($_POST['symptoms']) && isset($_POST['treatment']) && isset($_POST['animalid']) && isset($_POST['visitdate']) &&  isset($_POST['medicineids']) && isset($_POST['dosages']) && isset($_POST['instructions']) && isset($_POST['days']) && isset($_POST['presentcondition']))
 	 {
-    $tagnum =  $_POST['tagno'];
-    $taglen = strlen($tagnum);
-    if($taglen==12){
-      	mysqli_query($conn,"UPDATE animal_master SET  animalName='$tagnum' WHERE animalId=$animalid");
-    }
+
+		 //update animal tag here
+		  if( isset($_POST['tagno']))
+		  {
+			  $length = strlen($tagno);
+			  if($length == 12)
+			  {
+				  //update animal profile
+				  $query = mysqli_query($conn,"update animal_master set animalname = '$tagno' where animalId = $animalid");
+			  }
+		  }
+
+
+		 $loggedIdBranchId = 0;
+		 //get branchid first then insert records
+		  $query = mysqli_query($conn,"select * from user_master where doctorId=$doctorid");
+			if($query!=null)
+			{
+				$affected=mysqli_num_rows($query);
+				if($affected>0)
+				{
+					   while($result = mysqli_fetch_assoc($query))
+						{
+							$loggedIdBranchId=$result['branchId'];
+						}
+				}
+			}
+
+
 		$medicinesValues = explode(",", $medicineids);
 		$dosageValues = explode(",", $dosages);
 		$instructionValues = explode(",", $instructions);
@@ -30,16 +52,12 @@ header('Content-Type: application/json');
 		{
 			$nameOfSamples = $samplenames;
 		}
-		if(isset($_POST['strawnumber'])){
-			mysqli_query($conn,"UPDATE straw_details SET isConsumed = 1 WHERE strawId = $strawnumber");
-		}
 
 		//delete all rows mandatoryly
 		 $checkquery = mysqli_query($conn,"delete from   medication_master where animalId=$animalid and visitDate='$visitdate'");
 		//animalId, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate
-    $sql1 = "INSERT INTO medication_master( doctorid, animalId, visitType, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate , presentcondition, samples, nextvisitdate,latitude,longitude) VALUES ($doctorid,$animalid,'$visittype','$symptoms','$diagnosis','$treatment','$inoculation',$totalsamples,'$visitdate', '$presentcondition','$nameOfSamples', '$nextvisitdate',$latitude,$longitude)";
 
-      $query = mysqli_query($conn,$sql1);
+			$query = mysqli_query($conn,"INSERT INTO medication_master( doctorid, animalId, visitType, symptoms, diagnosis, treatment, typeOfInoculation, noOfSample, visitDate , presentcondition, samples, nextvisitdate,latitude,longitude,branchId) VALUES ($doctorid,$animalid,'$visittype','$symptoms','$diagnosis','$treatment','$inoculation',$totalsamples,'$visitdate', '$presentcondition','$nameOfSamples', '$nextvisitdate',$latitude,$longitude,$loggedIdBranchId)");
 					if($query==1)
 					{
 
@@ -54,7 +72,7 @@ header('Content-Type: application/json');
 
 			$checkquery = mysqli_query($conn,"delete from  fees_master where animalId=$animalid and visitDate='$visitdate'");
 
-			$query = mysqli_query($conn,"INSERT INTO fees_master(doctorid,animalId, visitDate, feesAmount, typeOfPayment) VALUES ($doctorid,$animalid,'$visitdate','$fees','$feestype')");
+			$query = mysqli_query($conn,"INSERT INTO fees_master(doctorid,animalId, visitDate, feesAmount, typeOfPayment,branchId) VALUES ($doctorid,$animalid,'$visitdate','$fees','$feestype',$loggedIdBranchId)");
 					if($query==1)
 					{
 
@@ -165,6 +183,6 @@ header('Content-Type: application/json');
 	 {
 		$response=array("Message"=> "Check query parameters","Responsecode"=>403);
 	 }
-   mysqli_close($conn);
 	 print json_encode($response);
+	  mysqli_close($conn);
 ?>
