@@ -128,6 +128,7 @@ function buttonvacination(id){
     $("#firsttable").hide();
     $("#thirdtable").hide();
     $("#secondtable").show();
+    $("#vaccinationtbldata").empty();
     getlistvaccineentry();
 }
 function buttondeworming(id){
@@ -139,6 +140,7 @@ function buttondeworming(id){
    $("#firsttable").hide();
    $("#secondtable").hide();
    $("#thirdtable").show();
+      $("#dewormingtbldata").empty();
    getlistdeworming();
    // console.log(AllData.animalId);
    // window.location.href="deworming.php?oid="+id+"&aniid="+AllData.animalId;
@@ -157,6 +159,7 @@ function backmain(){
 }
 
 function setvaccinationtabledata(styleData){
+
   var html ='';
   $('#vaccinationtbl').dataTable().fnDestroy();
   $("#vaccinationtbldata").empty();
@@ -174,7 +177,6 @@ function setvaccinationtabledata(styleData){
            }
         }
         html +='<tr>';
-        // let isConfirmed = confirmationStatus.get(AllData.isActive);
         html +="<td>"+mname+"</td>";
         html +="<td>"+AllData.visitDate+"</td>";
         html +="<td>"+AllData.batch+"</td>";
@@ -212,11 +214,13 @@ function getlistvaccineentry(){
          async : false,
          dataType :'json',
          success: function(response) {
-           console.log(response);
+           // console.log(response);
            var count;
             if(response['Data']!=null){
                count= response['Data'].length;
             }
+
+            vaccinationList.clear();
             for(var i=0;i<count;i++)
             {
             vaccinationList.set(response.Data[i].treatmentId,response.Data[i]);
@@ -726,6 +730,7 @@ function getlistdeworming(){
             if(response['Data']!=null){
                count= response['Data'].length;
             }
+            dwormingList.clear();
             for(var i=0;i<count;i++)
             {
             dwormingList.set(response.Data[i].treatmentId,response.Data[i]);

@@ -7,6 +7,9 @@ if(!isset($_SESSION['branchId'])){
 <head>
     <title>MahaVetNet | Login Screen</title>
     <!-- Meta tag Keywords -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content="Mahavetnet Login Animal Husbandary Department" />
@@ -91,7 +94,7 @@ if(!isset($_SESSION['branchId'])){
         <!-- //title -->
         <!-- content -->
         <div class="sub-main-w3">
-            
+
             <form id="signin" method="post">
             <!-- <strong style="color:red;text-align:center;">Note: Please confirm your VD by clicking on the option under profile settings on the top right menu item.</strong> -->
                 <div id="wait"
@@ -118,7 +121,7 @@ if(!isset($_SESSION['branchId'])){
 							</label>
 						</div>
 					</div> -->
-					
+
 				</div>
                 <!-- //switch -->
                 <input type="submit" value="Log In">

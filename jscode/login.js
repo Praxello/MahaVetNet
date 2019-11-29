@@ -22,6 +22,7 @@ $('#signin').on('submit', function(event) {
                     sessionStorage.setItem('mobile', response.Data.mobile);
                     console.log(sessionStorage.getItem('mobile'));
                 }
+                alert('Please Confirm your VD first (click on user name to see your vd)');
                 window.location.href = 'createSession.php?branchId=' + branchId + '&userId=' + userId + '&username=' + username + '&email=' + email + '&center=' + response.Data.center + '&designation=' + response.Data.designation;
             } else {
                 alert('Enter Correct Username and password');
