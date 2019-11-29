@@ -7,8 +7,9 @@
               <?php if($brId < 50000){
                      $center =  $_SESSION['center'];
                     ?>
-             <!-- <code style="text-align:center;float:right;color:red;">Please Confirm your VD first (click on user name to see your vd) </code> -->
-              <strong style="text-align:center;float:right;"><?php echo $center;?></strong><?php }?>
+             <code style="text-align:center;float:right;color:red;font-size:10px;">Please confirm your VDs first by clicking on user name on the right.(Click on 'NOT MY VD' button only if it is not your VD.) </code>
+            <br><strong style="text-align:center;float:right;"><?php echo $center;?></strong><?php }?>
+
           </div>
 
           <div class="header-right">

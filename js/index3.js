@@ -35,7 +35,6 @@ function loadBranchLevel(branchid) {
 loadBranchLevel(data.branchid);
 
 function loadMap(param) {
-    console.log("level in first load " + level);
     branch = [];
     downloads = [];
     Remaining = [];
@@ -46,9 +45,7 @@ function loadMap(param) {
         data: { branchid: param },
         async: true,
         dataType: 'json',
-        beforeSend: function() {
-            //chart.showLoading();
-        },
+        beforeSend: function() {},
         success: function(response) {
             if (response.Data != null) {
                 var count = response.Data.length;
@@ -73,7 +70,6 @@ function loadMap(param) {
 loadMap(data.branchid);
 
 function fetchName(level_data) {
-    console.log(level_data);
     chartvar = 1;
     $.ajax({
         url: url + 'getbranchId.php',
@@ -83,18 +79,13 @@ function fetchName(level_data) {
         dataType: 'json',
         beforeSend: function() {
             chart.showLoading();
-            // console.log("ok1");
         },
         success: function(response) {
             if (response.Data != null) {
                 branchid_g = response.Data;
-                console.log("BranchId:" + branchid_g);
-
             }
         },
         complete: function(response) {
-            // console.log("ok2");
-            //  chart.showLoading();
             loadMap(branchid_g);
         }
     });
@@ -162,8 +153,6 @@ function loadData(apiData) {
                             back_btn_val = this.category;
                             level_data.centretype = this.category;
                             level_data.branchid = branchid_g;
-                            console.log(level_data);
-                            console.log("level in click " + level);
                             if (level == 1) {
                                 level1_data.centretype = this.category;
                                 level1_data.branchid = data.branchid;
@@ -173,13 +162,11 @@ function loadData(apiData) {
                                 level2_data.centretype = level1_data.centretype;
                                 level2_data.branchid = data.branchid;
                                 level = 3;
-                                console.log(level2_data);
                                 level3_data.centretype = level_data.centretype;
                                 level3_data.branchid = level_data.branchid;
                                 fetchName(level_data);
                             } else if (level == 3) {
                                 level = 4;
-                                console.log(level3_data);
                                 fetchName(level_data);
                             } else if (level == 4) {
                                 level4_data.centretype = level_data.centretype;
@@ -199,11 +186,10 @@ function loadData(apiData) {
         },
         exporting: {
             buttons: {
-                customButton: {
+                viewData: {
                     x: -90,
+                    text: 'Back',
                     onclick: function() {
-                        // alert('Category: ' + back_btn_val + ', value: ' + branchid_g);
-                        console.log("level in back " + level);
                         if (level == 2) {
                             level = 1;
                             branchid_g = data.branchid;
@@ -211,19 +197,15 @@ function loadData(apiData) {
                         } else if (level == 3) {
                             level = 2;
                             branchid_g = level2_data.branchid;
-                            console.log(level2_data);
-                            console.log("in level back " + level2_data);
                             fetchName(level2_data);
                         } else if (level == 4) {
                             level = 3;
-                            console.log(level3_data);
                             fetchName(level3_data);
                         } else {
                             level = 4;
                             fetchName(level4_data);
                         }
-                    },
-                    symbol: 'download'
+                    }
                 }
             }
         },

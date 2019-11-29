@@ -183,6 +183,24 @@
 	 {
 		$response=array("Message"=> "Check query parameters","Responsecode"=>403);
 	 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	 print json_encode($response);
 	  mysqli_close($conn);
 ?>
