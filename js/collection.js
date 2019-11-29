@@ -23,13 +23,14 @@ function loadcasepaper() {
                 $("#wait").css("display", "block");
             },
             success: function(response) {
+                var feesAmount = 0;
                 if (response.Data != null) {
                     var tableData = '';
-                    var feesAmount = 0;
+
                     var count = response.Data.length;
                     for (var i = 0; i < count; i++) {
                         tableData += "<tr><td>" + response.Data[i].animalName + "</td>";
-                        tableData += "<td>" + response.Data[i].breed + "</td>";
+                        tableData += "<td>" + response.Data[i].specie + "</td>";
                         tableData += "<td>" + response.Data[i].breed + "</td>";
                         tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
                         tableData += "<td>" + response.Data[i].visitdate + "</td>";

@@ -104,7 +104,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                 <table class="table table-bordered table-striped  farmer-table">
                                     <thead id="farmer-head">
                                         <tr>
-                                            <th>Animal Name</th>
+                                            <th>Animal Name/Tag</th>
                                             <th>Species</th>
                                             <th>Breed</th>
                                             <th>Farmer Name</th>
