@@ -31,7 +31,7 @@
                                       <span>Commissioner</span>
                                   </div>
                                   <?}else{?>
-                                  <span class="prfil-img"><img src="images/profile.jpeg" alt="" width="55px"
+                                  <span class="prfil-img"><img src="https://praxello.com/ahimsa/profilepics/<?php echo $_SESSION['branchId'];?>.jpg" alt="No Image" width="55px"
                                           height="55px"> </span>
                                   <div class="user-name">
                                       <p><?php echo $_SESSION['username'];?></p>
