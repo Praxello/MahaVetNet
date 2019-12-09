@@ -24,14 +24,22 @@
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                               <div class="profile_img">
                                   <?php if($_SESSION['branchId'] == 100001){?>
-                                  <span class="prfil-img"><img src="images/<?php echo $_SESSION['branchId'];?>.jpeg"
+                                  <span class="prfil-img"><img src="images/100001.jpeg"
                                           alt="" width="55px" height="55px"> </span>
                                   <div class="user-name">
                                       <p><?php echo $_SESSION['username'];?></p>
                                       <span>Commissioner</span>
                                   </div>
-                                  <?}else{?>
-                                  <span class="prfil-img"><img src="https://praxello.com/ahimsa/profilepics/<?php echo $_SESSION['branchId'];?>.jpg" alt="No Image" width="55px"
+                                  <?}else{
+                                      $filename = "https://praxello.com/ahimsa/profilepics/". $_SESSION['branchId'].".jpg";
+                                      if(!file_exists($filename)){
+                                        $profile = "images/profile.jpeg";
+                                      }else{
+                                        $profile =  $filename;
+                                         
+                                      }
+                                          ?>
+                                  <span class="prfil-img"><img src="<?php echo $profile;?>" alt="" width="55px"
                                           height="55px"> </span>
                                   <div class="user-name">
                                       <p><?php echo $_SESSION['username'];?></p>

@@ -7,7 +7,7 @@ $response=null;
 $records = null;
 extract($_POST);
 if(isset($_POST['from']) && isset($_POST['upto']) && isset($_POST['branchId'])){
-    $sql = "SELECT mm.medicationId,am.animalName,am.specie,am.breed,aom.firstName,aom.lastName,aom.mobile,aom.address,DATE_FORMAT(mm.visitDate,'%d %M %Y') visitDate FROM medication_master mm INNER JOIN animal_master am ON am.animalId = mm.animalId INNER JOIN animal_owner_master aom ON am.ownerId = aom.ownerId
+    $sql = "SELECT mm.medicationId,mm.symptoms,am.animalName,am.specie,am.breed,aom.firstName,aom.lastName,aom.mobile,aom.address,DATE_FORMAT(mm.visitDate,'%d %M %Y') visitDate FROM medication_master mm INNER JOIN animal_master am ON am.animalId = mm.animalId INNER JOIN animal_owner_master aom ON am.ownerId = aom.ownerId
     WHERE mm.visitDate BETWEEN '$from' AND '$upto' AND mm.branchId = $branchId";
     $jobQuery = mysqli_query($conn,$sql);
     if ($jobQuery != null) {

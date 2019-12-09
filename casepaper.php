@@ -109,6 +109,7 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
                                             <th>Farmer Name</th>
                                             <th>Mobile</th>
                                             <th>Address</th>
+                                            <th>Symptoms</th>
                                             <th>Visit Date</th>
                                         </tr>
                                     </thead>

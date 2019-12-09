@@ -32,6 +32,7 @@ function loadcasepaper() {
                         tableData += "<td>" + response.Data[i].firstName + ' ' + response.Data[i].lastName + "</td>";
                         tableData += "<td>" + response.Data[i].mobile + "</td>";
                         tableData += "<td>" + response.Data[i].address + "</td>";
+                        tableData += "<td>" + response.Data[i].symptoms + "</td>";
                         tableData += "<td>" + response.Data[i].visitDate + "</td></tr>";
                     }
                 }

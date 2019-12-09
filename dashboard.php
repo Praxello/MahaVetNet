@@ -138,7 +138,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-
+                <?php if($brId > 6000){?>
+                  
                 <div class="row-one widgettable">
                     <div class="col-md-7 content-top-2 card">
                         <div class="agileinfo-cdr">
@@ -299,6 +300,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     
                     <div class="clearfix"> </div>
                 </div>
+           <?php 
+                }?>
             </div>
         </div>
         <!--footer-->
