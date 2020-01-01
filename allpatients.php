@@ -46,6 +46,10 @@ if(isset($_SESSION['branchId'])){
   .card-body .col-sm-6{
     background-color: white;
   }
+  .disabled-text h3, .disabled-text a, .disabled-text span {
+            color: gray !important;
+      }
+
  </style>
 
 
@@ -301,14 +305,14 @@ if(isset($_SESSION['branchId'])){
                     <div class="card-header" id="headingOne">
                       <h5 class="mb-0">
                         	<div class="form-title" style="background-color: beige;">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" style="width: 100%;text-align: left;" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link" data-toggle="collapse"  data-target="#collapseOne" style="width: 100%;text-align: left;" aria-expanded="true" aria-controls="collapseOne">
                           +Castration<input id="shidden1" type="hidden" value="0"></input><div id="head1" style="float: right;"></div>
                         </button>
 
                           </div>
                       </h5>
                     </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div id="collapseOne" class="collapse"  aria-expanded="false" aria-labelledby="headingOne" data-parent="#accordion">
                       <div class="card-body">
                         <form id="one1" method="post">
                         <div class="row">
@@ -351,7 +355,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                         	<div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          +Artificial Insemination (AI)<input id="shidden2" type="hidden"value="0"></input><div id="head2" style="float: right;"></div>
+                          +Artificial Insemination (AI)<span style="color:#cc383f;font-weight: bold;" id="aiSpan"></span><input id="shidden2" type="hidden"value="0"></input><div id="head2" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -820,7 +824,7 @@ if(isset($_SESSION['branchId'])){
                       <h5 class="mb-0">
                           <div class="form-title">
                         <button class="btn btn-link collapsed" style="width: 100%;text-align: left;" data-toggle="collapse" data-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
-                          +Treatment<input id="shidden8" type="hidden" value="0"></input><div id="head8" style="float: right;"></div>
+                          +Others<input id="shidden8" type="hidden" value="0"></input><div id="head8" style="float: right;"></div>
                         </button>
                       </div>
                       </h5>
@@ -831,7 +835,7 @@ if(isset($_SESSION['branchId'])){
                         <div class="row">
                           <div class="col-sm-6">
                           <div class="form-group">
-                              <label class="control-label">Treatment</label>
+                              <label class="control-label">Others</label>
                             <input type="text" class="form-control" id="treatment" placeholder="Enter Treatment" required>
                           </div>
                           </div>
@@ -903,8 +907,8 @@ if(isset($_SESSION['branchId'])){
                             </div>
                             <div class="col-sm-12">
                             <div class="form-group">
-                              <label class="control-label">Select Present condition</label><font color="red">*</font>
-                              <select  class="form-control"  id="selprecond" style="width:100%;" required>
+                              <label class="control-label">Select Present condition</label>
+                              <select  class="form-control"  id="selprecond" style="width:100%;">
                                 <option value="">Select Present condition</option>
                                 <option value="--">--</option>
                                 <option value="Ailing">Ailing</option>
@@ -1029,6 +1033,7 @@ if(isset($_SESSION['branchId'])){
 		<?php include "footer.php"; ?>
 	</div>
   <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
   <script src="js/modernizr.custom.js"></script>
   <script src="js/metisMenu.min.js"></script>
   <script src="js/custom.js"></script>

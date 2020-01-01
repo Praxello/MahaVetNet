@@ -24,8 +24,8 @@ if(isset($_SESSION['branchId']) && isset($_SESSION['email'])){
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <!-- <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' /> -->
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css"> -->
-	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
     <!-- Custom CSS -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <link rel="icon" type="images/png" sizes="16x16" href="images/mlogo.png">

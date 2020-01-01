@@ -109,6 +109,7 @@ $('#addnewanimal').on('submit', function(e) {
                 $('#addnewanimal')[0].reset();
                 $('#animalModal').modal('toggle');
                 animal_list(animals_data);
+                window.location.href = 'allpatients.php';
             }
         },
         complete: function(data) {

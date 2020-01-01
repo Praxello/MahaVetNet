@@ -6,6 +6,7 @@ ALTER TABLE animal_owner_master ADD FOREIGN KEY(branchId) REFERENCES branch_mast
 
 DELETE FROM medication_master  WHERE medication_master.branchId NOT IN(SELECT branch_master.branchId FROM branch_master);
 ALTER TABLE medication_master ADD FOREIGN KEY(branchId) REFERENCES branch_master(branchId);
+ALTER TABLE medication_master ADD FOREIGN KEY(branchId) REFERENCES branch_master(branchId);
 
 ALTER TABLE vaccination_master ADD FOREIGN KEY(branchId) REFERENCES branch_master(branchId);
 

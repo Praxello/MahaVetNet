@@ -8,6 +8,24 @@
 // });
 var animalList = new Map(); // This variable globally declare
 var medicineData = new Map(); // Medicine Data Map
+var feesChart = new Map();
+
+function loadSeva() {
+    $.ajax({
+        type: "POST",
+        url: url + "getSevashulk.php",
+        dataType: 'json',
+        success: function(response) {
+            if (response.Data != null) {
+                var count = response.Data.length;
+                for (var i = 0; i < count; i++) {
+                    feesChart.set(response.Data[i].shortName, response.Data[i].fees);
+                }
+            }
+        }
+    });
+}
+loadSeva();
 getallmedicinelist();
 
 function getallmedicinelist() {
@@ -358,16 +376,15 @@ function buttoncasepaper(id) {
     $("#firsttable").hide();
     $("#medicinetab").empty();
     $("#fourthtable").show();
-    $("#opdowner").html(AllData.firstName);
+    $("#opdowner").html(AllData.firstName + ' ' + AllData.lastName);
     $("#opdanimalname").html(AllData.animalName);
     var num = parseInt(AllData.animalName);
     // console.log("num"+num);
     // num="123";
-    if(isNaN(num)){
-      // console.log("Okif");
+    if (isNaN(num)) {
+        // console.log("Okif");
         $("#aientanimalno").val();
-    }
-    else{
+    } else {
         // console.log("Okelse");
         $("#aientanimalno").val(AllData.animalName);
     }
@@ -444,12 +461,26 @@ function backmain() {
     $("#fourthtable").hide();
 }
 
+function traverseCase(casepaper) {
+    var count = [];
+    for (let k of casepaper.keys()) {
+        var AllData = casepaper.get(k);
+        var newobj = JSON.parse(AllData.MedicationData.treatment);
+        if (newobj.hasOwnProperty('ArtificialInsemination') && (newobj['ArtificialInsemination'].AIType != "")) {
+            count.push(newobj['ArtificialInsemination'].AIType);
+        }
+    }
+    return count;
+}
+
 function attachcasepaperdata(today) {
     var date = today;
 
     if (casepaperlistData.has(date)) {
         var AllData = casepaperlistData.get(date);
-
+        var aitypes = traverseCase(casepaperlistData);
+        var x = aitypes.toString();
+        $('#aiSpan').html(" " + x + " already done");
         $("#setnavanimal").attr("src", "http://praxello.com/ahimsa/animalphotos/" + AllData.FeesData.animalId + ".jpg");
         $("#setimage").attr("src", "http://praxello.com/ahimsa/casephotos/" + AllData.MedicationData.medicationId + ".jpg");
         $("#nofserch").val(AllData.FeesData.feesAmount);
@@ -691,10 +722,10 @@ function removetrash(smid) {
 
 $("#one1").on('submit', function(event) {
     event.preventDefault();
-
     $("#head1").html('<span class="badge badge-success">Data Added</span>');
     $("#shidden1").val(1);
     $('#collapseOne').collapse('toggle');
+
 });
 $("#one1").on('reset', function(event) {
     event.preventDefault();
@@ -704,18 +735,24 @@ $("#one1").on('reset', function(event) {
     $("#shidden1").val(0);
     $('#collapseOne').collapse('toggle');
 });
-$("#two1").on('submit', function(event) {
+$("#two1").on('submit', function(event) { //for AI data
     var aientanimalno = $("#aientanimalno").val().length;
     event.preventDefault();
-    if(aientanimalno==12){
-      $("#head2").html('<span class="badge badge-success">Data Added</span>');
-      $("#shidden2").val(1);
-      $('#collapseTwo').collapse('toggle');
-    }
-    else{
-      $("#head2").html('');
-      $("#shidden2").val(0);
-      alert("Please Enter 12 Digit Correct Animal Tag Number");
+    if (aientanimalno == 12) {
+        $("#headingOne").hide(); //for hide castration
+        $("#headingFive").hide(); //for hide infertility
+        $("#head2").html('<span class="badge badge-success">Data Added</span>');
+        $("#shidden2").val(1);
+        $('#collapseTwo').collapse('toggle');
+        if (feesChart.has('AI')) {
+            var amount = feesChart.get('AI');
+            amount = parseInt(amount) + parseInt($('#nofserch').val());
+            $('#nofserch').val(amount);
+        }
+    } else {
+        $("#head2").html('');
+        $("#shidden2").val(0);
+        alert("Please Enter 12 Digit Correct Animal Tag Number");
     }
 
 
@@ -772,6 +809,11 @@ $("#five1").on('submit', function(event) {
     $("#head5").html('<span class="badge badge-success">Data Added</span>');
     $("#shidden5").val(1);
     $('#collapseFive').collapse('toggle');
+    if (feesChart.has('IF')) {
+        var amount = feesChart.get('IF');
+        amount = parseInt(amount) + parseInt($('#nofserch').val());
+        $('#nofserch').val(amount);
+    }
 });
 $("#five1").on('reset', function(event) {
     event.preventDefault();
@@ -787,6 +829,11 @@ $("#six1").on('submit', function(event) {
     $("#head6").html('<span class="badge badge-success">Data Added</span>');
     $("#shidden6").val(1);
     $('#collapseSix').collapse('toggle');
+    if (feesChart.has('PD')) {
+        var amount = feesChart.get('PD');
+        amount = parseInt(amount) + parseInt($('#nofserch').val());
+        $('#nofserch').val(amount);
+    }
 });
 $("#six1").on('reset', function(event) {
     event.preventDefault();
@@ -881,6 +928,9 @@ function savepage() {
     var feestype = "CASH";
     // $("#selpaymethod").val();
     var presentcondition = $("#selprecond").val();
+    if (presentcondition == "") {
+        presentcondition = '';
+    }
     var aientanimalno = $("#aientanimalno").val();
     // console.log(aientanimalno);
     var samplenames = [""];
@@ -930,6 +980,7 @@ function savepage() {
         aiarr['Scheme'] = aissch;
         aiarr['StrawNo'] = aisno;
         mainarr['ArtificialInsemination'] = aiarr;
+        console.log(mainarr);
     } else {
         aiarr['AIType'] = "";
         aiarr['Status of reproductive organ'] = "";
@@ -1055,7 +1106,7 @@ function savepage() {
     }
 
     if (visitdate == "" || visittype == "" || nextvisitdate == "" ||
-        fees == "" || feestype == "" || presentcondition == "") {
+        fees == "" || feestype == "") {
         alert("Please Fill all required Fields");
     } else {
 
@@ -1086,7 +1137,7 @@ function savepage() {
                 samplenames: samplenames,
                 latitude: '0',
                 longitude: '0',
-                tagno:aientanimalno
+                tagno: aientanimalno
             },
             async: false,
             dataType: 'json',
