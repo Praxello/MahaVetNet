@@ -25,6 +25,25 @@ function loadSeva() {
         }
     });
 }
+
+function loadTreatments() {
+    var dropdownList = '';
+    $.ajax({
+        type: "POST",
+        url: url + "getAllTreatments.php",
+        dataType: 'json',
+        success: function(response) {
+            if (response.Data != null) {
+                var count = response.Data.length;
+                for (var i = 0; i < count; i++) {
+                    dropdownList += "<option value=" + response.Data[i] + ">";
+                }
+            }
+            $('#browsers').html(dropdownList);
+        }
+    });
+}
+loadTreatments();
 loadSeva();
 getallmedicinelist();
 

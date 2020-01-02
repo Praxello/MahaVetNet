@@ -836,7 +836,8 @@ if(isset($_SESSION['branchId'])){
                           <div class="col-sm-6">
                           <div class="form-group">
                               <label class="control-label">Others</label>
-                            <input type="text" class="form-control" id="treatment" placeholder="Enter Treatment" required>
+                            <input type="text" class="form-control" id="treatment" list="browsers" placeholder="Enter treatment not listed above" required>
+                            <datalist id="browsers"></datalist>
                           </div>
                           </div>
                           <div class="col-sm-6">
