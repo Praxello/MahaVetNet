@@ -10,8 +10,7 @@ if(isset($_SESSION['branchId'])){
     <title>MahaVetNet | Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <meta name="keywords" content="Mahavetnet AHD" />
     <!-- <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script> -->
 
     <!-- Bootstrap Core CSS -->
@@ -61,6 +60,33 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         width: 295px;
     }
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141032238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141032238-1');
+</script>
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-141032238-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N9B5PM5');</script>
+
     <!--pie-chart -->
     <!-- index page sales reviews visitors pie chart -->
     <script src="js/pie-chart.js" type="text/javascript"></script>
@@ -76,6 +102,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body class="cbp-spmenu-push">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9B5PM5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <input type="hidden" id="branchid" value="<?php echo $brId;?>">
     <div class="main-content">
         <?php include 'leftsidebar.php';?>
