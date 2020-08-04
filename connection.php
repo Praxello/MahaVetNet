@@ -1,7 +1,7 @@
 <?php
 $serverName = 'localhost';
-$username   = 'mvn';
-$password   = '';
-$databaseName = 'mahavetnet_indexing';
+$username   = 'softclus_mvn';
+$password   = 'Mvn@411005';
+$databaseName = 'softclus_mvn';
 $conn = new mysqli($serverName,$username,$password,$databaseName)or die(mysqli_error($conn));
 ?>
