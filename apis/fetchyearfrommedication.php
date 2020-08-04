@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 	 extract($_POST);
 
 
- 					  $academicQuery = mysqli_query($conn,"SELECT DISTINCT(year(visitDate)) as year FROM medication_master WHERE year(visitDate) >0");
+ 					  $academicQuery = mysqli_query($conn,"SELECT DISTINCT(YEAR(visitDate)) as year FROM medication_master WHERE year(visitDate) >0");
 						if($academicQuery!=null)
 						{
 							$academicAffected=mysqli_num_rows($academicQuery);

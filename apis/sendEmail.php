@@ -18,11 +18,12 @@ if(isset($_POST['branchId']) && isset($_POST['center']) && isset($_POST['mobile'
    $email_message .= "Mobile Number: ".$mobile."<br>";
 
 // create email headers
+
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'Cc:sunnypinjanpatil@gmail.com,'."\r\n";
 $headers .= 'Cc:sunny.pinjan@praxello.com,'."\r\n";
-$headers .= 'Cc:pvn2266@gmail.com,'."\r\n";
+
 $headers .= 'Cc:support@mahavetnet.com,'."\r\n";
 $headers .= "From:".$email_from."\r\n";
 //$headers = 'From: '.$email_to."\r\n".'Reply-To: '.$email_from."\r\n" .'X-Mailer: PHP/' . phpversion();

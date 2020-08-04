@@ -1289,7 +1289,7 @@ for ($i = 0; $i < $count; $i++) {
      ->setCellValue('O' . $cell, $object);
 }
 }//end for add data
-$filename = "mpr_reports_" . date('Y-m-d h:i:s') . ".xls"; 
+$filename = "mpr_reports_" . date('Y-m-d h:i:s') . ".xlsx"; 
 $path = dirname(__FILE__) . '/./Classes/'.$filename;
 header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
 header('Content-Disposition: attachment;filename="' . $filename . '";');
@@ -1297,7 +1297,7 @@ header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
 
-$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save($path);
 $objWriter->save('php://output');
 
@@ -1320,6 +1320,8 @@ $objWriter->save('php://output');
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 // $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= "Content-Type: multipart/mixed;boundary=\"" . $separator . "\"" . $eol;
+$headers .= 'Cc:sunnypinjanpatil@gmail.com,'."\r\n";
+$headers .= 'Cc:vikaspawar3110@gmail.com,'."\r\n";
 $headers .= "From:".$email_from."\r\n";
 $headers .= "Content-Transfer-Encoding: 7bit" . $eol;
 $headers .= "This is a MIME encoded message." . $eol;
